@@ -1,0 +1,111 @@
+<mat-card fxFlex.gt-md="100" fxFlex.md="100" fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="pad-b-xd" class="table-responsive">
+    <div class="gene-card-title">
+          <div fxLayout="row"  fxLayoutAlign="start center">
+             <div fxLayout="column" fxLayoutAlign="start center">
+                <h3>{{'Request for Inspection'|translate}}</h3>
+             </div>
+             <span fxFlex></span>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="buttongroup mrgn-b-md mrgn-t-md" fxLayoutAlign="center">
+                <button class="mrgn-b-xs" mat-raised-button color="primary" >{{'Request for Inspection'|translate}}</button>
+        </div>
+       </div>
+       <!--First Row Of Cards-->
+       <div class="gene-card-content pad-b-none row" fxLayoutAlign="center">
+         <div fxFlex.gt-md="30" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="30" >
+            <mat-card class="accent-bg mat-card">
+               <div class="mrgn-b-xs" mat-card-widget fxLayout="row" fxLayoutAlign=" center">
+                <span class="lead inline-block" style="font-size:large;  text-align: center;">{{'Accepted' | translate}}</span>
+               </div>
+                <div class="mrgn-b-md" fxLayout="row wrap" fxLayoutAlign="center">
+                  <span>5</span>
+               </div>
+           </mat-card>
+      </div>  
+     
+        <div fxFlex.gt-md="30" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="30" >
+        <mat-card class="warn-bg mat-card">
+           <div class="mrgn-b-xs" mat-card-widget fxLayout="row" fxLayoutAlign=" center">
+            <span class="lead inline-block" style="font-size:large; text-align: center;">{{'Rejected' | translate}}</span>
+           </div>
+            <div class="mrgn-b-md" fxLayout="row wrap" fxLayoutAlign="center">
+              <span>5</span>
+           </div>
+       </mat-card>
+     </div>
+     <div fxFlex.gt-md="30" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="30" >
+      <mat-card class="mat-card" style="background-color :#696866; color: white;">
+         <div class="mrgn-b-xs" mat-card-widget fxLayout="row" fxLayoutAlign=" center">
+          <span class="lead inline-block" style="font-size:large; text-align: center;" >{{'Draft' | translate}}</span>
+         </div>
+          <div class="mrgn-b-md" fxLayout="row wrap" fxLayoutAlign="center">
+            <span>5</span>
+         </div>
+     </mat-card>
+   </div>
+    </div>
+    <!--Secocned Row of Cards-->
+    <div class="gene-card-content pad-b-none row" fxLayoutAlign="center">
+      <div fxFlex.gt-md="30" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="30" >
+         <mat-card class="primary-bg mat-card">
+            <div class="mrgn-b-xs" mat-card-widget fxLayout="row" fxLayoutAlign="center">
+             <span class="lead inline-block" style="font-size:medium;  text-align: center;" >{{'Accepted with Notes' | translate}}</span>
+            </div>
+             <div class="mrgn-b-md" fxLayout="row wrap" fxLayoutAlign="center">
+               <span>5</span>            
+            </div>
+         </mat-card>    
+    </div> 
+        <div fxFlex.gt-md="30" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="30" >
+              <mat-card class="mat-card" style="background-color: #F59C1A; color: white;">
+                 <div class="mrgn-b-xs" mat-card-widget fxLayout="row" fxLayoutAlign=" center">
+                  <span class="lead inline-block" style="font-size:medium;  text-align: center;">{{'Waiting Check' | translate}}</span>
+                 </div>
+                  <div class="mrgn-b-md" fxLayout="row wrap" fxLayoutAlign="center">
+                    <span>5</span>            
+                 </div>
+              </mat-card>    
+         </div>
+        <div fxFlex.gt-md="30" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="30" >
+              <mat-card class="mat-card" style="background-color: #727CB6 ; color: white;">
+                 <div class="mrgn-b-xs" mat-card-widget fxLayout="row" fxLayoutAlign=" center">
+                  <span class="lead inline-block" style="font-size:16px;  text-align: center;">{{'Rejected and must Resend' | translate}}</span>
+                 </div>
+                  <div class="mrgn-b-md" fxLayout="row wrap" fxLayoutAlign="center">
+                    <span>5</span>
+                 </div>
+             </mat-card>
+        </div>
+        
+</div>
+
+<div class="gene-card-content pad-t-none">
+   <div class="table-responsive">
+      <table class="table table-hover table-middle th-fw-light mb-0">
+         <thead>
+            <tr>
+               <th>{{'Request Number'|translate}}</th>
+               <th>{{'Request Type'|translate}}</th>
+               
+               <th>{{'Inspection Date'|translate}}</th>
+               <th>{{'Status'|translate}}</th>
+               <th>{{'Update Date'|translate}}</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let item of RFI">
+             <td>{{item.request_num}}</td>
+             <td>{{item.request_name}}</td>
+             <td>{{item.inspect_date}}</td>
+             <td>none</td>
+              <td>none</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</div>
+
+
+
+</mat-card>

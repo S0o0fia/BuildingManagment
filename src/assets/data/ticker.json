@@ -1,0 +1,45 @@
+[
+   {
+      "name" : "المستخلصات المعتمدة",
+      "amount" : "29.33",
+      "color" : "red"
+       
+    }
+    ,
+    {
+      "name" : "الأعمال المكتملة",
+      "amount" : "25.3",
+      "color" : "limegreen"
+       
+    }
+   
+    ,{
+      "name" : "المشاريع المتأخرة",
+      "amount" : "50.33",
+      "color" : "limegreen"
+       
+    } 
+  
+   ,
+
+    {
+      "name" : "المشاريع المكتملة",
+      "amount" : "40",
+      "color" : "red"
+       
+    }
+    ,{
+      "name" : "المشاريع حسب البرنامج",
+      "amount" : "29.33",
+      "color" : "limegreen"
+       
+    }
+    ,{
+      "name" : "المشاريع المتأخرة",
+      "amount" : "50.33",
+      "color" : "limegreen"
+       
+    } 
+  
+   
+]

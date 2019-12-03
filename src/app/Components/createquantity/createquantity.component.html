@@ -1,0 +1,167 @@
+
+<mat-card dir="rtl">
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column" fxLayoutAlign="start center">
+               <h3>{{'Add Quantity'|translate}}</h3>
+            </div>
+            <span fxFlex></span>
+         </div>
+         <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content">
+            <form #form="ngForm">
+                  <div fxLayout="column">
+                     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                        <!--Main Section-->
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                           <mat-form-field class="full-wid mrgn-b-lg">
+                                 <mat-label>{{'Main Section'|translate}}</mat-label>
+                                 <mat-select  matNativeControl required name="mainid" [(ngModel)]="mainid">
+                                       <div *ngFor="let section of Mainsection">
+                                    <div *ngIf="section.parent_id==''">        
+                                   <mat-option value={{section.id}}>
+                                     {{section.name}}
+                                   </mat-option>
+                                   </div>
+                              </div> 
+                                 </mat-select>
+                           </mat-form-field>
+                        </div>
+                       <!-- Type of Work-->
+                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                           <mat-form-field class="full-wid mrgn-b-lg">
+                                 <mat-label>{{'Type Of Works'|translate}}</mat-label>
+                                 <mat-select [disabled]="mainid== null ? true : false" name="workid"  [(ngModel)]="workid">
+                                     <div *ngFor="let section of Mainsection">
+                                      <div *ngIf="section.parent_id==mainid">        
+                                      <mat-option value={{section.id}}>
+                                        {{section.name}}
+                                   
+                                   </mat-option>
+                                      </div>
+                                     </div>
+                                 </mat-select>
+                                 
+                           </mat-form-field>
+                        </div>
+                        <!--Sub Section-->
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                    <mat-label>{{'Sub Section'|translate}}</mat-label>
+                                    <mat-select [disabled]=" (workid== null && mainid==null )? true : false" name="subid"  [(ngModel)]="subid">
+                                                <div *ngFor="let section of Mainsection">
+                                                 <div *ngIf="section.parent_id==workid">        
+                                                 <mat-option value={{section.id}}>
+                                                   {{section.name}}
+                                              
+                                              </mat-option>
+                                                 </div>
+                                                </div>
+                                            </mat-select>
+                                            
+                              </mat-form-field>
+                           </div>
+                              <!--Item Number-->
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                    <mat-label>{{'Item Number'|translate}}</mat-label>
+                                    <mat-select disabled>
+                                      <mat-option >
+                                      
+                                      </mat-option>
+                                    </mat-select>
+                              </mat-form-field>
+                           </div>
+                                 <!--Item Name-->
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                    <mat-label>{{'Item Name'|translate}}</mat-label>
+                                    <mat-select disabled>
+                                      <mat-option >
+                                      
+                                      </mat-option>
+                                    </mat-select>
+                              </mat-form-field>
+                           </div>
+                           <!--Start Session-->
+                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                 <mat-form-field class="full-wid mrgn-b-lg ">
+                                    <input matInput 
+                                    name="start_session" 
+                                    [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+                                     placeholder="{{'Session From'|translate}}">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>                         
+                                 </mat-form-field>
+                          </div>
+                            <!--End Session-->
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                 <mat-form-field class="full-wid mrgn-b-lg ">
+                                    <input matInput 
+                                    name="end_session"
+                                    [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
+                                     placeholder="{{'Session To'|translate}}">
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>                         
+                                 </mat-form-field>
+                          </div>
+                           <!--Description-->
+                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                 <mat-form-field class="full-wid mrgn-b-lg ">
+                                       <mat-label>{{'Description'|translate}}</mat-label>
+                                       <textarea matInput name="description"  
+                                                 cdkTextareaAutosize
+                                                  #autosize="cdkTextareaAutosize"
+                                                   cdkAutosizeMinRows="1"
+                                                    cdkAutosizeMaxRows="5"></textarea>                        
+                                 </mat-form-field>
+                          </div>
+
+                           <!--Unit-->
+                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                 <mat-form-field class="full-wid mrgn-b-lg ">
+                                       <mat-label>{{'Unit'|translate}}</mat-label>
+                                 <mat-select>
+                                   <mat-option >
+                                      
+                                   </mat-option>
+                                 </mat-select>                    
+                                 </mat-form-field>
+                          </div>
+                     </div>
+                       <!--Item Qunatity-->
+                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                                
+                                 <input matInput name="item_qty" 
+                                 placeholder="{{'Item Qunatity'|translate}}" type="number" required>       
+                           </mat-form-field>
+                    </div>
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                             
+                              <input matInput name="unit_price"
+                              placeholder="{{'Unit Price'|translate}}" type="number" required>       
+                        </mat-form-field>
+                 </div>
+                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                     <mat-form-field class="full-wid mrgn-b-lg ">
+                          
+                           <input matInput name="unit_price" 
+                           placeholder="{{'Total Price'|translate}}" type="number" required>       
+                     </mat-form-field>
+              </div>
+
+
+                     <div fxLayout="row" fxLayoutAlign="space-between">
+                           <button mat-button mat-raised-button color="accent" type="submit">{{'Add'|translate }}</button>
+                           <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()" type="button" dir="ltr">{{'Cancel'|translate }}</button>
+                           
+                     </div>
+                  </div>
+               </form>
+      </div>
+   </mat-card>
+
+

@@ -1,0 +1,12 @@
+<!-- <p>projectsmap works!</p> -->
+
+<agm-map [zoom]="5" [latitude]="24.7136" [longitude]="46.6753" style="height: 100%">
+    <agm-marker (mouseOver)="window.open()" (mouseOut)="window.close()" *ngFor="let marker of markers" [latitude]="marker.latitude"
+    [longitude]="marker.longitude">
+    <agm-info-window #window>
+        <h6>Longitude: {{marker.longitude}}</h6>
+        <h6>Latitude: {{marker.latitude}}</h6>
+        <h6>Project: {{marker.project}}</h6>
+    </agm-info-window>
+    </agm-marker>
+</agm-map>

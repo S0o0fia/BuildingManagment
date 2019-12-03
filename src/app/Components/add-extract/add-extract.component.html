@@ -1,0 +1,174 @@
+<div>
+<mat-card dir="rtl"  fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="70" style="margin:auto;">
+        <div class="gene-card-title">
+           <div fxLayout="row" fxLayoutAlign="center">
+              <div fxLayout="column" fxLayoutAlign="center">
+                 <h3>{{'Add Extract'|translate}}</h3>
+              </div>
+              <span fxFlex></span>
+           </div>
+           <mat-divider></mat-divider>
+        </div>
+        <div class="gene-card-content" >
+              <form #form="ngForm">
+                    <div fxLayout="column">
+                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                          <!--Extract Number-->
+                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                             <mat-form-field class="full-wid mrgn-b-lg">
+                                    <input matInput name="item_qty"
+                                    placeholder="{{'Extract Number'|translate}}" type="number" required>       
+                             </mat-form-field>
+                          </div>
+                          <!--Extract Number-->
+                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                <mat-form-field class="full-wid mrgn-b-lg">
+                                        <input matInput 
+                                        name="start_session" 
+                                        [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+                                         placeholder="{{'Extract Date'|translate}}">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>  
+                                </mat-form-field>
+                          </div>
+                           <!--Total work performed in the abstract-->
+                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                <mat-form-field class="full-wid mrgn-b-lg">
+                                       <input matInput name="item_qty"
+                                       placeholder="{{'Total work performed in the abstract'|translate}}" type="number" 
+                                       required disabled>       
+                                </mat-form-field>
+                             </div>
+                              <!--Total Discounts-->
+                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                <mat-form-field class="full-wid mrgn-b-lg">
+                                       <input matInput name="item_qty"
+                                       placeholder="{{'Total Discounts'|translate}}" type="number" 
+                                       required disabled>       
+                                </mat-form-field>
+                             </div>
+                                    <!--Net amount due-->
+                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                <mat-form-field class="full-wid mrgn-b-lg">
+                                       <input matInput name="item_qty"
+                                       placeholder="{{'Net amount due'|translate}}" type="number" 
+                                       required disabled>       
+                                </mat-form-field>
+                             </div>    
+                                      <!--Total after tax-->
+                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                <mat-form-field class="full-wid mrgn-b-lg">
+                                       <input matInput name="item_qty"
+                                       placeholder="{{'Total after tax'|translate}}" type="number" 
+                                       required disabled>       
+                                </mat-form-field>
+                             </div>   
+                                          <!--The amount paid-->
+                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                <mat-form-field class="full-wid mrgn-b-lg">
+                                       <input matInput name="item_qty"
+                                       placeholder="{{'The amount paid'|translate}}" type="number" 
+                                       required >       
+                                </mat-form-field>
+                             </div>                
+                </div>
+  
+  
+                       <div fxLayout="row" fxLayoutAlign="space-between">
+                             <button mat-button mat-raised-button color="accent" type="submit">{{'Add'|translate }}</button>
+                                                        
+                       </div>
+                    </div>
+                 </form>
+        </div>
+     </mat-card>
+    </div>
+
+     
+   
+   <div fxLayout="row wrap"  fxLayoutAlign="center">
+     <mat-card fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100"  class="mrgn-t-md">
+            <div class="gene-card-title">
+                    <div fxLayout="row" fxLayoutAlign="center">
+                       <div fxLayout="column" fxLayoutAlign="center">
+                          <h3>{{'Executed Business Items'|translate}}</h3>
+                       </div>
+                       <span fxFlex></span>
+                       <div fxLayout="column">
+                            <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialogItem()">{{'Add Item'|translate}}</button>
+                         </div>
+                    </div>
+                                          </div>
+                    <mat-divider></mat-divider>
+                    <div class="gene-card-content pad-t-none">
+                            <div class="table-responsive">
+                               <table class="table table-hover table-middle th-fw-light mb-0">
+                                  <thead>
+                                     <tr>
+                                        <th>#</th>
+                                        <th>{{'Item Number'|translate}}</th>
+                                        <th>{{'Item Name'|translate}}</th>
+                                        <th>{{'Quantity'|translate}}</th>
+                                        <th>{{'Price'|translate}}</th>
+                                        <th>{{'Total Price'|translate}}</th>
+                                        <th>{{'Controls'|translate}}</th>
+                                     </tr>
+                                  </thead>
+                                  <tbody>
+                                     <tr >
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                     </tr>
+                                  </tbody>
+                               </table>
+                            </div>
+                         </div>
+                
+    </mat-card>
+
+    <mat-card fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100"  dir="rtl">
+            <div class="gene-card-title">
+                    <div fxLayout="row" fxLayoutAlign="center">
+                       <div fxLayout="column" fxLayoutAlign="center">
+                          <h3>{{'Discounts Type'|translate}}</h3>
+                       </div>
+                       <span fxFlex></span>
+                       <div fxLayout="column">
+                            <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialogDiscount()">{{'Add Item'|translate}}</button>
+                         </div>
+                    </div>
+                    
+                        </div>
+                    <mat-divider></mat-divider>
+               
+                 <div class="gene-card-content pad-t-none">
+                        <div class="table-responsive">
+                           <table class="table table-hover table-middle th-fw-light mb-0">
+                              <thead>
+                                 <tr>
+                                    <th>#</th>
+                                    <th>{{'Discounts Type'|translate}}</th>
+                                    <th>{{'Total Discounts'|translate}}</th>
+                                    <th>{{'Controls'|translate}}</th>
+                                   
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr >
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                          </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+    </mat-card>
+   </div>
+  

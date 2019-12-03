@@ -1,0 +1,51 @@
+<mat-card dir="rtl">
+        <div class="gene-card-title">
+           <div fxLayout="row" fxLayoutAlign="start center">
+              <div fxLayout="column" fxLayoutAlign="start center">
+                 <h3>{{'Discounts'|translate}}</h3>
+              </div>
+              <span fxFlex></span>
+           </div>
+           <mat-divider></mat-divider>
+        </div>
+        <div class="gene-card-content">
+              <form #form="ngForm">
+                    <div fxLayout="column">
+                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                          <!--Discount Type-->
+                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                             <mat-form-field class="full-wid mrgn-b-lg">
+                                   <mat-label>{{'Discounts Type'|translate}}</mat-label>
+                                   <mat-select>
+                                     <mat-option >
+                                     
+                                     </mat-option>
+                                   </mat-select>
+                             </mat-form-field>
+                          </div>
+                          <!--Discounts Type-->
+                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                <mat-form-field class="full-wid mrgn-b-lg">
+                                       <input matInput name="item_qty"
+                                       placeholder="{{'Discounts Type'|translate}}" type="text" 
+                                       required disabled>       
+                                </mat-form-field>
+                             </div>
+                               <!--Total Discounts-->
+                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                <mat-form-field class="full-wid mrgn-b-lg">
+                                       <input matInput name="item_qty"
+                                       placeholder="{{'Total Discounts'|translate}}" type="number" 
+                                       required disabled>       
+                                </mat-form-field>
+                             </div>
+                       </div>
+                       <div fxLayout="row" fxLayoutAlign="space-between">
+                             <button mat-button mat-raised-button color="accent" type="submit">{{'Add'|translate }}</button>
+                             <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
+                             
+                       </div>
+                    </div>
+                 </form>
+        </div>
+     </mat-card>

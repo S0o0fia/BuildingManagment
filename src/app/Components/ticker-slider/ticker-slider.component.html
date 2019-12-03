@@ -1,0 +1,18 @@
+<ngx-slick-carousel [config]="sliderConfig">
+  <div class="pad-x-md ticker-item-wrap" fxLayoutAlign="content" fxLayout="column" ngxSlickItem *ngFor="let content of sliderContent">
+     
+      <div>
+         <span class="market-cap font-bold"  style="font-size: medium;" >
+            <span>{{content.name}}</span>
+           
+         </span>
+      </div>
+
+      <div>
+         <div class="price-wrap font-bold" [ngStyle]="{'color':content.color}" style="font-size: small;">
+            {{content.amount}} %
+         </div>
+     </div>
+    
+   </div>
+</ngx-slick-carousel>

@@ -1,0 +1,123 @@
+[
+   {
+      "icon" : "dns",
+      "name" : "حسب البرنامج",
+      "color" : "primary",
+      "duration" : "4",
+      "market_cap" : "عرض المشاريع",
+      "market_cap_icon" : "fa-arrow-left",
+      "market_cap_color" : "success-text",
+      "chartLabel" : ["A", "B", "C", "D", "E" , "F" ,"G"],
+      "chartData" :[
+         {
+            "data":[5,5,5,5,5,5,5]
+         }],
+      "chartColor" :  [{
+         "lineTension":0.6,
+         "borderColor": "#1565c0",
+         "pointBorderWidth": 0,
+         "pointHoverRadius": 0,
+         "pointRadius": 0,
+         "pointHoverBorderWidth": 0,
+         "borderWidth": 3,
+         "fill": false
+      }]
+   },
+   {
+      "icon" : "delivery_dining",
+      "name" : "التسليم الابتدائي",
+      "color" : "accent",
+      "duration" : "50",
+      "market_cap" : "عرض المشاريع",
+      "market_cap_icon": "fa-arrow-left",
+      "market_cap_color" : "success-text",
+      "chartLabel" : ["A", "B", "C", "D", "E" , "F" ,"G"],
+      "chartData" :[
+         {
+            "data":[5,5,5,5,5,5,5]
+         }],
+      "chartColor" :  [{
+         "lineTension":0.6,
+         "borderColor": "#0097a7",
+         "pointBorderWidth": 0,
+         "pointHoverRadius": 0,
+         "pointRadius": 0,
+         "pointHoverBorderWidth": 0,
+         "borderWidth": 3,
+         "fill": false
+      }]
+   } ,
+   {
+      "icon" : "delivery_dining",
+      "name" : "التسليم النهائي",
+      "color" : "success",
+      "duration" : "10",
+      "market_cap" : "عرض المشاريع",
+      "market_cap_icon" :"fa-arrow-left",
+      "market_cap_color" : "success-text",
+      "chartLabel" : ["A", "B", "C", "D", "E" , "F" ,"G"],
+      "chartData" :[
+         {
+            "data":[5,5,5,5,5,5,5]
+         }
+      ],
+      "chartColor" :  [{
+         "lineTension":0.6,
+         "borderColor": "#43a047",
+         "pointBorderWidth": 0,
+         "pointHoverRadius": 0,
+         "pointRadius": 0,
+         "pointHoverBorderWidth": 0,
+         "borderWidth": 3,
+         "fill": false
+      }]
+   },
+   {
+      "icon" : "watch_later",
+      "name" : "المشاريع المتأخرة",
+      "color" : "warn",
+      "duration" : "10",
+      "market_cap" : "عرض المشاريع",
+      "market_cap_icon" : "fa-arrow-left",
+      "market_cap_color" : "success-text",
+      "chartLabel" : ["A", "B", "C", "D", "E" , "F" ,"G"],
+      "chartData" :[
+         {
+            "data":[5,5,5,5,5,5,5]
+         }],
+      "chartColor" :  [{
+         "lineTension":0.6,
+         "borderColor": "#e53935",
+         "pointBorderWidth": 0,
+         "pointHoverRadius": 0,
+         "pointRadius": 0,
+         "pointHoverBorderWidth": 0,
+         "borderWidth": 3,
+         "fill": false
+      }]
+   },
+   {
+      "icon" : "report_problem",
+      "name" : "المشاريع  المتعثرة",
+      "color" : "theme",
+      "duration" : "10",
+      "market_cap" : "عرض المشاريع",
+      "market_cap_icon" : "fa-arrow-left",
+      "market_cap_color" : "success-text",
+      "chartLabel" : ["A", "B", "C", "D", "E" , "F" ,"G"],
+      "chartData" :[
+         {
+            "data":[5,5,5,5,5,5,5]
+         }],
+      "chartColor" :  [{
+         "lineTension":0.6,
+         "borderColor": "#e53935",
+         "pointBorderWidth": 0,
+         "pointHoverRadius": 0,
+         "pointRadius": 0,
+         "pointHoverBorderWidth": 0,
+         "borderWidth": 3,
+         "fill": false
+      }]
+   }
+]

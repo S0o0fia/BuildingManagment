@@ -1,0 +1,39 @@
+
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card>
+           <div class="gene-card-title">
+              <div fxLayout="row" fxLayoutAlign="space-around center">
+                 <div fxLayout="column">
+                    <h4>{{'Attendece'|translate}}</h4>
+     
+                 </div> <span fxFlex></span>
+                 
+                 <div fxLayout="column">
+                    <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Add'|translate}}</button>
+                 </div> 
+              </div>
+             
+              <mat-divider></mat-divider>
+           </div>
+           <div class="gene-card-content pad-t-none">
+              <div class="table-responsive">
+                 <table class="table table-hover table-middle th-fw-light mb-0">
+                    <thead>
+                       <tr>
+                          <th>{{'Employee Name'|translate}}</th>
+                          <th>{{'Date'|translate}}</th>
+                           <th>{{'Enter Time'|translate}}</th>
+                          <th>{{'Leave Time'|translate}}</th>
+                          <th>{{'Works Hours'|translate}}</th>
+                         
+                       </tr>
+                    </thead>
+                    <tbody>
+                       <tr>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+           </div>
+        </mat-card>
+     </div>

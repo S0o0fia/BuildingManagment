@@ -1,0 +1,75 @@
+<mat-card dir="rtl">
+        <div class="gene-card-title">
+           <div fxLayout="row" fxLayoutAlign="start center">
+              <div fxLayout="column" fxLayoutAlign="start center">
+                 <h3>{{'Add'|translate}}</h3>
+              </div>
+              <span fxFlex></span>
+           </div>
+           <mat-divider></mat-divider>
+        </div>
+        <div class="gene-card-content">
+              <form #form="ngForm">
+                    <div fxLayout="column">
+                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                          <!--Item Number-->
+                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                             <mat-form-field class="full-wid mrgn-b-lg">
+                                   <mat-label>{{'Consultant Name'|translate}}</mat-label>
+                                   <mat-select>
+                                     <mat-option >
+                                     
+                                     </mat-option>
+                                   </mat-select>
+                             </mat-form-field>
+                          </div>
+                         <!--Item Name-->
+                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                             <mat-form-field class="full-wid mrgn-b-lg">
+                                   <mat-label>{{'Empolyee Name'|translate}}</mat-label>
+                                   <mat-select disabled>
+                                     <mat-option >
+                                     
+                                     </mat-option>
+                                   </mat-select>
+                             </mat-form-field>
+                          </div>
+                         
+                                                          
+                             <!--Start Session-->
+                             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                   <mat-form-field class="full-wid mrgn-b-lg ">
+                                      <input matInput 
+                                      name="start_session1"  
+                                      [min]="minDate" [max]="maxDate" [matDatepicker]="picker1"
+                                       placeholder="{{'Date'|translate}}">
+                                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                      <mat-datepicker #picker1></mat-datepicker>                         
+                                   </mat-form-field>
+                            </div>
+                         
+                       <!--Item Qunatity-->
+                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                             <mat-form-field class="full-wid mrgn-b-lg ">
+                                  
+                                   <input matInput name="item_qty"
+                                   placeholder="{{'Enter Time'|translate}}" type="number" required>       
+                             </mat-form-field>
+                      </div>
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                            <mat-form-field class="full-wid mrgn-b-lg ">
+                                 
+                                  <input matInput name="item_qty"
+                                  placeholder="{{'Leave Time'|translate}}" type="number" required>       
+                            </mat-form-field>
+                     </div>
+                     </div>
+                       <div fxLayout="row" fxLayoutAlign="space-between">
+                             <button mat-button mat-raised-button color="accent" type="submit">{{'Add'|translate }}</button>
+                             <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
+                             
+                       </div>
+                    </div>
+                 </form>
+        </div>
+     </mat-card>

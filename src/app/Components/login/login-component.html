@@ -1,0 +1,36 @@
+<div class="gene-login gene-session pad-y-xl">
+   <div fxLayout="row" fxLayoutAlign="center start">
+      <div fxLayout="column" fxFlex.xl="540px" fxFlex.lg="540px" fxFlex.md="540px" fxFlex.sm="540px" fxFlex.xs="100">
+         <mat-card class="gene-login-wrapper">
+            <div>
+               <div fxLayout="column" fxLayoutAlign="center center mrgn-b-md">
+                  <div class="login-logo justify-content">
+                     <img src="assets/img/login_logo.jpg" id="logo">
+                     <br>
+                     <h3>{{'Projects Managment Program'|translate}}</h3>
+                  </div>
+               </div>
+               <form #form="ngForm" (ngSubmit)="login(form.value)">
+               <div fxLayout="column" fxLayoutAlign="start stretch">
+                  <mat-form-field class="full-wid mrgn-b-md">
+                     <input matInput placeholder="{{'username'|translate}}" type="text" name="username" required [(ngModel)]="username">
+                  </mat-form-field>
+                  <mat-form-field class="full-wid mrgn-b-md ">
+                     <input matInput placeholder="{{'Password'|translate}}" type="password" name="password" required [(ngModel)]="password">
+                  </mat-form-field>
+                  <div fxLayout="row" fxLayoutAlign="start center">
+                     <div fxLayout="column">
+                        <mat-checkbox class="remember-me">{{'Remember Me'|translate}}</mat-checkbox>
+                     </div>
+                     <span fxFlex></span>
+                     <div><a [routerLink]="['/session/forgot-password']">{{'Forgot Password?'|translate}}</a></div>
+                  </div>
+                  <button class="login" mat-raised-button [disabled]="!form.valid">{{'SIGN IN'|translate}}</button>
+                
+               </div>
+               </form>
+            </div>
+         </mat-card>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,364 @@
+<div fxLayout="row wrap" fxLayoutAlign=" start" class="gene-form-wizard">
+    <mat-card fxFlex="100%">
+       <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="start center">
+             <div fxLayout="column">
+                <h4>{{'New Project'|translate}}</h4>
+             </div>
+             <span fxFlex></span> 
+          </div>
+          <mat-divider></mat-divider>
+       </div>
+       <div class="gene-card-content">
+          <mat-tab-group [selectedIndex]="selectedIndex">
+             <mat-tab label="{{'Step 1'|translate}}">
+                <form #form="ngForm" >
+                   <div fxLayout="column">
+                      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                            <mat-form-field class="full-wid mrgn-b-lg">
+                                 <input matInput name="name" [(ngModel)]="name"
+                                  placeholder="{{'Proejct Name'|translate}}" type="text" required>
+                            </mat-form-field>
+                         </div>
+                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                            <mat-form-field class="full-wid mrgn-b-lg"> 
+                               <input matInput name="contact_number"  [(ngModel)]="contact_number"
+                                placeholder="{{'Contract Number'|translate}}" required type="number">
+                            </mat-form-field>
+                         </div>
+                      </div>
+                      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                            <mat-form-field class="full-wid mrgn-b-lg ">
+                                    <mat-label>{{'Consultant Name'|translate}}</mat-label>
+                               <mat-select matNativeControl required name="consultant_name"
+                               [(ngModel)]="consultant_name">
+                               <mat-option   value="hi" >hi</mat-option>
+                                  <div *ngFor="let user of users">
+                                  <div *ngIf = "user.user_job == 'consultant'">
+                               
+                                <mat-option value="{{user.id}}" >{{user.name}}</mat-option>
+                              </div> 
+                              </div>
+                              </mat-select>
+                            </mat-form-field>
+                         </div>
+                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                            <mat-form-field class="full-wid mrgn-b-lg ">
+                                    <mat-label>{{'Contructor Name'|translate}}</mat-label>
+                                    <mat-select matNativeControl required name="contractor_name"
+                                    [(ngModel)]="contractor_name">
+                                    <mat-option  value="hi" >hi</mat-option>
+                                          <div *ngFor="let user of users">
+                                        <div *ngIf = "user.user_job == 'contractor'"> 
+                                         
+                                       <mat-option value="{{user.id}}" >{{user.name}}</mat-option>
+                                    </div> 
+                                    </div>
+                                    </mat-select>
+                            </mat-form-field>
+                         </div>
+                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <mat-label fxLayoutAlign="start center" >* {{'Session From'|translate}}</mat-label>
+                              <br>
+                         <mat-radio-group aria-label="Select an option">
+                              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                              <mat-radio-button name="calender" (change)="datepick(1)"  value="1" ngModel>{{'Session From Hijri'|translate}}</mat-radio-button>
+                              </div>
+                              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                              <mat-radio-button name="calender" (change)="datepick(2)" value="2" ngMdoel>{{'Session From Grogorian'|translate}}</mat-radio-button>
+                              </div>
+                            </mat-radio-group>
+                         </div>
+                         <br>
+                         <br>
+                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                              <mat-form-field class="full-wid mrgn-b-lg ">
+                                 <input matInput 
+                                 name="startdate1" [(ngModel)]="startdate" 
+                                 [min]="minDate" [max]="maxDate" [matDatepicker]="pickerhijri"
+                                  placeholder="{{'Session From Hijri'|translate}}">
+                                 <mat-datepicker-toggle matSuffix [for]="pickerhijri"
+                                 [disabled]="calender != 1"></mat-datepicker-toggle>
+                                 <mat-datepicker #pickerhijri></mat-datepicker>                         
+                              </mat-form-field>
+                       </div>
+                       <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                              <input matInput 
+                              name="startdate2" [(ngModel)]="startdate" 
+                              [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+                               placeholder="{{'Session From Grogorian'|translate}}"
+                               [disabled]="calender != 2">
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>                         
+                           </mat-form-field>
+                    </div>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="start">
+                         <button mat-button type="button" disabled>{{'Previous'|translate }}</button>
+                         <button mat-button mat-raised-button [disabled]="!form.valid" (click)="nextStep()" type="submit" >{{'Next'|translate }} </button>
+                      </div>
+                   </div>
+
+                </form>
+             </mat-tab>
+             <mat-tab label="{{'Step 2'|translate}}" [disabled]="!form.valid">
+                <form #form2="ngForm" >
+                   <div fxLayout="column">
+                      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                            <mat-form-field class="full-wid mrgn-b-lg ">
+                             <input matInput placeholder="{{'First Payment'|translate}}"
+                             name="first_pay"  [(ngModel)]="first_pay" 
+                             type="number" (change)="raito()" required> 
+                            </mat-form-field>
+                         </div>
+                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                            <mat-form-field class="full-wid mrgn-b-lg ">
+                                <input matInput 
+                                name="project_amount"  [(ngModel)]="project_amount" 
+                                placeholder="{{'Project Amount'|translate}}" type="number" required
+                                (change)="raito()">
+                            </mat-form-field>
+                         </div>
+                      </div>
+                      
+                      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                            <input matInput placeholder="{{'Preface Payment Ratio'|translate}}"
+                            name="first_pay_ratio"  [(ngModel)] = "perface_ratio"
+                            type="text" required disabled>
+                           </mat-form-field>
+                        </div>
+                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                               <input matInput 
+                               name="net_cost"   
+                               placeholder="{{'Net Project Cost'|translate}}" type="number" required>
+                           </mat-form-field>
+                        </div>
+                     </div>
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                           
+                                 <mat-label fxLayoutAlign="start center" >* {{'Project Duration'|translate}}</mat-label>
+                                 <br>
+                           <mat-radio-group aria-label="Select an option">
+                                <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                                <mat-radio-button name="duration" (change)="durationType(1)"  value="1" ngModel>{{'Duration with Days'|translate}}</mat-radio-button>
+                                </div>
+                                <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                                <mat-radio-button name="duration" (change)="durationType(2)" value="2" ngMdoel>{{'Duration with Months'|translate}}</mat-radio-button>
+                                </div>
+                          </mat-radio-group>
+                      </div>
+                     <br>
+                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                         
+                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                            <mat-form-field class="full-wid mrgn-b-lg ">
+                              <input matInput name="project_duration_days" [(ngModel)]="project_duration_days"
+                              (change)="caldurationd(project_duration_days)"
+                              placeholder="{{'Project Duration With Days'|translate}}" type="number"
+                              [disabled]="duration != 1" required>
+                            </mat-form-field>
+                         </div>
+                         
+                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                              <mat-form-field class="full-wid mrgn-b-lg ">
+                                <input matInput name="project_duration_months" [(ngModel)]="project_duration_months"
+                                (change)="caldurationm(project_duration_months)"
+                                placeholder="{{'Project Duration With Months'|translate}}" type="number" required
+                                [disabled]="duration != 2">
+                              </mat-form-field>
+                           </div>
+                      </div>
+
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                           <mat-label fxLayoutAlign="start center" >* {{'Session To'|translate}}</mat-label>
+                           <br>
+                      <mat-radio-group aria-label="Select an option">
+                           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                           <mat-radio-button name="calender" (change)="datepick(1)"  value="1" ngModel>{{'Session To Hijri'|translate}}</mat-radio-button>
+                           </div>
+                           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                           <mat-radio-button name="calender" (change)="datepick(2)" value="2" ngMdoel>{{'Session To Grogorian'|translate}}</mat-radio-button>
+                           </div>
+                         </mat-radio-group>
+                      </div>
+                      <br>
+                      <br>
+                      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                              <input matInput 
+                              name="todate1"  
+                              [min]="minDate" [max]="maxDate" [matDatepicker]="pickerhijri2"
+                               placeholder="{{'Session To Hijri'|translate}}">
+                              <mat-datepicker-toggle matSuffix [for]="pickerhijri2"
+                              [disabled]="calender != 1"></mat-datepicker-toggle>
+                              <mat-datepicker #pickerhijri2></mat-datepicker>                         
+                           </mat-form-field>
+                    </div>
+                    <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                           <input matInput 
+                           name="todate2" 
+                           [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
+                            placeholder="{{'Session To Grogorian'|translate}}"
+                            [disabled]="calender != 2">
+                           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                           <mat-datepicker #picker2></mat-datepicker>                         
+                        </mat-form-field>
+                 </div>
+               </div>
+                      <div fxLayout="row" fxLayoutAlign="start">
+                         <button mat-button type="button" (click)="previousStep()">{{'Previous'|translate }}</button>
+                         <button mat-button mat-raised-button [disabled]="!form2.valid" (click)="nextStep()" type="button">{{'Next'|translate }}</button>
+                      </div>
+                   </div>
+                </form>
+             </mat-tab>
+             <mat-tab label="{{'Step 3'|translate}}" [disabled]="!form2.valid">
+                <form #form3="ngForm" (ngSubmit)="SaveData()">
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+                              <mat-form-field class="full-wid mrgn-b-lg ">
+                                <input matInput  name="budget_year"  [(ngModel)]="budget_year"
+                                placeholder="{{'Budget Year'|translate}}" type="number" required>
+                              </mat-form-field>
+                        </div>
+                
+                     <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+                         <mat-form-field class="full-wid mrgn-b-lg ">
+                          <mat-label>{{'Within Project'|translate}}</mat-label>
+                          <mat-select matNativeControl required name="within_project" 
+                          [(ngModel)]="within_project" >
+                              <div *ngFor="let Project of ProjectList">
+                           <mat-option value="{{Project.name}}">{{Project.name}}
+                          
+                           </mat-option>  
+                        </div>     
+                       </mat-select>
+                         </mat-form-field>
+                      </div>
+                      <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+                         <mat-form-field class="full-wid mrgn-b-lg ">
+                           <mat-label>{{'Project Status'|translate}}</mat-label>
+                           <mat-select matNativeControl
+                            name="satuts"  [(ngModel)]="status" 
+                             required>
+                            <mat-option value="active" >{{'Active'|translate}}</mat-option>
+                            <mat-option value="draft" >{{'Draft'|translate}}</mat-option>
+                          </mat-select>
+                         </mat-form-field>
+                      </div>
+                   </div>
+                   <mat-form-field class="full-wid mrgn-b-lg ">
+                     <mat-label>{{'Project Description'|translate}}</mat-label>
+                     <textarea matInput name="description"  [(ngModel)]="description"
+                               cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                 cdkAutosizeMinRows="1"
+                                  cdkAutosizeMaxRows="5"></textarea>
+                   </mat-form-field>
+                   <div fxLayout="row" fxLayoutAlign="start">
+                      <button mat-button type="button" (click)="previousStep()">{{'Previous'|translate }}</button>
+                      <button mat-button mat-raised-button [disabled]="!form3.valid" (click)="nextStep()" type="submit">{{'Next'|translate }}</button>
+                   </div>
+                </form>
+             </mat-tab>
+             <mat-tab label="{{'Step 4'|translate}}" [disabled]="!form3.valid || !form.valid"
+             (onLoad)="SaveData()" >
+            
+                <div fxLayout="column">
+                   <div class="custom-pad text-center">
+                      <h1>{{'Saving Project is Done'|translate}}
+                         
+                      </h1>
+                      <mat-icon style="width:100%;">cloud_done</mat-icon>
+                   </div>
+                </div>
+             </mat-tab>
+          </mat-tab-group>
+       </div>
+    </mat-card>
+ </div>
+ <!--The Map Part-->
+ <div fxLayout="row wrap" fxLayoutAlign="start">
+      <div fxFlex.gt-md="300" fxFlex.gt-sm="300" fxFlex="300" style="height: 500px;">
+         <mat-card id="mapcard">
+            <div class="gene-card-title">
+               <div fxLayout="row" fxLayoutAlign="start center">
+                  <div fxLayout="column" fxFlex="500">
+                     <h3>{{'Choose Location'|translate}}</h3>
+                  </div>
+                  <span fxFlex></span>
+                  <button mat-icon-button>
+                     <mat-icon>sync</mat-icon>
+                  </button>
+                  <button mat-icon-button [matMenuTriggerFor]="options">
+                     <mat-icon>more_horiz</mat-icon>
+                  </button>
+               </div>
+               <mat-divider></mat-divider>
+            </div>
+            <div class="gene-card-content" class="map">
+               <agm-map [latitude]="lat" [longitude]="lng" class="map" (mapClick)="placeMarker($event)">
+                  <agm-marker (mouseOver)="window.open()" (mouseOut)="window.close()" [latitude]="lat"
+                    [longitude]="lng">
+                    <agm-info-window #window>
+                      <h6>Longitude: {{lng}}</h6>
+                      <h6>Latitude: {{lat}}</h6>
+                    </agm-info-window>
+                  </agm-marker>
+               </agm-map>
+               <!-- <agm-map [latitude]="latitude" [longitude]="longitude" style="height: 300px" (mapClick)="placeMarker($event)">
+                  <agm-marker (mouseOver)="window.open()" (mouseOut)="window.close()" *ngFor="let marker of markers" [latitude]="marker.latitude"
+                    [longitude]="marker.longitude">
+                    <agm-info-window #window>
+                      <h6>Longitude: {{marker.longitude}}</h6>
+                      <h6>Latitude: {{marker.latitude}}</h6>
+                    </agm-info-window>
+                  </agm-marker>
+                </agm-map> -->
+            </div>
+            <form #form3="ngForm">
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                         <mat-form-field class="full-wid mrgn-b-lg ">
+                              <input matInput placeholder="{{'Latitude'|translate}}" type="text" [(ngModel)]="lat" required [ngModelOptions]="{standalone: true}">
+                         </mat-form-field>
+                      </div>
+                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                                 <input matInput placeholder="{{'Longitude'|translate}}" type="text" [(ngModel)]="lng" required [ngModelOptions]="{standalone: true}">
+                                 
+                           </mat-form-field>
+                      </div>
+                  </div>
+                 
+            </form>
+         </mat-card>
+      </div>
+   </div>
+   <mat-menu #options="matMenu" x-position="before">
+      <button mat-menu-item>
+         <mat-icon>settings</mat-icon>
+         Settings 
+      </button>
+      <button mat-menu-item>
+         <mat-icon>more</mat-icon>
+         View More 
+      </button>
+      <button mat-menu-item>
+         <mat-icon>notifications_off</mat-icon>
+         Disable notifications 
+      </button>
+      <button mat-menu-item>
+         <mat-icon>exit_to_app</mat-icon>
+         Remove Panel 
+      </button>
+   </mat-menu>

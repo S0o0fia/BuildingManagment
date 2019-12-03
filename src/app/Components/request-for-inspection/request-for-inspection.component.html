@@ -1,0 +1,56 @@
+
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card>
+           <div class="gene-card-title">
+              <div fxLayout="row" fxLayoutAlign="space-around center">
+                 <div fxLayout="column">
+                    <h4>{{'Request for Inspection'|translate}}</h4>
+     
+                 </div> <span fxFlex></span>
+                 
+                 <div fxLayout="column">
+                    <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Add Request'|translate}}</button>
+                 </div> 
+              </div>
+             
+              <mat-divider></mat-divider>
+           </div>
+           <div class="gene-card-content pad-t-none">
+              <div class="table-responsive">
+                 <table class="table table-hover table-middle th-fw-light mb-0">
+                    <thead>
+                       <tr>
+                          <th>{{'Project Number'|translate}}</th>
+                          <th>{{'Project Name'|translate}}</th>
+                           <th>{{'Item Number'|translate}}</th>
+                          <th>{{'Item Name'|translate}}</th>
+                          <th>{{'Request Number'|translate}}</th>
+                          <th>{{'Inspection Date'|translate}}</th>
+                          <th>{{'Controls'|translate}}</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                       <tr *ngFor="let data of RFI_tbl">
+                         <td>{{data.project_id}}</td>
+                         <td>{{data.project_name}}</td>
+                         <td>{{data.request_num}}</td>
+                         <td>{{data.request_name}}</td>
+                         <td>{{data.item_qty}}</td>
+                         <td>{{data.inspect_date}}</td>
+                         <td>
+                                <div class="dropdown row">
+                                        <button mat-icon-button matTooltip="{{'Delete'|translate}}">
+                                              <mat-icon color="primary">delete</mat-icon>
+                                        </button>
+                                        <button mat-icon-button   matTooltip="{{'Edit'|translate}}" >
+                                              <mat-icon  color="primary">edit</mat-icon>
+                                        </button>
+                                        </div>
+                         </td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+           </div>
+        </mat-card>
+     </div>

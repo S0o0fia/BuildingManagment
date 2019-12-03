@@ -1,0 +1,22 @@
+<mat-card class="stats-card-wrap">
+	<div class="mrgn-b-md" fxLayoutAlign="start center">
+      <div class="crypto-icon-wrap inline-block">
+        <mat-icon [color]="statsCardData.color">{{statsCardData.icon}}</mat-icon>
+      </div>
+		<div class="inline-block vertical-align-mid pad-wrap" style="font-size:small;">
+         <h5 class="mrgn-b-none">{{statsCardData.name}}</h5>
+		</div>
+   </div>
+   <div >
+      <div class="chart-wrap mrgn-b-lg {{statsCardData.color}}-chart-shadow">
+      </div>
+      <div class="chart info" fxLayout="row wrap" fxLayoutAlign="space-between center">
+         <span class="crypto-duration mat-grey-300" style="font-size:medium;">
+            {{statsCardData.duration}}
+         </span>
+         <span class="market-cap">
+            <i class="fa  {{statsCardData.market_cap_icon}} {{statsCardData.market_cap_color}}"> {{statsCardData.market_cap}} </i>
+         </span>
+      </div>
+   </div>
+</mat-card>

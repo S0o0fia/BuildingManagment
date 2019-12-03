@@ -1,0 +1,18 @@
+
+         <div fxLayout="row wrap" fxLayoutAlign="space-around center" dir="rtl">
+
+            <div fxLayout="column center" style="text-align: center;" >
+                  <h3>{{'Cumulative Completion Rate'|translate}}</h3>
+      <nvd3 class="intense-colors-pie-chart white-labels-pie-chart" [options]="chartOptions" [data]="data"></nvd3>
+            </div>
+            <div fxLayout="column center" style="text-align: center;">
+                        <h3>{{'Weekly Completion Rate'|translate}}</h3>
+      <nvd3 class="intense-colors-pie-chart white-labels-pie-chart" [options]="chartOptions" [data]="data"></nvd3>
+            </div>
+          <div fxLayout="column center" style="text-align: center;">
+                  <h3>{{'Pervious Completion Rate'|translate}}</h3>
+           <nvd3 class="intense-colors-pie-chart white-labels-pie-chart" [options]="chartOptions" [data]="data"></nvd3>
+         </div>
+
+         </div>
+

@@ -1,0 +1,54 @@
+body .gene-login-wrapper {
+   padding: 2rem;
+   margin-top:15%;
+   opacity: 0.95;
+    .login-logo {
+        margin-bottom: 2rem;
+        img {
+            margin-bottom: 2rem;
+        }
+    }
+    button {
+        margin: 1rem 0;
+    }
+}
+
+.justify-content {
+    justify-content: center;
+}
+
+#logo
+{
+    width: 25%;
+    margin: auto;
+}
+
+.login-logo{
+    margin-top: 2%;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    text-align-last: center;
+}
+h3{
+    margin-top:5%;
+}
+
+input {
+ font-size: medium;;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+    font-size: 1.25rem !important;
+    margin-left: 2%;
+}
+
+.login
+{
+    background-color: #37474F;
+    color: white;
+}
+
+.login:hover{
+    opacity: 0.8;
+}
