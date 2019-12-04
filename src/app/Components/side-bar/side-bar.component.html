@@ -2,7 +2,7 @@
    <mat-toolbar class="sidebar-logo">
       <div class="gene-logo">
          <a href="javascript:void(0)" (click)="onClick()" style="color:white">
-            برنامج
+            
             {{'Projects Managment' |translate}}
            
          </a>
@@ -12,7 +12,7 @@
       <div class="sidebar-container">
          <div class="gene-user-thumb text-center">
             <img class="img-responsive img-circle" src="assets/img/pro-thumb.jpg" width="107" height="107" alt="user list image">
-            <div class="gene-user-name">John Hobbs</div>
+            <div class="gene-user-name">{{user}}</div>
          </div>
          <div class="sidenav-scrollbar-container" fxLayout="column">
             <ng-container *ngIf="verticalMenuStatus; else horizontalMenuStatus">

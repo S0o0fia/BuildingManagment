@@ -50,7 +50,7 @@ export class CreatprojectComponent implements OnInit {
   duration : number=0;
   project_duration_days : number = 0;
   project_duration_months : number = 0;
-
+   deliverdate : Date ;
  
 
   constructor( private pageTitleService: PageTitleService,
@@ -59,6 +59,7 @@ export class CreatprojectComponent implements OnInit {
 
                   this.minDate = new Date(1900,1,1);
                   this.maxDate = new Date(2050,1,1);
+
                   this.lng=46.6753;
                   this.lat=24.7136;
                }
@@ -103,13 +104,28 @@ export class CreatprojectComponent implements OnInit {
   }
 caldurationm(value)
 {
-    this.project_duration_days = value*30;
+   let days = this.startdate.getDay();
+   let Month = this.startdate.getMonth();
+   let Year = this.startdate.getFullYear();
+   days+=1;
+   Month += value;
+   this.deliverdate = new Date(Year , Month , days);
+
+   this.project_duration_days = value*30;
+
   
 }
 
 caldurationd(value)
 {
+   let days = this.startdate.getDay();
+   let Month = this.startdate.getMonth();
+   let Year = this.startdate.getFullYear();
+   Month += Math.round(value/30);
+   days += value%30+1;
+   this.deliverdate = new Date(Year , Month , days);
    this.project_duration_months= value/30;
+
 }
   nextStep() {
     const format = 'MM/dd/yyyy';

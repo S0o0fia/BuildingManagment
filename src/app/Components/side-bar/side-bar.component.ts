@@ -14,6 +14,7 @@ export class SideBarComponent implements OnInit {
 
 	@Input() menuList : any;
    @Input() verticalMenuStatus : boolean;
+   user : string;
  
    public username :string = 'Nqraa';
    public Title :string =   'Projects Managment' ;
@@ -22,6 +23,8 @@ export class SideBarComponent implements OnInit {
                 public coreService: CoreService,
                 public menuItems: MenuItems ,
                 ) { 
+
+					this.user = localStorage.getItem('loginUser');
                   
                 }
 

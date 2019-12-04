@@ -54,14 +54,7 @@ const MENUITEMS = [
         {state: 'compantmanage', name: 'Company Managment',   type: 'link' },  
       ]
       } ,
-    {
-
-      state: 'videos',
-      name: 'Videos',
-      type: 'link',
-      icon: 'play_arrow',
-     
-    },
+  
     {
       state: 'logout',
       name: 'Logout',

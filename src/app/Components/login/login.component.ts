@@ -31,7 +31,8 @@ export class LoginComponent {
         (data)=>{
            debugger;
              localStorage.setItem("token" , data["token"]);
-             localStorage.setItem("loginUser" , data["token"]);
+             localStorage.setItem("loginUser" , value.username);
+
              this.router.navigate(['/home/crm']);
          }
 
