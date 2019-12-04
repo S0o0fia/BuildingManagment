@@ -35,24 +35,29 @@ export class CreatprojectComponent implements OnInit {
   contractor_name  :string = ""; 
   contact_number  :number; 
   project_amount  :number; 
-  project_duration  :number ; 
   first_pay : number;
   within_project :string="";
   budget_year  :string = ""; 
   status  :string = ""; 
   description  :string = ""; 
+  startdate_hijri : Date = new Date();
+  startdate:Date = new Date();
+  deliverdate_hijri : Date = new Date();
+  deliverdate:Date = new Date();
   minDate:Date;
   maxDate :Date;
   lng : number;
   lat:number;
   users : any;
-  startdate:Date = new Date();
-  perface_ratio : number;
+  project_duration_days : number = 0;
+  project_duration_months : number = 0;  
+  perface_ratio : number=0;
   calender : number =0;
   duration : number=0;
-  project_duration_days : number = 0;
-  project_duration_months : number = 0;
-   deliverdate : Date ;
+  netcost : number = 0;
+  project_type : string ;
+
+
  
 
   constructor( private pageTitleService: PageTitleService,
