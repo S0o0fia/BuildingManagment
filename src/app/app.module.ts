@@ -77,6 +77,7 @@ import { AddDiscountComponent } from './Components/add-discount/add-discount.com
 import { ProjectsmapComponent } from './Components/projectsmap/projectsmap.component';
 import { ExcelService } from './Service/excel.service';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { AddBuildingComponent } from './Components/add-building/add-building.component';
 
 
 
@@ -277,7 +278,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		AddExtractComponent,
 		AddItemComponent,
 		AddDiscountComponent ,
-		ProjectsmapComponent
+		ProjectsmapComponent,
+		AddBuildingComponent
 	
 		
 		
@@ -293,7 +295,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		RFIStatusComponent,
 		ExtractsComponent,
 		AddItemComponent,
-		AddDiscountComponent
+		AddDiscountComponent,
+		AddBuildingComponent
 		
 	],
 	exports:[

@@ -7,6 +7,8 @@ import { NewProject } from 'app/Models/Project/new-project';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { ProjectModel } from 'app/Models/Project/project-model';
 import { DatePipe, formatDate } from '@angular/common';
+import { AddBuildingComponent } from '../add-building/add-building.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'ms-creatproject',
@@ -55,7 +57,8 @@ export class CreatprojectComponent implements OnInit {
 
   constructor( private pageTitleService: PageTitleService,
                
-               private translate : TranslateService , public service : CoreService , public fb: FormBuilder) {
+               private translate : TranslateService , public service : CoreService
+                , public fb: FormBuilder , private dialog: MatDialog) {
 
                   this.minDate = new Date(1900,1,1);
                   this.maxDate = new Date(2050,1,1);
@@ -116,6 +119,18 @@ caldurationm(value)
   
 }
 
+openDialog(): void {
+   const dialogRef = this.dialog.open(AddBuildingComponent, {
+     width: '50%',
+     height: '80%'
+    
+   });
+
+   dialogRef.afterClosed().subscribe(result => {
+     console.log('The dialog was closed');
+     
+   });
+ }
 caldurationd(value)
 {
    let days = this.startdate.getDay();

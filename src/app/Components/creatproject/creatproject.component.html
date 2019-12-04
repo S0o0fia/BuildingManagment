@@ -34,7 +34,6 @@
                                     <mat-label>{{'Consultant Name'|translate}}</mat-label>
                                <mat-select matNativeControl required name="consultant_name"
                                [(ngModel)]="consultant_name">
-                               <mat-option   value="hi" >hi</mat-option>
                                   <div *ngFor="let user of users">
                                   <div *ngIf = "user.user_job == 'consultant'">
                                
@@ -49,10 +48,9 @@
                                     <mat-label>{{'Contructor Name'|translate}}</mat-label>
                                     <mat-select matNativeControl required name="contractor_name"
                                     [(ngModel)]="contractor_name">
-                                    <mat-option  value="hi" >hi</mat-option>
-                                          <div *ngFor="let user of users">
+                                 
+                                     <div *ngFor="let user of users">
                                         <div *ngIf = "user.user_job == 'contractor'"> 
-                                         
                                        <mat-option value="{{user.id}}" >{{user.name}}</mat-option>
                                     </div> 
                                     </div>
@@ -64,10 +62,10 @@
                               <br>
                          <mat-radio-group aria-label="Select an option">
                               <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                              <mat-radio-button name="calender" (change)="datepick(1)"  value="1" ngModel>{{'Session From Hijri'|translate}}</mat-radio-button>
+                              <mat-radio-button name="calender" (change)="datepick(1)"  value="1" [(ngModel)]="calender">{{'Session From Hijri'|translate}}</mat-radio-button>
                               </div>
                               <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                              <mat-radio-button name="calender" (change)="datepick(2)" value="2" ngMdoel>{{'Session From Grogorian'|translate}}</mat-radio-button>
+                              <mat-radio-button name="calender" (change)="datepick(2)" value="2"  [(ngModel)]="calender">{{'Session From Grogorian'|translate}}</mat-radio-button>
                               </div>
                             </mat-radio-group>
                          </div>
@@ -96,6 +94,7 @@
                            </mat-form-field>
                     </div>
                       </div>
+                     
                       <div fxLayout="row" fxLayoutAlign="start">
                          <button mat-button type="button" disabled>{{'Previous'|translate }}</button>
                          <button mat-button mat-raised-button [disabled]="!form.valid" (click)="nextStep()" type="submit" >{{'Next'|translate }} </button>
@@ -147,10 +146,10 @@
                                  <br>
                            <mat-radio-group aria-label="Select an option">
                                 <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                <mat-radio-button name="duration" (change)="durationType(1)"  value="1" ngModel>{{'Duration with Days'|translate}}</mat-radio-button>
+                                <mat-radio-button name="duration" (change)="durationType(1)"  value="1"  [(ngModel)]="duration">{{'Duration with Days'|translate}}</mat-radio-button>
                                 </div>
                                 <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                <mat-radio-button name="duration" (change)="durationType(2)" value="2" ngMdoel>{{'Duration with Months'|translate}}</mat-radio-button>
+                                <mat-radio-button name="duration" (change)="durationType(2)" value="2"  [(ngModel)]="duration">{{'Duration with Months'|translate}}</mat-radio-button>
                                 </div>
                           </mat-radio-group>
                       </div>
@@ -181,10 +180,10 @@
                            <br>
                       <mat-radio-group aria-label="Select an option">
                            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <mat-radio-button name="calender" (change)="datepick(1)"  value="1" ngModel>{{'Session To Hijri'|translate}}</mat-radio-button>
+                           <mat-radio-button name="calender" (change)="datepick(1)"  value="1"  [(ngModel)]="calender">{{'Session To Hijri'|translate}}</mat-radio-button>
                            </div>
                            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <mat-radio-button name="calender" (change)="datepick(2)" value="2" ngMdoel>{{'Session To Grogorian'|translate}}</mat-radio-button>
+                           <mat-radio-button name="calender" (change)="datepick(2)" value="2"  [(ngModel)]="calender">{{'Session To Grogorian'|translate}}</mat-radio-button>
                            </div>
                          </mat-radio-group>
                       </div>
@@ -224,14 +223,14 @@
              <mat-tab label="{{'Step 3'|translate}}" [disabled]="!form2.valid">
                 <form #form3="ngForm" (ngSubmit)="SaveData()">
                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                               <mat-form-field class="full-wid mrgn-b-lg ">
                                 <input matInput  name="budget_year"  [(ngModel)]="budget_year"
                                 placeholder="{{'Budget Year'|translate}}" type="number" required>
                               </mat-form-field>
                         </div>
                 
-                     <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+                     <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                          <mat-form-field class="full-wid mrgn-b-lg ">
                           <mat-label>{{'Within Project'|translate}}</mat-label>
                           <mat-select matNativeControl required name="within_project" 
@@ -245,17 +244,30 @@
                        </mat-select>
                          </mat-form-field>
                       </div>
-                      <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
-                         <mat-form-field class="full-wid mrgn-b-lg ">
-                           <mat-label>{{'Project Status'|translate}}</mat-label>
-                           <mat-select matNativeControl
-                            name="satuts"  [(ngModel)]="status" 
-                             required>
-                            <mat-option value="active" >{{'Active'|translate}}</mat-option>
-                            <mat-option value="draft" >{{'Draft'|translate}}</mat-option>
-                          </mat-select>
-                         </mat-form-field>
-                      </div>
+                     
+                   </div>
+                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">                      
+                     <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                          <mat-label>{{'Project Status'|translate}}</mat-label>
+                          <mat-select matNativeControl
+                           name="satuts"  [(ngModel)]="status" 
+                            required>
+                           <mat-option value="active" >{{'Active'|translate}}</mat-option>
+                           <mat-option value="draft" >{{'Draft'|translate}}</mat-option>
+                         </mat-select>
+                        </mat-form-field>
+                     </div>
+                        
+                     <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                          <mat-label>{{'Project Type'|translate}}</mat-label>
+                          <mat-select matNativeControl required>
+                           <mat-option value="Signle" >{{'Signle Quantity Table'|translate}}</mat-option>
+                           <mat-option value="Multiple" (click)="openDialog()" >{{'Multiple Quantity Tables'|translate}}</mat-option>
+                         </mat-select>
+                        </mat-form-field>
+                     </div>
                    </div>
                    <mat-form-field class="full-wid mrgn-b-lg ">
                      <mat-label>{{'Project Description'|translate}}</mat-label>

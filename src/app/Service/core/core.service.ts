@@ -61,7 +61,7 @@ export class CoreService {
 
 	getUsers ()
 	{
-		let userUrl='/users/get?db='+this.db+'&token'+localStorage.getItem("token");
+		let userUrl='/users/get?db='+this.db+'&token='+localStorage.getItem("token");
 		return this.http.get(this.apiURL+userUrl);
 	}
 
