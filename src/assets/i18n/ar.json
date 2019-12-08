@@ -429,6 +429,8 @@
    "Project Type" : "نوع المشروع" ,
     "Building Location" : "موقع المبنى" ,
     "Building Type" : "نوغ المبنى" ,
+    "Project Number Based on Budget" : "رقم المشروع بالميزانية" , 
+    "Date of Contract" : "تاريخ توقيع العقد" ,
     "Global Building" : "مرفق عام"  , 
     "Private Building" : "مرفق خاص" ,
     "Building Description" : "وصف المبنى" , 

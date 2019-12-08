@@ -35,6 +35,7 @@ export class CreatprojectComponent implements OnInit {
   contractor_name  :string = ""; 
   contact_number  :number; 
   project_amount  :number; 
+  project_duration  :number ; 
   first_pay : number;
   within_project :string="";
   budget_year  :string = ""; 
@@ -42,22 +43,22 @@ export class CreatprojectComponent implements OnInit {
   description  :string = ""; 
   startdate_hijri : Date = new Date();
   startdate:Date = new Date();
-  deliverdate_hijri : Date = new Date();
-  deliverdate:Date = new Date();
   minDate:Date;
   maxDate :Date;
   lng : number;
   lat:number;
   users : any;
-  project_duration_days : number = 0;
-  project_duration_months : number = 0;  
+  netcost :number=0;
   perface_ratio : number=0;
   calender : number =0;
   duration : number=0;
-  netcost : number = 0;
-  project_type : string ;
-
-
+  project_duration_days : number = 0;
+  project_duration_months : number = 0;
+  deliverdate : Date = new Date()  ;
+  deliverdate_hijri : Date = new Date();
+  type : string="";
+  proj_number: string = "";
+  sig_date : Date = new Date();
  
 
   constructor( private pageTitleService: PageTitleService,
@@ -118,7 +119,7 @@ caldurationm(value)
    days+=1;
    Month += value;
    this.deliverdate = new Date(Year , Month , days);
-
+   this.deliverdate_hijri = new Date(Year , Month , days);
    this.project_duration_days = value*30;
 
   
@@ -144,15 +145,18 @@ caldurationd(value)
    Month += Math.round(value/30);
    days += value%30+1;
    this.deliverdate = new Date(Year , Month , days);
+   this.deliverdate_hijri = new Date(Year , Month , days);
    this.project_duration_months= value/30;
 
 }
   nextStep() {
     const format = 'MM/dd/yyyy';
     const locale = 'en-US';
-    let formattedDate = formatDate(this.startdate, format, locale);
-     
-    
+    let startDate = formatDate(this.startdate, format, locale);
+    let startDateHiri = formatDate(this.startdate_hijri, format, locale);
+    let deliverDate = formatDate(this.deliverdate, format, locale);
+    let deliverDateHihri = formatDate(this.deliverdate_hijri, format, locale); 
+    let segDate = formatDate(this.sig_date, format, locale); 
      this.newProject={
         
         name : this.name ,
@@ -163,11 +167,22 @@ caldurationd(value)
         proj_contractor:+this.contractor_name , 
         description:this.description ,
         first_pay : this.first_pay , 
-        proj_duration :this.project_duration , 
+        proj_duration_days :this.project_duration_days ,
+        proj_duration_monthes : this.project_duration_months, 
         project_val:this.project_amount , 
-        from_date :formattedDate.toString() ,
         lantitude : this.lat ,
         longitude : this.lng ,
+        delivery_date : deliverDate.toString() ,
+        delivery_hijri_date : deliverDateHihri.toString(),
+        first_pay_percentage : this.perface_ratio , 
+        project_date : startDate.toString() ,
+        project_hijri_date : startDateHiri.toString(),
+        project_type : this.type ,
+        project_net : this.netcost,
+        proj_number: this.proj_number,
+        sig_date: segDate.toString()
+
+
         
         }
         
@@ -181,21 +196,21 @@ caldurationd(value)
     let formattedDate = formatDate(this.startdate, format, locale);
    
    
-     this.newProject={
-      name : this.name ,
-      proj_state:this.status,
-      budget_year:this.budget_year ,
-      proj_consultant:+this.consultant_name,
-      contact_no:this.contact_number,
-      proj_contractor:+this.contractor_name , 
-      description:this.description ,
-      first_pay : this.first_pay , 
-      proj_duration :this.project_duration , 
-      project_val:this.project_amount , 
-      from_date : formattedDate.toString(),
-      lantitude : this.lat ,
-      longitude : this.lng ,
-   }
+   //   this.newProject={
+   //    name : this.name ,
+   //    proj_state:this.status,
+   //    budget_year:this.budget_year ,
+   //    proj_consultant:+this.consultant_name,
+   //    contact_no:this.contact_number,
+   //    proj_contractor:+this.contractor_name , 
+   //    description:this.description ,
+   //    first_pay : this.first_pay , 
+   //    proj_duration :this.project_duration , 
+   //    project_val:this.project_amount , 
+   //    from_date : formattedDate.toString(),
+   //    lantitude : this.lat ,
+   //    longitude : this.lng ,
+   // }
      this.selectedIndex -= 1;
   }   
 

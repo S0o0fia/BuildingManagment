@@ -4,11 +4,10 @@ import 'rxjs/Rx';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
-
-
 import { ProjectModel } from 'app/Models/Project/project-model';
 import { NewProject } from 'app/Models/Project/new-project';
 import { Rfi } from 'app/Models/RFI/rfi';
+import { Quantity } from 'app/Models/Quantity/quantity';
 
 @Injectable({
 	providedIn: 'root'
@@ -67,49 +66,60 @@ export class CoreService {
 
 	createProject (value:NewProject)
 	{
-		let projecturl = "/project/create?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"name":"'+
+		let projecturl = "/api_test/api_test?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"name":"'+
 		value.name+
 		'","contact_no":"'+value.contact_no+
 		'","proj_consultant":'+value.proj_consultant+
 		',"proj_contractor":'+value.proj_contractor+
 		',"proj_val":'+value.project_val+
 		',"first_pay":'+value.first_pay+
-		',"from_date":"'+value.from_date+
-		'","proj_duration":"'+value.proj_duration+
+		',"latitude":'+value.lantitude+
+		',"longitude":'+value.longitude+
+		',"first_pay_percentage":'+value.first_pay_percentage+
+		',"project_net":'+value.project_net+
+		',"proj_duration_days":"'+value.proj_duration_days+
+		'","proj_duration_monthes":"'+value.proj_duration_monthes+
+		'","project_date":"'+value.project_date+
+		'","project_hijri_date":"'+value.project_hijri_date+
+		'","from_date":"'+value.delivery_date+
+		'","delivery_date":"'+value.delivery_date+
+		'","sig_date":"'+value.sig_date+
+		'","proj_number":"'+value.proj_number+
+		'","delivery_hijri_date":"'+value.delivery_hijri_date+
+		'","project_type":"'+value.project_type+
 		'","budget_year":"'+value.budget_year+
 		'","proj_state":"active","description":"'+value.description+'"}';
-debugger;
-		let prj : NewProject = {
-			name : "newprject" , 
-			budget_year : "1223" ,
-			contact_no  : 55352 ,
-			description : "sosfsdpgs" ,
-			first_pay : 2000 ,
-			from_date : "11/11/2019",
-			lantitude : 12.25563 ,
-			longitude : 13.22555 , 
-			proj_consultant : 8 ,
-			proj_contractor : 6 ,
-			proj_duration : 255 ,
-			proj_state  : "active" ,
-			project_val:520000 
-        };
-	
 
-		console.log(projecturl);
 		const headers = new HttpHeaders();
-		const param = new HttpParams().set("values", JSON.stringify(prj));
+	
 		headers.set('Content-Type', 'application/json; charset=utf-8');
 		return this.http.post(this.apiURL+projecturl, null);
 	}
 
 	getQty_tbl()
 	{
-		let QtyUrl= "/table-qty/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("prijectId");
+		let QtyUrl= "/table-qty/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get(this.apiURL+QtyUrl);
 	}
 
-
+	createQty(value : Quantity)
+	{
+		let createQtyturl = "/table-qty/create?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"main_section_id":'
+		+value.main_section_id+
+		',"first_subsection_id":'+value.first_subsection_id+
+		',"second_subsection_id":'+value.second_subsection_id+
+		',"product_uom":'+value.product_uom+
+		',"project_id":'+value.projectid+
+		',"item_qty":'+value.item_qty+
+		',"price_unit":'+value.price_unit+
+		',"price_total":'+value.price_total+
+		',"item_number":"'+value.item_name+
+		'","item_name":"'+value.item_name+
+        '","description":"'+value.description+'"}';
+       
+		console.log(createQtyturl);
+		return this.http.post(this.apiURL+createQtyturl , null);
+	}
 	getMainSectionList(){
 		let mainSectionUrl='/section/get?token='+localStorage.getItem('token');
 	   return this.http.get(this.apiURL+mainSectionUrl);
@@ -119,7 +129,7 @@ debugger;
 	getRFI_tbl()
 	{
 		
-		let RFIUrl= "/rfi/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("prijectId");
+		let RFIUrl= "/rfi/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get<Rfi>(this.apiURL+RFIUrl);
 
 	}
@@ -132,5 +142,11 @@ debugger;
 	getStuats ()
 	{
 		return this.http.get("assets/data/status.json");
+	}
+
+	getUnit ()
+	{
+		let unitURL  ="/uoms/get?db="+this.db+"&token="+localStorage.getItem('token') ;
+		return this.http.get(this.apiURL+unitURL);
 	}
 }

@@ -22,10 +22,22 @@
                             </mat-form-field>
                          </div>
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg"> 
                                <input matInput name="contact_number"  [(ngModel)]="contact_number"
                                 placeholder="{{'Contract Number'|translate}}" required type="number">
                             </mat-form-field>
+                            </div>
+                            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                                 <mat-form-field class="full-wid mrgn-b-lg"> 
+                                       <input matInput name="sig_date"
+                                       [(ngModel)]="sig_date"  
+                                      [min]="minDate" [max]="maxDate" [matDatepicker]="sigdate"
+                                       placeholder="{{'Date of Contract'|translate}}">
+                                      <mat-datepicker-toggle matSuffix [for]="sigdate"></mat-datepicker-toggle>
+                                      <mat-datepicker #sigdate></mat-datepicker>   
+                                 </mat-form-field>
+                            </div>
                          </div>
                       </div>
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
@@ -62,10 +74,10 @@
                               <br>
                          <mat-radio-group aria-label="Select an option">
                               <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                              <mat-radio-button name="calender" (change)="datepick(1)"  value="1" [(ngModel)]="calender">{{'Session From Hijri'|translate}}</mat-radio-button>
+                              <mat-radio-button (change)="datepick(1)"  value="1">{{'Session From Hijri'|translate}}</mat-radio-button>
                               </div>
                               <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                              <mat-radio-button name="calender" (change)="datepick(2)" value="2"  [(ngModel)]="calender">{{'Session From Grogorian'|translate}}</mat-radio-button>
+                              <mat-radio-button (change)="datepick(2)" value="2">{{'Session From Grogorian'|translate}}</mat-radio-button>
                               </div>
                             </mat-radio-group>
                          </div>
@@ -74,7 +86,7 @@
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                               <mat-form-field class="full-wid mrgn-b-lg ">
                                  <input matInput 
-                                 name="startdate1" [(ngModel)]="startdate" 
+                                 name="startdate_hijri" [(ngModel)]="startdate_hijri" 
                                  [min]="minDate" [max]="maxDate" [matDatepicker]="pickerhijri"
                                   placeholder="{{'Session From Hijri'|translate}}">
                                  <mat-datepicker-toggle matSuffix [for]="pickerhijri"
@@ -85,7 +97,7 @@
                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                            <mat-form-field class="full-wid mrgn-b-lg ">
                               <input matInput 
-                              name="startdate2" [(ngModel)]="startdate" 
+                              name="startdate" [(ngModel)]="startdate" 
                               [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
                                placeholder="{{'Session From Grogorian'|translate}}"
                                [disabled]="calender != 2">
@@ -128,15 +140,16 @@
                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                            <mat-form-field class="full-wid mrgn-b-lg ">
                             <input matInput placeholder="{{'Preface Payment Ratio'|translate}}"
-                            name="first_pay_ratio"  [(ngModel)] = "perface_ratio"
+                            name="perface_ratio"  [(ngModel)] = "perface_ratio"
                             type="text" required disabled>
                            </mat-form-field>
                         </div>
                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                            <mat-form-field class="full-wid mrgn-b-lg ">
                                <input matInput 
-                               name="net_cost"   
-                               placeholder="{{'Net Project Cost'|translate}}" type="number" required>
+                               name="netcost"   
+                               placeholder="{{'Net Project Cost'|translate}}" type="number"
+                               [(ngModel)]="netcost" required>
                            </mat-form-field>
                         </div>
                      </div>
@@ -146,10 +159,10 @@
                                  <br>
                            <mat-radio-group aria-label="Select an option">
                                 <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                <mat-radio-button name="duration" (change)="durationType(1)"  value="1"  [(ngModel)]="duration">{{'Duration with Days'|translate}}</mat-radio-button>
+                                <mat-radio-button  (change)="durationType(1)"  value="1">{{'Duration with Days'|translate}}</mat-radio-button>
                                 </div>
                                 <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                <mat-radio-button name="duration" (change)="durationType(2)" value="2"  [(ngModel)]="duration">{{'Duration with Months'|translate}}</mat-radio-button>
+                                <mat-radio-button  (change)="durationType(2)" value="2" >{{'Duration with Months'|translate}}</mat-radio-button>
                                 </div>
                           </mat-radio-group>
                       </div>
@@ -180,10 +193,10 @@
                            <br>
                       <mat-radio-group aria-label="Select an option">
                            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <mat-radio-button name="calender" (change)="datepick(1)"  value="1"  [(ngModel)]="calender">{{'Session To Hijri'|translate}}</mat-radio-button>
+                           <mat-radio-button (change)="datepick(1)"  value="1" >{{'Session To Hijri'|translate}}</mat-radio-button>
                            </div>
                            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <mat-radio-button name="calender" (change)="datepick(2)" value="2"  [(ngModel)]="calender">{{'Session To Grogorian'|translate}}</mat-radio-button>
+                           <mat-radio-button (change)="datepick(2)" value="2" >{{'Session To Grogorian'|translate}}</mat-radio-button>
                            </div>
                          </mat-radio-group>
                       </div>
@@ -191,9 +204,9 @@
                       <br>
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                       <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <mat-form-field class="full-wid mrgn-b-lg ">
-                              <input matInput 
-                              name="deliverdate"  [(ngModel)]="deliverdate" value="deliverdate"
+                           <mat-form-field class="mrgn-b-lg ">
+                              <input matInput  name="deliverdate_hijri"
+                               [(ngModel)]="deliverdate_hijri"
                               [min]="minDate" [max]="maxDate" [matDatepicker]="pickerhijri2"
                                placeholder="{{'Session To Hijri'|translate}}">
                               <mat-datepicker-toggle matSuffix [for]="pickerhijri2"
@@ -202,9 +215,9 @@
                            </mat-form-field>
                     </div>
                     <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                        <mat-form-field class="full-wid mrgn-b-lg ">
-                           <input matInput 
-                           name="deliverdate" [(ngModel)]="deliverdate" value="deliverdate"
+                        <mat-form-field class="mrgn-b-lg ">
+                           <input matInput name="deliverdate"
+                            [(ngModel)]="deliverdate"  
                            [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
                             placeholder="{{'Session To Grogorian'|translate}}"
                             [disabled]="calender != 2">
@@ -232,16 +245,8 @@
                 
                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                          <mat-form-field class="full-wid mrgn-b-lg ">
-                          <mat-label>{{'Within Project'|translate}}</mat-label>
-                          <mat-select matNativeControl required name="within_project" 
-                          [(ngModel)]="within_project" >
-                           <mat-option value="new">{{'New Project'|translate}}</mat-option>
-                              <div *ngFor="let Project of ProjectList">
-                           <mat-option value="{{Project.name}}">{{Project.name}}
-                          
-                           </mat-option>  
-                        </div>     
-                       </mat-select>
+                           <input matInput  name="proj_number"  [(ngModel)]="proj_number"
+                           placeholder="{{'Project Number Based on Budget'|translate}}" type="text" required>
                          </mat-form-field>
                       </div>
                      
@@ -262,9 +267,10 @@
                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                         <mat-form-field class="full-wid mrgn-b-lg ">
                           <mat-label>{{'Project Type'|translate}}</mat-label>
-                          <mat-select matNativeControl required>
-                           <mat-option value="Signle" >{{'Signle Quantity Table'|translate}}</mat-option>
-                           <mat-option value="Multiple" (click)="openDialog()" >{{'Multiple Quantity Tables'|translate}}</mat-option>
+                          <mat-select matNativeControl required name="type"
+                            [(ngModel)]="type" >
+                           <mat-option value="single" >{{'Signle Quantity Table'|translate}}</mat-option>
+                           <mat-option value="multi" (click)="openDialog()" >{{'Multiple Quantity Tables'|translate}}</mat-option>
                          </mat-select>
                         </mat-form-field>
                      </div>

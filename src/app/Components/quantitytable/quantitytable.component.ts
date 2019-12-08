@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { CoreService } from 'app/service/core/core.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CreatprojectComponent } from '../creatproject/creatproject.component';
@@ -20,8 +20,9 @@ import * as JSpfd from 'jspdf'
 })
 export class QuantitytableComponent implements OnInit {
   collapseSidebarStatus: any;
-
-  constructor(public service : CoreService, 
+  mySubscription : any;
+  browserRefresh = false;
+  constructor(public service : CoreService,  private router : Router,
       private pageTitleService: PageTitleService , private dialog: MatDialog) { 
 
         const dialogConfig = new MatDialogConfig();
@@ -50,17 +51,18 @@ this.service.getQty_tbl().subscribe(
       height: '80%'
      
     });
-
+   
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      
+      this.router.navigate['/table/quantity'];
+    
     });
   }
 
+ 
   exportAsXLSX():void {
    
    
-
   
   // this.excelService.generateExcel(this.Qty_tbl);
   }

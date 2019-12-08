@@ -65,53 +65,25 @@
                               <!--Item Number-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                               <mat-form-field class="full-wid mrgn-b-lg">
-                                    <mat-label>{{'Item Number'|translate}}</mat-label>
-                                    <mat-select disabled>
-                                      <mat-option >
-                                      
-                                      </mat-option>
-                                    </mat-select>
+                                          <input matInput name="item_number"  [(ngModel)]="item_number"
+                                          placeholder="{{'Item Number'|translate}}" type="text"  required> 
                               </mat-form-field>
                            </div>
                                  <!--Item Name-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                               <mat-form-field class="full-wid mrgn-b-lg">
-                                    <mat-label>{{'Item Name'|translate}}</mat-label>
-                                    <mat-select disabled>
-                                      <mat-option >
-                                      
-                                      </mat-option>
-                                    </mat-select>
+                                          <input matInput name="item_name" [(ngModel)]="item_name"
+                                          placeholder="{{'Item Name'|translate}}" type="text"  required> 
                               </mat-form-field>
                            </div>
-                           <!--Start Session-->
-                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                 <mat-form-field class="full-wid mrgn-b-lg ">
-                                    <input matInput 
-                                    name="start_session" 
-                                    [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
-                                     placeholder="{{'Session From'|translate}}">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>                         
-                                 </mat-form-field>
-                          </div>
-                            <!--End Session-->
-                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                 <mat-form-field class="full-wid mrgn-b-lg ">
-                                    <input matInput 
-                                    name="end_session"
-                                    [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
-                                     placeholder="{{'Session To'|translate}}">
-                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker2></mat-datepicker>                         
-                                 </mat-form-field>
-                          </div>
-                           <!--Description-->
+                          <!--Description-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                  <mat-form-field class="full-wid mrgn-b-lg ">
                                        <mat-label>{{'Description'|translate}}</mat-label>
                                        <textarea matInput name="description"  
                                                  cdkTextareaAutosize
+                                                 name="description"
+                                                 [(ngModel)]="description"
                                                   #autosize="cdkTextareaAutosize"
                                                    cdkAutosizeMinRows="1"
                                                     cdkAutosizeMaxRows="5"></textarea>                        
@@ -122,10 +94,12 @@
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                  <mat-form-field class="full-wid mrgn-b-lg ">
                                        <mat-label>{{'Unit'|translate}}</mat-label>
-                                 <mat-select>
-                                   <mat-option >
-                                      
+                                 <mat-select name="unitid" [(ngModel)]="unitid">
+                              <div *ngFor="let unit of Unit" >
+                                   <mat-option value={{unit.id}} >
+                                      {{unit.name}}
                                    </mat-option>
+                              </div>
                                  </mat-select>                    
                                  </mat-form-field>
                           </div>
@@ -134,28 +108,30 @@
                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <mat-form-field class="full-wid mrgn-b-lg ">
                                 
-                                 <input matInput name="item_qty" 
+                                 <input matInput name="item_qty"  [(ngModel)]="item_qty"
                                  placeholder="{{'Item Qunatity'|translate}}" type="number" required>       
                            </mat-form-field>
                     </div>
                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                         <mat-form-field class="full-wid mrgn-b-lg ">
                              
-                              <input matInput name="unit_price"
+                              <input matInput name="unit_price" [(ngModel)]="unit_price"
+                              [disabled]="item_qty==null" (change)="calTotal()"
                               placeholder="{{'Unit Price'|translate}}" type="number" required>       
                         </mat-form-field>
                  </div>
                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                      <mat-form-field class="full-wid mrgn-b-lg ">
                           
-                           <input matInput name="unit_price" 
-                           placeholder="{{'Total Price'|translate}}" type="number" required>       
+                           <input matInput name="total_price"  [(ngModel)]="total_price"
+                          disabled
+                           placeholder="{{'Total Price'|translate}}" type="number"  required>       
                      </mat-form-field>
               </div>
 
 
                      <div fxLayout="row" fxLayoutAlign="space-between">
-                           <button mat-button mat-raised-button color="accent" type="submit">{{'Add'|translate }}</button>
+                           <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add'|translate }}</button>
                            <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()" type="button" dir="ltr">{{'Cancel'|translate }}</button>
                            
                      </div>

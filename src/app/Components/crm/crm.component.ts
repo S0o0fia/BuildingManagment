@@ -101,7 +101,7 @@ export class CrmComponent implements OnInit, OnDestroy {
       Choose(list , id)
       {
         
-         localStorage.setItem('prijectId' , id);
+         localStorage.setItem('projectid' , id);
          switch(list)
          {
             case "Edit Project":
