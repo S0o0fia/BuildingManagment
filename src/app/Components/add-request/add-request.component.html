@@ -12,60 +12,40 @@
               <form #form="ngForm">
                     <div fxLayout="column">
                        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                          <!--Item Number-->
+                          <!--Request Type-->
                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                              <mat-form-field class="full-wid mrgn-b-lg">
-                                   <mat-label>{{'Request Number'|translate}}</mat-label>
+                                   <mat-label>{{'Request Type'|translate}}</mat-label>
                                    <mat-select>
                                    </mat-select>
                              </mat-form-field>
                           </div>
-                         <!--Item Name-->
-                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                             <mat-form-field class="full-wid mrgn-b-lg">
-                                   <mat-label>{{'Request Type'|translate}}</mat-label>
-                                   <mat-select disabled>
-                                     <mat-option >
-                                     
-                                     </mat-option>
-                                   </mat-select>
-                             </mat-form-field>
-                          </div>
-                         
-                          <!--Sub Section-->
-                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                <mat-form-field class="full-wid mrgn-b-lg">
-                                      <mat-label>{{'Request Name'|translate}}</mat-label>
-                                      <mat-select>
-                                        <mat-option >
-                                        
-                                        </mat-option>
-                                      </mat-select>
-                                </mat-form-field>
-                             </div>
-                                                    
-                            
-                             <!--Start Session-->
-                             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                   <mat-form-field class="full-wid mrgn-b-lg ">
-                                      <input matInput 
-                                      name="start_session1"  
-                                      [min]="minDate" [max]="maxDate" [matDatepicker]="picker1"
-                                       placeholder="{{'Inspection Date'|translate}}">
-                                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                      <mat-datepicker #picker1></mat-datepicker>                         
-                                   </mat-form-field>
-                            </div>
-                         
-                           <!--Start Session-->
+                          <!--Request Number-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                                 <input matInput name="req_number"
+                                 placeholder="{{'Request Number'|translate}}" type="text" disabled required>       
+                           </mat-form-field>
+                    </div>
+
+                      <!--Location of Work-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg">
+                              <mat-label>{{'Location of Works'|translate}}</mat-label>
+                              <mat-select>
+                              </mat-select>
+                        </mat-form-field>
+                     </div>
+                  
+                  <!--Start Session-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                               <mat-form-field class="full-wid mrgn-b-lg ">
                                  <input matInput 
-                                 name="start_session2"  
-                                 [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
-                                  placeholder="{{'Session From'|translate}}">
-                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                 <mat-datepicker #picker2></mat-datepicker>                         
+                                 name="start_work"  
+                                 [min]="minDate" [max]="maxDate" [matDatepicker]="startwork"
+                                  placeholder="{{'Start Date of Works'|translate}}">
+                                 <mat-datepicker-toggle matSuffix [for]="startwork"></mat-datepicker-toggle>
+                                 <mat-datepicker #startwork></mat-datepicker>                         
                               </mat-form-field>
                        </div>
 
@@ -73,33 +53,107 @@
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <mat-form-field class="full-wid mrgn-b-lg ">
                               <input matInput 
-                              name="from_session3"  
-                              [min]="minDate" [max]="maxDate" [matDatepicker]="picker3"
-                               placeholder="{{'Session To'|translate}}">
-                              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                              <mat-datepicker #picker3></mat-datepicker>                         
+                              name="end_work"  
+                              [min]="minDate" [max]="maxDate" [matDatepicker]="endwork"
+                               placeholder="{{'End Date of Works'|translate}}">
+                              <mat-datepicker-toggle matSuffix [for]="endwork"></mat-datepicker-toggle>
+                              <mat-datepicker #endwork></mat-datepicker>                         
                            </mat-form-field>
                     </div>
-                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                         
+                     <!--Inspection Date-->
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                           <input matInput 
+                           name="insepction_date"  
+                           [min]="minDate" [max]="maxDate" [matDatepicker]="insepctiondate"
+                            placeholder="{{'Inspection Date'|translate}}">
+                           <mat-datepicker-toggle matSuffix [for]="insepctiondate"></mat-datepicker-toggle>
+                           <mat-datepicker #insepctiondate></mat-datepicker>                         
+                        </mat-form-field>
+                    </div>
+
+                    
+                 <!--Item Information-->
+                    <mat-card  class="full-wid mrgn-b-lg ">
+                        <mat-label>{{'Items'|translate}}</mat-label>
+                        <div class="gene-card-content">
+                          
+                                    <div fxLayout="column">
+                                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                    
+                     <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32">
                      <mat-form-field class="full-wid mrgn-b-lg ">
                           
                         <mat-label>{{'Item Number'|translate}}</mat-label>
-                        <mat-select>
-                          <mat-option >
-                          
+                        <mat-select name="item_number" [(ngModel)]="item_number">
+                          <mat-option  value="Hi">
+                             Hi
                           </mat-option>
                         </mat-select>   
                      </mat-form-field>
-              </div>
-                       <!--Item Qunatity-->
-                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                             <mat-form-field class="full-wid mrgn-b-lg ">
-                                  
-                                   <input matInput name="item_qty"
-                                   placeholder="{{'Item Qunatity'|translate}}" type="number" required>       
-                             </mat-form-field>
-                      </div>
                      </div>
+                     <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32" style="margin-right: 2%;">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                             
+                           <mat-label>{{'Item Name'|translate}}</mat-label>
+                           <mat-select name="item_name" [(ngModel)]="item_name">
+                             <mat-option value="Hi">
+                               Hi
+                             </mat-option>
+                           </mat-select>   
+                        </mat-form-field>
+                        </div>
+                            <!--Executed Quantity-->
+                            <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32" style="margin-right: 2%; margin-top:0.5%;">
+                              <mat-form-field class="full-wid mrgn-b-lg ">
+                                   
+                                    <input matInput name="qty" [(ngModel)]="qty"
+                                    placeholder="{{'Executed Quantity'|translate}}" type="number" required>       
+                              </mat-form-field>
+                       </div>
+                  </div>
+                 </div>
+                </div>
+              <div fxLayout="row" fxLayoutAlign="center">
+                  <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add Item'|translate }}</button>
+             </div> 
+         </mat-card>
+         <!--Table of Added Items-->
+         <mat-card  class="full-wid mrgn-b-lg ">
+               <mat-label>{{'Added Items'|translate}}</mat-label>
+               <div class="gene-card-content">
+                  <div fxLayout="column">
+                     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                           <div class="table-responsive" id="dvPdf">
+           
+                                 <table class="table table-hover table-middle th-fw-light mb-0">
+                                    <thead>
+                                       <tr>
+                                          <th>{{'Item Number'|translate}}</th>
+                                          <th>{{'Item Name'|translate}}</th>
+                                          <th>{{'Executed Quantity'|translate}}</th>
+                                          <th>{{'Controls'|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr *ngFor="let item of itemDate; let i = index" >
+                                          <td>{{item.item_number}}</td>
+                                          <td>{{item.item_name}}</td>
+                                          <td>{{item.qty}}</td>
+                                          <td><mat-icon (click)="removeitem(i)" matTooltip="{{'Delete' | translate}}">delete</mat-icon></td>
+                                        </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+
+               </div>
+                  </div>
+                     </div>     
+         </mat-card>
+   
+      </div>
+                    
                        <div fxLayout="row" fxLayoutAlign="space-between">
                              <button mat-button mat-raised-button color="accent" type="submit">{{'Add'|translate }}</button>
                              <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
