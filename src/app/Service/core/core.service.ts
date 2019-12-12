@@ -8,6 +8,7 @@ import { ProjectModel } from 'app/Models/Project/project-model';
 import { NewProject } from 'app/Models/Project/new-project';
 import { Rfi } from 'app/Models/RFI/rfi';
 import { Quantity } from 'app/Models/Quantity/quantity';
+import { NewItemRFI } from 'app/Models/Items/new-item-rfi';
 
 @Injectable({
 	providedIn: 'root'
@@ -101,7 +102,42 @@ export class CoreService {
 		let QtyUrl= "/table-qty/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get(this.apiURL+QtyUrl);
 	}
+	getType_forRFI ()
+	{
+		let typeRfi = "/types/get?db="+this.db+"&token="+localStorage.getItem("token");
+		return  this.http.get(this.apiURL+typeRfi);
+	
+	}
 
+	createRFi(value : Rfi)
+	{
+		
+		let createRFi = "/rfi/create?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"request_num":"'
+		+value.request_num+
+		'","request_id":'+localStorage.getItem('projectid')+
+		',"request_type":"'+value.request_ids+
+		'","work_location":"'+value.work_location+
+		'","inspect_date":"'+value.inspect_date+
+		'","sation_from":"'+value.start_date+
+		'","sation_to":"'+value.end_date+
+		'","appled_to":"'+value.end_date+
+		'","appled_from":"'+value.start_date+'"}';
+		console.log(createRFi);
+		return this.http.post(this.apiURL+createRFi , null);
+	}
+	
+	createItemRFI(value : NewItemRFI )
+	{
+	  
+		let createRFi = "/rfi/create/items?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"num":"'
+		+value.num+
+		'","rfi_id":'+value.rfi_id+
+		',"qty":'+value.qty+
+		',"name":"'+value.name+'"}';
+		console.log(createRFi);
+		return this.http.post(this.apiURL+createRFi , null);
+	
+	}
 	createQty(value : Quantity)
 	{
 		let createQtyturl = "/table-qty/create?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"main_section_id":'
@@ -113,7 +149,7 @@ export class CoreService {
 		',"item_qty":'+value.item_qty+
 		',"price_unit":'+value.price_unit+
 		',"price_total":'+value.price_total+
-		',"item_number":"'+value.item_name+
+		',"item_number":"'+value.item_number+
 		'","item_name":"'+value.item_name+
         '","description":"'+value.description+'"}';
        
@@ -130,10 +166,16 @@ export class CoreService {
 	{
 		
 		let RFIUrl= "/rfi/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("projectid");
-		return this.http.get<Rfi>(this.apiURL+RFIUrl);
+	
+	    
+		return this.http.get<Rfi[]>(this.apiURL+RFIUrl);
 
 	}
-	 
+	getItemRFI()
+	{
+		let getItemRFIUrl="/rfi/items/get?db="+this.db+'&token='+localStorage.getItem("token");
+		return this.http.get<NewItemRFI[]>(this.apiURL+getItemRFIUrl);
+	}
 	getTypeofWork ()
 	{
 

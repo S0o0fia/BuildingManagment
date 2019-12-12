@@ -1,5 +1,6 @@
 export interface NewItemRFI {
-    item_number : string; 
-    item_name : string ; 
+    rfi_id : number;
+    num: string;  
+    name : string ; 
     qty : number
 }

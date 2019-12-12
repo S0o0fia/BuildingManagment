@@ -4,6 +4,8 @@ import { PageTitleService } from '../core/page-title/page-title.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddRequestComponent } from '../add-request/add-request.component';
 import { Rfi } from 'app/Models/RFI/rfi';
+import { GetRFI } from 'app/Models/RFI/get-rfi';
+import { NewItemRFI } from 'app/Models/Items/new-item-rfi';
 
 @Component({
   selector: 'ms-request-for-inspection',
@@ -12,7 +14,9 @@ import { Rfi } from 'app/Models/RFI/rfi';
 })
 export class RequestForInspectionComponent implements OnInit {
 
-  RFI_tbl : Rfi ;
+  RFI_tbl : Rfi[] = [];
+  Item_rfi :NewItemRFI[]=[];
+  
  
   constructor(public service : CoreService,
     private pageTitleService: PageTitleService , private dialog: MatDialog) { 
@@ -29,12 +33,34 @@ export class RequestForInspectionComponent implements OnInit {
    
 ngOnInit() {
 this.pageTitleService.setTitle("طلبات فحص الأعمال  ");
-;
+
  this.service.getRFI_tbl().subscribe(
    data=> this.RFI_tbl = data,
    err=> console.log(err)
  );
-   console.log(this.RFI_tbl);
+
+ this.service.getItemRFI().subscribe(
+  data=> 
+ {
+  debugger;
+     data.forEach(element => {
+          this.RFI_tbl.forEach(element1 => {
+          
+            if(element.rfi_id == element1.id)
+            {
+             
+              element1.item_name = element.name ;
+              element1.item_number = element.num ;
+              element1.item_qty = element.qty;
+            }
+          });
+     });
+  } ,
+  err=> console.log(err)
+
+
+);
+  
 }
 
 openDialog(): void {

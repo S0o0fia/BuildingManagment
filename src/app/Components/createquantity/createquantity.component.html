@@ -31,7 +31,7 @@
                        <!-- Type of Work-->
                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <mat-form-field class="full-wid mrgn-b-lg">
-                                 <mat-label>{{'Type Of Works'|translate}}</mat-label>
+                                 <mat-label>{{'Sub Section'|translate}}</mat-label>
                                  <mat-select [disabled]="mainid== null ? true : false" name="workid"  [(ngModel)]="workid">
                                      <div *ngFor="let section of Mainsection">
                                       <div *ngIf="section.parent_id==mainid">        
@@ -48,7 +48,7 @@
                         <!--Sub Section-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                               <mat-form-field class="full-wid mrgn-b-lg">
-                                    <mat-label>{{'Sub Section'|translate}}</mat-label>
+                                    <mat-label>{{'Type Of Works'|translate}}</mat-label>
                                     <mat-select [disabled]=" (workid== null && mainid==null )? true : false" name="subid"  [(ngModel)]="subid">
                                                 <div *ngFor="let section of Mainsection">
                                                  <div *ngIf="section.parent_id==workid">        

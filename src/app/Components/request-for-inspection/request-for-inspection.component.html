@@ -33,24 +33,29 @@
                        </tr>
                     </thead>
                     <tbody>
-                       <tr *ngFor="let data of RFI_tbl">
-                         <td>{{data.project_id}}</td>
-                         <td>{{data.project_name}}</td>
-                         <td>{{data.request_num}}</td>
-                         <td>{{data.request_name}}</td>
-                         <td>{{data.item_qty}}</td>
-                         <td>{{data.inspect_date}}</td>
+                       <tr *ngFor="let data of RFI_tbl" >
+                           <td>{{data.request_name}}</td>
+                          <td>{{data.request_num}}</td>
+                          <td>{{data.work_location}}</td>
+                          <td>{{data.inspect_date}}</td>
+                          <td>{{data.start_date}}</td>
+                          <td>{{data.end_date}}</td>
+                          <td>{{data.item_number}}</td>
+                          <td>{{data.item_name}}</td>
+                          <td>{{data.item_qty}}</td>
                          <td>
                                 <div class="dropdown row">
                                         <button mat-icon-button matTooltip="{{'Delete'|translate}}">
                                               <mat-icon color="primary">delete</mat-icon>
                                         </button>
-                                        <button mat-icon-button   matTooltip="{{'Edit'|translate}}" >
-                                              <mat-icon  color="primary">edit</mat-icon>
+                                        <button mat-icon-button   matTooltip="{{'Detials'|translate}}" >
+                                              <mat-icon  color="primary">arrow_back</mat-icon>
                                         </button>
                                         </div>
                          </td>
+                      
                        </tr>
+                 
                     </tbody>
                  </table>
               </div>

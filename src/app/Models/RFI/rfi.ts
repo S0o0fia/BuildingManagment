@@ -1,14 +1,16 @@
+import { NewItemRFI } from '../Items/new-item-rfi';
+
 export interface Rfi {
- 
-    inspect_date :string;
-    item_qty :string;
-    project_id : number;
-    project_name : string;
-    request_name : string;
-    request_num:string;
-    request_type_id:number;
-    tbl_quantity_id:number;
-    work_location:string;
-    consultant_approval:string;
-    ammana_engineer_approval:string;
+      id:number;
+      request_name : string;
+      request_ids:number;
+      request_num: string;
+      work_location: string; 
+      start_date : string;
+      end_date : string;
+      inspect_date : string;
+      item_name : string;
+      item_number:string;
+      item_qty: number;
+   
 }
