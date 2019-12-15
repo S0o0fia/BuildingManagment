@@ -24,11 +24,11 @@
                           <th>{{'Request Number'|translate}}</th>
                            <th>{{'Location of Works'|translate}}</th>
                           <th>{{'Inspection Date'|translate}}</th>
-                          <th>{{'Start Date of Works'|translate}}</th>
-                          <th>{{'End Date of Works'|translate}}</th>
                           <th>{{'Item Number'|translate}}</th>
                           <th>{{'Item Name'|translate}}</th>
-                          <th>{{'Executed Quantity'|translate}}</th>                        
+                          <th>{{'Executed Quantity'|translate}}</th>  
+                          <th>{{'Request Status'|translate}}</th>
+                          <th>{{'Consultant Approve'|translate}}</th>                      
                           <th>{{'Controls'|translate}}</th>
                        </tr>
                     </thead>
@@ -38,17 +38,17 @@
                           <td>{{data.request_num}}</td>
                           <td>{{data.work_location}}</td>
                           <td>{{data.inspect_date}}</td>
-                          <td>{{data.start_date}}</td>
-                          <td>{{data.end_date}}</td>
                           <td>{{data.item_number}}</td>
                           <td>{{data.item_name}}</td>
                           <td>{{data.item_qty}}</td>
+                          <td>{{data.state | translate}}</td>
+                          <td>{{data.consultant_approval | translate}}</td>
                          <td>
                                 <div class="dropdown row">
                                         <button mat-icon-button matTooltip="{{'Delete'|translate}}">
                                               <mat-icon color="primary">delete</mat-icon>
                                         </button>
-                                        <button mat-icon-button   matTooltip="{{'Detials'|translate}}" >
+                                        <button mat-icon-button  (click)="rfidetails(data.id)" matTooltip="{{'Detials'|translate}}" >
                                               <mat-icon  color="primary">arrow_back</mat-icon>
                                         </button>
                                         </div>
@@ -58,6 +58,10 @@
                  
                     </tbody>
                  </table>
+                 <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
+                 previousLabel="{{'Previous'|translate}}"
+                 nextLabel="{{'Next'|translate}}"
+                  (pageChange)="page = $event"></pagination-controls>
               </div>
            </div>
         </mat-card>

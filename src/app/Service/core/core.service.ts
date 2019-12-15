@@ -9,6 +9,7 @@ import { NewProject } from 'app/Models/Project/new-project';
 import { Rfi } from 'app/Models/RFI/rfi';
 import { Quantity } from 'app/Models/Quantity/quantity';
 import { NewItemRFI } from 'app/Models/Items/new-item-rfi';
+import { GetRFI } from 'app/Models/RFI/get-rfi';
 
 @Injectable({
 	providedIn: 'root'
@@ -168,7 +169,7 @@ export class CoreService {
 		let RFIUrl= "/rfi/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("projectid");
 	
 	    
-		return this.http.get<Rfi[]>(this.apiURL+RFIUrl);
+		return this.http.get<GetRFI[]>(this.apiURL+RFIUrl);
 
 	}
 	getItemRFI()

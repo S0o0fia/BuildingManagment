@@ -116,6 +116,7 @@ export class AddRequestComponent implements OnInit {
                   this.inspectionIDs = data as InspctionId;
                   this.itemDate.forEach(element => {
                     element.rfi_id = this.inspectionIDs.inspection_id ,
+                    console.log(element);
                     this.services.createItemRFI(element).subscribe(
                       data=>console.log(data),
                       err=>console.log(err)

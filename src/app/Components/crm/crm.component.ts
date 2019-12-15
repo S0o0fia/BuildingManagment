@@ -210,9 +210,6 @@ export class CrmComponent implements OnInit, OnDestroy {
                      { console.log(res);
                       this.ProjectList = res as any[];
                       this.totalRec = this.ProjectList.length;
-                      console.log(this.totalRec);
-                      console.log(this.page);
-                     
                       },                     
                        err => console.log(err),
                        ()  => this.ProjectList

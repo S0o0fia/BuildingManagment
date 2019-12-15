@@ -17,6 +17,7 @@ import { RquestforRecieveItemsComponent } from './Components/rquestfor-recieve-i
 import { ExractsComponent } from './Components/exracts/exracts.component';
 import { AddExtractComponent } from './Components/add-extract/add-extract.component';
 import { ProjectsmapComponent } from './Components/projectsmap/projectsmap.component';
+import { RfidetailsComponent } from './Components/rfidetails/rfidetails.component';
 
 
 
@@ -58,6 +59,10 @@ const appRoutes: Routes = [
                path:'rfi',
                component:RequestForInspectionComponent
             }
+            , {
+               path:'rfidetails/:id',
+               component:RfidetailsComponent
+            }
 
          ]
          },
@@ -88,6 +93,7 @@ const appRoutes: Routes = [
             path:'addextract',
             component:AddExtractComponent
          }
+        
       ]
    },
      

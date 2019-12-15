@@ -6,6 +6,7 @@ import { AddRequestComponent } from '../add-request/add-request.component';
 import { Rfi } from 'app/Models/RFI/rfi';
 import { GetRFI } from 'app/Models/RFI/get-rfi';
 import { NewItemRFI } from 'app/Models/Items/new-item-rfi';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ms-request-for-inspection',
@@ -14,12 +15,16 @@ import { NewItemRFI } from 'app/Models/Items/new-item-rfi';
 })
 export class RequestForInspectionComponent implements OnInit {
 
-  RFI_tbl : Rfi[] = [];
+  RFI_tbl1 : GetRFI[] = [];
+  RFI_tbl : GetRFI[] = [];
   Item_rfi :NewItemRFI[]=[];
+  resultsLength = 0;
+  totalRec : number;
+  page: number = 1;
   
  
   constructor(public service : CoreService,
-    private pageTitleService: PageTitleService , private dialog: MatDialog) { 
+    private pageTitleService: PageTitleService ,private router:Router, private dialog: MatDialog) { 
 
       const dialogConfig = new MatDialogConfig();
 
@@ -30,28 +35,44 @@ export class RequestForInspectionComponent implements OnInit {
 
     }
 
-   
+    rfidetails(id)
+    {
+      
+     this.router.navigate(['home/table/rfidetails',id]);
+      
+    }
 ngOnInit() {
 this.pageTitleService.setTitle("طلبات فحص الأعمال  ");
 
  this.service.getRFI_tbl().subscribe(
-   data=> this.RFI_tbl = data,
+   data=> this.RFI_tbl1 = data,
    err=> console.log(err)
  );
 
  this.service.getItemRFI().subscribe(
   data=> 
  {
-  debugger;
+  this.RFI_tbl1.forEach(element1 => {
      data.forEach(element => {
-          this.RFI_tbl.forEach(element1 => {
-          
-            if(element.rfi_id == element1.id)
+                    if(element.rfi_id == element1.id)
             {
              
-              element1.item_name = element.name ;
-              element1.item_number = element.num ;
-              element1.item_qty = element.qty;
+            this.RFI_tbl.push({
+            end_date: element1.end_date , 
+inspect_date : element1.inspect_date,
+item_name : element.name , 
+request_ids : element1.request_ids ,
+request_name : element1.request_name , 
+request_num : element1.request_num ,
+start_date : element1.start_date , 
+work_location  :element1.work_location , 
+item_number : element.num , 
+item_qty : element.qty,
+id : element.rfi_id , 
+state : element1.state ,
+consultant_approval : element1.consultant_approval
+
+            });
             }
           });
      });
@@ -60,7 +81,7 @@ this.pageTitleService.setTitle("طلبات فحص الأعمال  ");
 
 
 );
-  
+this.totalRec = this.RFI_tbl.length;
 }
 
 openDialog(): void {
