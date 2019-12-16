@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { RequestForInspectionComponent } from '../request-for-inspection/request-for-inspection.component';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Rfi } from 'app/Models/RFI/rfi';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -35,11 +35,12 @@ export class AddRequestComponent implements OnInit {
   inspection_id : number;
   inspectionIDs : InspctionId;
   constructor(   public dialogRef: MatDialogRef<RequestForInspectionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Rfi,private translate : TranslateService , private  services :CoreService) {
+    @Inject(MAT_DIALOG_DATA) public data: Rfi,private _snackBar: MatSnackBar
+    ,private translate : TranslateService , private  services :CoreService) {
       this.minDate = new Date(1900,1,1);
       this.maxDate = new Date(2050,1,1);
     }
-  	
+  	//Method to fill the Table of items
     addItem()
     {
       this.itemDate.push({
@@ -50,28 +51,33 @@ export class AddRequestComponent implements OnInit {
       });
     }
 
+    //this to get the request number from the from 
     request(value)
     {
       this.req_number = value;
 
 
     }
+    //Method Action To remove item when click on delete icon on items Tables 
     removeitem(index)
     {
       this.itemDate.splice(index , 1);
     }
 
+    //Action Method when click Cancel button
   onNoClick(): void {
     this.dialogRef.close();
   }
  
   
   ngOnInit() {
+    //to het the type of work
     this.services.getType_forRFI().subscribe(
       data => this.types = data , 
       err=>console.log(err)
     );
    
+    //to get the item fro Qty-tble based on id of work type 
     this.services.getQty_tbl().subscribe(
       data=> this.quantitys = data , 
       err => console.log(err)
@@ -79,15 +85,19 @@ export class AddRequestComponent implements OnInit {
     
   }
   
+  //to get the selected item name  binding with its number
   BindItemname(value)
   {
     this.item_name = value;
   }
 
+  //to get the seleced item number binding with its name
   BindItemnumber(value)
   {
     this.item_number = value;
   }
+  
+  //when you click Save Button
   Save()
   {
     const format = 'MM/dd/yyyy';
@@ -116,19 +126,35 @@ export class AddRequestComponent implements OnInit {
                   this.inspectionIDs = data as InspctionId;
                   this.itemDate.forEach(element => {
                     element.rfi_id = this.inspectionIDs.inspection_id ,
-                    console.log(element);
                     this.services.createItemRFI(element).subscribe(
-                      data=>console.log(data),
+                      data=>{
+                         //function for calling Stackbar
+                        let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
+                        if(msg)
+                        {
+                          location.reload();
+                        }
+                      },
                       err=>console.log(err)
                     )
                   });
                   
-                
-
-
-      },
+               },
        err=> console.log(err)
      );
      
+  }
+
+  //the Stack bar Method 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      verticalPosition: 'top',
+      horizontalPosition : 'center' ,
+      panelClass: ['my-snack-bar']
+    });
+
+    return true;
+    
   }
 }

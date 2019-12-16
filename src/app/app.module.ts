@@ -79,6 +79,8 @@ import { ExcelService } from './Service/excel.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AddBuildingComponent } from './Components/add-building/add-building.component';
 import { RfidetailsComponent } from './Components/rfidetails/rfidetails.component';
+import { EditContractedQunatityComponent } from './Components/edit-contracted-qunatity/edit-contracted-qunatity.component';
+import { SelectApproveComponent } from './Components/select-approve/select-approve.component';
 
 
 
@@ -281,13 +283,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		AddDiscountComponent ,
 		ProjectsmapComponent,
 		AddBuildingComponent,
-		RfidetailsComponent
+		RfidetailsComponent,
+		EditContractedQunatityComponent,
+		SelectApproveComponent
 	
 		
 		
 	],
 	entryComponents:[
-       
+		EditContractedQunatityComponent,
+		SelectApproveComponent,
 		CreatequantityComponent,
 		AddRequestComponent,
 		PieChartComponent,

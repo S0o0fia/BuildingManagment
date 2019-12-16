@@ -22,6 +22,8 @@ export class QuantitytableComponent implements OnInit {
   collapseSidebarStatus: any;
   mySubscription : any;
   browserRefresh = false;
+  totalRec : number;
+  page: number = 1;
   constructor(public service : CoreService,  private router : Router,
       private pageTitleService: PageTitleService , private dialog: MatDialog) { 
 
@@ -34,7 +36,7 @@ export class QuantitytableComponent implements OnInit {
 
       }
   
- Qty_tbl : any ;
+ Qty_tbl : any =[] ;
 ngOnInit() {
 this.pageTitleService.setTitle("جدول الكميات");
 this.service.getQty_tbl().subscribe(
@@ -42,7 +44,7 @@ this.service.getQty_tbl().subscribe(
    (err)=> console.log(err)
 );
    
-
+ this.totalRec = this.Qty_tbl.length;
   }
 
   openDialog(): void {

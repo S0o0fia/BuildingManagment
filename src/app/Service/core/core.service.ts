@@ -10,6 +10,7 @@ import { Rfi } from 'app/Models/RFI/rfi';
 import { Quantity } from 'app/Models/Quantity/quantity';
 import { NewItemRFI } from 'app/Models/Items/new-item-rfi';
 import { GetRFI } from 'app/Models/RFI/get-rfi';
+import { Approvedqty } from 'app/Models/Quantity/approvedqty';
 
 @Injectable({
 	providedIn: 'root'
@@ -27,6 +28,7 @@ export class CoreService {
 	editProductData 		 : any;	
 	apiURL : string = 'http://35.226.236.165:8069/api';
 	db: string='nqproject';
+	
 	constructor(private matDialog : MatDialog,
 					private http : HttpClient){
 	}
@@ -130,7 +132,7 @@ export class CoreService {
 	createItemRFI(value : NewItemRFI )
 	{
 	  
-		let createRFi = "/rfi/create/items?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"num":"'
+		let createRFi = "/rfi/items/create?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"num":"'
 		+value.num+
 		'","rfi_id":'+value.rfi_id+
 		',"qty":'+value.qty+
@@ -138,6 +140,14 @@ export class CoreService {
 		console.log(createRFi);
 		return this.http.post(this.apiURL+createRFi , null);
 	
+	}
+	createConsultantApprove(id : number , state : string , consultant_approve : string)
+	{
+		 let consultant_approvalUrl = "/rfi/set_state?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"id":'
+		 +id+
+		 ',"state":"'+state+
+		 '","consultant_approval":"'+consultant_approve+'"}';
+		 return this.http.post(this.apiURL+consultant_approvalUrl , null);
 	}
 	createQty(value : Quantity)
 	{
@@ -162,7 +172,23 @@ export class CoreService {
 	   return this.http.get(this.apiURL+mainSectionUrl);
 	}
 
-	
+	updateSate(state : string , id : number)
+	{
+		let updateUrl = "/rfi/set_state?db="+this.db+"&token="+localStorage.getItem("token")+'&values={"id":'+
+		 id+
+		 ',"consultant_approval":"waiting"'+
+		 ',"state":"'+state+'"}';
+		 return this.http.post(this.apiURL+updateUrl , null);
+	}
+
+	updateApprovdQty(data:Approvedqty){
+            let approvedqtyUrl = "/rfi/items/approval_qty?db="+this.db+"&token="+localStorage.getItem("token")+'&values={"id":'+
+			data.id+
+			',"approved_qty":'+data.approved_qty+'}';
+
+			return this.http.post(this.apiURL+approvedqtyUrl , null);
+
+	}
 	getRFI_tbl()
 	{
 		

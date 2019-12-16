@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { QuantitytableComponent } from '../quantitytable/quantitytable.component';
 import { Quantity } from 'app/Models/Quantity/quantity';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -35,8 +35,8 @@ export class CreatequantityComponent implements OnInit {
   total_price : number;
   newQty : Quantity;
 
-  constructor(   public dialogRef: MatDialogRef<QuantitytableComponent>, private router : Router,
-    @Inject(MAT_DIALOG_DATA) public data: Quantity,private fb: FormBuilder, private pageTitleService: PageTitleService
+  constructor(   public dialogRef: MatDialogRef<QuantitytableComponent>, private router : Router
+    ,private _snackBar: MatSnackBar , @Inject(MAT_DIALOG_DATA) public data: Quantity,private fb: FormBuilder, private pageTitleService: PageTitleService
     ,private translate : TranslateService , private coreService:CoreService) {
       this.minDate = new Date(1900,1,1);
       this.maxDate = new Date(2050,1,1);
@@ -86,14 +86,29 @@ export class CreatequantityComponent implements OnInit {
       this.coreService.createQty(this.newQty).subscribe(
         (data)=>{ 
           console.log(data) ;
-          this.dialogRef.close(); 
-          this.router.navigate['/table/quantity'];
+        
+          let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
+                        if(msg)
+                        {
+                          location.reload();
+                        }
       
         } ,
         err=> {console.log(err);}
      );
   }
 
+//the Stack bar Method 
+openSnackBar(message: string, action: string) {
+  this._snackBar.open(message, action, {
+    duration: 2000,
+    verticalPosition: 'top',
+    horizontalPosition : 'center' ,
+    panelClass: ['my-snack-bar']
+  });
 
+  return true;
+  
+}
  
 }

@@ -10,7 +10,8 @@
                        <div fxLayout="column">
                           <div class="row">
                           <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()">{{'Back'|translate}}</button>
-                          <button class="mrgn-b-xs" mat-raised-button color="accent">{{'Draft Approve'|translate}}</button>
+                          <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
+                           (click)="ApproveDraft()">{{'Draft Approve'|translate}}</button>
                         </div>
                        </div> 
                     </div>
@@ -32,13 +33,14 @@
                          </tr>
                       </thead>
                       <tbody  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
-                         <tr   fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
-                           <td >hi</td>
-                           <td  >hi</td>
-                           <td  >hi</td>
-                           <td  >hi</td>
-                           <td  >hi</td>
-                           <td  >hi</td>
+                         <tr  *ngFor="let item of RFI_tbl"   fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
+                          
+                           <td>{{item.request_num}}</td>
+                           <td>{{item.request_name}}</td>
+                           <td>{{item.work_location}}</td>
+                           <td>{{user}}</td>
+                           <td>{{state | translate}}</td>
+                           <td>{{consultant_approve| translate}}</td>
                          </tr>
                       </tbody>
                    </table>
@@ -70,8 +72,14 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr >
-                      
+                     <tr *ngFor="let item of Items" style="text-align: center;">
+                         <td>{{item.num}}</td>
+                         <td>{{item.name}}</td>
+                         <td>{{item.qty}}</td>
+                         <td>{{contracted_qty}}</td>
+                         <td>
+                            <mat-icon matTooltip="{{'Edit Contract Quantity'|translate}}" (click)="openDialog(item.id)">edit</mat-icon>
+                       </td>
                      </tr>
                   </tbody>
                </table>
@@ -89,7 +97,7 @@
                
                <div fxLayout="row">
                  
-                  <button class="mrgn-b-xs" mat-raised-button color="accent">{{'Consultant Approve'|translate}}</button>
+                  <button class="mrgn-b-xs" [disabled]="consultant_approve != 'waiting'" mat-raised-button color="accent" (click)="openDialogApprove()">{{consultant_btn|translate}}</button>
                   <button class="mrgn-b-xs" mat-raised-button color="warn">{{'Result Approve'|translate}}</button>
                   <button class="mrgn-b-xs" mat-raised-button color="primary">{{'Print'|translate}}</button>
             
@@ -101,7 +109,7 @@
          <div class="gene-card-content pad-t-none">
             <div class="table-responsive" id="dvPdf">
               <mat-card style="background-color: lightsteelblue;">
-                <h5>{{'Request Status' |translate}} : </h5>
+                <h5>{{'Request Status' |translate}} : {{state | translate}}</h5>
                 <h5>{{'Progress Date' |translate}} :</h5>
                 <h5>{{'Progress Owner' |translate}} :</h5>
               </mat-card>
@@ -111,7 +119,7 @@
                   <div fxLayout="column">
                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                     <!--Department-->
-                    <div >
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
                         <mat-form-field class="full-wid mrgn-b-lg">
                               <mat-label>{{'Department'|translate}}</mat-label>
                               <mat-select name="department">      
@@ -121,7 +129,7 @@
                         </mat-form-field>
                      </div>
                        <!--Note-->
-                    <div >
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
                             <mat-form-field class="full-wid mrgn-b-lg">
                                   <mat-label>{{'Details'|translate}}</mat-label>
                                   <textarea matInput name="details"  

@@ -1,0 +1,41 @@
+<mat-card dir="rtl">
+    <div class="gene-card-title">
+       <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="column" fxLayoutAlign="start center">
+             <h3>{{'Add Request'|translate}}</h3>
+          </div>
+          <span fxFlex></span>
+       </div>
+       <mat-divider></mat-divider>
+    </div>
+    <div mat-dialog-content>
+          <form #form="ngForm">
+                <div fxLayout="column">
+                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                      <!-- Approve State  Options-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                         <mat-form-field class="full-wid mrgn-b-lg">
+                               <mat-label>{{'Approvment'|translate}}</mat-label>
+                               <mat-select name="data" [(ngModel)]="data">
+                                
+                                     <mat-option value="waiting" >{{'waiting'|translate}}</mat-option>
+                                       <mat-option value="accepted" >{{'Accepted'|translate}}</mat-option>
+                                       <mat-option value="accepted-with-comment" >{{'Accepted With Comments'|translate}}</mat-option>
+                                       <mat-option value="reject-resend" >{{'Rejected and must Resend'|translate}}</mat-option>
+                                       <mat-option value="rejected" >{{'Rejected'|translate}}</mat-option>
+                               </mat-select>
+                         </mat-form-field>
+                      </div>
+               
+
+  </div>
+                
+                   <div fxLayout="row" fxLayoutAlign="space-between" mat-dialog-actions>
+                         <button mat-button mat-raised-button color="accent"   [mat-dialog-close]="data" cdkFocusInitial>{{'Approve'|translate }}</button>
+                         <button mat-button mat-raised-button color="warn"   (click)="onNoClick()" type="button" dir="ltr">{{'Cancel'|translate }}</button>
+                         
+                   </div>
+                </div>
+             </form>
+    </div>
+ </mat-card>

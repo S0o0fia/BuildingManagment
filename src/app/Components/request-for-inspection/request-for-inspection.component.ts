@@ -49,38 +49,7 @@ this.pageTitleService.setTitle("طلبات فحص الأعمال  ");
    err=> console.log(err)
  );
 
- this.service.getItemRFI().subscribe(
-  data=> 
- {
-  this.RFI_tbl1.forEach(element1 => {
-     data.forEach(element => {
-                    if(element.rfi_id == element1.id)
-            {
-             
-            this.RFI_tbl.push({
-            end_date: element1.end_date , 
-inspect_date : element1.inspect_date,
-item_name : element.name , 
-request_ids : element1.request_ids ,
-request_name : element1.request_name , 
-request_num : element1.request_num ,
-start_date : element1.start_date , 
-work_location  :element1.work_location , 
-item_number : element.num , 
-item_qty : element.qty,
-id : element.rfi_id , 
-state : element1.state ,
-consultant_approval : element1.consultant_approval
 
-            });
-            }
-          });
-     });
-  } ,
-  err=> console.log(err)
-
-
-);
 this.totalRec = this.RFI_tbl.length;
 }
 
