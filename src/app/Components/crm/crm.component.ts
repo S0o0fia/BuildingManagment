@@ -82,6 +82,7 @@ export class CrmComponent implements OnInit, OnDestroy {
       cryptoCompareColumns = ["id","name","consultant_name","contractor_name" , "Status" , "Controls"];
       dropList = [
          "Edit Project",
+         "Project Items" ,
          "Quantity Table",
          "Files Managment",
          "Lines Files Managment",
@@ -92,8 +93,8 @@ export class CrmComponent implements OnInit, OnDestroy {
          "Financial Flow" ,
          "Current Extracts",
          "Abstracts" ,
-         "History Formats",
-         "Show Location Map"      ];
+         "History Formats"
+               ];
       
       /*
          ----------Choose from drop down list  ----------
@@ -107,6 +108,10 @@ export class CrmComponent implements OnInit, OnDestroy {
             case "Edit Project":
                {this.router.navigate(['/home/edit']); }
                   break;
+
+            case "Project Items":
+                     {this.router.navigate(['/home/items']); }
+                        break;      
 
             case "Quantity Table" :
                   {this.router.navigate(['/home/table/quantity']);}
@@ -174,7 +179,7 @@ export class CrmComponent implements OnInit, OnDestroy {
 
       RFI(id)
       {
-         localStorage.setItem('prijectId' , id);
+         localStorage.setItem('projectid' , id);
          {this.router.navigate(['/home/table/rfi']);}
 
       }

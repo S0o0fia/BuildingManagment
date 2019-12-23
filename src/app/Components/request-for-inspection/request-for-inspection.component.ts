@@ -21,6 +21,7 @@ export class RequestForInspectionComponent implements OnInit {
   resultsLength = 0;
   totalRec : number;
   page: number = 1;
+  statename : string;
   
  
   constructor(public service : CoreService,
@@ -31,7 +32,7 @@ export class RequestForInspectionComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
 
-   
+      this.statename = "waiting";
 
     }
 
@@ -45,9 +46,10 @@ ngOnInit() {
 this.pageTitleService.setTitle("طلبات فحص الأعمال  ");
 
  this.service.getRFI_tbl().subscribe(
-   data=> this.RFI_tbl1 = data,
+   data=> this.RFI_tbl = data,
    err=> console.log(err)
  );
+
 
 
 this.totalRec = this.RFI_tbl.length;
@@ -65,5 +67,13 @@ openDialog(): void {
     
   });
 }
+
+state(key:string)
+{
+ this.statename = key;
+
+  
+}
+
 }
 

@@ -1,0 +1,79 @@
+<mat-card style="margin: auto; width: 50%;">
+    <div class="gene-card-title">
+       <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxLayout="column">
+             <h5>{{'Project Items'|translate}}</h5>
+          </div> <span fxFlex></span>
+       </div>      
+       <mat-divider></mat-divider>
+    </div>
+      
+       <div class="gene-card-content pad-t-none">
+        <form #form="ngForm">
+            <div fxLayout="column">
+               <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                  <!--Item Type-->
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                     <mat-form-field class="full-wid mrgn-b-lg">
+                           <mat-label>{{'Item Type'|translate}}</mat-label>
+                           <mat-select name="itemtype"  [(ngModel)]="itemtype">
+                                 <mat-option value="Building">
+                                  {{'Building'|translate}}
+                                 </mat-option>
+                                 <mat-option value="Garden">
+                                    {{'Garden'|translate}}
+                                 </mat-option>
+                                 <mat-option value="Sour">
+                                    {{'Sour'|translate}}
+                                 </mat-option>
+                           </mat-select>
+                     </mat-form-field>
+                  </div>
+        
+              <!--Item Name-->
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                <mat-form-field class="full-wid mrgn-b-lg">
+                    <input matInput name="item_name"  [(ngModel)]="item_name"
+                    placeholder="{{'Project Item Name'|translate}}" type="text" required>    
+                </mat-form-field>
+            </div>
+
+            </div>
+            <div>
+              <div fxLayout="row" fxLayoutAlign="center">
+                    <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add Project Item'|translate }}</button>
+               </div>
+            </div>
+        </div>
+    </form>
+
+     <br/>        
+   
+           <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                 <div class="table-responsive" id="dvPdf">
+ 
+                       <table class="table table-hover table-middle th-fw-light mb-0">
+                          <thead>
+                             <tr>
+                                <th>{{'Item Type'|translate}}</th>
+                                <th>{{'Project Item Name'|translate}}</th>
+                                <th>{{'Controls'|translate}}</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                             <tr *ngFor="let item of itemsData; let i = index" >
+                                <td>{{item.itemtype | translate}}</td>
+                                <td>{{item.itemname}}</td>
+                                <td><mat-icon (click)="removeitem(i)" matTooltip="{{'Delete' | translate}}">delete</mat-icon></td>
+                              </tr>
+                          </tbody>
+                       </table>
+                    </div>
+           
+     </div>
+     <div fxLayout="row" fxLayoutAlign="center">
+        <button mat-button mat-raised-button color="accent" [disabled]="itemsData.length == 0"
+         fxLayoutAlign="center" type="button">{{'Add All'|translate }}</button>
+    </div>
+</div>
+</mat-card>

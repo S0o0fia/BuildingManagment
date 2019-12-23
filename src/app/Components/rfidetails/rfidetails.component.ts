@@ -107,7 +107,7 @@ export class RfidetailsComponent implements OnInit {
    this.openSnackBar("تم اعتماد المسودة","إغلاق");
   }
   ngOnInit() {
-    //getting RFI Data 
+    //getting R0FI Data 
     this.service.getRFI_tbl().subscribe(
      data => {
     

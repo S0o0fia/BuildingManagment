@@ -81,6 +81,7 @@ import { AddBuildingComponent } from './Components/add-building/add-building.com
 import { RfidetailsComponent } from './Components/rfidetails/rfidetails.component';
 import { EditContractedQunatityComponent } from './Components/edit-contracted-qunatity/edit-contracted-qunatity.component';
 import { SelectApproveComponent } from './Components/select-approve/select-approve.component';
+import { ProjectitemsComponent } from './Components/projectitems/projectitems.component';
 
 
 
@@ -285,7 +286,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		AddBuildingComponent,
 		RfidetailsComponent,
 		EditContractedQunatityComponent,
-		SelectApproveComponent
+		SelectApproveComponent,
+		ProjectitemsComponent
 	
 		
 		

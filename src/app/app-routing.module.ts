@@ -18,6 +18,7 @@ import { ExractsComponent } from './Components/exracts/exracts.component';
 import { AddExtractComponent } from './Components/add-extract/add-extract.component';
 import { ProjectsmapComponent } from './Components/projectsmap/projectsmap.component';
 import { RfidetailsComponent } from './Components/rfidetails/rfidetails.component';
+import { ProjectitemsComponent} from './Components/projectitems/projectitems.component';
 
 
 
@@ -46,6 +47,10 @@ const appRoutes: Routes = [
             component:AttendeceComponent
          } ,
          {
+            path:'items',
+            component:ProjectitemsComponent
+         },
+         {
             path:"activestage",
             component:ActivestageComponent
          } ,
@@ -62,7 +67,8 @@ const appRoutes: Routes = [
             , {
                path:'rfidetails/:id',
                component:RfidetailsComponent
-            }
+            },
+           
 
          ]
          },
