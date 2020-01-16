@@ -11,6 +11,8 @@ import { Quantity } from 'app/Models/Quantity/quantity';
 import { NewItemRFI } from 'app/Models/Items/new-item-rfi';
 import { GetRFI } from 'app/Models/RFI/get-rfi';
 import { Approvedqty } from 'app/Models/Quantity/approvedqty';
+import { Matetrial } from 'app/Models/Material/matetrial';
+import { Mirequest } from 'app/Models/MIR Request/mirequest';
 
 @Injectable({
 	providedIn: 'root'
@@ -26,7 +28,7 @@ export class CoreService {
 	horizontalSideNavOpen : boolean = false; 	
 	projectDetailsContent : any;
 	editProductData 		 : any;	
-	apiURL : string = 'http://35.226.236.165:8069/api';
+	apiURL : string = 'http://192.168.100.61:8070/api';
 	db: string='nqproject';
 	
 	constructor(private matDialog : MatDialog,
@@ -217,5 +219,18 @@ export class CoreService {
 	{
 		let unitURL  ="/uoms/get?db="+this.db+"&token="+localStorage.getItem('token') ;
 		return this.http.get(this.apiURL+unitURL);
+	}
+
+	getMIRequest ()
+	{
+	   		let mirequest  ="/factory/get?db="+this.db+"&token="+localStorage.getItem('token') ;
+		    return this.http.get(this.apiURL+mirequest);	
+	}
+
+	createMIR(value : Mirequest)
+	{
+		let mirequest  ="/mir/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
+		+'","request_date":"'+value.request_date +'"}';
+        return this.http.post(this.apiURL+mirequest ,null);
 	}
 }

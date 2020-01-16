@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import {pieChartDemoData} from 'app/Models/chart-data'
 import { stackedAreaChartData } from "app/Models/stackedAreaChart.data";
-
+import * as pbi from 'powerbi-client';  
 @Component({
   selector: 'ms-activestage',
   templateUrl: './activestage.component.html',
   styleUrls: ['./activestage.component.scss']
 })
 export class ActivestageComponent implements OnInit {
-
+  
   constructor(       private pageTitleService: PageTitleService) { }
 
   pieChartDemoData :any[];

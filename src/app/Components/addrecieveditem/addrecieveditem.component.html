@@ -8,112 +8,111 @@
            </div>
            <mat-divider></mat-divider>
         </div>
-        <div class="gene-card-content">
+        <div class="gene-card-content" *ngFor="let item of mirrequest">
               <form #form="ngForm">
                     <div fxLayout="column">
                        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                           <!--Item Number-->
                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                              <mat-form-field class="full-wid mrgn-b-lg">
-                                   <mat-label>{{'Request Number'|translate}}</mat-label>
-                                   <mat-select>
-                                     <mat-option >
-                                     
-                                     </mat-option>
-                                   </mat-select>
+                              <input matInput name="code"  
+                              placeholder="{{'Request Number'|translate}}" type="text" disabled >  
+                                <label>{{item.code}}</label>   
                              </mat-form-field>
                           </div>
+                            <!--Date of delivery request-->
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <mat-form-field fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <input matInput 
+                                  name="reqDate"  [(ngModel)]="reqDate"
+                                  [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
+                                   placeholder="{{'Date of delivery request'|translate}}">
+                                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker2></mat-datepicker> 
+                                 </mat-form-field>
+                               </div>
+
+                             <!--Factroy Name-->
+                             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                 <mat-label>{{'Factroy Name'|translate}}</mat-label>
+                                 <mat-select name="factroy_id"  [(ngModel)]="factroy_id" >
+                                    <div *ngFor="let fact of item.factory">
+                                    <mat-option value={{fact.name}} (click)="hi(fact.name ,item.code)">
+                                       {{fact.name}}
+                                   </mat-option>
+                                </div>
+                               </mat-select>
+                           </mat-form-field>
+                           </div>
+
                          <!--Material supplied-->
                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                             <mat-form-field class="full-wid mrgn-b-lg">
-                                   <mat-label>{{'Material supplied'|translate}}</mat-label>
-                                   <mat-select>
-                                     <mat-option >
-                                     
-                                     </mat-option>
-                                   </mat-select>
-                             </mat-form-field>
+                           <mat-form-field class="full-wid mrgn-b-lg">
+                              <mat-label>{{'Material supplied'|translate}}</mat-label>
+                              <mat-select name="mat_name">
+                              <div *ngFor="let fact of item.factory">
+                              <div *ngIf="factroy_id == fact.name">  
+                              <div *ngFor="let matrial of fact.materials">
+                                 <mat-option value={{matrial.code}} (click) = "addmat(matrial.code , matrial.name)">
+                                    {{matrial.name}}
+                                </mat-option>
+                             </div>
+                             </div>
+                             </div>
+                            </mat-select>
+                        </mat-form-field>
                           </div>
                          
-                          <!--Factroy Name-->
-                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                <mat-form-field class="full-wid mrgn-b-lg">
-                                        <input matInput name="factroy_name"
-                                        placeholder="{{'Factory Name'|translate}}" type="text" required>       
-                                  </mat-form-field>
-                               
-                             </div>
-                                   
-                              <!--Size of supplied material-->
-                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                <mat-form-field class="full-wid mrgn-b-lg">
-                                        <input matInput name="item_size"
-                                        placeholder="{{'Size of supplied material'|translate}}" type="number" required>       
-                                  </mat-form-field>
-                          
-                             </div>
-                            
-                                 <!--Unit-->
-                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                <mat-form-field class="full-wid mrgn-b-lg">
-                                      <mat-label>{{'Unit'|translate}}</mat-label>
-                                      <mat-select>
-                                        <mat-option >
-                                                 
-                                        </mat-option>
-                                      </mat-select>
-                                </mat-form-field>
-                             </div>
-                             <!--Date of delivery request-->
-                             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                <mat-form-field>
-                                <input matInput 
-                                    name="date_delivery"  
-                                    [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
-                                     placeholder="{{'Date of delivery request'|translate}}">
-                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker2></mat-datepicker> 
-                                    </mat-form-field>
-                                 </div>
-
-                                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100"class="map">
-                                        <agm-map [latitude]="lat" [longitude]="lng" class="map" (mapClick)="placeMarker($event)">
-                                           <agm-marker (mouseOver)="window.open()" (mouseOut)="window.close()" [latitude]="lat"
-                                             [longitude]="lng">
-                                             <agm-info-window #window>
-                                               <h6>Longitude: {{lng}}</h6>
-                                               <h6>Latitude: {{lat}}</h6>
-                                             </agm-info-window>
-                                           </agm-marker>
-                                        </agm-map>
-
-                                  </div>
-             
-                  <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                         <mat-form-field class="full-wid mrgn-b-lg ">
-                              <input matInput placeholder="{{'Latitude'|translate}}" type="text" [(ngModel)]="lat" required [ngModelOptions]="{standalone: true}">
-                         </mat-form-field>
-                      </div>
-                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <mat-form-field class="full-wid mrgn-b-lg ">
-                                 <input matInput placeholder="{{'Longitude'|translate}}" type="text" [(ngModel)]="lng" required [ngModelOptions]="{standalone: true}">
-                                 
-                           </mat-form-field>
-                      </div>
-                  </div>
-                 
-                           <!--Qunatity-->
+                        <!--Qunatity-->
                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                           <mat-form-field class="full-wid mrgn-b-lg">
-                                <input matInput name="factroy_name"
+                                <input matInput name="qty" [(ngModel)]="qty"
                                 placeholder="{{'Quantity'|translate}}" type="number" required>  
-                                     </mat-form-field>
-                                </div>    
+                            </mat-form-field>
+                       </div>    
                                
                       </div>
+
+                      <div fxLayout="row" fxLayoutAlign="center">
+                        <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add Quantity'|translate }}</button>
+                    </div> 
+
+
+                    <mat-card  class="full-wid mrgn-b-lg ">
+                     <mat-label>{{'Material supplied'|translate}}</mat-label>
+                     <div class="gene-card-content">
+                        <div fxLayout="column">
+                           <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                                 <div class="table-responsive" id="dvPdf">
+                 
+                                       <table class="table table-hover table-middle th-fw-light mb-0">
+                                          <thead>
+                                             <tr>
+                                                <th>{{'Material supplied'|translate}}</th>
+                                                <th>{{'Quantity'|translate}}</th>
+                                                <th>{{'Controls'|translate}}</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                             <tr *ngFor="let item of matrial; let i = index" >
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.qty}}</td>
+                                                <td><mat-icon (click)="removeitem(i)" matTooltip="{{'Delete' | translate}}">delete</mat-icon></td>
+                                              </tr>
+                                          </tbody>
+                                       </table>
+                                    </div>
+      
+                     </div>
+                        </div>
+                           </div>     
+               </mat-card>
+
+
+
                        <div fxLayout="row" fxLayoutAlign="space-between">
-                             <button mat-button mat-raised-button color="accent" type="submit">{{'Add'|translate }}</button>
+                             <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add'|translate }}</button>
                              <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
                              
                        </div>

@@ -46,30 +46,8 @@
                         </mat-form-field>
                      </div>
                   
-                  <!--Start Session-->
-                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                              <mat-form-field class="full-wid mrgn-b-lg ">
-                                 <input matInput 
-                                 name="start_work"  [(ngModel)]="start_work"
-                                 [min]="minDate" [max]="maxDate" [matDatepicker]="startwork"
-                                  placeholder="{{'Start Date of Works'|translate}}">
-                                 <mat-datepicker-toggle matSuffix [for]="startwork"></mat-datepicker-toggle>
-                                 <mat-datepicker #startwork></mat-datepicker>                         
-                              </mat-form-field>
-                       </div>
-
-                        <!--Start Session-->
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                           <mat-form-field class="full-wid mrgn-b-lg ">
-                              <input matInput 
-                              name="end_work"  [(ngModel)]="end_work" 
-                              [min]="minDate" [max]="maxDate" [matDatepicker]="endwork"
-                               placeholder="{{'End Date of Works'|translate}}">
-                              <mat-datepicker-toggle matSuffix [for]="endwork"></mat-datepicker-toggle>
-                              <mat-datepicker #endwork></mat-datepicker>                         
-                           </mat-form-field>
-                    </div>
-                         
+                
+                 
                      <!--Inspection Date-->
                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                         <mat-form-field class="full-wid mrgn-b-lg ">
