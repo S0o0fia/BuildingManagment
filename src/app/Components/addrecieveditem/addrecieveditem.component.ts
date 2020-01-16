@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Mirequest } from 'app/Models/MIR Request/mirequest';
 import { CoreService } from 'app/Service/core/core.service';
 import { formatDate } from '@angular/common';
+import { Matetrial } from 'app/Models/Material/matetrial';
 
 @Component({
   selector: 'ms-addrecieveditem',
@@ -28,6 +29,9 @@ export class AddrecieveditemComponent implements OnInit {
   mat_code : string;
   qty : string;
   mir: Mirequest;
+  mirid  :number;
+  matiral :Matetrial;
+;
   hi(val , code)
   {
      this.facroty_id = val;
@@ -61,7 +65,7 @@ export class AddrecieveditemComponent implements OnInit {
   addItem()
   {
     this.matrial.push({
-      code :this.mat_name ,
+      code :this.mat_code ,
       name :this.mat_name,
       qty : this.qty ,
    
@@ -98,10 +102,23 @@ export class AddrecieveditemComponent implements OnInit {
      }
    
 
-   this.service.createMIR(this.mirrequest).subscribe(
-     data=>console.log(data) , 
-     err=> console.log(err)
-   );
+  //  this.service.createMIR(this.mirrequest).subscribe(
+  //    data=>{
+  //      this.mirid = data['mirid'] as number;
+  //      this.matrial.forEach(element => {
+  //       this.matrial.push({
+  //         factory_id : this.facroty_id,
+  //         material_id : element.code,
+  //         qty : this.qty ,
+  //         mir_id : this.mirid,
+  //         approved_qty : this.qty
+          
+  //       });
+  //       console.log(this.matrial);
+  //      });
+  //    } , 
+  //    err=> console.log(err)
+  //  );
      
   }
 

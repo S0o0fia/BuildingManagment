@@ -28,8 +28,8 @@ export class CoreService {
 	horizontalSideNavOpen : boolean = false; 	
 	projectDetailsContent : any;
 	editProductData 		 : any;	
-	apiURL : string = 'http://192.168.100.61:8070/api';
-	db: string='nqproject';
+	public apiURL : string = 'http://94.99.142.220:8070/api';
+	public db: string='nqproject';
 	
 	constructor(private matDialog : MatDialog,
 					private http : HttpClient){
@@ -232,5 +232,11 @@ export class CoreService {
 		let mirequest  ="/mir/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
 		+'","request_date":"'+value.request_date +'"}';
         return this.http.post(this.apiURL+mirequest ,null);
+	}
+
+	createMIRItem(value : Matetrial)
+	{
+		let miritem  ="/mir/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+'"}';
+        return this.http.post(this.apiURL+miritem ,null);
 	}
 }
