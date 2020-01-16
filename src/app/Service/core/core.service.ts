@@ -28,7 +28,7 @@ export class CoreService {
 	horizontalSideNavOpen : boolean = false; 	
 	projectDetailsContent : any;
 	editProductData 		 : any;	
-	public apiURL : string = 'http://94.99.142.220:8070/api';
+	public apiURL : string = 'http://94.99.142.220/api';
 	public db: string='nqproject';
 	
 	constructor(private matDialog : MatDialog,
