@@ -1,11 +1,12 @@
- <h1 mat-dialog-title>{{'Edit Contract Quantity'|translate}}</h1>
+ 
+ <h1 mat-dialog-title dir="rtl">{{'Edit Contract Quantity'|translate}}</h1>
     <br/>
-    <div mat-dialog-content>
+    <div mat-dialog-content dir="rtl">
       <mat-form-field>
         <input matInput type="number" name="qunatity" [(ngModel)]="qunatity" placeholder="{{'Enter Qunatity'|translate}}" dir="rtl">
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
-      <button mat-button color="warn"  (click)="onNoClick()">{{'Cancel'|translate}}</button>
+      <button mat-button color="warn"  (click)="onNoClick(qunatity)">{{'Cancel'|translate}}</button>
       <button mat-button color="accent"  [mat-dialog-close]="qunatity" cdkFocusInitial>{{'Add' | translate}}</button>
 </div>

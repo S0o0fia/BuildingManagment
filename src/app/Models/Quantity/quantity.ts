@@ -2,7 +2,7 @@ export interface Quantity {
     projectid:number;
     main_section_id: number;
     first_subsection_id: number;
-    second_subsection_id: number;
+    second_subsection_id: string;
     description: string;
     item_name:  string;
     item_number: string;

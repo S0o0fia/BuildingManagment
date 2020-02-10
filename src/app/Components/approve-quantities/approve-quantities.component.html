@@ -1,0 +1,101 @@
+<mat-card dir="rtl">
+    <div class="gene-card-title">
+       <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="column" fxLayoutAlign="start center">
+             <h3>{{'Approved Quantities'|translate}}</h3>
+          </div>
+          <span fxFlex></span>
+       </div>
+       <mat-divider></mat-divider>
+    </div>
+    <div class="gene-card-content">
+          <form #form="ngForm">
+                <div fxLayout="column">
+                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                      <!--Project Name-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                         <mat-form-field class="full-wid mrgn-b-lg">
+                               <mat-label>{{'Project Name'|translate}}</mat-label>
+                               <mat-select name="projectid" [(ngModel)]="projectid">
+                               <div *ngFor="let item of project">
+                                 <mat-option value={{item.id}} >
+                                     {{item.name}}
+                                 </mat-option>
+                              </div>
+                               </mat-select>
+                         </mat-form-field>
+                      </div>
+                     
+                      <!--Due to-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                      <mat-label>
+                        {{'Due do'|translate}}
+                      </mat-label>
+                      </div>
+                                                      
+                         <!--Start Session-->
+                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                               <mat-form-field class="full-wid mrgn-b-lg ">
+                                  <input matInput 
+                                        name="from"  [(ngModel)]="from"
+                                  [min]="minDate" [max]="maxDate" [matDatepicker]="picker1"
+                                   placeholder="{{'From'|translate}}">
+                                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker1></mat-datepicker>                         
+                               </mat-form-field>
+                        </div>
+
+                           <!--Start Session-->
+                           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                              <mat-form-field class="full-wid mrgn-b-lg ">
+                                 <input matInput 
+                                       name="to"   [(ngModel)]="to"
+                                 [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
+                                  placeholder="{{'To'|translate}}">
+                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                 <mat-datepicker #picker2></mat-datepicker>                         
+                              </mat-form-field>
+                       </div>
+                   </div>
+                     
+                 <div fxLayout="row" fxLayoutAlign="center">
+                         <button mat-button mat-raised-button color="accent" (click)="Filter()" type="submit">{{'Display'|translate }}</button>
+                       
+                         
+                   </div>
+                </div>
+             </form>
+    </div>
+ </mat-card>
+
+ <mat-card dir="rtl">
+   <div class="gene-card-content">
+      <table class="table table-hover table-middle th-fw-light mb-0">
+         <thead>
+            <tr style="text-align: center;">
+               <th>{{'Item Number'|translate}}</th>
+               <th>{{'Item Name'|translate}}</th>
+               <th>{{'Item Description'|translate}}</th>
+               <th>{{'Unit'|translate}}</th>
+               <th>{{'Contract Quantity'|translate}}</th>
+               <th>{{'Unit Price'|translate}}</th>
+               <th>{{'Approved Quantity'|translate}}</th>
+               <th>{{'Cost Approved Quantity'|translate}}</th>
+               
+            </tr>
+         </thead>
+         <tbody>
+            <tr style="text-align: center;" *ngFor="let approve of approveaty">
+               <td>{{approve.number}}</td>
+               <td>{{approve.name}}</td>
+               <td>{{approve.description}}</td>
+               <td>{{approve.uom}}</td>
+               <td>{{approve.qty}}</td>
+               <td>{{approve.price}}</td>
+               <td>{{approve.approved_qty}}</td>
+               <td>{{approve.approved_qty * approve.price }}</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</mat-card>

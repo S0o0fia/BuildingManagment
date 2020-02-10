@@ -8,7 +8,8 @@ import { NewItemRFI } from 'app/Models/Items/new-item-rfi';
 import { CoreService } from 'app/Service/core/core.service';
 import { formatDate } from '@angular/common';
 import { InspctionId } from 'app/Models/inspction_id/inspction-id';
-
+import { FileUploader , FileSelectDirective } from 'ng2-file-upload';
+const uri = 'D:/Users/Documents/برنامج إدارة المرافق/src/files';
 @Component({
   selector: 'ms-add-request',
   templateUrl: './add-request.component.html',
@@ -34,11 +35,105 @@ export class AddRequestComponent implements OnInit {
   newRFI : Rfi;
   inspection_id : number;
   inspectionIDs : InspctionId;
+  hasBaseDropZoneOver = false;
+  hasAnotherDropZoneOver = false;
+  item_id : number;
+  buildings : any[]=[];
+ //upload file
+  uploader: FileUploader = new FileUploader({url: uri});
+  AttachList : any = [];  
+  selectedfile = null;
+  pitem : string="";
+  statepitem : boolean  = false;
+  filter : number = 0;
+  search : string;
+  value : string;
+
+   filterType(val)
+    {
+       this.filter = val;
+    }
+  
+
+    Search()
+    {
+      console.log(this.filter);
+      console.log(this.search);
+       this.quantitys.forEach(element=>
+        {
+        
+          if(this.filter == 1)
+          {
+              if(this.search == element['item_name'])
+              {
+                console.log(this.search == element['item_name'])
+                 this.BindItemname(element['item_name'] , element['id']);
+                 this.BindItemnumber(element['item_number'] , element['id']);
+              }
+
+          }
+          else if(this.filter == 2)
+          {
+            
+            if(this.search == element['item_number'])
+            {
+              console.log(this.search == element['item_number'])
+              this.BindItemname(element['item_name'] , element['id']);
+              this.BindItemnumber(element['item_number'] , element['id']);
+            }
+             
+          }
+
+        });
+     
+    }
+
+  onFileSelected(event)
+  {
+    this.selectedfile =<File> event.target.files[0];
+  }
+
+  change()
+  {
+    this.statepitem = true;
+
+  }
+  
+  onUpload()
+  {
+     const fd = new FormData();
+    
+     fd.append('file' , this.selectedfile , this.selectedfile.name);
+     this.services.UploadFile(fd).subscribe(
+       res=>console.log(res),
+       err=>console.log(err)
+     );
+  }
+     /**
+      *fileOverBase fires during 'over' and 'out' events for Drop Area.
+      */
+     fileOverBase(e: any): void {
+      this.hasBaseDropZoneOver = e;
+  }
+
+  /**
+    *fileOverAnother fires after a file has been dropped on a Drop Area.
+    */
+  fileOverAnother(e: any): void {
+      this.hasAnotherDropZoneOver = e;
+  }
   constructor(   public dialogRef: MatDialogRef<RequestForInspectionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Rfi,private _snackBar: MatSnackBar
     ,private translate : TranslateService , private  services :CoreService) {
       this.minDate = new Date(1900,1,1);
       this.maxDate = new Date(2050,1,1);
+
+
+
+      this.uploader.onCompleteItem = (item : any , response : any , status : any , header : any)=>
+      {
+            this.AttachList.push(JSON.parse(response));
+      }
     }
   	//Method to fill the Table of items
     addItem()
@@ -47,7 +142,10 @@ export class AddRequestComponent implements OnInit {
         rfi_id : 0 ,
         name : this.item_name , 
         num : this.item_number ,
-        qty : this.qty
+        item_id : this.item_id ,
+        qty : this.qty ,
+        approved_qty: 0,
+        pitem :this.pitem
       });
     }
 
@@ -55,14 +153,12 @@ export class AddRequestComponent implements OnInit {
     request(value)
     {
       this.req_number = value;
+     
 
 
     }
     //Method Action To remove item when click on delete icon on items Tables 
-    removeitem(index)
-    {
-      this.itemDate.splice(index , 1);
-    }
+    
 
     //Action Method when click Cancel button
   onNoClick(): void {
@@ -79,22 +175,32 @@ export class AddRequestComponent implements OnInit {
    
     //to get the item fro Qty-tble based on id of work type 
     this.services.getQty_tbl().subscribe(
-      data=> this.quantitys = data , 
+      data=> {this.quantitys = data ;
+        
+      }, 
       err => console.log(err)
     );
+
+    this.services.getProjectitem().subscribe(
+      data=> this.buildings = data as any, 
+      err=> console.log(err)
+    );
+
     
   }
   
   //to get the selected item name  binding with its number
-  BindItemname(value)
+  BindItemname(value , id)
   {
     this.item_name = value;
+    this.item_id = id;
   }
 
   //to get the seleced item number binding with its name
-  BindItemnumber(value)
+  BindItemnumber(value , id)
   {
     this.item_number = value;
+    this.item_id = id;
   }
   
   //when you click Save Button
@@ -107,7 +213,7 @@ export class AddRequestComponent implements OnInit {
       let inspectiondate= formatDate(this.insepction_date, format, locale);
       console.log(this.work_id);
      this.newRFI = {
-       id : 0 ,
+              id : 0 ,
               end_date : startdate,
               inspect_date : endate ,
               request_name:"",    
@@ -118,7 +224,8 @@ export class AddRequestComponent implements OnInit {
               work_location : this.work_id,
               item_name:"",
               item_number:"",
-              item_qty : 0
+              item_qty : 0,
+             
      }
 
      this.services.createRFi(this.newRFI).subscribe(
@@ -126,6 +233,7 @@ export class AddRequestComponent implements OnInit {
                   this.inspectionIDs = data as InspctionId;
                   this.itemDate.forEach(element => {
                     element.rfi_id = this.inspectionIDs.inspection_id ,
+                    element.approved_qty = element.qty
                     this.services.createItemRFI(element).subscribe(
                       data=>{
                          //function for calling Stackbar

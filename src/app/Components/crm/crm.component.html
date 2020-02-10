@@ -53,6 +53,10 @@
                                  <td>{{data.contractor_name}}</td>
                                  <td>{{data.Status}}</td>
                                  <td>
+                                    <button mat-icon-button color="primary" matTooltip="{{'Delete'|translate}}"
+                                    (click)="deleteProject(data.id)">
+                                 <mat-icon>delete</mat-icon>
+                                 </button>
                                    <button mat-icon-button color="primary" matTooltip="{{'Active Stage'|translate}}"
                                        (click)="activestage(data.id)">
                                     <mat-icon>speed</mat-icon>

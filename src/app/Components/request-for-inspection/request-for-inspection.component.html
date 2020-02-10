@@ -18,10 +18,10 @@
                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('draft')">{{'draft'|translate}}</button>
                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('waiting')">{{'waiting'|translate}}</button>
                <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')">{{'accepted'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted-with-comment')">{{'accepted-with-comment'|translate}}</button>
+               <button class="mrgn-b-xs" mat-raised-button style="background-color: orange; color: white;" (click)="state('accepted-with-comment')">{{'accepted-with-comment'|translate}}</button>
+               <button class="mrgn-b-xs" mat-raised-button style="background-color: rgb(252, 252, 9) ; color: black;"  (click)="state('reject-resend')">{{'reject-resend'|translate}}</button>
                <button class="mrgn-b-xs" mat-raised-button color="warn" (click)="state('rejected')">{{'rejected'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button color="warn" (click)="state('reject-resend')">{{'reject-resend'|translate}}</button>
-              </div>
+                </div>
               <br/>
               
               <mat-divider></mat-divider>
@@ -31,12 +31,11 @@
                  <table class="table table-hover table-middle th-fw-light mb-0">
                     <thead>
                        <tr>
-                          <th>{{'Request Type'|translate}}</th>
+                          <th>{{'Specify Works'|translate}}</th>
                           <th>{{'Request Number'|translate}}</th>
-                           <th>{{'Location of Works'|translate}}</th>
+                           <th>{{'Project Items'|translate}}</th>
                           <th>{{'Inspection Date'|translate}}</th>
                           <th>{{'Request Status'|translate}}</th>
-                          <th>{{'Consultant Approve'|translate}}</th>                      
                           <th>{{'Controls'|translate}}</th>
                        </tr>
                     </thead>
@@ -50,13 +49,10 @@
                           <td>{{data.work_location}}</td>
                           <td>{{data.inspect_date}}</td>
                           <td>{{data.state | translate}}</td>
-                          <td>{{data.consultant_approval | translate}}</td>
+                     
                          <td>
                            <div class="dropdown row">
-                                    <button mat-icon-button matTooltip="{{'Delete'|translate}}">
-                                              <mat-icon color="primary">delete</mat-icon>
-                                        </button>
-                                        <button mat-icon-button  (click)="rfidetails(data.id)" matTooltip="{{'Detials'|translate}}" >
+                                 <button mat-icon-button  (click)="rfidetails(data.id)" matTooltip="{{'Detials'|translate}}" >
                                               <mat-icon  color="primary">arrow_back</mat-icon>
                                         </button>
                                </div>

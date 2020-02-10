@@ -16,15 +16,15 @@
                           <!--Extract Number-->
                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                              <mat-form-field class="full-wid mrgn-b-lg">
-                                    <input matInput name="item_qty"
-                                    placeholder="{{'Extract Number'|translate}}" type="number" required>       
+                                    <input matInput name="extract_number" [(ngModel)]="extract_number"
+                                    placeholder="{{'Extract Number'|translate}}" type="text" required>       
                              </mat-form-field>
                           </div>
                           <!--Extract Number-->
                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-form-field class="full-wid mrgn-b-lg">
                                         <input matInput 
-                                        name="start_session" 
+                                        name="extract_date" [(ngModel)]="extract_date"
                                         [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
                                          placeholder="{{'Extract Date'|translate}}">
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -34,7 +34,7 @@
                            <!--Total work performed in the abstract-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-form-field class="full-wid mrgn-b-lg">
-                                       <input matInput name="item_qty"
+                                       <input matInput name="total_work" [(ngModel)]="total_work"
                                        placeholder="{{'Total work performed in the abstract'|translate}}" type="number" 
                                        required disabled>       
                                 </mat-form-field>
@@ -42,7 +42,7 @@
                               <!--Total Discounts-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-form-field class="full-wid mrgn-b-lg">
-                                       <input matInput name="item_qty"
+                                       <input matInput name="total_discount" [(ngModel)]="total_discount"
                                        placeholder="{{'Total Discounts'|translate}}" type="number" 
                                        required disabled>       
                                 </mat-form-field>
@@ -50,7 +50,7 @@
                                     <!--Net amount due-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-form-field class="full-wid mrgn-b-lg">
-                                       <input matInput name="item_qty"
+                                       <input matInput name="Net_amout" [(ngModel)]="Net_amout"
                                        placeholder="{{'Net amount due'|translate}}" type="number" 
                                        required disabled>       
                                 </mat-form-field>
@@ -58,7 +58,7 @@
                                       <!--Total after tax-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-form-field class="full-wid mrgn-b-lg">
-                                       <input matInput name="item_qty"
+                                       <input matInput name="total_Vat" [(ngModel)]="total_Vat"
                                        placeholder="{{'Total after tax'|translate}}" type="number" 
                                        required disabled>       
                                 </mat-form-field>
@@ -66,7 +66,7 @@
                                           <!--The amount paid-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-form-field class="full-wid mrgn-b-lg">
-                                       <input matInput name="item_qty"
+                                       <input matInput name="paid" [(ngModel)]="paid" 
                                        placeholder="{{'The amount paid'|translate}}" type="number" 
                                        required >       
                                 </mat-form-field>
@@ -74,8 +74,8 @@
                 </div>
   
   
-                       <div fxLayout="row" fxLayoutAlign="space-between">
-                             <button mat-button mat-raised-button color="accent" type="submit">{{'Add'|translate }}</button>
+                       <div fxLayout="row" fxLayoutAlign="center">
+                             <button mat-button mat-raised-button color="accent" (click)="AddExtract()" type="submit">{{'Add'|translate }}</button>
                                                         
                        </div>
                     </div>
@@ -94,9 +94,31 @@
                           <h3>{{'Executed Business Items'|translate}}</h3>
                        </div>
                        <span fxFlex></span>
-                       <div fxLayout="column">
-                            <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialogItem()">{{'Add Item'|translate}}</button>
-                         </div>
+                       
+                       <div fxLayout="column"  fxLayoutAlign="center" fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                        <form #form="ngForm">
+                          
+                             
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                    <mat-label>{{'Item Number'|translate}} , {{'Item Name'|translate}}</mat-label>
+                                    <mat-select name="item_id" [(ngModel)]="item_id">
+                                                <div *ngFor="let item of approve">
+                                                 <mat-option value={{item.id}} (click)="Add(item.id)" >
+                                                   {{item.number}}   ,    {{item.name}} 
+                                              </mat-option>
+                                                
+                                                </div>
+                                            </mat-select>                                            
+                              </mat-form-field>
+                             
+                          
+                        </form>
+                       </div>
+                   
+                       <span fxFlex></span>
+                       <!-- <div fxLayout="column">
+                            <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="AddItem()">{{'Add Item'|translate}}</button>
+                         </div> -->
                     </div>
                                           </div>
                     <mat-divider></mat-divider>
@@ -115,15 +137,17 @@
                                      </tr>
                                   </thead>
                                   <tbody>
-                                     <tr >
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                     <tr *ngFor="let item of approved ; let i = index">
+                                   
+                                        <td>#</td>
+                                        <td>{{item.number}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.approved_qty}}</td>
+                                        <td>{{item.price}}</td>
+                                        <td>{{item.price * item.approved_qty}}</td>
+                                        <td><button (click)="removeitem(i)" color="warn" mat-button><mat-icon>delete</mat-icon></button></td>
                                      </tr>
+                                  
                                   </tbody>
                                </table>
                             </div>
@@ -138,9 +162,44 @@
                           <h3>{{'Discounts Type'|translate}}</h3>
                        </div>
                        <span fxFlex></span>
-                       <div fxLayout="column">
+                       
+                       <div fxLayout="column"  fxLayoutAlign="center" fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                        <div fxLayout="row" fxLayoutAlign="center">
+                        <form #form="ngForm">
+                          
+                             
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                    <mat-label>{{'Discounts Type'|translate}}</mat-label>
+                                    <mat-select name="dis" [(ngModel)]="dis" >
+                                              <mat-option value="1" >
+                                                   {{'Delay penalty'|translate}}
+                                              </mat-option>
+                                              <mat-option value="1" >
+                                                {{'A well-executed fine'|translate}}
+                                             </mat-option>
+                                             <mat-option value="1" >
+                                                {{'Downpayment'|translate}}
+                                             </mat-option>
+                                             <mat-option value="1" >
+                                                {{'The value of the previous abstracts'|translate}}
+                                             </mat-option>
+                                            </mat-select>                                            
+                              </mat-form-field>
+
+                              <mat-form-field class="full-wid mrgn-b-lg"> 
+                                   <input matInput name="dis_amount" [(ngModel)]="dis_amount" 
+                                 placeholder="{{'Total Discounts'|translate}}" type="number" required>   
+                           </mat-form-field>
+                        </form>
+                        </div>
+                       </div>
+                   
+                       <span fxFlex></span>
+                      
+                      
+                       <!-- <div fxLayout="column">
                             <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialogDiscount()">{{'Add Item'|translate}}</button>
-                         </div>
+                         </div> -->
                     </div>
                     
                         </div>
@@ -159,7 +218,7 @@
                                  </tr>
                               </thead>
                               <tbody>
-                                 <tr >
+                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>

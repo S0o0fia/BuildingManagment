@@ -12,16 +12,24 @@ export interface approveData {
 })
 export class SelectApproveComponent implements OnInit {
    
+  comment :string ; 
+  approve :string;
   constructor( public dialogRef: MatDialogRef<RfidetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string)
+    @Inject(MAT_DIALOG_DATA) public data: any)
     {
       
-      
+    
+     
     }
     
-    onNoClick(): void {
-      this.dialogRef.close();
     
+    onNoClick(): void {
+     
+     this.data  = {
+        approve : this.approve , 
+        comment : this.comment
+      } 
+      this.dialogRef.close();
     }
   
   ngOnInit() {

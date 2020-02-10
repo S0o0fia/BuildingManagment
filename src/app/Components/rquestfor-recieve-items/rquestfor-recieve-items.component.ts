@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AddrecieveditemComponent } from '../addrecieveditem/addrecieveditem.component';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { CoreService } from 'app/Service/core/core.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ms-rquestfor-recieve-items',
@@ -9,7 +11,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
   styleUrls: ['./rquestfor-recieve-items.component.scss']
 })
 export class RquestforRecieveItemsComponent implements OnInit {
-  constructor(
+  getMIR : any = [];
+  constructor(public service : CoreService, public router : Router,
     private pageTitleService: PageTitleService , private dialog: MatDialog) { 
 
       const dialogConfig = new MatDialogConfig();
@@ -21,9 +24,18 @@ export class RquestforRecieveItemsComponent implements OnInit {
 
     }
 
+  mirdetails(id)
+    {      
+     this.router.navigate(['home/table/mirdetails',id]);
+    }
+
     Qty_tbl : any ;
 ngOnInit() {
 this.pageTitleService.setTitle("طلبات تسليم المواد");
+this.service.getMIR().subscribe(
+  data=>this.getMIR=data,
+  err=>console.log(err) 
+);
 
 }
 

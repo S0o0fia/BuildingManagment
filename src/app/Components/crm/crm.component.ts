@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
 import { CoreService } from 'app/service/core/core.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProjectModel } from 'app/Models/Project/project-model';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
+import { ChooserequestComponent } from '../chooserequest/chooserequest.component';
 
 @Component({
   selector: 'ms-crm',
@@ -93,7 +94,9 @@ export class CrmComponent implements OnInit, OnDestroy {
          "Financial Flow" ,
          "Current Extracts",
          "Abstracts" ,
-         "History Formats"
+         "History Formats",
+         "Add Request"
+
                ];
       
       /*
@@ -127,7 +130,7 @@ export class CrmComponent implements OnInit, OnDestroy {
                 break;
                   
             case "Request for Recieves Items": 
-                    {this.router.navigate(['/home/receiveitem']);}
+                    {this.router.navigate(['/home/table/receiveitem']);}
                break;
                    
             case "Project Obstacles":  break;
@@ -142,9 +145,40 @@ export class CrmComponent implements OnInit, OnDestroy {
             case "History Formats":  break;
 
             case "Show Location Map": break;
+
+            case "Add Request" :
+            {
+             
+             this.openDialog();
+            }   
+            break;
          }
       }
-     
+
+      openDialog(): void {
+         const dialogRef = this.dialog.open(ChooserequestComponent, {
+           width: '50%',
+           height: '80%'
+          
+         });
+      }
+
+      deleteProject(id)
+      {
+       this. _snackBar.open("تم الحذف بنجاح " , "إغلاق" , {
+         duration: 2000,
+         verticalPosition: 'top',
+         horizontalPosition : 'center' ,
+         panelClass: ['my-snack-bar']
+       })
+       this.service.deleteproject(id).subscribe(
+         data=>console.log(data),
+         err=>console.log(err)
+      );
+      location.reload();
+    }
+
+
       activestage(id){
          this.router.navigate(['/home/activestage']);
          localStorage.setItem('projectid',id);
@@ -187,11 +221,18 @@ export class CrmComponent implements OnInit, OnDestroy {
       constructor(public service : CoreService,
                   private router : Router,
                   private pageTitleService: PageTitleService ,
-                  private route: ActivatedRoute) { 
+                  private route: ActivatedRoute ,
+                  public _snackBar : MatSnackBar,
+                  private dialog: MatDialog) { 
 
                      
-                
-                              }
+                     const dialogConfig = new MatDialogConfig();
+
+                     dialogConfig.disableClose = true;
+                     dialogConfig.autoFocus = true;
+             
+                  
+                     }
             
       ngOnInit() {
         

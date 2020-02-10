@@ -16,16 +16,12 @@
                   <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                      <mat-form-field class="full-wid mrgn-b-lg">
                            <mat-label>{{'Item Type'|translate}}</mat-label>
-                           <mat-select name="itemtype"  [(ngModel)]="itemtype">
-                                 <mat-option value="Building">
-                                  {{'Building'|translate}}
+                           <mat-select name="itemtype"  [(ngModel)]="itemtype" >
+                               <div *ngFor="let item of type">
+                              <mat-option value="{{item.id}}" (click)="addname(item.name)">
+                                 {{item.name}}
                                  </mat-option>
-                                 <mat-option value="Garden">
-                                    {{'Garden'|translate}}
-                                 </mat-option>
-                                 <mat-option value="Sour">
-                                    {{'Sour'|translate}}
-                                 </mat-option>
+                              </div> 
                            </mat-select>
                      </mat-form-field>
                   </div>
@@ -62,8 +58,8 @@
                           </thead>
                           <tbody>
                              <tr *ngFor="let item of itemsData; let i = index" >
-                                <td>{{item.itemtype | translate}}</td>
-                                <td>{{item.itemname}}</td>
+                                <td>{{item.type_name}}</td>
+                                <td>{{item.name}}</td>
                                 <td><mat-icon (click)="removeitem(i)" matTooltip="{{'Delete' | translate}}">delete</mat-icon></td>
                               </tr>
                           </tbody>
@@ -73,7 +69,7 @@
      </div>
      <div fxLayout="row" fxLayoutAlign="center">
         <button mat-button mat-raised-button color="accent" [disabled]="itemsData.length == 0"
-         fxLayoutAlign="center" type="button">{{'Add All'|translate }}</button>
+         fxLayoutAlign="center" type="button" (click)="SaveData()">{{'Add All'|translate }}</button>
     </div>
 </div>
 </mat-card>

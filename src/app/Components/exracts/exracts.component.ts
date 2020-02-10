@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
+import { CoreService } from 'app/Service/core/core.service';
 
 
 
@@ -13,7 +14,8 @@ export class ExractsComponent implements OnInit {
   uploader: FileUploader = new FileUploader({url: ''});
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
-  constructor(private router : Router) { }
+  Invoices:any[]=[];
+  constructor(private router : Router , public service : CoreService) { }
     
 
      /**
@@ -30,8 +32,10 @@ export class ExractsComponent implements OnInit {
       this.hasAnotherDropZoneOver = e;
   }
     ngOnInit() {
-      
-    }
+      this.service.getInvoice().subscribe(
+        data=> this.Invoices = data as any ,
+        err=> console.log(err));      
+  }
    
 
   open()

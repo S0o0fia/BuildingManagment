@@ -19,6 +19,9 @@ import { AddExtractComponent } from './Components/add-extract/add-extract.compon
 import { ProjectsmapComponent } from './Components/projectsmap/projectsmap.component';
 import { RfidetailsComponent } from './Components/rfidetails/rfidetails.component';
 import { ProjectitemsComponent} from './Components/projectitems/projectitems.component';
+import { UnderdevelopmentComponent } from './Components/underdevelopment/underdevelopment.component';
+import { MirapproveComponent } from './Components/mirapprove/mirapprove.component';
+import { ApproveQuantitiesComponent } from './Components/approve-quantities/approve-quantities.component';
 
 
 
@@ -47,12 +50,20 @@ const appRoutes: Routes = [
             component:AttendeceComponent
          } ,
          {
+            path : "approvedqty" , 
+            component : ApproveQuantitiesComponent
+         },
+         {
             path:'items',
             component:ProjectitemsComponent
          },
          {
             path:"activestage",
             component:ActivestageComponent
+         } ,
+         {
+            path : 'under' ,
+            component : UnderdevelopmentComponent
          } ,
          {
             path:'table',
@@ -68,14 +79,26 @@ const appRoutes: Routes = [
                path:'rfidetails/:id',
                component:RfidetailsComponent
             },
-           
-
+            {
+               path:'receiveitem',
+               component:RquestforRecieveItemsComponent
+            },
+             
+            {
+               path:'mirdetails/:id',
+               component:MirapproveComponent
+            },
+          
          ]
          },
          {
             path:'videos',
             component:VideosComponent
-         } , {
+         } ,
+         
+        
+
+         {
             path:'edit',
             component:EditProjectComponent
          }
@@ -83,10 +106,7 @@ const appRoutes: Routes = [
             path:'filemanagement',
             component:FileManagementComponent
          }
-         , {
-            path:'receiveitem',
-            component:RquestforRecieveItemsComponent
-         },
+        ,
          {
             path:'projectsmap',
             component:ProjectsmapComponent
@@ -102,6 +122,7 @@ const appRoutes: Routes = [
         
       ]
    },
+  
      
    {
       path: '**',

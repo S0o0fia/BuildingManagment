@@ -12,5 +12,6 @@ export interface Rfi {
       item_name : string;
       item_number:string;
       item_qty: number;
+ 
    
 }

@@ -22,20 +22,26 @@
                       <th>#</th>
                       <th>{{'Extract Number'|translate}}</th>
                       <th>{{'Extract Date'|translate}}</th>
-                      <th>{{'Total before tax'|translate}}</th>
-                      <th>{{'Total after tax'|translate}}</th>
-                      <th>{{'Controls'|translate}}</th>
+                      <th>{{'Executed Business Amount'|translate}}</th>
+                      <th>{{'Total_Vat'|translate}}</th>
+                      <th>{{'The amount paid'|translate}}</th>
+                      <th>{{'Total_Discount'|translate}}</th>
+                      <th>{{'Total Price'|translate}}</th>
+                  
                      
                    </tr>
                 </thead>
                 <tbody>
-                   <tr >
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                   <tr *ngFor="let invoice of Invoices" style="text-align: center;">
+                      <td>#</td>
+                      <td>{{invoice.id}}</td>
+                      <td>{{invoice.date}}</td>
+                      <td>{{invoice.total_excuted}}</td>
+                     <td>{{invoice.Total_vat}}</td>
+                      <td>{{invoice.paid}}</td>
+                      <td>{{invoice.total_discount}}</td>
+                      <td>{{invoice.total_price}}</td>
+                     
                    </tr>
                 </tbody>
              </table>
@@ -44,8 +50,12 @@
     </mat-card>
 
 
+
+
+
+
     <!--Upload File-->
-    <div fxLayout="row wrap" fxLayoutAlign="start" class="gene-file-upload">
+    <!-- <div fxLayout="row wrap" fxLayoutAlign="start" class="gene-file-upload">
             <mat-card fxFlex="100%">
                <div class="gene-card-title">
                   <div fxLayout="row" fxLayoutAlign="start center">
@@ -138,4 +148,4 @@
                   </div>
                </div>
             </mat-card>
-         </div>
+         </div> -->

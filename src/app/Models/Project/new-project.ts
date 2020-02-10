@@ -21,6 +21,9 @@ export interface NewProject {
     project_net:number;
     sig_date : string ;
     proj_number : string;
+    proj_situation : string;
+    date_situation : string;
+    multi_qty_table : boolean ;
 
     
     

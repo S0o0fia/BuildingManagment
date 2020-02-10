@@ -1,0 +1,157 @@
+<div class="container" fxLayout="wrap row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutAlign="center">
+    <mat-card>
+            <div class="gene-card-title">
+                    <div fxLayout="row" fxLayoutAlign="space-around center">
+                       <div fxLayout="column">
+                          <h4>{{'Request Status'|translate}}</h4>
+           
+                       </div> <span fxFlex></span>
+                       
+                       <div fxLayout="column">
+                          <div class="row">
+                          <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()">{{'Back'|translate}}</button>
+                          <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
+                           (click)="ApproveDraft()">{{'Draft Approve'|translate}}</button>
+                        </div>
+                       </div> 
+                    </div>
+                   
+                    <mat-divider></mat-divider>
+         </div>
+         <div class="gene-card-content pad-t-none">
+                <div class="table-responsive" id="dvPdf">
+                  
+                   <table class=" table-middle table" fxLayout="row">
+                      <thead  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column">
+                         <tr  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column" >
+                            <td>{{'Request Number'|translate}}</td>
+                            <td>{{'The date of application'|translate}}</td>
+                            <td>{{'Request Status'|translate}}</td>
+                            <td>{{'Consultant Approve'|translate}}</td>
+                         </tr>
+                      </thead>
+                      <tbody  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
+                         <tr  *ngFor="let item of getMIR"   fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
+                          
+                           <td>{{item.id}}</td>
+                           <td>{{item.request_date}}</td>
+                            <td>{{item.state | translate}}</td>
+                           <td>{{consultant_approve| translate}}</td>
+                         </tr>
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+        <div class="gene-card-title">
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+               <div fxLayout="column">
+                  <h4>{{'Material supplied'|translate}}</h4>
+   
+               </div> <span fxFlex></span>
+               
+             
+            </div>
+           
+            <mat-divider></mat-divider>
+         </div>
+         <div class="gene-card-content pad-t-none">
+            <div class="table-responsive" id="dvPdf">
+              
+               <table class="table table-hover table-middle th-fw-light mb-0">
+                  <thead>
+                     <tr>
+                        <th>{{'Factory Name'|translate}}</th>
+                        <th>{{'Material supplied'|translate}}</th>
+                        <th>{{'Executed Quantity'|translate}}</th>
+                        <th>{{'Contracted Qunatity'|translate}}</th>
+                        <th>{{'Controls'|translate}}</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let item of itemMir" style="text-align: center;">
+                         <td>{{item.factory_name}}</td>
+                         <td>{{item.material_name}}</td>
+                         <td>{{item.qty}}</td>
+                         <td>{{contracted_qty[item.id]}}</td>
+                         <td>
+                            <mat-icon matTooltip="{{'Edit Contract Quantity'|translate}}" (click)="openDialog(item.id)">edit</mat-icon>
+                       </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+    </mat-card>
+
+    <mat-card>
+        <div class="gene-card-title">
+            <div fxLayout="column" fxLayoutAlign="space-around center">
+               <div fxLayout="row">
+                  <h4>{{'Inspection Details'|translate}}</h4>
+   
+               </div> <span fxFlex></span>
+               
+               <div fxLayout="row">
+                 
+                  <button class="mrgn-b-xs" [disabled]="consultant_approve != 'waiting'" mat-raised-button color="accent" (click)="openDialogApprove()">{{consultant_btn|translate}}</button>
+                  <button class="mrgn-b-xs" mat-raised-button color="warn">{{'Result Approve'|translate}}</button>
+                  <button class="mrgn-b-xs" mat-raised-button color="primary">{{'Print'|translate}}</button>
+            
+               </div> 
+            </div>
+           
+            <mat-divider></mat-divider>
+         </div>
+         <div class="gene-card-content pad-t-none">
+            <div class="table-responsive" id="dvPdf">
+              <mat-card style="background-color: lightsteelblue;">
+                <h5>{{'Request Status' |translate}} : {{state | translate}}</h5>
+                <h5>{{'Progress Date' |translate}} :</h5>
+                <h5>{{'Progress Owner' |translate}} :</h5>
+              </mat-card>
+
+              <mat-card>
+                <form>
+                  <div fxLayout="column">
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                    <!--Department-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                        <mat-form-field class="full-wid mrgn-b-lg">
+                              <mat-label>{{'Department'|translate}}</mat-label>
+                              <mat-select name="department">      
+                                   <mat-option>
+                                      </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                     </div>
+                       <!--Note-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                            <mat-form-field class="full-wid mrgn-b-lg">
+                                  <mat-label>{{'Details'|translate}}</mat-label>
+                                  <textarea matInput name="details"  
+                                  cdkTextareaAutosize
+                                   #autosize="cdkTextareaAutosize"
+                                    cdkAutosizeMinRows="1"
+                                     cdkAutosizeMaxRows="5"></textarea> 
+                            </mat-form-field>
+                         </div>
+                  </div>
+                         <div fxLayout="row" fxLayoutAlign="center">
+                                <button mat-button mat-raised-button color="accent" type="button" dir="ltr">{{'Save'|translate }}</button>
+                         </div>
+                  </div>
+                </form>
+              </mat-card>
+
+              <mat-card style="text-align: center;"> 
+                  <h5>أعمال الكهرباء</h5>
+                  <h6>بواسطة</h6>
+                  <div fxLayout="row"  fxLayoutAlign="center">
+                      <mat-icon>edit</mat-icon>
+                      <mat-icon>delete</mat-icon>
+                  </div>
+             </mat-card>
+            </div>
+         </div>
+    </mat-card>
+</div>

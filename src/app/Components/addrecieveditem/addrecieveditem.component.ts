@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { RquestforRecieveItemsComponent } from '../rquestfor-recieve-items/rquestfor-recieve-items.component';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,6 +7,7 @@ import { Mirequest } from 'app/Models/MIR Request/mirequest';
 import { CoreService } from 'app/Service/core/core.service';
 import { formatDate } from '@angular/common';
 import { Matetrial } from 'app/Models/Material/matetrial';
+import { Mirdata } from 'app/Models/MIR Request/mirdata';
 
 @Component({
   selector: 'ms-addrecieveditem',
@@ -24,13 +25,15 @@ export class AddrecieveditemComponent implements OnInit {
   mirrequest : any=[];
   reqCode : string;
   facroty_id : string;
-  matrial : any[]=[];
+  matrial : Mirdata[]=[];
+  addmatrial : any[]=[];
   mat_name : string;
   mat_code : string;
   qty : string;
   mir: Mirequest;
   mirid  :number;
   matiral :Matetrial;
+  getMIR: any=[];
 ;
   hi(val , code)
   {
@@ -47,7 +50,9 @@ export class AddrecieveditemComponent implements OnInit {
    this.lat = position.coords.lat;
    this.lng = position.coords.lng;
    }
-  constructor(  public service : CoreService  , public dialogRef: MatDialogRef<RquestforRecieveItemsComponent>,
+  constructor(  public service : CoreService  
+    ,private _snackBar: MatSnackBar
+    , public dialogRef: MatDialogRef<RquestforRecieveItemsComponent>,
     @Inject(MAT_DIALOG_DATA)  private translate : TranslateService) {
       this.minDate = new Date(1900,1,1);
       this.maxDate = new Date(2050,1,1);
@@ -56,7 +61,17 @@ export class AddrecieveditemComponent implements OnInit {
       this.lat=24.7136;
     }
   	
-   
+    openSnackBar(message: string, action: string) {
+      this._snackBar.open(message, action, {
+        duration: 2000,
+        verticalPosition: 'top',
+        horizontalPosition : 'center' ,
+        panelClass: ['my-snack-bar']
+      });
+  
+      return true;
+      
+    }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -67,7 +82,7 @@ export class AddrecieveditemComponent implements OnInit {
     this.matrial.push({
       code :this.mat_code ,
       name :this.mat_name,
-      qty : this.qty ,
+      qty : +this.qty ,
    
     });
   }
@@ -102,23 +117,60 @@ export class AddrecieveditemComponent implements OnInit {
      }
    
 
-  //  this.service.createMIR(this.mirrequest).subscribe(
-  //    data=>{
-  //      this.mirid = data['mirid'] as number;
-  //      this.matrial.forEach(element => {
-  //       this.matrial.push({
-  //         factory_id : this.facroty_id,
-  //         material_id : element.code,
-  //         qty : this.qty ,
-  //         mir_id : this.mirid,
-  //         approved_qty : this.qty
+     this.service.createMIR(this.mirrequest).subscribe(
+      data=>{
+      
+        
+        this.mirid = data['mir_id'] as number;
+        
+        this.matrial.forEach(element => {
+          this.addmatrial.push({
+            factory_id : this.facroty_id,
+            material_id : element.code,
+            name :element.name ,
+            qty : this.qty ,
+            mir_id : this.mirid,
+            approved_qty : this.qty
+            
+          });
+        
+        });
           
-  //       });
-  //       console.log(this.matrial);
-  //      });
-  //    } , 
-  //    err=> console.log(err)
-  //  );
+       
+  
+        
+ 
+ 
+      } , 
+      err=> console.log(err)
+    );
+
+    if(this.addmatrial != null)
+    {
+      this.addmatrial.forEach(e=>{
+        
+        this.service.createMIRItem(e).subscribe(
+          data=>{
+
+           let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
+           if(msg)
+           {
+             location.reload();
+           }
+           console.log(data)},
+          err=>console.log(err)
+        );
+      });
+      
+    }
+
+  // this.matrial.forEach(element=>{
+  //   this.service.createMIRItem(element).subscribe(
+  //     data=>console.log(data),
+  //     err=>console.log(err)
+  //   );
+  // });
+
      
   }
 

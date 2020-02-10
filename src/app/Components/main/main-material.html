@@ -12,13 +12,7 @@
       <a class="navbar-brand" href="#">{{header}}</a>
       <breadcrumb class="gene-breadcrumbs"></breadcrumb>
       <span fxFlex></span>
-      <div class="search-bar" fxFlex>
-         <form class="search-form" fxShow="false" fxShow.gt-xs tourAnchor="tour-search">
-            <mat-form-field>
-               <input matInput placeholder="{{'Search'|translate}}">
-            </mat-form-field>
-         </form>
-      </div>
+     
       <div class="secondary-menu">
          <button fxHide="true" fxHide.gt-sm="false" mat-button class="fullscreen-toggle" (click)="toggleFullscreen()" tourAnchor="tour-full-screen">
             <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
@@ -32,13 +26,9 @@
          <button (click)="end.toggle()" mat-icon-button class="overflow-visible">
             <mat-icon>notifications</mat-icon>
          </button>
-         <button mat-icon-button class="overflow-visible" [matMenuTriggerFor]="appsmenu">
-            <mat-icon>apps</mat-icon>
-         </button>
+        
          <ms-language-drop-down></ms-language-drop-down>
-         <button mat-icon-button class="overflow-visible" (click)="chatMenu()">
-            <mat-icon>chat</mat-icon>
-         </button>
+       
       </div>
    </mat-toolbar>
    <mat-sidenav #end position="end" class="chat-panel" mode="over" opened="false">

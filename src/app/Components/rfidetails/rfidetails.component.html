@@ -76,8 +76,8 @@
                          <td>{{item.num}}</td>
                          <td>{{item.name}}</td>
                          <td>{{item.qty}}</td>
-                         <td>{{contracted_qty}}</td>
-                         <td>
+                         <td>{{contracted_qty[item.id]}}</td>
+                        <td>
                             <mat-icon matTooltip="{{'Edit Contract Quantity'|translate}}" (click)="openDialog(item.id)">edit</mat-icon>
                        </td>
                      </tr>

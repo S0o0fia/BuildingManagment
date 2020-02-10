@@ -1,0 +1,22 @@
+
+
+    <div fxLayout="row wrap" fxLayoutAlign=" start" class="gene-form-wizard" dir="rtl">
+        <mat-card fxFlex="100%">
+           <div class="gene-card-title">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                 <div fxLayout="column">
+                    <h4>{{'Choose Type of Request'|translate}}</h4>
+                 </div>
+                 <span fxFlex></span> 
+              </div>
+       
+           </div>
+           <div class="gene-card-content">
+ 
+            <div  *ngFor=" let list of dropList let i = index" fxLayout="row wrap"  >  
+             <button color="accent" mat-button  (click)="Choose(list)">{{list|translate}}</button>
+             <mat-divider></mat-divider>          
+           </div>
+           </div>
+</mat-card>
+</div>

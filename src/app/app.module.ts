@@ -82,6 +82,11 @@ import { RfidetailsComponent } from './Components/rfidetails/rfidetails.componen
 import { EditContractedQunatityComponent } from './Components/edit-contracted-qunatity/edit-contracted-qunatity.component';
 import { SelectApproveComponent } from './Components/select-approve/select-approve.component';
 import { ProjectitemsComponent } from './Components/projectitems/projectitems.component';
+import { ChooserequestComponent } from './Components/chooserequest/chooserequest.component';
+import { UnderdevelopmentComponent } from './Components/underdevelopment/underdevelopment.component';
+import { DiscountComponent } from './Components/discount/discount.component';
+import { MirapproveComponent } from './Components/mirapprove/mirapprove.component';
+import { ApproveQuantitiesComponent } from './Components/approve-quantities/approve-quantities.component';
 
 
 
@@ -114,6 +119,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		  }),
 		BrowserAnimationsModule,
 		FormsModule,
+		FileUploadModule,
 		ReactiveFormsModule,
 		RoutingModule,
 		MatDatepickerModule,
@@ -287,12 +293,21 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		RfidetailsComponent,
 		EditContractedQunatityComponent,
 		SelectApproveComponent,
-		ProjectitemsComponent
+		ProjectitemsComponent,
+		ChooserequestComponent,
+		UnderdevelopmentComponent,
+		DiscountComponent,
+		MirapproveComponent,
+		ApproveQuantitiesComponent
+
 	
 		
 		
 	],
 	entryComponents:[
+		DiscountComponent,
+		ChooserequestComponent,
+		UnderdevelopmentComponent,
 		EditContractedQunatityComponent,
 		SelectApproveComponent,
 		CreatequantityComponent,

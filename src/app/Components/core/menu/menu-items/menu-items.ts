@@ -43,6 +43,16 @@ const MENUITEMS = [
       icon: 'location_on',
      
     },
+    
+  
+   
+    {
+      state : 'approvedqty',
+      name : 'Approved Quantities' ,
+      type : 'link',
+      icon : 'check_box' 
+
+    },
     {
       state: 'settings',
       name: 'Global Setting',
@@ -53,15 +63,15 @@ const MENUITEMS = [
         {state: 'permission', name: 'Permission',   type: 'link' },
         {state: 'compantmanage', name: 'Company Managment',   type: 'link' },  
       ]
-      } ,
-  
-    {
-      state: 'logout',
-      name: 'Logout',
-      type: 'link',
-      icon: 'exit_to_app'
-     
-    }
+      }
+      ,
+      {
+        state: 'logout',
+        name: 'Logout',
+        type: 'link',
+        icon: 'exit_to_app'
+       
+      } 
 ]
 
 @Injectable()

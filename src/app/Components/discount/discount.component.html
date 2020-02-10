@@ -1,0 +1,80 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" dir="rtl">
+    <mat-card>
+       <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+             <div fxLayout="column">
+                <h4>{{'Discount'|translate}}</h4>
+                </div> <span fxFlex></span>           
+          </div>         
+          <mat-divider></mat-divider>
+       </div>
+       <div class="gene-card-content pad-t-none">
+        <form #form="ngForm">
+            <div fxLayout="column">
+               <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+                       <!--Discount Value-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                <mat-label>{{'Discount Value'|translate}}</mat-label>
+                </div>
+           
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                  
+                    <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49" style="margin-left:2%;">
+                    <mat-form-field class="full-wid mrgn-b-lg">
+                        <input matInput name="value" (change)="Cal(1)" [(ngModel)]="value"
+                        placeholder="{{'Value'|translate}}" type="text" required>   
+                    </mat-form-field>
+                    </div>
+                    <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                    <mat-form-field class="full-wid mrgn-b-lg">
+                     <input matInput name="percentage"  (change)="Cal(2)" [(ngModel)]="percentage"
+                     placeholder="{{'Percentage'|translate}}" type="text" required>   
+                    </mat-form-field>
+                    </div>
+                  </div>
+
+             
+                <!--Discount Mechanism-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-label>
+                            {{'Discount Mechanism'|translate}}
+                        </mat-label>
+                        <br>
+                        <mat-radio-group name="mechanism"  [(ngModel)]="mechanism"   >
+                            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                            <mat-radio-button (change)="CalTotal(1)" value="1">{{'Before VAT'|translate}}</mat-radio-button>
+                            </div>
+                            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                            <mat-radio-button (change)="CalTotal(2)" value="2">{{'After VAT'|translate}}</mat-radio-button>
+                            </div>
+                          </mat-radio-group> 
+                    </div>
+               </div>
+
+               <br>
+               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                <mat-label>{{'Total After Discount'|translate}}</mat-label>
+                </div>
+           
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                  
+                    <mat-form-field class="full-wid mrgn-b-lg">
+                        <input matInput name="totalvalue"
+                        placeholder="{{'Value'|translate}}" [(ngModel)]="totalvalue" type="text" required >   
+                    </mat-form-field>
+                   
+                    </div>
+                
+
+                  
+              
+               <div fxLayout="row" fxLayoutAlign="center">
+                     <button mat-button mat-raised-button color="accent" type="submit" (click)="Apply()">{{'Apply Discount'|translate }}</button>
+              </div>
+            </div>
+         </form>         
+
+       </div>
+       </mat-card>
+</div>

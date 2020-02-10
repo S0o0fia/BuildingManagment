@@ -4,6 +4,7 @@ export interface Matetrial {
     qty : number ;
     mir_id : number ;
     approved_qty : number;
+    name :string;
     
 }
 

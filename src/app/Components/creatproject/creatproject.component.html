@@ -14,6 +14,7 @@
              <mat-tab label="{{'Step 1'|translate}}">
                 <form #form="ngForm" >
                    <div fxLayout="column">
+                      <!--Proejct Name-->
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg">
@@ -21,6 +22,7 @@
                                   placeholder="{{'Proejct Name'|translate}}" type="text" required>
                             </mat-form-field>
                          </div>
+                          <!--Contract Number-->
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                               <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg"> 
@@ -28,6 +30,7 @@
                                 placeholder="{{'Contract Number'|translate}}" required type="number">
                             </mat-form-field>
                             </div>
+                             <!--Date of Contract-->
                             <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                                  <mat-form-field class="full-wid mrgn-b-lg"> 
                                        <input matInput name="sig_date"
@@ -40,6 +43,7 @@
                             </div>
                          </div>
                       </div>
+                         <!--Consultant Name-->
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
@@ -55,6 +59,7 @@
                               </mat-select>
                             </mat-form-field>
                          </div>
+                             <!--Contructor Name-->
                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
                                     <mat-label>{{'Contructor Name'|translate}}</mat-label>
@@ -69,43 +74,22 @@
                                     </mat-select>
                             </mat-form-field>
                          </div>
+                      </div>
                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                               <mat-label fxLayoutAlign="start center" >* {{'Session From'|translate}}</mat-label>
-                              <br>
-                         <mat-radio-group aria-label="Select an option">
-                              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                              <mat-radio-button (change)="datepick(1)"  value="1">{{'Session From Hijri'|translate}}</mat-radio-button>
-                              </div>
-                              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                              <mat-radio-button (change)="datepick(2)" value="2">{{'Session From Grogorian'|translate}}</mat-radio-button>
-                              </div>
-                            </mat-radio-group>
-                         </div>
-                         <br>
-                         <br>
-                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                              <mat-form-field class="full-wid mrgn-b-lg ">
-                                 <input matInput 
-                                 name="startdate_hijri" [(ngModel)]="startdate_hijri" 
-                                 [min]="minDate" [max]="maxDate" [matDatepicker]="pickerhijri"
-                                  placeholder="{{'Session From Hijri'|translate}}">
-                                 <mat-datepicker-toggle matSuffix [for]="pickerhijri"
-                                 [disabled]="calender != 1"></mat-datepicker-toggle>
-                                 <mat-datepicker #pickerhijri></mat-datepicker>                         
-                              </mat-form-field>
-                       </div>
-                       <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                          </div>
+                             <!--Session From Grogorian-->
+                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <mat-form-field class="full-wid mrgn-b-lg ">
                               <input matInput 
                               name="startdate" [(ngModel)]="startdate" 
                               [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
-                               placeholder="{{'Session From Grogorian'|translate}}"
-                               [disabled]="calender != 2">
+                               placeholder="{{'Session From Grogorian'|translate}}" >
                               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                               <mat-datepicker #picker></mat-datepicker>                         
                            </mat-form-field>
                     </div>
-                      </div>
+                    
                      
                       <div fxLayout="row" fxLayoutAlign="start">
                          <button mat-button type="button" disabled>{{'Previous'|translate }}</button>
@@ -118,6 +102,7 @@
              <mat-tab label="{{'Step 2'|translate}}" [disabled]="!form.valid">
                 <form #form2="ngForm" >
                    <div fxLayout="column">
+                         <!--First Payment-->
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
@@ -126,6 +111,7 @@
                              type="number" (change)="raito()" required> 
                             </mat-form-field>
                          </div>
+                          <!--Project Amount-->
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
                                 <input matInput 
@@ -135,7 +121,7 @@
                             </mat-form-field>
                          </div>
                       </div>
-                      
+                         <!--Preface Payment Ratio-->
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                            <mat-form-field class="full-wid mrgn-b-lg ">
@@ -144,6 +130,7 @@
                             type="text" required disabled>
                            </mat-form-field>
                         </div>
+                           <!--Net Project Cost-->
                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                            <mat-form-field class="full-wid mrgn-b-lg ">
                                <input matInput 
@@ -153,6 +140,7 @@
                            </mat-form-field>
                         </div>
                      </div>
+                     <!--Project Duration-->
                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            
                                  <mat-label fxLayoutAlign="start center" >* {{'Project Duration'|translate}}</mat-label>
@@ -167,6 +155,7 @@
                           </mat-radio-group>
                       </div>
                      <br>
+                        <!--Project Duration-->
                    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                          
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
@@ -187,40 +176,22 @@
                               </mat-form-field>
                            </div>
                       </div>
-
+                <!--Session To-->
                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <mat-label fxLayoutAlign="start center" >* {{'Session To'|translate}}</mat-label>
-                           <br>
-                      <mat-radio-group aria-label="Select an option">
-                           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <mat-radio-button (change)="datepick(1)"  value="1" >{{'Session To Hijri'|translate}}</mat-radio-button>
-                           </div>
-                           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <mat-radio-button (change)="datepick(2)" value="2" >{{'Session To Grogorian'|translate}}</mat-radio-button>
-                           </div>
-                         </mat-radio-group>
+                        
+                     
                       </div>
-                      <br>
-                      <br>
+                    
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <mat-form-field class="mrgn-b-lg ">
-                              <input matInput  name="deliverdate_hijri"
-                               [(ngModel)]="deliverdate_hijri"
-                              [min]="minDate" [max]="maxDate" [matDatepicker]="pickerhijri2"
-                               placeholder="{{'Session To Hijri'|translate}}">
-                              <mat-datepicker-toggle matSuffix [for]="pickerhijri2"
-                              [disabled]="calender != 1"></mat-datepicker-toggle>
-                              <mat-datepicker #pickerhijri2></mat-datepicker>                         
-                           </mat-form-field>
-                    </div>
-                    <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                        <mat-form-field class="mrgn-b-lg ">
+                      
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="mrgn-b-lg " fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <input matInput name="deliverdate"
                             [(ngModel)]="deliverdate"  
                            [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
                             placeholder="{{'Session To Grogorian'|translate}}"
-                            [disabled]="calender != 2">
+                            >
                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                            <mat-datepicker #picker2></mat-datepicker>                         
                         </mat-form-field>
@@ -252,50 +223,143 @@
                      
                    </div>
                    <div fxLayout="row wrap" fxLayoutAlign="space-between center">                      
-                     <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                         <mat-form-field class="full-wid mrgn-b-lg ">
                           <mat-label>{{'Project Status'|translate}}</mat-label>
                           <mat-select matNativeControl
                            name="satuts"  [(ngModel)]="status" 
                             required>
-                           <mat-option value="active" >{{'Active'|translate}}</mat-option>
-                           <mat-option value="draft" >{{'Draft'|translate}}</mat-option>
+                            <mat-option value="late" >{{'Late'|translate}}</mat-option>
+                           <mat-option value="arranged" >{{'Arragned'|translate}}</mat-option>
+                           <mat-option value="stumbled" >{{'Stumbled'|translate}}</mat-option>
+                         
                          </mat-select>
                         </mat-form-field>
                      </div>
-                        
-                     <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                        <mat-form-field class="full-wid mrgn-b-lg ">
-                          <mat-label>{{'Project Type'|translate}}</mat-label>
-                          <mat-select matNativeControl required name="type"
-                            [(ngModel)]="type" >
-                           <mat-option value="single" >{{'Signle Quantity Table'|translate}}</mat-option>
-                           <mat-option value="multi" (click)="openDialog()" >{{'Multiple Quantity Tables'|translate}}</mat-option>
-                         </mat-select>
-                        </mat-form-field>
-                     </div>
-                   </div>
+                   
+                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="4+" fxFlex="100" fxFlex.gt-md="49">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                           <mat-label>{{'Project Stiuation'|translate}}</mat-label>
+                          <mat-select matNativeControl
+                           name="stiuation"  [(ngModel)]="stiuation" 
+                            required>
+                            <mat-option value="darft" >{{'Draft'|translate}}</mat-option>
+                            <mat-option value="active" >{{'Active'|translate}}</mat-option>
+                            <mat-option value="pulled" >{{'Pulled'|translate}}</mat-option>
+                            <mat-option value="intial_devliver" >{{'Intial Devliver'|translate}}</mat-option>
+                            <mat-option value="final_devliver" >{{'Final Devliver'|translate}}</mat-option>
+                            <mat-option value="totaly_stopped" >{{'Totaly Stopped'|translate}}</mat-option>
+                            <mat-option value="partial_stopped" >{{'Partial Stopped'|translate}}</mat-option>
+                            </mat-select>
+                           </mat-form-field>
+                        </div>
+                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                           <input matInput 
+                           name="stiuationdate" [(ngModel)]="stiuationdate" 
+                           [min]="minDate" [max]="maxDate" [matDatepicker]="sdate"
+                            placeholder="{{'Situation Date'|translate}}" >
+                           <mat-datepicker-toggle matSuffix [for]="sdate"></mat-datepicker-toggle>
+                           <mat-datepicker #sdate></mat-datepicker> 
+                           </mat-form-field>
+                        </div>
+                    
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                    <mat-form-field class="full-wid mrgn-b-lg ">
                      <mat-label>{{'Project Description'|translate}}</mat-label>
                      <textarea matInput name="description"  [(ngModel)]="description"
                                cdkTextareaAutosize
                                 #autosize="cdkTextareaAutosize"
                                  cdkAutosizeMinRows="1"
-                                  cdkAutosizeMaxRows="5"></textarea>
+                                  cdkAutosizeMaxRows="5" required></textarea>
                    </mat-form-field>
+                     </div>
+
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                      
+                           <mat-checkbox 
+                           (change)="IsChecked(true)">{{'Multiple Quantity Tables'|translate}}</mat-checkbox>
+                           
+                     </div>
+
+                      <br/>
+                      <mat-divider></mat-divider>
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-label  class="mrgn-b-md">{{'Upload queue'|translate}}</mat-label>
+                     
+                        <input type="file" id="file"  class="mrgn-b-md" type="file" ng2FileSelect [uploader]="uploader" multiple required/>
+                
+                        <div fxFlex.gt-md="100" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                           <div class="mrgn-b-md">
+                              <h6 fxLayout="row">
+                                 <span fxFlex>{{'Upload queue' | translate}}</span>
+                                 <span>Queue length: {{ uploader?.queue?.length }}</span>
+                              </h6>
+                              <div class="set-overflow-x-auto">
+                                 <table class="table mb-3 material ml-0 mr-0 mrgn-b-md">
+                                    <thead>
+                                       <tr>
+                                          <th width="30%">{{'Name'|translate}}</th>
+                                          <th>{{'Size' | translate}}</th>
+                                           <th>{{'Status' | translate}}</th>
+                                          <th>{{'Controls' | translate}}</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <ng-container *ngIf="uploader.queue.length > 0; else elseBlock">
+                                          <tr *ngFor="let item of uploader.queue">
+                                             <td>{{ item?.file?.name }}</td>
+                                             <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2'
+                                                }} MB</td>
+                                            <td class="text-center">
+                                                <span *ngIf="item.isSuccess">
+                                                   <mat-icon>check</mat-icon>
+                                                </span>
+                                                <span *ngIf="item.isCancel">
+                                                   <mat-icon>cancel</mat-icon>
+                                                </span>
+                                                <span *ngIf="item.isError">
+                                                   <mat-icon>error</mat-icon>
+                                                </span>
+                                             </td>
+                                             <td nowrap>
+                                                <button mat-raised-button mat-button-sm type="button" color="accent" class="btn btn-success btn-xs btn-b-xs" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                                   <span class="glyphicon glyphicon-upload"></span> {{'Upload'|translate}}
+                                                </button>
+                                                <button mat-raised-button mat-button-sm type="button"  color="warn" class="btn btn-danger btn-xs btn-b-xs" (click)="item.remove()">
+                                                   <span class="glyphicon glyphicon-trash"></span> {{'Remove' |translate}}
+                                                </button>
+                                             </td>
+                                          </tr>
+                                       </ng-container>
+                                       <ng-template #elseBlock>
+                                         {{' No data to display' | translate}}
+                                       </ng-template>
+                                    </tbody>
+                                 </table>
+                              </div>
+                               <button mat-raised-button mat-button-sm  color="accent" type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                                {{'Upload All'|translate}}
+                              </button>
+                             <button mat-raised-button mat-button-sm  color="warn" type="button" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                                 {{'Remove All' | translate}}
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                   </div>
                    <div fxLayout="row" fxLayoutAlign="start">
                       <button mat-button type="button" (click)="previousStep()">{{'Previous'|translate }}</button>
                       <button mat-button mat-raised-button [disabled]="!form3.valid" (click)="nextStep()" type="submit">{{'Next'|translate }}</button>
                    </div>
                 </form>
              </mat-tab>
-             <mat-tab label="{{'Step 4'|translate}}" [disabled]="!form3.valid || !form.valid"
+             <mat-tab label="{{'Step 4'|translate}}" [disabled]="!form.valid"
              (onLoad)="SaveData()" >
             
                 <div fxLayout="column">
                    <div class="custom-pad text-center">
-                      <h1>{{'Saving Project is Done'|translate}}
-                         
+                      <h1>Thank You                         
                       </h1>
                       <mat-icon style="width:100%;">cloud_done</mat-icon>
                    </div>
@@ -315,12 +379,7 @@
                      <h3>{{'Choose Location'|translate}}</h3>
                   </div>
                   <span fxFlex></span>
-                  <button mat-icon-button>
-                     <mat-icon>sync</mat-icon>
-                  </button>
-                  <button mat-icon-button [matMenuTriggerFor]="options">
-                     <mat-icon>more_horiz</mat-icon>
-                  </button>
+                 
                </div>
                <mat-divider></mat-divider>
             </div>

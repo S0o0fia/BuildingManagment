@@ -34,7 +34,8 @@ export class CreatequantityComponent implements OnInit {
   unit_price: number;
   total_price : number;
   newQty : Quantity;
-
+  items : any = [];
+ 
   constructor(   public dialogRef: MatDialogRef<QuantitytableComponent>, private router : Router
     ,private _snackBar: MatSnackBar , @Inject(MAT_DIALOG_DATA) public data: Quantity,private fb: FormBuilder, private pageTitleService: PageTitleService
     ,private translate : TranslateService , private coreService:CoreService) {
@@ -60,6 +61,12 @@ export class CreatequantityComponent implements OnInit {
       data=>this.Unit = data, 
       err=> console.log(err)
     );
+    
+    this.coreService.getProjectitem().subscribe(
+      data=> this.items = data , 
+      err=> console.log(err)
+    );
+
 
   }
 
@@ -74,7 +81,7 @@ export class CreatequantityComponent implements OnInit {
             description : this.description , 
             first_subsection_id : +this.subid , 
             main_section_id : +this.mainid , 
-            second_subsection_id : +this.workid , 
+            second_subsection_id : this.workid , 
             item_name : this.item_name ,
             item_number : this.item_number , 
             item_qty : this.item_qty , 

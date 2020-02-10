@@ -10,11 +10,44 @@
             <div fxLayout="column">
                <div class="row">
                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Add'|translate}}</button>
-               <button  matTooltip="{{'Export Excel'|translate}}" class="mrgn-b-xs" mat-raised-button color="primary" (click)="generatePdf()"><mat-icon>insert_drive_file</mat-icon></button>
+               <button  matTooltip="{{'Discount'|translate}}" class="mrgn-b-xs" mat-raised-button color="primary" (click)="opendiscount()"><mat-icon>money_off</mat-icon></button>
             </div>
             </div> 
          </div>
-        
+         <mat-divider></mat-divider>
+         <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+         
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+               <h4>{{'Filter by'|translate}}</h4>
+              
+           </div>
+
+         </div>
+         <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
+               <mat-form-field class="full-wid mrgn-b-lg">
+                     <mat-label>{{'Project Items'|translate}}</mat-label>
+                     <mat-select  name="proj_item"  [(ngModel)]="proj_item">
+                     <div *ngFor="let data of projectitems">
+                         <mat-option  (click)="bindProjectType(data.name , data.id)" value={{data.id}}>{{data.name}}</mat-option>
+                       </div>
+                    </mat-select>
+                     
+               </mat-form-field>
+            </div>
+
+            <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
+               <mat-form-field class="full-wid mrgn-b-lg">
+                     <mat-label>{{'Type Of Works'|translate}}</mat-label>
+                     <mat-select  name="item_type"  [(ngModel)]="item_type">
+                        <div   *ngFor="let data of section">
+                         <mat-option  (click)="bindItemType(data.name , data.id)" value={{data.id}}>{{data.name}}</mat-option>
+                        </div>
+                     </mat-select>
+                     
+               </mat-form-field>
+            </div>
+         </div>
          <mat-divider></mat-divider>
       </div>
       <div class="gene-card-content pad-t-none">
@@ -23,29 +56,35 @@
             <table class="table table-hover table-middle th-fw-light mb-0">
                <thead>
                   <tr>
-                     <th>{{'Main Section'|translate}}</th>
-                     <th>{{'Sub Section'|translate}}</th>
-                     <th>{{'Type Of Works'|translate}}</th>
-                     <th>{{'Item Number'|translate}}</th>
-                     <th>{{'Item Name'|translate}}</th>
-                     <th>{{'Contract Quantity'|translate}}</th>
-                     <th>{{'Unit Price'|translate}}</th>
-                     <th>{{'Total Price'|translate}}</th>
+                   <th>{{'Project Items'|translate}}</th>
+                   <th>{{'Type Of Works'|translate}}</th>
+                   <th>{{'Items Type'|translate}}</th>
+                   <th>{{'Item Number'|translate}}</th>
+                   <th >{{'Item Name'|translate}}</th>
+                    <th>{{'Extecuted Quantities'|translate}}</th>
+                    <th>{{'Unit'|translate}}</th>
+                    <th>{{'Unit Price'|translate}}</th>
+                    <th>{{'Total Price'|translate}}</th>
                   </tr>
                </thead>
-               <tbody>
-                  <tr *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
+               <tbody *ngFor="let data of Qty_tbl" >
+                  <tr  *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name | paginate: { id: 'listing_pagination',
                   itemsPerPage: 10,
                   currentPage: page,
                   totalItems: totalRec }">
-                     <td>{{data.main_section_name}}</td>
-                     <td>{{data.second_subsection_name}}</td>
+                                
                      <td>{{data.first_subsection_name}}</td>
+                     <td>{{data.main_section_name}}</td>
+                     <td>{{data.item_type | translate}}</td>
                      <td>{{data.item_number}}</td>
                      <td>{{data.item_name}}</td>
                      <td>{{data.item_qty}}</td>
+                     <td>{{data.product_uom_name}}</td>
                      <td>{{data.price_unit}}</td>
-                     <td>{{data.price_total}}</td>
+                     <td>{{data.price_total}}</td>                   
+                
+                   
+                 
                   </tr>
                </tbody>
             </table>
@@ -54,6 +93,17 @@
              nextLabel="{{'Next'|translate}}"
             (pageChange)="page = $event"></pagination-controls>
          </div>
+        <div  fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+             <mat-label style="font-weight: bold;">{{'Total Price'|translate}} : {{total_budget}}</mat-label>
+          </div>
+          <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" fxFlex.gt-md="30">
+            <mat-label style="font-weight: bold;">{{'Total Budget with vat'|translate}} : {{total_budget_vat}}</mat-label>
+         </div>
+         <div fxFlex.gt-sm="29" fxFlex.gt-xs="29" fxFlex="100" fxFlex.gt-md="29">
+            <mat-label style="font-weight: bold;">{{'Total After Discount'|translate}} : {{totaldis}}</mat-label>
+         </div>
+        </div>
       </div>
    </mat-card>
 </div>

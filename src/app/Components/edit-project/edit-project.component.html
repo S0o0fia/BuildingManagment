@@ -11,209 +11,285 @@
        </div>
        <div class="gene-card-content">
            <!--First Tab-->
-          <mat-tab-group [selectedIndex]="selectedIndex">
-             <mat-tab label="{{'Main Data'|translate}}" class="mrgn-b-md">
+         
                 <form #form="ngForm" >
-                   <div fxLayout="column" *ngFor="let item of project">
-                      <div fxLayout="row wrap" fxLayoutAlign="space-between center" *ngIf="item.id == projectid">
-                          <!--Project Name-->
-                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                  
+                  <div fxLayout="column">
+                     
+                     <div fxLayout="row wrap" fxLayoutAlign="space-between center" >
+                     
+                        <!--Project Name-->
+                     
+                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg">
-                                 <input matInput name="name"  value={{item.name}} 
-                                  placeholder="{{'Proejct Name'|translate}}" type="text" disabled>
+                                 <input matInput name="name"  
+                                  placeholder="{{'Proejct Name'|translate}}" type="text" disabled
+                                  [(ngModel)]="project[0].name" >
                             </mat-form-field>
                          </div>
-                          <!--Contract Number-->
+
+                         <!--Contract Number-->
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg"> 
-                               <input matInput name="contact_number"   value={{item.id}} 
-                                placeholder="{{'Contract Number'|translate}}" disabled type="number">
+                               <input matInput name="contact_number"  
+                                placeholder="{{'Contract Number'|translate}}" disabled type="number"
+                                [(ngModel)]="project[0].contact_number">
                             </mat-form-field>
                          </div>
-                      </div>
+                   </div>
+
                        <!--Consultant Name-->
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
-                               <input matInput name="consultant_name"   value={{item.consultant_name}} 
-                                    placeholder="{{'Consultant Name'|translate}}" disabled type="text">
-                           
+                               <input matInput name="consultant_name"
+                                    placeholder="{{'Consultant Name'|translate}}" disabled type="text"
+                                    [(ngModel)]="project[0].consultant_name">
                             </mat-form-field>
                          </div>
-                          <!--Contructor Name-->
-                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                            <mat-form-field class="full-wid mrgn-b-lg ">
-                                    <mat-label>{{'Contructor Name'|translate}}</mat-label>
-                                    <mat-select matNativeControl required name="contractor_name">
-                                          <div >
-                                     <mat-option value=""></mat-option>
-                                          </div>
-                                    </mat-select>
-                            </mat-form-field>
-                         </div>
+
+                      
                           <!--Project Number in Ministry of Finance-->
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
                                     <input matInput name="project_number_mf" 
-                                    placeholder="{{'Project Number in Ministry of Finance'|translate}}" type="text" required>
+                                    placeholder="{{'Contructor Name'|translate}}" 
+                                    [(ngModel)]="project[0].contractor_name"
+                                    type="text" disabled required>
                             </mat-form-field>
                          </div>
+                  </div>    
+
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                           <!--Project Amount-->
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                                 <mat-form-field class="full-wid mrgn-b-lg ">
                                         <input matInput name="project_amount" 
-                                        placeholder="{{'Project Amount'|translate}}" type="number" required>
+                                        placeholder="{{'Project Amount'|translate}}" type="number" 
+                                        [(ngModel)]="project[0].proj_val"
+                                        disabled required>
                                 </mat-form-field>
                         </div>
+
                           <!--Contract Amount after Discount-->
                           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                                 <mat-form-field class="full-wid mrgn-b-lg ">
                                         <input matInput name="contract_amount_discount" 
-                                        placeholder="{{'Contract Amount after Discount'|translate}}" type="number" required>
+                                        placeholder="{{'Contract Amount after Discount'|translate}}" 
+                                        [(ngModel)]="project[0].project_net"
+                                        type="number"  required>
                         </mat-form-field>
                         </div>
-                         <!--Amount of Available Works-->
-                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                <mat-form-field class="full-wid mrgn-b-lg ">
-                                        <input matInput name="Amount_Avia_Works" 
-                                        placeholder="{{'Amount of Available Works'|translate}}" type="number" required>
-                        </mat-form-field>
-                        </div>
+                  </div>
+
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                          <!--First Payment-->
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                                 <mat-form-field class="full-wid mrgn-b-lg ">
                                         <input matInput name="first_payment" 
-                                        placeholder="{{'First Payment'|translate}}" type="number" required>
+                                        placeholder="{{'First Payment'|translate}}" type="number"
+                                        [(ngModel)]="project[0].first_pay"
+                                        disabled required>
                         </mat-form-field>
                         </div>
+
                          <!--Project Start Date-->
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                                 <mat-form-field class="full-wid mrgn-b-lg ">
                                         <input matInput name="start_date" 
                                         [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
-                                        placeholder="{{'Date of Project Start'|translate}}">
+                                        placeholder="{{'Date of Project Start'|translate}}" 
+                                        [(ngModel)]="project[0].from_date"
+                                        disabled>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>   
                         </mat-form-field>
                         </div>
-                      </div>
-                      <div fxLayout="row" fxLayoutAlign="start" class="mrgn-b-md">
-                         <button mat-button type="button" disabled>{{'Previous'|translate }}</button>
-                         <button mat-button mat-raised-button [disabled]="!form.valid" (click)="nextStep()" type="submit" >{{'Next'|translate }} </button>
-                      </div>
-                   </div>
-                </form>
-             </mat-tab>
-             <!--Seconed Tab-->
-             <mat-tab label="{{'Cost Data'|translate}}" [disabled]="!form.valid">
-                    <form #form2="ngForm" >
-                       <div fxLayout="column">
+                  </div>
+
+
+                    <div fxLayout="row wrap" fxLayoutAlign="space-between center">      
+                        <!--Project Stiuation-->
+                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                     <mat-form-field class="full-wid mrgn-b-lg ">
+                             <mat-label>{{'Project Stiuation'|translate}}</mat-label>
+                        <mat-select matNativeControl required name="project[0].proj_situation" [(ngModel)]="project[0].proj_situation">
+                        
+                         <mat-option value="darft" >{{'Draft'|translate}}</mat-option>
+                           <mat-option value="active" >{{'Active'|translate}}</mat-option>
+                           <mat-option value="pulled" >{{'Pulled'|translate}}</mat-option>
+                           <mat-option value="intial_devliver" >{{'Intial Devliver'|translate}}</mat-option>
+                           <mat-option value="final_devliver" >{{'Final Devliver'|translate}}</mat-option>
+                           <mat-option value="totaly_stopped" >{{'Totaly Stopped'|translate}}</mat-option>
+                           <mat-option value="partial_stopped" >{{'Partial Stopped'|translate}}</mat-option>
+                          
+                       </mat-select>
+                     </mat-form-field>
+                  </div>
+
+                  <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                     <mat-form-field class="full-wid mrgn-b-lg ">
+                             <input matInput name="project[0].sit_date" 
+                             [min]="minDate" [max]="maxDate" [matDatepicker]="pickersit"
+                             placeholder="{{'Situation Date'|translate}}" 
+                             [(ngModel)]="project[0].sit_date"
+                             disabled>
+                             <mat-datepicker-toggle matSuffix [for]="pickersit"></mat-datepicker-toggle>
+                             <mat-datepicker #pickersit></mat-datepicker>   
+             </mat-form-field>
+             </div>
+          </div>
+               
+               
+               
+          <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+                       <!--Status-->
+                  <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                     <mat-form-field class="full-wid mrgn-b-lg ">
+                             <mat-label>{{'Status'|translate}}</mat-label>
+                        <mat-select matNativeControl required name="project[0].proj_state" [(ngModel)]="project[0].proj_state">
+                           <mat-option value="late" >{{'Late'|translate}}</mat-option>
+                           <mat-option value="arranged" >{{'Arragned'|translate}}</mat-option>
+                           <mat-option value="stumbled" >{{'Stumbled'|translate}}</mat-option>
+                       </mat-select>
+                     </mat-form-field>
+                  </div>
+
+                   <!--Description-->
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="100" fxFlex="49" fxFlex.gt-md="49">
+                     <mat-form-field class="full-wid mrgn-b-lg ">
+                             <mat-label>{{'Description'|translate}}</mat-label>
+                             <textarea matInput name="project[0].description" 
+                             [(ngModel)]="project[0].description" 
+                             cdkTextareaAutosize
+                              #autosize="cdkTextareaAutosize"
+                               cdkAutosizeMinRows="1"
+                                cdkAutosizeMaxRows="5"></textarea>
+                     </mat-form-field>
+                  </div>
+          </div>
+               
+               
+               
+         
+                  
                           <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                             <!--Project Duration--> 
                             <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
                                         <input matInput name="project_duraction" 
-                                        placeholder="{{'Project Duration'|translate}}" type="number" required>
+                                        placeholder="{{'Project Duration'|translate}} " type="number" 
+                                        [(ngModel)]="project[0].proj_duration_days"
+                                        disabled required>
                             </mat-form-field>
                              </div>
-                             <!--Approved time extension--> 
-                             <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                    <mat-form-field class="full-wid mrgn-b-lg ">
-                                                <input matInput name="approved_time" 
-                                                placeholder="{{'Approved time extension'|translate}}" type="number" required>
-                                    </mat-form-field>
-                             </div>
-                              <!--Budget Year--> 
+                             <!--Budget Year--> 
                               <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                                     <mat-form-field class="full-wid mrgn-b-lg ">
-                                                <input matInput name="budget_year" 
-                                                placeholder="{{'Budget Year'|translate}}" type="number" required>
+                                                <input matInput name="project[0].budget_year" 
+                                                placeholder="{{'Budget Year'|translate}}" type="number"
+                                                [(ngModel)]="project[0].budget_year"
+                                                disabled required>
                                     </mat-form-field>
                              </div>
-                               <!--Time extension is under approval--> 
-                               <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                    <mat-form-field class="full-wid mrgn-b-lg ">
-                                                <input matInput name="time_under_approve" 
-                                                placeholder="{{'Time extension is under approval'|translate}}" type="number" required>
-                                    </mat-form-field>
+                             
                              </div>
-                                <!--Elapsed duration ratio--> 
-                                <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                        <mat-form-field class="full-wid mrgn-b-lg ">
-                                                    <input matInput name="elapsed_ratio" 
-                                                    placeholder="{{'Elapsed duration ratio'|translate}}" type="number" required>
-                                        </mat-form-field>
-                                 </div>
-                                  <!--Actual completion rate planned by main time schedule--> 
-                                <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                        <mat-form-field class="full-wid mrgn-b-lg ">
-                                                    <input matInput name="time_compelte_rate" 
-                                                    placeholder="{{'Actual completion rate planned by main time schedule'|translate}}" type="number" required>
-                                        </mat-form-field>
-                                 </div>
-                                   <!--Actual completion rate--> 
-                                <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                        <mat-form-field class="full-wid mrgn-b-lg ">
-                                                    <input matInput name="actual_compelte_rate" 
-                                                    placeholder="{{'Actual completion rate'|translate}}" type="number" required>
-                                        </mat-form-field>
-                                 </div>
-                                 <!--Percentage of completion according to approved extracts-->
-                                 <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                        <mat-form-field class="full-wid mrgn-b-lg ">
-                                                    <input matInput name="percent_compelte_extract" 
-                                                    placeholder="{{'Percentage of completion according to approved extracts'|translate}}" type="number" required>
-                                      </mat-form-field>
-                                 </div>
-                                  <!--Actual completion rate planned according to the updated schedule-->
-                                  <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                        <mat-form-field class="full-wid mrgn-b-lg ">
-                                                    <input matInput name="rate_planned_updated_schedule" 
-                                                    placeholder="{{'Actual completion rate planned according to the updated schedule'|translate}}" type="number" required>
-                                      </mat-form-field>
-                                 </div>
-                                  <!--Expected additional business value-->
-                                  <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                        <mat-form-field class="full-wid mrgn-b-lg ">
-                                                    <input matInput name="Expected_business_value" 
-                                                    placeholder="{{'Expected additional business value'|translate}}" type="number" required>
-                                      </mat-form-field>
-                                 </div>
-                             </div>
-                          </div>
-                          <div fxLayout="row" fxLayoutAlign="start" class="mrgn-b-md">
-                             <button mat-button type="button" (click)="previousStep()">{{'Previous'|translate }}</button>
-                             <button mat-button mat-raised-button [disabled]="!form2.valid" (click)="nextStep()" type="button">{{'Next'|translate }}</button>
-                          </div>
-                     
-                    </form>
-                 </mat-tab>
-    <!--Third Tab-->
-    <mat-tab label="{{'Time Data'|translate}}" [disabled]="!form2.valid">
-            <form #form3="ngForm" >
-               <div fxLayout="column">
-                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                    <!--Projected cost of contract at project completion--> 
-                    <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                    <mat-form-field class="full-wid mrgn-b-lg ">
-                                <input matInput name="project_cost_at_compelete" 
-                                placeholder="{{'Projected cost of contract at project completion'|translate}}" type="number" required>
-                    </mat-form-field>
-                     </div>
-                       <!--Overrun value in contract value--> 
-                    <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                            <mat-form-field class="full-wid mrgn-b-lg ">
-                                        <input matInput name="overrun_value" 
-                                        placeholder="{{'Overrun value in contract value'|translate}}" type="number" required>
-                            </mat-form-field>
-                    </div>
-                       <!--Savings--> 
+
+                             <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                                      <!--Savings--> 
                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                            <mat-form-field class="full-wid mrgn-b-lg ">
-                                        <input matInput name="Savings" 
-                                        placeholder="{{'Savings'|translate}}" type="number" required>
-                            </mat-form-field>
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                                    <input matInput name="Savings"  name="project[0].proj_dis"
+                                    [(ngModel)]="project[0].proj_dis"
+                                    placeholder="{{'Savings'|translate}}" type="number" required>
+                        </mat-form-field>
                     </div>
+                      <!--Expiry date of the contractual project--> 
+                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                                <input matInput name="project[0].project_date" 
+                                [(ngModel)]="project[0].project_date"
+                                [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
+                                placeholder="{{'Expiry date of the contractual project'|translate}}">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>   
+                        </mat-form-field>
+                </div>  
+                   
+                                      
+                  </div>
+                              
+             <button mat-icon-button color="primary" matTooltip="{{'Add'|translate}}"
+              (click)="addItem()">
+              <mat-icon>add_circle</mat-icon>
+               </button>     
+                 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+                  <div formArrayName="arr" *ngFor="let a of myForm.get('arr').value; let i = index">
+                  <div [formGroupName]="i" style="margin-bottom: 10px;">
+                  <div fxLayout="column">
+                   <!--Choose Extension-->
+                   <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                           
+                     <mat-label fxLayoutAlign="start center" >* {{'Project Duration'|translate}}</mat-label>
+                     <br>
+                    <mat-radio-group aria-label="Select an option">
+                    <div fxFlex.gt-sm="31" fxFlex.gt-xs="31" fxFlex="100" fxFlex.gt-md="31">
+                    <mat-radio-button  (click)="extentype(1)"  value="1">{{'Extension with Days'|translate}}</mat-radio-button>
+                    </div>
+                      <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="32">
+                      <mat-radio-button  (click)="extentype(2)"  value="2">{{'Extension with Months'|translate}}</mat-radio-button>
+                      </div>
+                       <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="32">
+                        <mat-radio-button  (click)="extentype(3)"  value="3">{{'Extension with Date'|translate}}</mat-radio-button>
+                        </div>
+                     </mat-radio-group>
+               </div>  
+               </div>
+               </div>
+                  </div>
+                 </form>
+                <br>
+
+                 <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                   
+                     <!--Extension with Days-->
+                               <div fxFlex.gt-sm="31" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="31">
+                                 <mat-form-field class="full-wid mrgn-b-lg ">
+                                             <input matInput name="extension_time_days" formControlName="extension_time_days" 
+                                             placeholder="{{'Extension with Days'|translate}}" type="number"  
+                                            
+                                             >
+                                 </mat-form-field>
+                              </div>
+                                <!--Extension with Months -->
+                                <div fxFlex.gt-sm="31" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="31">
+                                 <mat-form-field class="full-wid mrgn-b-lg ">
+                                             <input matInput name="extension_time_month" formControlName="extension_time_month" 
+                                             placeholder="{{'Extension with Months'|translate}}" type="number"
+                                            
+                                             >
+                                 </mat-form-field>
+                              </div>
+                              <!--Extension with Date -->
+                              <div fxFlex.gt-sm="31" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="31">
+                                 <mat-form-field class="full-wid mrgn-b-lg ">
+                                    <input matInput name="extension_time_date" formControlName="extension_time_date"
+                                    [min]="minDate" [max]="maxDate" [matDatepicker]="exten_date"
+                                    placeholder="{{'Extension with Date'|translate}}">
+                                    <mat-datepicker-toggle matSuffix [for]="exten_date"></mat-datepicker-toggle>
+                                    <mat-datepicker #exten_date></mat-datepicker>   
+                                </mat-form-field>
+                              </div>
+                 </div>
+                       
+                         <br>
+                        
+          
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                                   
+                     
                      <!--The remaining project duration--> 
                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
@@ -221,78 +297,30 @@
                                         placeholder="{{'The remaining project duration'|translate}}" type="number" required>
                             </mat-form-field>
                     </div>
-                      <!--Expiry date of the contractual project--> 
-                      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                            <mat-form-field class="full-wid mrgn-b-lg ">
-                                    <input matInput name="Expiray_projecT_date" 
-                                    [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
-                                    placeholder="{{'Expiry date of the contractual project'|translate}}">
-                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker2></mat-datepicker>   
-                            </mat-form-field>
-                    </div>
-                        <!--Project completion date after approved time extension--> 
-                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                <mat-form-field class="full-wid mrgn-b-lg ">
-                                        <input matInput name="Expiray_projecT_date_extension" 
-                                        [min]="minDate" [max]="maxDate" [matDatepicker]="picker3"
-                                        placeholder="{{'Project completion date after approved time extension'|translate}}">
-                                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker3></mat-datepicker>   
-                                </mat-form-field>
-                        </div>
-                          <!--Item Qunatity--> 
-                     <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                            <mat-form-field class="full-wid mrgn-b-lg ">
-                                        <input matInput name="item_quantity" 
-                                        placeholder="{{'Item Qunatity'|translate}}" type="number" required>
-                            </mat-form-field>
-                    </div>
-                    <!--Within Project-->
+                     
+
+                    <!--Project completion date after approved time extension--> 
                     <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                            <mat-form-field class="full-wid mrgn-b-lg ">
-                                    <mat-label>{{'Within Project'|translate}}</mat-label>
-                               <mat-select matNativeControl required name="within_project">
-                                  <div >
-                                <mat-option value="" ></mat-option>
-                                </div>
-                              </mat-select>
-                            </mat-form-field>
-                         </div>
-                         <!--Status-->
-                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                <mat-form-field class="full-wid mrgn-b-lg ">
-                                        <mat-label>{{'Status'|translate}}</mat-label>
-                                   <mat-select matNativeControl required name="status">
-                                      <div *ngFor="let status of data">
-                                    <mat-option value="status.Name" >{{status.Name | translate}}</mat-option>
-                                    </div>
-                                  </mat-select>
-                                </mat-form-field>
-                             </div>
-                              <!--Description-->
-                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                <mat-form-field class="full-wid mrgn-b-lg ">
-                                        <mat-label>{{'Description'|translate}}</mat-label>
-                                        <textarea matInput name="description"  
-                                        cdkTextareaAutosize
-                                         #autosize="cdkTextareaAutosize"
-                                          cdkAutosizeMinRows="1"
-                                           cdkAutosizeMaxRows="5"></textarea>
-                                </mat-form-field>
-                             </div>
+                     <mat-form-field class="full-wid mrgn-b-lg ">
+                             <input matInput name="Expiray_projecT_date_extension" 
+                             [min]="minDate" [max]="maxDate" [matDatepicker]="picker3"
+                             placeholder="{{'Project completion date after approved time extension'|translate}}">
+                             <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                             <mat-datepicker #picker3></mat-datepicker>   
+                     </mat-form-field>
+                   </div>
+
                   </div>
-               </div>
-                  <div fxLayout="row" fxLayoutAlign="start" class="mrgn-b-md">
-                     <button mat-button type="button" (click)="previousStep()">{{'Previous'|translate }}</button>
-                     <button mat-button mat-raised-button [disabled]="!form3.valid" (click)="nextStep()" type="button">{{'Next'|translate }}</button>
-                  </div>
+
              
+
+                  <div fxLayout="row" fxLayoutAlign="center" class="mrgn-b-md">
+                  
+                     <button mat-button mat-raised-button color="accent"  (click)="SaveData()" type="button">{{'Edit'|translate }}</button>
+                  </div>
+                  </div>
             </form>
-         </mat-tab>
-         <!--Fourth Step-->
-        
-          </mat-tab-group>
+       
        </div>
     </mat-card>
  </div>

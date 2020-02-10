@@ -32,7 +32,7 @@ export class RequestForInspectionComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
 
-      this.statename = "waiting";
+      this.statename = "draft";
 
     }
 

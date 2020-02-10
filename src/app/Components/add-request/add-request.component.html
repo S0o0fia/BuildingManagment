@@ -12,13 +12,24 @@
               <form #form="ngForm">
                     <div fxLayout="column">
                        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                          <!--Request Type-->
+                          <!--Location of Work-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg">
+                              <mat-label>{{'Project Items'|translate}}</mat-label>
+                              <mat-select name="work_id" [(ngModel)]="work_id">
+                              <div *ngFor="let build of buildings" >
+                                 <mat-option value={{build.id}}>{{build.name}}</mat-option>
+                              </div>  
+                              </mat-select>
+                        </mat-form-field>
+                     </div>
+                  <!--Request Type-->
                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                              <mat-form-field class="full-wid mrgn-b-lg">
-                                   <mat-label>{{'Request Type'|translate}}</mat-label>
+                                   <mat-label>{{'Specify Works'|translate}}</mat-label>
                                    <mat-select name="typename" [(ngModel)]="typename">
                                       <div *ngFor="let type of types">
-                                         <mat-option  (click)="request(type.sequence)" value={{type.id}} >
+                                         <mat-option  (click)="request(type.sequence , type.id)" value={{type.id}} >
                                             {{type.type}}
                                          </mat-option>
                                       </div>
@@ -34,18 +45,7 @@
                               
                          </div>
 
-                      <!--Location of Work-->
-                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                        <mat-form-field class="full-wid mrgn-b-lg">
-                              <mat-label>{{'Location of Works'|translate}}</mat-label>
-                              <mat-select name="work_id" [(ngModel)]="work_id">
-                                 <mat-option value="B1">{{'Build' | translate}} 1</mat-option>
-                                 <mat-option value="B2">{{'Build' | translate}} 2</mat-option>
-                                 <mat-option value="B3">{{'Build' | translate}} 3</mat-option>
-                              </mat-select>
-                        </mat-form-field>
-                     </div>
-                  
+                    
                 
                  
                      <!--Inspection Date-->
@@ -59,24 +59,51 @@
                            <mat-datepicker #insepctiondate></mat-datepicker>                         
                         </mat-form-field>
                     </div>
-
                     
+                    <!--Attachment-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                      <input type="file" (change)="onFileSelected($event)"/>
+                      <button (click)="onUpload()"> Upload</button>
+                     </div>
+
+
                  <!--Item Information-->
                     <mat-card  class="full-wid mrgn-b-lg ">
                         <mat-label>{{'Items'|translate}}</mat-label>
                         <div class="gene-card-content">
                           
-                                    <div fxLayout="column">
-                                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                    
-                     <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32">
+                   <div fxLayout="column">
+                     <div fxLayout="row wrap" fxLayoutAlign="center center">
+                        <h6>{{'Search by'|translate}}</h6>
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" style="margin-left:5%;" fxLayoutAlign="center">
+                        <mat-radio-group aria-label="Select an option" name="f">
+                        <mat-radio-button  (change)="filterType(1)"  value="1">{{'Item Name'|translate}}</mat-radio-button>
+                        <mat-radio-button  (change)="filterType(2)" value="2"   >{{'Item Number'|translate}}</mat-radio-button>
+                     </mat-radio-group>
+                  </div>
+                 </div>
+                     
+                      <div fxLayout="row wrap" fxLayoutAlign="center center">
+                        <div fxFlex.gt-sm="40" fxFlex.gt-xs="100" fxFlex="40" fxFlex.gt-md="40" style="margin-right: 2%;">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                             <mat-label>{{'Search'|translate}}  <mat-icon aria-hidden="false">search</mat-icon>  </mat-label>
+                              <input [disabled]="filter==0" (change)="Search()" matInput  name="search" [(ngModel)]="search" type="text">
+                                   
+                              </mat-form-field>
+                        </div>
+
+                      </div>
+                     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+                        
+                    <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32">
                      <mat-form-field class="full-wid mrgn-b-lg ">
                           
                         <mat-label>{{'Item Number'|translate}}</mat-label>
                         <mat-select name="item_number" [(ngModel)]="item_number">
                          <div *ngFor="let data of quantitys">
-                          <div *ngIf="data.first_subsection_id == typename">  
-                           <mat-option  value={{data.item_number}} (click)="BindItemname(data.item_name)">
+                          <div *ngIf="data.main_section_id == typename">  
+                           <mat-option  value={{data.item_number}} (click)="BindItemname(data.item_name , data.id)">
                                {{data.item_number}}
                           </mat-option>
                         </div>
@@ -90,8 +117,8 @@
                            <mat-label>{{'Item Name'|translate}}</mat-label>
                            <mat-select name="item_name" [(ngModel)]="item_name">
                                  <div *ngFor="let data of quantitys">
-                                       <div *ngIf="data.first_subsection_id == typename">  
-                                        <mat-option  value={{data.item_name}} (click)="BindItemnumber(data.item_number)">
+                                       <div *ngIf="data.main_section_id == typename">  
+                                        <mat-option  value={{data.item_name}} (click)="BindItemnumber(data.item_number , data.id )">
                                             {{data.item_name}}                                      
                                      </mat-option>
                              </div>
@@ -108,6 +135,18 @@
                               </mat-form-field>
                        </div>
                   </div>
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                     <mat-checkbox (click)="change()">{{'Prepare Item'|translate}}</mat-checkbox>                   
+                     
+                 </div>
+                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                  <mat-form-field class="full-wid mrgn-b-lg ">
+                        <input matInput name="pitem" [(ngModel)]="pitem"
+                        [disabled]="!statepitem"
+                        placeholder="{{'Prepare Item'|translate}}" type="text">       
+                  </mat-form-field>
+                </div>
+                 
                  </div>
                 </div>
               <div fxLayout="row" fxLayoutAlign="center">
@@ -128,6 +167,7 @@
                                           <th>{{'Item Number'|translate}}</th>
                                           <th>{{'Item Name'|translate}}</th>
                                           <th>{{'Executed Quantity'|translate}}</th>
+                                          <th>{{'Prepare Item'|translate}}</th>
                                           <th>{{'Controls'|translate}}</th>
                                         </tr>
                                     </thead>
@@ -136,6 +176,7 @@
                                           <td>{{item.num}}</td>
                                           <td>{{item.name}}</td>
                                           <td>{{item.qty}}</td>
+                                          <td>{{item.pitem}}</td>
                                           <td><mat-icon (click)="removeitem(i)" matTooltip="{{'Delete' | translate}}">delete</mat-icon></td>
                                         </tr>
                                     </tbody>

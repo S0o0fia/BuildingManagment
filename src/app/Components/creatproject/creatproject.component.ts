@@ -9,6 +9,7 @@ import { ProjectModel } from 'app/Models/Project/project-model';
 import { DatePipe, formatDate } from '@angular/common';
 import { AddBuildingComponent } from '../add-building/add-building.component';
 import { MatDialog } from '@angular/material';
+import { FileUploader } from 'ng2-file-upload';
 
 @Component({
   selector: 'ms-creatproject',
@@ -40,6 +41,7 @@ export class CreatprojectComponent implements OnInit {
   within_project :string="";
   budget_year  :string = ""; 
   status  :string = ""; 
+  stiuation : string = "";
   description  :string = ""; 
   startdate_hijri : Date = new Date();
   startdate:Date = new Date();
@@ -58,8 +60,28 @@ export class CreatprojectComponent implements OnInit {
   deliverdate_hijri : Date = new Date();
   type : string="";
   proj_number: string = "";
-  sig_date : Date = new Date();
- 
+  sig_date : Date = new Date(); 
+  stiuationdate : Date = new Date();
+  uploader: FileUploader = new FileUploader({url: ''});
+  hasBaseDropZoneOver = false;
+  hasAnotherDropZoneOver = false;
+  qty_type : boolean;
+
+    
+
+     /**
+      *fileOverBase fires during 'over' and 'out' events for Drop Area.
+      */
+     fileOverBase(e: any): void {
+      this.hasBaseDropZoneOver = e;
+  }
+
+  /**
+    *fileOverAnother fires after a file has been dropped on a Drop Area.
+    */
+  fileOverAnother(e: any): void {
+      this.hasAnotherDropZoneOver = e;
+  }
 
   constructor( private pageTitleService: PageTitleService,
                
@@ -71,6 +93,8 @@ export class CreatprojectComponent implements OnInit {
 
                   this.lng=46.6753;
                   this.lat=24.7136;
+
+                  this.qty_type = false;
                }
 
   ngOnInit() {
@@ -157,6 +181,7 @@ caldurationd(value)
     let deliverDate = formatDate(this.deliverdate, format, locale);
     let deliverDateHihri = formatDate(this.deliverdate_hijri, format, locale); 
     let segDate = formatDate(this.sig_date, format, locale); 
+    let sdate = formatDate(this.stiuationdate, format, locale); 
      this.newProject={
         
         name : this.name ,
@@ -180,7 +205,10 @@ caldurationd(value)
         project_type : this.type ,
         project_net : this.netcost,
         proj_number: this.proj_number,
-        sig_date: segDate.toString()
+        sig_date: segDate.toString() ,
+        proj_situation : this.stiuation ,
+        date_situation : sdate , 
+        multi_qty_table : this.qty_type
 
 
         
@@ -190,6 +218,10 @@ caldurationd(value)
      this.selectedIndex += 1;
   }
  
+  IsChecked(val)
+  {
+    this.qty_type = val;
+  }
   previousStep() {
     const format = 'MM/dd/yyyy';
     const locale = 'en-US';

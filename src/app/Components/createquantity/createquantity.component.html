@@ -13,10 +13,27 @@
             <form #form="ngForm">
                   <div fxLayout="column">
                      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                       <!--project item-->
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                    <mat-label>{{'Project Items'|translate}}</mat-label>
+                                    <mat-select  name="subid"  [(ngModel)]="subid">
+                                                <div *ngFor="let section of items">
+                                                     
+                                                 <mat-option value={{section.id}}>
+                                                   {{section.name}}
+                                              
+                                              </mat-option>
+                                                
+                                                </div>
+                                            </mat-select>
+                                            
+                              </mat-form-field>
+                           </div>
                         <!--Main Section-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <mat-form-field class="full-wid mrgn-b-lg">
-                                 <mat-label>{{'Main Section'|translate}}</mat-label>
+                                 <mat-label>{{'Type Of Works'|translate}}</mat-label>
                                  <mat-select  matNativeControl required name="mainid" [(ngModel)]="mainid">
                                        <div *ngFor="let section of Mainsection">
                                     <div *ngIf="section.parent_id==''">        
@@ -31,37 +48,15 @@
                        <!-- Type of Work-->
                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <mat-form-field class="full-wid mrgn-b-lg">
-                                 <mat-label>{{'Sub Section'|translate}}</mat-label>
-                                 <mat-select [disabled]="mainid== null ? true : false" name="workid"  [(ngModel)]="workid">
-                                     <div *ngFor="let section of Mainsection">
-                                      <div *ngIf="section.parent_id==mainid">        
-                                      <mat-option value={{section.id}}>
-                                        {{section.name}}
-                                   
-                                   </mat-option>
-                                      </div>
-                                     </div>
+                                 <mat-label>{{'Items Type'|translate}}</mat-label>
+                                 <mat-select  name="workid"  [(ngModel)]="workid">
+                                     <mat-option value="contracted">{{'Contracted'|translate}}</mat-option>
+                                     <mat-option value="calibrate">{{'Calibration'|translate}}</mat-option>
                                  </mat-select>
                                  
                            </mat-form-field>
                         </div>
-                        <!--Sub Section-->
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                              <mat-form-field class="full-wid mrgn-b-lg">
-                                    <mat-label>{{'Type Of Works'|translate}}</mat-label>
-                                    <mat-select [disabled]=" (workid== null && mainid==null )? true : false" name="subid"  [(ngModel)]="subid">
-                                                <div *ngFor="let section of Mainsection">
-                                                 <div *ngIf="section.parent_id==workid">        
-                                                 <mat-option value={{section.id}}>
-                                                   {{section.name}}
-                                              
-                                              </mat-option>
-                                                 </div>
-                                                </div>
-                                            </mat-select>
-                                            
-                              </mat-form-field>
-                           </div>
+                       
                               <!--Item Number-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                               <mat-form-field class="full-wid mrgn-b-lg">

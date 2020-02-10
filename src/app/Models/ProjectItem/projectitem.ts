@@ -1,5 +1,7 @@
 export interface Projectitem {
-    itemtype : string; 
-    itemname: string;
+    name : string; 
+    type_id: number;
+    project_id : number;
+    type_name:string;
 }
 

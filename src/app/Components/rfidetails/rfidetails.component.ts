@@ -21,7 +21,7 @@ export class RfidetailsComponent implements OnInit {
    user : string ;
    id : number;
    approve_draft : boolean ;
-   contracted_qty : number=0;
+   contracted_qty : any[]=[];
    number_arr : Approvedqty[]=[];
     item_id : number;
    state : string;
@@ -48,23 +48,27 @@ export class RfidetailsComponent implements OnInit {
 
   //openDialog to edit Approved Qunatity 
   openDialog(qid): void {
+    console.log(qid);
     const dialogRef = this.dialog.open(EditContractedQunatityComponent, {
       width: '20%',
       height :'30%',
-      data: {quantity: this.contracted_qty}
+      data: this.contracted_qty[qid]
+      
     }
+  
     );
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.contracted_qty = result;
+      this.contracted_qty[qid] = result;
       this.number_arr.push({
         id : qid , 
-        approved_qty : result
+        approved_qty :  this.contracted_qty[qid]
 
       });
     
     });
+    console.log(this.number_arr);
   }
    //open Approve Dialog
    openDialogApprove()
@@ -72,10 +76,13 @@ export class RfidetailsComponent implements OnInit {
     const dialogRef = this.dialog.open( SelectApproveComponent , {
       width: '50%',
       height :'40%',
+      data : {comment : '' , approve : ''}
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      console.log(result);
       this.consultant_approve = result;
       this.state = result;
       this.consultant_btn = "Consultant Approve Done";
@@ -136,10 +143,15 @@ export class RfidetailsComponent implements OnInit {
     this.service.getItemRFI().subscribe(
       data =>
       {
+       
         data.forEach(element => {
           if(element.rfi_id == this.id)
-            {this.Items.push(element);
-              this.contracted_qty = element.qty;
+            {
+              console.log(element);
+              this.Items.push(element);
+              this.contracted_qty[element['id'] ]=element.approved_qty;
+             
+              console.log(this.contracted_qty);
             }
 
         });
