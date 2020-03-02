@@ -43,9 +43,7 @@
                                  placeholder="{{'Request Number'|translate}}" type="text" disabled required>    
                               </mat-form-field> 
                               
-                         </div>
-
-                    
+                         </div>                   
                 
                  
                      <!--Inspection Date-->
@@ -59,98 +57,142 @@
                            <mat-datepicker #insepctiondate></mat-datepicker>                         
                         </mat-form-field>
                     </div>
-                    
-                    <!--Attachment-->
+                       <!--Attachment-->
                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                      <input type="file" (change)="onFileSelected($event)"/>
-                      <button (click)="onUpload()"> Upload</button>
-                     </div>
+                     <input type="file"
+                     id="file"
+                     (change)="handleFileInput($event.target.files)">
+                     <button (click)="onUpload()"> Upload</button>
+                    </div>
 
-
-                 <!--Item Information-->
-                    <mat-card  class="full-wid mrgn-b-lg ">
-                        <mat-label>{{'Items'|translate}}</mat-label>
-                        <div class="gene-card-content">
-                          
-                   <div fxLayout="column">
-                     <div fxLayout="row wrap" fxLayoutAlign="center center">
-                        <h6>{{'Search by'|translate}}</h6>
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" style="margin-left:5%;" fxLayoutAlign="center">
-                        <mat-radio-group aria-label="Select an option" name="f">
-                        <mat-radio-button  (change)="filterType(1)"  value="1">{{'Item Name'|translate}}</mat-radio-button>
-                        <mat-radio-button  (change)="filterType(2)" value="2"   >{{'Item Number'|translate}}</mat-radio-button>
-                     </mat-radio-group>
-                  </div>
                  </div>
+
+                 <!--Items--> 
+                    <mat-card  class="full-wid mrgn-b-lg ">
+                     <mat-label>{{'Items'|translate}}</mat-label>
+                     <div class="gene-card-content">
+                      
+                <div fxLayout="column">
+               
+                    
+                     <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" fxFlex.gt-md="50" style="margin-left:5%;" fxLayoutAlign="center">
+                     <h6 >{{'Search by'|translate}}    </h6>   
+                     <br/>
+                     <mat-radio-group aria-label="Select an option" name="f" >
+                     <mat-radio-button  (change)="filterType(1)"  value="1">{{'Item Name'|translate}}</mat-radio-button>
+                     <mat-radio-button  (change)="filterType(2)" value="2"  >{{'Item Number'|translate}}</mat-radio-button>
+                  </mat-radio-group>
+                   </div>
+                   <br>
+                  </div>
+
+                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                  
+                     <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" fxFlex.gt-md="50" fxLayoutAlign="center">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                          <mat-label>{{'Search'|translate}}  <mat-icon aria-hidden="false">search</mat-icon>  </mat-label>
+                           <input [disabled]="filter==0" (change)="Search()" matInput  name="search" [(ngModel)]="search" type="text">
+                                
+                           </mat-form-field>
+                       </div>
+
+                   </div>
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
                      
-                      <div fxLayout="row wrap" fxLayoutAlign="center center">
-                        <div fxFlex.gt-sm="40" fxFlex.gt-xs="100" fxFlex="40" fxFlex.gt-md="40" style="margin-right: 2%;">
-                           <mat-form-field class="full-wid mrgn-b-lg ">
-                             <mat-label>{{'Search'|translate}}  <mat-icon aria-hidden="false">search</mat-icon>  </mat-label>
-                              <input [disabled]="filter==0" (change)="Search()" matInput  name="search" [(ngModel)]="search" type="text">
-                                   
-                              </mat-form-field>
-                        </div>
+                 <div fxFlex.gt-sm="45" fxFlex.gt-xs="100" fxFlex="45" fxFlex.gt-md="45">
+                  <mat-form-field class="full-wid mrgn-b-lg ">
+                       
+                     <mat-label>{{'Item Number'|translate}}</mat-label>
+                     <mat-select name="item_number" [(ngModel)]="item_number">
+                      <div *ngFor="let data of quantitys">
+                       <div *ngIf="data.main_section_id == typename">  
+                        <mat-option  value={{data.item_number}} (click)="BindItemname(data.item_name , data.id)">
+                            {{data.item_number}}
+                       </mat-option>
+                     </div>
+                     </div>
+                     </mat-select>   
+                  </mat-form-field>
+                  </div>
 
-                      </div>
-                     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-
-                        
-                    <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32">
+                  <div fxFlex.gt-sm="45" fxFlex.gt-xs="100" fxFlex="45" fxFlex.gt-md="45" style="margin-right: 2%;">
                      <mat-form-field class="full-wid mrgn-b-lg ">
                           
-                        <mat-label>{{'Item Number'|translate}}</mat-label>
-                        <mat-select name="item_number" [(ngModel)]="item_number">
-                         <div *ngFor="let data of quantitys">
-                          <div *ngIf="data.main_section_id == typename">  
-                           <mat-option  value={{data.item_number}} (click)="BindItemname(data.item_name , data.id)">
-                               {{data.item_number}}
-                          </mat-option>
-                        </div>
-                        </div>
-                        </mat-select>   
+                        <mat-label>{{'Item Name'|translate}}</mat-label>
+                        <mat-select name="item_name" [(ngModel)]="item_name">
+                              <div *ngFor="let data of quantitys">
+                                    <div *ngIf="data.main_section_id == typename">  
+                                     <mat-option  value={{data.item_name}} (click)="BindItemnumber(data.item_number , data.id )">
+                                         {{data.item_name}}                                      
+                                  </mat-option>
+                    </div>
+                    </div>
+                     </mat-select>   
                      </mat-form-field>
+                  </div>
+                     
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-checkbox (click)="change()">{{'Prepare Item'|translate}}</mat-checkbox>                   
+                        
+                    </div>
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                     <mat-form-field class="full-wid mrgn-b-lg ">
+                           <input matInput name="pitem" [(ngModel)]="pitem"
+                           [disabled]="!statepitem"
+                           placeholder="{{'Phase Description'|translate}}" type="text">       
+                     </mat-form-field>
+                  
                      </div>
-                     <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32" style="margin-right: 2%;">
+                  </div>
+                     </div>
+                    </mat-card>
+                  
+                  
+                 <!--Item Information-->
+                    <mat-card  class="full-wid mrgn-b-lg ">
+                        <mat-label>{{'Inspect Location'|translate}}</mat-label>
+                        <div class="gene-card-content">
+             
+                   <div fxLayout="column">
+                     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                     <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32" style=" margin-top:0.5%;">
                         <mat-form-field class="full-wid mrgn-b-lg ">
                              
-                           <mat-label>{{'Item Name'|translate}}</mat-label>
-                           <mat-select name="item_name" [(ngModel)]="item_name">
-                                 <div *ngFor="let data of quantitys">
-                                       <div *ngIf="data.main_section_id == typename">  
-                                        <mat-option  value={{data.item_name}} (click)="BindItemnumber(data.item_number , data.id )">
-                                            {{data.item_name}}                                      
-                                     </mat-option>
-                             </div>
-                             </div>
-                           </mat-select>   
+                              <input matInput name="inspect_loc" [(ngModel)]="inspect_loc" (click)='setVisible()'
+                              placeholder="{{'Inspect Location'|translate}}" type="text" required>       
                         </mat-form-field>
-                        </div>
+                 </div>
+                
                             <!--Executed Quantity-->
-                            <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32" style="margin-right: 2%; margin-top:0.5%;">
+                            <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32" style=" margin-top:0.5%;">
                               <mat-form-field class="full-wid mrgn-b-lg ">
                                    
-                                    <input matInput name="qty" [(ngModel)]="qty"
+                                    <input matInput name="qty" [(ngModel)]="qty" (change)="Visibles()"
                                     placeholder="{{'Executed Quantity'|translate}}" type="number" required>       
                               </mat-form-field>
                        </div>
+                       <!--Total-->
+                       <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32"
+                       
+                       style=" margin-top:0.5%;">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                             
+                              <input matInput name="total" [(ngModel)]="total"
+                              placeholder="{{'Total'|translate}}" type="number" disabled>       
+                         </mat-form-field>
+                        </div>
                   </div>
-                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                     <mat-checkbox (click)="change()">{{'Prepare Item'|translate}}</mat-checkbox>                   
-                     
-                 </div>
-                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                  <mat-form-field class="full-wid mrgn-b-lg ">
-                        <input matInput name="pitem" [(ngModel)]="pitem"
-                        [disabled]="!statepitem"
-                        placeholder="{{'Prepare Item'|translate}}" type="text">       
-                  </mat-form-field>
-                </div>
+                
+                  <div>
+                  <h6  [ngStyle]="{'visibility': Visible ? 'visible' : 'hidden' }">{{'You have exceed the avialable quantity'|translate}}</h6>
+                  </div>  
+                  </div>
+                  </div>
                  
-                 </div>
-                </div>
+        
               <div fxLayout="row" fxLayoutAlign="center">
-                  <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add Item'|translate }}</button>
+                  <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add'|translate }}</button>
              </div> 
          </mat-card>
          <!--Table of Added Items-->
@@ -164,19 +206,18 @@
                                  <table class="table table-hover table-middle th-fw-light mb-0">
                                     <thead>
                                        <tr>
-                                          <th>{{'Item Number'|translate}}</th>
-                                          <th>{{'Item Name'|translate}}</th>
-                                          <th>{{'Executed Quantity'|translate}}</th>
-                                          <th>{{'Prepare Item'|translate}}</th>
+                                          <th>{{'Inspect Location'|translate}}</th>
+                                          <th>{{'Quantity'|translate}}</th>
+                                          <th>{{'Total'|translate}}</th>
                                           <th>{{'Controls'|translate}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                        <tr *ngFor="let item of itemDate; let i = index" >
-                                          <td>{{item.num}}</td>
-                                          <td>{{item.name}}</td>
+                                          <td>{{item.inspect_location}}</td>
                                           <td>{{item.qty}}</td>
-                                          <td>{{item.pitem}}</td>
+                                          <td>{{item.total}}</td>
+                                         
                                           <td><mat-icon (click)="removeitem(i)" matTooltip="{{'Delete' | translate}}">delete</mat-icon></td>
                                         </tr>
                                     </tbody>
@@ -195,7 +236,8 @@
                              <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
                              
                        </div>
-                    </div>
+                       
+                    
                  </form>
         </div>
      </mat-card>

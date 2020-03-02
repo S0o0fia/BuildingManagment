@@ -83,6 +83,7 @@ export class CrmComponent implements OnInit, OnDestroy {
       cryptoCompareColumns = ["id","name","consultant_name","contractor_name" , "Status" , "Controls"];
       dropList = [
          "Edit Project",
+         "List of Count" ,
          "Project Items" ,
          "Quantity Table",
          "Files Managment",
@@ -111,7 +112,9 @@ export class CrmComponent implements OnInit, OnDestroy {
             case "Edit Project":
                {this.router.navigate(['/home/edit']); }
                   break;
-
+                  case "List of Count" :{
+                     this.router.navigate(['/home/table/countdetails']);
+                  } break;
             case "Project Items":
                      {this.router.navigate(['/home/items']); }
                         break;      
@@ -123,6 +126,7 @@ export class CrmComponent implements OnInit, OnDestroy {
             case"Files Managment": 
                {this.router.navigate(['/home/filemanagement']);}
                break;
+
               case  "Lines Files Managment":  break;
             
            case "Request for Inspection":  

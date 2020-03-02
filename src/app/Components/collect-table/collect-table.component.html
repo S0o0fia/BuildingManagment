@@ -1,0 +1,162 @@
+<div fxLayout="row wrap" fxLayoutAlign=" start" class="gene-form-wizard" dir="rtl">
+    <mat-card fxFlex="100%">
+       <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="start center">
+             <div fxLayout="column">
+                <h4>{{'Request for Inventroy Qunatities'|translate}}</h4>
+             </div>
+           
+            
+          <span fxFlex></span> 
+       </div>
+       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+         <div fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100" fxFlex.gt-md="40">
+            <mat-label class="text-center">{{'Item Name'|translate}}</mat-label>
+         </div>
+         <div fxFlex.gt-sm="60" fxFlex.gt-xs="60" fxFlex="100" fxFlex.gt-md="60">
+            <mat-form-field class="full-wid mrgn-b-lg ">
+                  <mat-label>{{'Item Name'|translate}}</mat-label>
+                  <mat-select  name="item">
+                    <div *ngFor= "let item of items">
+                     <mat-option (click)="Item(item.id)" value={{item.item_number}}>{{item.item_name}}</mat-option>
+                  </div>
+                 </mat-select>
+                  
+            </mat-form-field>
+         </div>
+       </div>
+
+       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+          
+         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+         <div fxFlex.gt-sm="48" fxFlex.gt-xs="48" fxFlex="100" fxFlex.gt-md="48">
+            
+            <mat-label>{{'From'|translate}}</mat-label>
+               <mat-form-field class="full-wid mrgn-b-lg"> 
+                  <input matInput  name="fromd" [(ngModel)]="fromd"
+                 [min]="minDate" [max]="maxDate" [matDatepicker]="from"
+                  placeholder="{{'From'|translate}}">
+                 <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                 <mat-datepicker #from></mat-datepicker>   
+               </mat-form-field>
+          </div>
+
+         <div fxFlex.gt-sm="51" fxFlex.gt-xs="51" fxFlex="100" fxFlex.gt-md="51" style="margin-right:5%;">
+            
+            <mat-label>{{'To'|translate}}</mat-label>
+          
+            <mat-form-field class="full-wid mrgn-b-lg"> 
+               <input matInput name="tod" [(ngModel)]="tod"
+              [min]="minDate" [max]="maxDate" [matDatepicker]="to"
+               placeholder="{{'To'|translate}}">
+              <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+              <mat-datepicker #to></mat-datepicker>   
+            </mat-form-field>
+         </div>
+         </div>
+
+       </div>
+       <div fxLayout="row" fxLayoutAlign="center">
+         <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="ShowRFI()">{{'Submit'|translate}}</button>
+             
+        </div>
+      
+      </div >
+       <div class="gene-card-content">
+          
+         <div class="table-responsive">
+
+            <table class="table table-hover table-middle th-fw-light mb-0">
+               <thead>
+                  <tr class="text-center">
+                     <th class="text-center">{{'Choose'|translate}}</th>
+                     <th class="text-center">{{'Request Number'|translate}}</th>
+                     <th class="text-center">{{'Request Type'|translate}}</th>
+                     <th class="text-center">{{'Date'|translate}}</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let item of RFI ; let i = index;">
+                     <td style="text-align: center;">
+                        <mat-checkbox (change)="getRFIid($event , item.id , i)"></mat-checkbox>
+                     </td>
+                     <td style="text-align: center;">
+                      {{item.request_num}}
+                     </td>
+                     <td style="text-align: center;">
+                        {{item.request_type}}
+                     </td>
+                     <td style="text-align: center;">
+                      {{item.inspect_date}}
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+       </div>
+    </mat-card>
+</div>
+
+
+<div fxLayout="row wrap" fxLayoutAlign=" start" class="gene-form-wizard" dir="rtl">
+   <mat-card fxFlex="100%">
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column">
+               <h4>{{'Inspect Location'|translate}}</h4>
+            </div>
+          
+           
+         <span fxFlex></span> 
+         </div>
+         </div>
+         <div class="gene-card-content pad-t-none">
+            <div class="table-responsive" id="dvPdf">
+              
+               <table class="table table-hover table-middle th-fw-light mb-0">
+                  <thead>
+                     <tr style="text-align: center;">
+                        <th style="text-align: center;">{{'ID'|translate}}</th>
+                        <th style="text-align: center;">{{'Inspect Location'|translate}}</th>
+                        <th style="text-align: center;">{{'Executed Quantity'|translate}}</th>
+                        <th style="text-align: center;">{{'Approved Quantity'|translate}}</th>
+                        <th style="text-align: center;">{{'Controls'|translate}}</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let item of Location; let i = index" style="text-align: center;">
+                        <td>{{item.rfi_id}}</td>
+                        <td>{{item.name}}</td>
+                         <td>
+                           <mat-form-field class="full-wid mrgn-b-lg">
+                             
+                              <input matInput name="qty"  
+                               [(ngModel)]="item.qty" 
+                              placeholder={{item.qty}}
+                              />
+                        </mat-form-field>
+                         </td>
+                         <td>
+                           <mat-form-field class="full-wid mrgn-b-lg">
+                              <mat-label>{{'Approved Quantity'|translate}}</mat-label>
+                              <input matInput name="approve"  
+                             
+                              [(ngModel)]="item.approve"
+                              />
+                        </mat-form-field>
+                         </td>
+                         <td>
+                            <mat-icon matTooltip="{{'Delete'|translate}}" (click)="delete(i)">delete</mat-icon>
+                       </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end end">
+               <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="AddCount()">{{'Add'|translate}}</button>
+                   
+              </div>
+         </div>
+   </mat-card>
+   </div>
+   

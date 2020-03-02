@@ -101,7 +101,7 @@ export class ChooserequestComponent implements OnInit {
 
     case "Adopt inventory of quantities":
       {
-        this.router.navigate(['/home/under']);
+        this.router.navigate(['/home/table/collect']);
         this.dialog.closeAll();
       }
       break;

@@ -7,6 +7,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/
 import { EditContractedQunatityComponent } from '../edit-contracted-qunatity/edit-contracted-qunatity.component';
 import { SelectApproveComponent } from '../select-approve/select-approve.component';
 import { Approvedqty } from 'app/Models/Quantity/approvedqty';
+import {Comment } from '../../Models/Comment/comment'
 
 @Component({
   selector: 'ms-rfidetails',
@@ -15,6 +16,7 @@ import { Approvedqty } from 'app/Models/Quantity/approvedqty';
 })
 
 export class RfidetailsComponent implements OnInit {
+  
    RFI : GetRFI[]=[];
    RFI_tbl : GetRFI[]=[];
    Items : NewItemRFI[]=[];
@@ -27,6 +29,12 @@ export class RfidetailsComponent implements OnInit {
    state : string;
    consultant_approve : string;
    consultant_btn : string;
+   type : any = [];
+   details : string;
+   typeid : number;
+   Comment : Comment;
+   
+   Comments : any = [];
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
     ,private _snackBar: MatSnackBar ,public dialog: MatDialog) { 
     this.user = localStorage.getItem('loginUser');
@@ -34,6 +42,11 @@ export class RfidetailsComponent implements OnInit {
      this.approve_draft = false;
 
   
+  }
+
+  Typeid ( val )
+  {
+    this.typeid = val;
   }
 
   //function for calling Stackbar
@@ -46,63 +59,19 @@ export class RfidetailsComponent implements OnInit {
     });
   }
 
-  //openDialog to edit Approved Qunatity 
-  openDialog(qid): void {
-    console.log(qid);
-    const dialogRef = this.dialog.open(EditContractedQunatityComponent, {
-      width: '20%',
-      height :'30%',
-      data: this.contracted_qty[qid]
-      
-    }
-  
-    );
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.contracted_qty[qid] = result;
-      this.number_arr.push({
-        id : qid , 
-        approved_qty :  this.contracted_qty[qid]
 
-      });
-    
-    });
-    console.log(this.number_arr);
-  }
    //open Approve Dialog
    openDialogApprove()
    {
     const dialogRef = this.dialog.open( SelectApproveComponent , {
       width: '50%',
       height :'40%',
-      data : {comment : '' , approve : ''}
-      
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      this.consultant_approve = result;
-      this.state = result;
-      this.consultant_btn = "Consultant Approve Done";
-      this.service.createConsultantApprove(this.id , this.state , this.consultant_approve).subscribe(
-        data=> console.log(data) , 
-        err=> console.log(err)
-      );
-
-      this.number_arr.forEach(element => {
-        console.log(element);
-        this.service.updateApprovdQty(element).subscribe(
-          data=>console.log(data) , 
-          err=> console.log(err)
-        )
-        
-      });
-      this.openSnackBar("تم اعتماد الطلب من قبل الاستشاري","إغلاق");
-      
+      data : this.id
+     
     });
    }
+
   //Action Method when click on the Approve Draft Button
   ApproveDraft()
   {
@@ -113,11 +82,20 @@ export class RfidetailsComponent implements OnInit {
     )
    this.openSnackBar("تم اعتماد المسودة","إغلاق");
   }
+
   ngOnInit() {
+  
+    //get Comments
+    this.service.getComment(this.id    
+      ).subscribe( data=> this.Comments = data , 
+      err=> console.log(err));
+        
+
     //getting R0FI Data 
     this.service.getRFI_tbl().subscribe(
      data => {
     
+      console.log(data);
        data.forEach(element => {
             if(element.id == this.id)
            {this.RFI_tbl.push(element);
@@ -157,8 +135,37 @@ export class RfidetailsComponent implements OnInit {
         });
       }
     );
+
+    //get Type of comments
+    this.service.getType_forRFI().subscribe(
+     data=> this.type = data , 
+     err => console.log(err)
+         
+    );
   }
 
+  Save()
+  {
+    
+    this.Comment = {
+      comments : this.details , 
+  
+      create_uid : this.user , 
+      rfi_id : this.id , 
+      section_id : this.typeid
+
+    }
+
+    //Cretate Comment
+    this.service.CreateComment(this.Comment).subscribe(
+      data=>{
+        console.log(data) ;
+        location.reload();
+      } , 
+      err=> console.log(err)
+    );
+   
+  }
   //Action Method when click on Back Button 
   backtorfi()
   {

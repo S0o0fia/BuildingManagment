@@ -9,7 +9,7 @@ import { CoreService } from 'app/Service/core/core.service';
 import { formatDate } from '@angular/common';
 import { InspctionId } from 'app/Models/inspction_id/inspction-id';
 import { FileUploader , FileSelectDirective } from 'ng2-file-upload';
-const uri = 'D:/Users/Documents/برنامج إدارة المرافق/src/files';
+const URL = 'http://nqraait.ddns.net:8070/api/test?db=nqproject&token='+localStorage.getItem('token');
 @Component({
   selector: 'ms-add-request',
   templateUrl: './add-request.component.html',
@@ -23,7 +23,7 @@ export class AddRequestComponent implements OnInit {
   req_number : string;
   item_number : string;
   item_name : string;
-  qty : number;
+  qty : number=0;
   types : any =[];
   itemDate : NewItemRFI[]=[];
   typename : number;
@@ -40,14 +40,36 @@ export class AddRequestComponent implements OnInit {
   item_id : number;
   buildings : any[]=[];
  //upload file
-  uploader: FileUploader = new FileUploader({url: uri});
+  uploader: FileUploader = new FileUploader({url: URL});
   AttachList : any = [];  
+  
   selectedfile = null;
   pitem : string="";
   statepitem : boolean  = false;
   filter : number = 0;
   search : string;
   value : string;
+  inspect_loc : string;
+  avaible_qty : number;
+  total : number=0;
+  Visible : boolean = false;   
+  price : number;
+  total_price : number;             
+
+
+  fileToUpload: File = null
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+}
+
+  removeitem(index)
+  {
+    if(index != 0)
+    this.itemDate.splice(0  , index);
+    else
+    this.itemDate.pop();
+  }
 
    filterType(val)
     {
@@ -57,8 +79,7 @@ export class AddRequestComponent implements OnInit {
 
     Search()
     {
-      console.log(this.filter);
-      console.log(this.search);
+     
        this.quantitys.forEach(element=>
         {
         
@@ -66,9 +87,12 @@ export class AddRequestComponent implements OnInit {
           {
               if(this.search == element['item_name'])
               {
-                console.log(this.search == element['item_name'])
+              
                  this.BindItemname(element['item_name'] , element['id']);
                  this.BindItemnumber(element['item_number'] , element['id']);
+                 this.avaible_qty = element['item_qty']-element['excuted'];
+                 this.price = element['price_unit']; 
+                 console.log(this.avaible_qty)
               }
 
           }
@@ -77,9 +101,13 @@ export class AddRequestComponent implements OnInit {
             
             if(this.search == element['item_number'])
             {
-              console.log(this.search == element['item_number'])
+            
+              console.log(element);
               this.BindItemname(element['item_name'] , element['id']);
               this.BindItemnumber(element['item_number'] , element['id']);
+              this.avaible_qty = element['item_qty']-element['excuted'];
+              this.price = element['price_unit']; 
+              console.log(this.avaible_qty)
             }
              
           }
@@ -88,23 +116,25 @@ export class AddRequestComponent implements OnInit {
      
     }
 
-  onFileSelected(event)
-  {
-    this.selectedfile =<File> event.target.files[0];
-  }
+  
 
   change()
   {
     this.statepitem = true;
+     
 
   }
   
+  onFileSelected(event)
+  {
+    this.selectedfile =<File> event.target.files[0];
+  }
   onUpload()
   {
-     const fd = new FormData();
+     
     
-     fd.append('file' , this.selectedfile , this.selectedfile.name);
-     this.services.UploadFile(fd).subscribe(
+     
+     this.services.UploadFile(this.fileToUpload).subscribe(
        res=>console.log(res),
        err=>console.log(err)
      );
@@ -122,6 +152,7 @@ export class AddRequestComponent implements OnInit {
   fileOverAnother(e: any): void {
       this.hasAnotherDropZoneOver = e;
   }
+  
   constructor(   public dialogRef: MatDialogRef<RequestForInspectionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Rfi,private _snackBar: MatSnackBar
     ,private translate : TranslateService , private  services :CoreService) {
@@ -130,23 +161,40 @@ export class AddRequestComponent implements OnInit {
 
 
 
-      this.uploader.onCompleteItem = (item : any , response : any , status : any , header : any)=>
-      {
-            this.AttachList.push(JSON.parse(response));
-      }
+      
     }
   	//Method to fill the Table of items
     addItem()
     {
       this.itemDate.push({
-        rfi_id : 0 ,
-        name : this.item_name , 
-        num : this.item_number ,
-        item_id : this.item_id ,
-        qty : this.qty ,
-        approved_qty: 0,
-        pitem :this.pitem
+      rfi_id : 0 ,
+      inspect_location : this.inspect_loc , 
+      qty : this.qty , 
+      approved_qty  : 0 , 
+      total : this.total
       });
+      
+      
+
+    }
+
+    Visibles()
+    {
+      if(this.qty > this.avaible_qty)
+      {
+        this.Visible = true;
+        console.log(this.Visible);
+      }
+
+      this.total = this.qty * this.price;
+    }
+
+    setVisible()
+    {
+      this.Visible = false;
+      console.log(this.Visible);
+      this.qty = 0 ; 
+      this.total = 0; 
     }
 
     //this to get the request number from the from 
@@ -166,7 +214,16 @@ export class AddRequestComponent implements OnInit {
   }
  
   
+  
   ngOnInit() {
+
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+         console.log('File:uploaded:'+this.uploader);
+         console.log('File uploaded successfully');
+    };
+
+
     //to het the type of work
     this.services.getType_forRFI().subscribe(
       data => this.types = data , 
@@ -210,30 +267,34 @@ export class AddRequestComponent implements OnInit {
     const locale = 'en-US';
     let startdate= formatDate(this.start_work, format, locale);
     let endate=formatDate(this.end_work, format, locale);
-      let inspectiondate= formatDate(this.insepction_date, format, locale);
-      console.log(this.work_id);
+    let inspectiondate= formatDate(this.insepction_date, format, locale);
+   
      this.newRFI = {
               id : 0 ,
               end_date : startdate,
               inspect_date : endate ,
               request_name:"",    
-                     
               request_ids : this.typename , 
               request_num : this.req_number , 
               start_date : inspectiondate ,
               work_location : this.work_id,
-              item_name:"",
-              item_number:"",
-              item_qty : 0,
+             item_id : this.item_id , 
+             pitem : this.pitem
              
      }
 
+     this.itemDate.forEach(element=>
+      {
+       this.total_price += element.total;
+      });
+
+      
      this.services.createRFi(this.newRFI).subscribe(
        data=> {
                   this.inspectionIDs = data as InspctionId;
                   this.itemDate.forEach(element => {
                     element.rfi_id = this.inspectionIDs.inspection_id ,
-                    element.approved_qty = element.qty
+                    element.approved_qty = 0
                     this.services.createItemRFI(element).subscribe(
                       data=>{
                          //function for calling Stackbar

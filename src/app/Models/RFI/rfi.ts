@@ -9,9 +9,7 @@ export interface Rfi {
       start_date : string;
       end_date : string;
       inspect_date : string;
-      item_name : string;
-      item_number:string;
-      item_qty: number;
- 
+      item_id : number;
+      pitem : string;
    
 }

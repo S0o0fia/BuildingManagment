@@ -16,13 +16,13 @@
                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                          <mat-form-field class="full-wid mrgn-b-lg">
                                <mat-label>{{'Approvment'|translate}}</mat-label>
-                               <mat-select name="data" [(ngModel)]="data">
+                               <mat-select name="approve" [(ngModel)]="approve">
                                 
-                                     <mat-option value="waiting" >{{'waiting'|translate}}</mat-option>
-                                       <mat-option value="accepted" >{{'Accepted'|translate}}</mat-option>
-                                       <mat-option value="accepted-with-comment" >{{'Accepted With Comments'|translate}}</mat-option>
-                                       <mat-option value="reject-resend" >{{'Rejected and must Resend'|translate}}</mat-option>
-                                       <mat-option value="rejected" >{{'Rejected'|translate}}</mat-option>
+                                    
+                                       <mat-option  (click)="disbleCommet()" value="accepted" >{{'Accepted'|translate}}</mat-option>
+                                       <mat-option (click)="enableCommet()" value="accepted-with-comment" >{{'Accepted With Comments'|translate}}</mat-option>
+                                       <mat-option  (click)="disbleCommet()" value="reject-resend" >{{'Rejected and must Resend'|translate}}</mat-option>
+                                       <mat-option  (click)="disbleCommet()" value="rejected" >{{'Rejected'|translate}}</mat-option>
                                </mat-select>
                          </mat-form-field>
                       </div>
@@ -31,8 +31,10 @@
                         <mat-form-field class="full-wid mrgn-b-lg">
                            
                               <input matInput name="comment"  [(ngModel)]="comment"
-                              placeholder="{{'Comment'|translate}}" type="text" >    
-                         
+                              placeholder="{{'Comment'|translate}}" type="text"
+                              [disabled]="!com"
+                              >    
+                              
                         </mat-form-field>
                      </div>
                
@@ -40,8 +42,8 @@
   </div>
                 
                    <div fxLayout="row" fxLayoutAlign="space-between" mat-dialog-actions>
-                         <button mat-button mat-raised-button color="accent"   [mat-dialog-close]="data" cdkFocusInitial>{{'Approve'|translate }}</button>
-                         <button mat-button mat-raised-button color="warn"   (click)="onNoClick()" type="button" dir="ltr">{{'Cancel'|translate }}</button>
+                         <button mat-button mat-raised-button color="accent"   (click)="onNoClick()" cdkFocusInitial>{{'Approve'|translate }}</button>
+                         <button mat-button mat-raised-button color="warn"   (click)="close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
                          
                    </div>
                 </div>

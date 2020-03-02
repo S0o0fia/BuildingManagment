@@ -1,0 +1,72 @@
+
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+       <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+             <div fxLayout="column">
+                <h4>{{'List of Count'|translate}}</h4>
+ 
+             </div> <span fxFlex></span>
+             
+             <div fxLayout="column">
+                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Add Request'|translate}}</button>
+             </div> 
+          </div>
+         
+          <br/>
+          <div fxLayout="row" fxLayoutAlign="center center">
+           <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('draft')">{{'draft'|translate}}</button>
+           <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('waiting')">{{'waiting'|translate}}</button>
+           <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')">{{'accepted'|translate}} <br> Code A </button>
+           <button class="mrgn-b-xs" mat-raised-button style="background-color: orange; color: white;" (click)="state('accepted-with-comment')">{{'accepted-with-comment'|translate}} <br> Code B</button>
+           <button class="mrgn-b-xs" mat-raised-button style="background-color: rgb(252, 252, 9) ; color: black;"  (click)="state('reject-resend')">{{'reject-resend'|translate}} <br> Code C</button>
+           <button class="mrgn-b-xs" mat-raised-button color="warn" (click)="state('rejected')">{{'rejected'|translate}} <br> Code D </button>
+            </div>
+          <br/>
+          
+          <mat-divider></mat-divider>
+       </div>
+       <div class="gene-card-content pad-t-none">
+          <div class="table-responsive">
+             <table class="table table-hover table-middle th-fw-light mb-0">
+                <thead>
+                   <tr>
+                      <th style="text-align: center;">{{'ID'|translate}}</th>
+                      <th style="text-align: center;">{{'From'|translate}}</th>
+                       <th style="text-align: center;">{{'To'|translate}}</th>
+                      <th style="text-align: center;">{{'Item Name'|translate}}</th>
+                    
+                      <th style="text-align: center;">{{'Controls'|translate}}</th>
+                   </tr>
+                </thead>
+                <tbody *ngFor="let data of counttable ">
+                   <tr *ngIf="data.state == statename | paginate: { id: 'listing_pagination',
+                itemsPerPage: 10,
+                currentPage: page,
+                totalItems: totalRec }">
+                      <td style="text-align: center;">{{data.id}}</td>
+                      <td style="text-align: center;">{{data.date_from}}</td>
+                      <td style="text-align: center;">{{data.date_to}}</td>
+                      <td style="text-align: center;">{{data.quantity_name}}</td>
+                      <td style="text-align: center;">{{data.state | translate}}</td>
+                 
+                     <td style="text-align: center;">
+                       <div class="dropdown row">
+                             <button mat-icon-button  (click)="countdetails(data.id)" matTooltip="{{'Detials'|translate}}" >
+                                          <mat-icon  color="primary">arrow_back</mat-icon>
+                                    </button>
+                           </div>
+                     </td>
+                   
+                   </tr>
+             
+                </tbody>
+             </table>
+             <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
+              previousLabel="{{'Previous'|translate}}"
+               nextLabel="{{'Next'|translate}}"
+              (pageChange)="page = $event"></pagination-controls>
+          </div>
+       </div>
+    </mat-card>
+ </div>

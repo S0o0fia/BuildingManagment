@@ -1,10 +1,7 @@
 export interface NewItemRFI {
-    item_id : number;
     rfi_id : number;
-    num: string;  
-    name : string ; 
+    inspect_location : string;
     qty : number;
-    pitem : string;
+    total : number;
     approved_qty : number;
-  
 }

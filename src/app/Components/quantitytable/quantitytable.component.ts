@@ -13,11 +13,13 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import * as JSpfd from 'jspdf' 
 import { DiscountComponent } from '../discount/discount.component';
+import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
 
 @Component({
   selector: 'ms-quantitytable',
   templateUrl: './quantitytable.component.html',
-  styleUrls: ['./quantitytable.component.scss']
+  styleUrls: ['./quantitytable.component.scss'],
+
 })
 export class QuantitytableComponent implements OnInit {
   collapseSidebarStatus: any;
@@ -32,13 +34,31 @@ export class QuantitytableComponent implements OnInit {
   projectitem : string ;
   section : any = [];
   projectitems : any =[];
-  item_type : number;
-  proj_item : number;
+  item_type : number = 0;
+  proj_item : number = 0;
   type_name : string;
   item_name : string;
+  all : number = 0;
+  disappearDisount : boolean = false; 
+  total_excuted : number ;
+  filterbyExceed : boolean = false;
+  
+  HideDiscount()
+  {
+     if(  this.disappearDisount == true)
+     this.disappearDisount = false;
+     else 
+     this.disappearDisount = true;
+  }
 
-  
-  
+  FilterExceed()
+  {
+    if(this.filterbyExceed == true)
+     this.filterbyExceed = false;
+     else 
+     this.filterbyExceed = true;
+  }
+
   bindProjectType(name)
   {
      this.item_name = name;
@@ -59,12 +79,16 @@ export class QuantitytableComponent implements OnInit {
                this.dis = data[0].discount as number;
                this.totaldis = this.total_budget - this.dis;
                this.total_budget_vat = ((this.total_budget)+(this.total_budget*0.05));
+
+               this.total_budget = this.formatPipe.transform(this.total_budget);
+               this.totaldis = this.formatPipe.transform(this.totaldis);
+               this.total_budget_vat = this.formatPipe.transform(this.total_budget_vat);
      }, 
       err=>console.log(err)
     )
   }
 
-  constructor(public service : CoreService,  private router : Router,
+  constructor(public service : CoreService,  private router : Router, private formatPipe: NumberFormatPipe , 
       private pageTitleService: PageTitleService , private dialog: MatDialog , private discount : MatDialog) { 
 
         const dialogConfig = new MatDialogConfig();
@@ -78,7 +102,29 @@ export class QuantitytableComponent implements OnInit {
   
  Qty_tbl : any =[] ;
 ngOnInit() {
+
+
+
 this.pageTitleService.setTitle("جدول الكميات");
+
+this.service.gettotal().subscribe(
+  data=>{
+    console.log(data);
+    this.total_budget = data[0].total as number;
+    this.dis = data[0].discount as number;
+    this.totaldis = this.total_budget - this.dis;
+    this.total_budget_vat = ((this.total_budget)+(this.total_budget*0.05));
+    this.total_excuted =   data[0].total_excuted as number
+
+    this.total_budget = this.formatPipe.transform(this.total_budget);
+    this.totaldis = this.formatPipe.transform(this.totaldis);
+    this.total_budget_vat = this.formatPipe.transform(this.total_budget_vat);
+    this.total_excuted = this.formatPipe.transform(this.total_excuted);
+    
+  }, 
+  err => console.log(err)
+);
+
 this.service.getQty_tbl().subscribe(
    (res)=> {this.Qty_tbl = res 
             console.log(this.Qty_tbl);

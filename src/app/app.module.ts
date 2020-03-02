@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA , Pipe , PipeTransform} from '@angular/core';
 import 'hammerjs';
 import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -87,6 +87,10 @@ import { UnderdevelopmentComponent } from './Components/underdevelopment/underde
 import { DiscountComponent } from './Components/discount/discount.component';
 import { MirapproveComponent } from './Components/mirapprove/mirapprove.component';
 import { ApproveQuantitiesComponent } from './Components/approve-quantities/approve-quantities.component';
+import { NumberFormatPipe } from './Models/Pipe/number.pip';
+import { CollectTableComponent } from './Components/collect-table/collect-table.component';
+import { CountdetailsComponent } from './Components/countdetails/countdetails.component';
+import { CountitemdetailsComponent } from './Components/countitemdetails/countitemdetails.component';
 
 
 
@@ -113,11 +117,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	imports: [
 		BrowserModule,
 		NgxPaginationModule,
+        
 	
 		AgmCoreModule.forRoot({
 			apiKey: 'AIzaSyBe4r21LOoFNKUy6Dv3o4H16ozLT473wvs'
 		  }),
-		BrowserAnimationsModule,
+		BrowserAnimationsModule, 
+		FileUploadModule ,
 		FormsModule,
 		FileUploadModule,
 		ReactiveFormsModule,
@@ -131,14 +137,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		MenuToggleModule,
 		FileUploadModule,
 	    HttpClientModule,
-	  ChartsModule,
-	  HijriModule,
+	    ChartsModule,
+	    HijriModule,
 		VgCoreModule,
 		VgControlsModule,
 		VgOverlayPlayModule,
 		VgBufferingModule,
 		VgStreamingModule,
-      HttpClientModule,
+        HttpClientModule,
 
       MatSlideToggleModule,
 		TranslateModule.forRoot({
@@ -258,9 +264,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	],
 	declarations: [
 		GeneAppComponent, 
+		NumberFormatPipe,
 	    SideBarComponent, FooterComponent ,
 		MainComponent,
 		CrmComponent , 
+		
 		CreatprojectComponent , 
 		QuantitytableComponent,
 		LoginComponent,
@@ -298,14 +306,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		UnderdevelopmentComponent,
 		DiscountComponent,
 		MirapproveComponent,
-		ApproveQuantitiesComponent
+		ApproveQuantitiesComponent,
+		CollectTableComponent,
+		CountdetailsComponent,
+		CountitemdetailsComponent
 
 	
 		
 		
 	],
 	entryComponents:[
-		DiscountComponent,
+		DiscountComponent,	
 		ChooserequestComponent,
 		UnderdevelopmentComponent,
 		EditContractedQunatityComponent,
@@ -324,16 +335,23 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		
 	],
 	exports:[
-		MatDatepickerModule	]
+		MatDatepickerModule ,
+	
+		
+		]
 	,
 	bootstrap: [GeneAppComponent],
 	providers: [
+	
 		MenuItems,
 		BreadcrumbService,
 		PageTitleService,
 		HijriService,
 		ExcelService,
+		NumberFormatPipe,
 		D3ChartService,
+
+	
 		{
 			provide: PERFECT_SCROLLBAR_CONFIG,
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

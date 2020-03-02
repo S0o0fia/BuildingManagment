@@ -1,0 +1,93 @@
+<div class="container" fxLayout="wrap row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutAlign="center">
+    <mat-card>
+            <div class="gene-card-title">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                       <div fxLayout="column">
+                          <h4>{{'Request Status'|translate}}</h4>
+           
+                       </div> <span fxFlex></span>
+                       
+                       <div fxLayout="column">
+                          <div class="row">
+                          <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()">{{'Back'|translate}}</button>
+                          <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
+                           (click)="ApproveDraft()">{{'Draft Approve'|translate}}</button>
+                           <button class="mrgn-b-xs" [disabled]="consultant_approve == 'accepted'" mat-raised-button color="warn" (click)="ApproveConsultant()">{{consultant_btn|translate}}</button>
+                
+                        </div>
+                       </div> 
+                    </div>
+                   
+                    <mat-divider></mat-divider>
+         </div>
+         <div class="gene-card-content pad-t-none">
+                <div class="table-responsive" id="dvPdf">
+                  
+                   <table class=" table-responsive table" fxLayout="row">
+                      <thead  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column">
+                         <tr  fxLayout="column"   fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column" >
+                            <td>{{'ID'|translate}}</td>
+                            <td>{{'From'|translate}}</td>
+                            <td>{{'To'|translate}}</td>
+                            <td>{{'By Contractor'|translate}}</td>
+                            <td>{{'Request Status'|translate}}</td>
+                            
+                            <td style="padding-bottom: 20%;;">{{'Item Name'|translate}}</td>
+                           
+                         </tr>
+                      </thead>
+                      <tbody  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
+                         <tr  *ngFor="let item of count"   fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
+                          
+                           <td>{{item.id}}</td>
+                           <td>{{item.date_from}}</td>
+                           <td>{{item.date_to}}</td>
+                           <td>{{user}}</td>
+                           <td>{{state | translate}}</td>
+                          
+                           <td>{{item.quantity_name}}</td>
+                         
+                         </tr>
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+        <div class="gene-card-title">
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+               <div fxLayout="column">
+                  <h4>{{'Inspect Location'|translate}}</h4>
+   
+               </div> <span fxFlex></span>
+               
+             
+            </div>
+           
+            <mat-divider></mat-divider>
+         </div>
+         <div class="gene-card-content pad-t-none">
+            <div class="table-responsive" id="dvPdf">
+              
+               <table class="table table-hover table-middle th-fw-light mb-0">
+                  <thead>
+                     <tr>
+                         <th style="text-align: center;">{{'Inspect Location'|translate}}</th>
+                        <th style="text-align: center;">{{'Executed Quantity'|translate}}</th>
+                        <th style="text-align: center;">{{'Approved Quantity'|translate}}</th>
+
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let item of Items" style="text-align: center;">
+                         <td style="text-align: center;">{{item.location}}</td>
+                         <td style="text-align: center;">{{item.qty}}</td>
+                         <td style="text-align: center;"><input matInput name="approve" [(ngModel)]="item.approved_qty"/></td>
+                        
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+    </mat-card>
+
+    
+</div>

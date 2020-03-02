@@ -21,15 +21,17 @@
          <div class="gene-card-content pad-t-none">
                 <div class="table-responsive" id="dvPdf">
                   
-                   <table class=" table-middle table" fxLayout="row">
+                   <table class=" table-responsive table" fxLayout="row">
                       <thead  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column">
-                         <tr  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column" >
+                         <tr  fxLayout="column"   fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column" >
                             <td>{{'Request Number'|translate}}</td>
                             <td>{{'Request Type'|translate}}</td>
                             <td>{{'Location of Works'|translate}}</td>
                             <td>{{'By Contractor'|translate}}</td>
                             <td>{{'Request Status'|translate}}</td>
-                            <td>{{'Consultant Approve'|translate}}</td>
+                            <td>{{'Item Number'|translate}}</td>
+                            <td style="padding-bottom: 20%;;">{{'Item Name'|translate}}</td>
+                            <td >{{'Prepare Item'|translate}}</td>
                          </tr>
                       </thead>
                       <tbody  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
@@ -40,7 +42,9 @@
                            <td>{{item.work_location}}</td>
                            <td>{{user}}</td>
                            <td>{{state | translate}}</td>
-                           <td>{{consultant_approve| translate}}</td>
+                           <td>{{item.item_number}}</td>
+                           <td>{{item.item_name}}</td>
+                           <td>{{item.pitem}}</td>
                          </tr>
                       </tbody>
                    </table>
@@ -64,20 +68,16 @@
                <table class="table table-hover table-middle th-fw-light mb-0">
                   <thead>
                      <tr>
-                        <th>{{'Item Number'|translate}}</th>
-                        <th>{{'Item Name'|translate}}</th>
+                         <th>{{'Inspect Location'|translate}}</th>
                         <th>{{'Executed Quantity'|translate}}</th>
-                        <th>{{'Contracted Qunatity'|translate}}</th>
                         <th>{{'Controls'|translate}}</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr *ngFor="let item of Items" style="text-align: center;">
-                         <td>{{item.num}}</td>
                          <td>{{item.name}}</td>
                          <td>{{item.qty}}</td>
-                         <td>{{contracted_qty[item.id]}}</td>
-                        <td>
+                         <td>
                             <mat-icon matTooltip="{{'Edit Contract Quantity'|translate}}" (click)="openDialog(item.id)">edit</mat-icon>
                        </td>
                      </tr>
@@ -123,8 +123,11 @@
                         <mat-form-field class="full-wid mrgn-b-lg">
                               <mat-label>{{'Department'|translate}}</mat-label>
                               <mat-select name="department">      
-                                   <mat-option>
-                                      </mat-option>
+                                   <div *ngFor="let item of type"> 
+                                    <mat-option (click)="Typeid(item.id)" value={{item.id}}>
+                                       {{item.type}}
+                                    </mat-option>
+                                   </div>
                             </mat-select>
                         </mat-form-field>
                      </div>
@@ -133,7 +136,7 @@
                             <mat-form-field class="full-wid mrgn-b-lg">
                                   <mat-label>{{'Details'|translate}}</mat-label>
                                   <textarea matInput name="details"  
-                                  cdkTextareaAutosize
+                                  cdkTextareaAutosize [(ngModel)]="details"
                                    #autosize="cdkTextareaAutosize"
                                     cdkAutosizeMinRows="1"
                                      cdkAutosizeMaxRows="5"></textarea> 
@@ -141,20 +144,23 @@
                          </div>
                   </div>
                          <div fxLayout="row" fxLayoutAlign="center">
-                                <button mat-button mat-raised-button color="accent" type="button" dir="ltr">{{'Save'|translate }}</button>
+                                <button mat-button mat-raised-button color="accent" type="button" dir="ltr"
+                                (click)="Save()"
+                                >{{'Save'|translate }}</button>
                          </div>
                   </div>
                 </form>
               </mat-card>
-
+           <div style="overflow-y:scroll; height:200px;">
+             <div *ngFor="let comment of Comments"  >
               <mat-card style="text-align: center;"> 
-                  <h5>أعمال الكهرباء</h5>
+                  <h5>{{comment.section_name}}</h5>
+                  <h5>{{comment.comments}}</h5>
                   <h6>بواسطة</h6>
-                  <div fxLayout="row"  fxLayoutAlign="center">
-                      <mat-icon>edit</mat-icon>
-                      <mat-icon>delete</mat-icon>
-                  </div>
+                  <h6>{{comment.name}}</h6>
              </mat-card>
+             </div>
+              </div>
             </div>
          </div>
     </mat-card>

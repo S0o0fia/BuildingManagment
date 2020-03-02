@@ -17,10 +17,10 @@
               <div fxLayout="row" fxLayoutAlign="center center">
                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('draft')">{{'draft'|translate}}</button>
                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('waiting')">{{'waiting'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')">{{'accepted'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button style="background-color: orange; color: white;" (click)="state('accepted-with-comment')">{{'accepted-with-comment'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button style="background-color: rgb(252, 252, 9) ; color: black;"  (click)="state('reject-resend')">{{'reject-resend'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button color="warn" (click)="state('rejected')">{{'rejected'|translate}}</button>
+               <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')">{{'accepted'|translate}} <br> Code A </button>
+               <button class="mrgn-b-xs" mat-raised-button style="background-color: orange; color: white;" (click)="state('accepted-with-comment')">{{'accepted-with-comment'|translate}} <br> Code B</button>
+               <button class="mrgn-b-xs" mat-raised-button style="background-color: rgb(252, 252, 9) ; color: black;"  (click)="state('reject-resend')">{{'reject-resend'|translate}} <br> Code C</button>
+               <button class="mrgn-b-xs" mat-raised-button color="warn" (click)="state('rejected')">{{'rejected'|translate}} <br> Code D </button>
                 </div>
               <br/>
               

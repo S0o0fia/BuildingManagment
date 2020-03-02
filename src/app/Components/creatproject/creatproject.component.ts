@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { CoreService } from 'app/service/core/core.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { NewProject } from 'app/Models/Project/new-project';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { ProjectModel } from 'app/Models/Project/project-model';
@@ -56,6 +56,7 @@ export class CreatprojectComponent implements OnInit {
   duration : number=0;
   project_duration_days : number = 0;
   project_duration_months : number = 0;
+  project_duration_h_months : number = 0;
   deliverdate : Date = new Date()  ;
   deliverdate_hijri : Date = new Date();
   type : string="";
@@ -65,9 +66,12 @@ export class CreatprojectComponent implements OnInit {
   uploader: FileUploader = new FileUploader({url: ''});
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
+  from_hijri : string;
   qty_type : boolean;
 
-    
+  containfirst : boolean = false;
+
+
 
      /**
       *fileOverBase fires during 'over' and 'out' events for Drop Area.
@@ -83,7 +87,7 @@ export class CreatprojectComponent implements OnInit {
       this.hasAnotherDropZoneOver = e;
   }
 
-  constructor( private pageTitleService: PageTitleService,
+  constructor( private pageTitleService: PageTitleService, 
                
                private translate : TranslateService , public service : CoreService
                 , public fb: FormBuilder , private dialog: MatDialog) {
@@ -95,6 +99,8 @@ export class CreatprojectComponent implements OnInit {
                   this.lat=24.7136;
 
                   this.qty_type = false;
+
+                 
                }
 
   ngOnInit() {
@@ -116,6 +122,13 @@ export class CreatprojectComponent implements OnInit {
          (err) => {console.log(err)}
      );
   }
+
+  conationfpay()
+  { 
+    
+    this.containfirst = true;
+    
+    }
   durationType(value)
   {
      this.duration = value;
@@ -144,9 +157,16 @@ caldurationm(value)
    Month += value;
    this.deliverdate = new Date(Year , Month , days);
    this.deliverdate_hijri = new Date(Year , Month , days);
-   this.project_duration_days = value*30;
+    
+   if(this.duration == 2){
+    this.project_duration_days = value*29.5;
+   }
 
-  
+    
+   if(this.duration == 3){
+    this.project_duration_days = value*30.4;
+   }
+
 }
 
 openDialog(): void {
@@ -161,17 +181,38 @@ openDialog(): void {
      
    });
  }
+
 caldurationd(value)
 {
    let days = this.startdate.getDay();
    let Month = this.startdate.getMonth();
    let Year = this.startdate.getFullYear();
-   Month += Math.round(value/30);
-   days += value%30+1;
+   if(this.duration == 2)
+   {
+ 
+    Month += Math.round(value/29.5);
+
+   }
+   if(this.duration == 3)
+   {
+    
+    Month += Math.round(value/30.4);
+
+   }
+  
+   days += value %30 + 1;
    this.deliverdate = new Date(Year , Month , days);
    this.deliverdate_hijri = new Date(Year , Month , days);
-   this.project_duration_months= value/30;
+   if(this.duration == 2)
+   {
+    this.project_duration_months= Math.round(value/29.5);
 
+   }
+   if(this.duration == 3)
+   {
+    this.project_duration_h_months= Math.round(value/30.4);
+
+   }
 }
   nextStep() {
     const format = 'MM/dd/yyyy';

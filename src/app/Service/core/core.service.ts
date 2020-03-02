@@ -16,7 +16,9 @@ import { Mirequest } from 'app/Models/MIR Request/mirequest';
 import { Projectitem } from 'app/Models/ProjectItem/projectitem';
 import { Miritems } from 'app/Models/MIR Request/miritems';
 import { Extract } from '../../Models/Extract/extract';
-
+import { Comment } from '../../Models/Comment/comment';
+import { Count } from 'app/Models/Count/count';
+import { Countitem } from 'app/Models/Count/countitem';
 @Injectable({
 	providedIn: 'root'
 })
@@ -31,7 +33,7 @@ export class CoreService {
 	horizontalSideNavOpen : boolean = false; 	
 	projectDetailsContent : any;
 	editProductData 		 : any;	
-	public apiURL : string = 'http://Nqraait.ddns.net:8070/api';
+	public apiURL : string = 'http://nqraait.ddns.net:8070/api';
 	public db: string='nqproject';
 	
 	constructor(private matDialog : MatDialog,
@@ -126,8 +128,10 @@ export class CoreService {
 		let createRFi = "/rfi/create?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"request_num":"'
 		+value.request_num+
 		'","request_id":'+localStorage.getItem('projectid')+
-		',"request_type":"'+value.request_ids+
-		'","item_id":'+value.work_location+
+		',"request_type":'+value.request_ids+
+		',"pitem":"'+value.pitem+
+		'","quantity_id":'+value.item_id+
+		',"item_id":'+value.work_location+
 		',"inspect_date":"'+value.inspect_date+
 		'","sation_from":"'+value.start_date+
 		'","sation_to":"'+value.end_date+
@@ -139,24 +143,24 @@ export class CoreService {
 	
 	createItemRFI(value : NewItemRFI )
 	{ 
-		let createRFi = "/rfi/items/create?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"num":"'
-		+value.num+
-		'","rfi_id":'+value.rfi_id+
-		',"qty_id":'+value.item_id+
-		',"qty":'+value.qty+
-		',"approved_qty":'+value.approved_qty+
-		// ',"pitem":"'+value.pitem+
-		'","name":"'+value.name+'"}';
+		let createRFi = "/rfi/items/create?db="+this.db+'&token='+localStorage.getItem("token")+'&values='+
+		'{"rfi_id":'+value.rfi_id+
+		',"name":"'+value.inspect_location+
+		'","qty":'+value.qty+
+		'}';
 		console.log(createRFi);
 		return this.http.post(this.apiURL+createRFi , null);
 	
 	}
-	createConsultantApprove(id : number , state : string , consultant_approve : string)
+	
+	createConsultantApprove(id : number , state : string , consultant_approve : string , comment : string)
 	{
 		 let consultant_approvalUrl = "/rfi/set_state?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"id":'
 		 +id+
 		 ',"state":"'+state+
+		 '","comment":"'+comment+
 		 '","consultant_approval":"'+consultant_approve+'"}';
+	
 		 return this.http.post(this.apiURL+consultant_approvalUrl , null);
 	}
 	createQty(value : Quantity)
@@ -177,6 +181,7 @@ export class CoreService {
 		console.log(createQtyturl);
 		return this.http.post(this.apiURL+createQtyturl , null);
 	}
+	
 	getMainSectionList(){
 		let mainSectionUrl='/section/get?token='+localStorage.getItem('token');
 	   return this.http.get(this.apiURL+mainSectionUrl);
@@ -405,17 +410,100 @@ export class CoreService {
 
 
 	file : any;
-	UploadFile(fd:FormData)
-	{
-		
-		
-          
- 
-		let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-	    this.file = fd.getAll("file");
-		
+	UploadFile(fd:File)
+	{  
+		let headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8' });
+		const formData: FormData = new FormData();
+		formData.append('fileKey', fd, fd.name);
 		let url= "/test?db=nqproject&token="+localStorage.getItem('token');
-		return this.http.post(this.apiURL+url , this.file[0].name , {headers});
-	}
 	
+		return this.http.post(this.apiURL+url+'&file='+formData.get('fileKey') ,null);
+	}
+
+	CreateComment ( comment : Comment )
+	{
+		let url = '/rfi/comments/create?db=nqproject&token='+localStorage.getItem('token')+
+		'&values={'+
+		'"section_id":'+comment.section_id+
+		',"comments":"'+comment.comments+
+		'","rfi_id":'+comment.rfi_id+
+		',"name":"'+comment.create_uid+
+		
+		'"}';
+          console.log(url);
+		return this.http.post(this.apiURL+url , null);
+	}
+
+	getComment ( id)
+	{
+		let url = '/rfi/comments/get?db=nqproject&token='+localStorage.getItem('token')+'&rfi_id='+id;
+		return this.http.get(this.apiURL+url);
+	}
+
+	getRFIwithItemFilter(id: number , sdata : string , edata : string)
+	{
+		let geturl = '/approved_rfi/get?db=nqproject&token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid')+
+		'&from_date='+sdata+'&to='+edata+'&item_id='+id;
+	
+		return this.http.get(this.apiURL+geturl);	
+	}
+
+	createCount(counts: Count)
+	{
+		let count = '/count/create?db=nqproject&token='+localStorage.getItem('token')+
+		'&values={"quantity_id" : '+counts.qunatity_id+
+		',"date_from":"'+counts.fromdate+
+		'","date_to" :"'+counts.todate+
+		'","project_id":'+counts.projectid+'}';
+		console.log(count);
+       
+		return this.http.post(this.apiURL+count , null);
+	}
+
+	createcountItem(countitem : Countitem)
+	{
+		let itemUrl = '/count/items/create?db=nqproject&token='+localStorage.getItem('token')+
+		'&values={"name" : "Count- '+countitem.name+
+		'","count_id":'+countitem.count_id+
+		',"location" :"'+countitem.location+
+		'","location_id":'+countitem.location_id+
+		',"qty":'+countitem.qty+
+		',"approved_qty":'+countitem.approved_qty+
+		'}';
+        console.log(itemUrl);
+		return this.http.post(this.apiURL+itemUrl , null);
+	}
+
+	getCount()
+	{
+		let counturl = '/count/get?db=nqproject&token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid');
+		return this.http.get<any[]>(this.apiURL+counturl);
+	}
+
+	getCountItem(id)
+	{
+		let counturl = '/count/items/get?db=nqproject&token='+localStorage.getItem('token')+'&count_id='+id;
+		return this.http.get<any[]>(this.apiURL+counturl);
+	}
+
+	setCountState(state : string , id)
+	{
+		let counturl = '/count/set_state?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
+		'"state":"'+state+
+		'", "id":'+id +
+		'}';
+
+		console.log(counturl);
+		return this.http.post(this.apiURL+counturl ,null);
+	}
+
+	approveCountQty(id : number , approve : number)
+	{
+      let countQtydd = '/count/items/approved_qty?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
+	  '"approved_qty":"'+approve+
+	  '", "id":'+id +
+	  '}';	 
+	  return this.http.post(this.apiURL+countQtydd ,null);
+	}
 }
+

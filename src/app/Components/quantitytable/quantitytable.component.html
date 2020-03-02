@@ -28,8 +28,9 @@
                <mat-form-field class="full-wid mrgn-b-lg">
                      <mat-label>{{'Project Items'|translate}}</mat-label>
                      <mat-select  name="proj_item"  [(ngModel)]="proj_item">
+                         <mat-option  (click)="bindItemType(all)" value="0">{{'All'|translate}}</mat-option>
                      <div *ngFor="let data of projectitems">
-                         <mat-option  (click)="bindProjectType(data.name , data.id)" value={{data.id}}>{{data.name}}</mat-option>
+                         <mat-option  (click)="bindProjectType(data.name)" value={{data.id}}>{{data.name}}</mat-option>
                        </div>
                     </mat-select>
                      
@@ -40,12 +41,21 @@
                <mat-form-field class="full-wid mrgn-b-lg">
                      <mat-label>{{'Type Of Works'|translate}}</mat-label>
                      <mat-select  name="item_type"  [(ngModel)]="item_type">
+                        <mat-option  (click)="bindItemType(all)" value="0">{{'All'|translate}}</mat-option>
                         <div   *ngFor="let data of section">
-                         <mat-option  (click)="bindItemType(data.name , data.id)" value={{data.id}}>{{data.name}}</mat-option>
+                         <mat-option  (click)="bindItemType(data.name)" value={{data.id}}>{{data.name}}</mat-option>
                         </div>
                      </mat-select>
                      
                </mat-form-field>
+            </div>
+         </div>
+         <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
+          <mat-checkbox (click)="FilterExceed()">{{'Exceed Qunatiyu with Contracted Qunatity'|translate}}</mat-checkbox>
+            </div>
+            <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
+               <mat-checkbox (click)="HideDiscount()">{{'Hide Total Amount with Discount'|translate}}</mat-checkbox>
             </div>
          </div>
          <mat-divider></mat-divider>
@@ -55,38 +65,204 @@
            
             <table class="table table-hover table-middle th-fw-light mb-0">
                <thead>
-                  <tr>
-                   <th>{{'Project Items'|translate}}</th>
-                   <th>{{'Type Of Works'|translate}}</th>
-                   <th>{{'Items Type'|translate}}</th>
-                   <th>{{'Item Number'|translate}}</th>
-                   <th >{{'Item Name'|translate}}</th>
-                    <th>{{'Extecuted Quantities'|translate}}</th>
-                    <th>{{'Unit'|translate}}</th>
-                    <th>{{'Unit Price'|translate}}</th>
-                    <th>{{'Total Price'|translate}}</th>
+                  <tr >
+                  <th >{{'Project Items'|translate}}</th>
+                  <th>{{'Type Of Works'|translate}}</th>
+                  <th>{{'Item Number'|translate}}</th>
+                  <th >{{'Item Name'|translate}}</th>
+                  <th>{{'Items Type'|translate}}</th>
+                  <th>{{'Unit'|translate}}</th>
+                  <th>{{'Contracted Quantities'|translate}}</th>
+                  <th>{{'Unit Price'|translate}}</th>
+                  <th>{{'Total Quantities Price'|translate}}</th>
+                  <th>{{'Extecuted Quantities'|translate}}</th>
+                  <th>{{'Total Excuted'|translate}}</th>
                   </tr>
                </thead>
-               <tbody *ngFor="let data of Qty_tbl" >
-                  <tr  *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name | paginate: { id: 'listing_pagination',
+               <tbody *ngIf='item_type == 0  && proj_item == 0 && filterbyExceed == false '>
+                  <tr  *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
+                     itemsPerPage: 10,
+                     currentPage: page,
+                     totalItems: totalRec }">
+                                   
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.first_subsection_name}}</span>
+                        </td>
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }" >
+                           <span>{{data.main_section_name}}</span>
+                        </td>               
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.item_number}}</span>
+                        </td>
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.item_name}}</span>
+                        </td>    
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.item_type | translate}}</span>
+                        </td>                
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.product_uom_name}}</span>
+                        </td>
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.item_qty}}</span>
+                        </td>
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.price_unit}}</span>
+                        </td>
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.price_total}}</span>
+                        </td>                   
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.excuted}}</span>
+                        </td>
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.total_excuted}}</span>
+                        </td>
+                      
+                    
+                     </tr>
+                </tbody>
+
+
+           
+                <tbody  *ngIf='item_type != 0 && proj_item != 0' > 
+                 <tr *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
+                     itemsPerPage: 10,
+                     currentPage: page,
+                     totalItems: totalRec }">
+                                  
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.first_subsection_name}}</span>
+                        </td>
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.main_section_name}}</span>
+                        </td>               
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_number}}</span>
+                        </td>
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_name}}</span>
+                        </td>    
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_type | translate}}</span>
+                        </td>                
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.product_uom_name}}</span>
+                        </td>
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_qty}}</span>
+                        </td>
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.price_unit}}</span>
+                        </td>
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.price_total}}</span>
+                        </td>                   
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.excuted}}</span>
+                        </td>
+                        <td *ngIf=" data.first_subsection_name == item_name && data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.total_excuted}}</span>
+                        </td>
+                     </tr>
+                  </tbody>
+               
+
+            
+               
+               <tbody *ngIf='proj_item != 0 && item_type == 0'>
+             
+                     <tr *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
+                     itemsPerPage: 10,
+                     currentPage: page,
+                     totalItems: totalRec }">
+                                   
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.first_subsection_name}}</span>
+                        </td>
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.main_section_name}}</span>
+                        </td>               
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_number}}</span>
+                        </td>
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_name}}</span>
+                        </td>    
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name"></td>                
+                             <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_type | translate}}</span>
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.product_uom_name}}</span>
+                        </td>
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_qty}}</span>
+                        </td>
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.price_unit}}</span>
+                        </td>
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.price_total}}</span>
+                        </td>                   
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.excuted}}</span>
+                        </td>
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
+                           <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.total_excuted}}</span>
+                        </td>
+                      
+               
+                     </tr>
+                  
+
+               </tbody>
+
+               <tbody *ngIf='filterbyExceed == true'>
+             
+                  <tr *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
                   itemsPerPage: 10,
                   currentPage: page,
                   totalItems: totalRec }">
                                 
-                     <td>{{data.first_subsection_name}}</td>
-                     <td>{{data.main_section_name}}</td>
-                     <td>{{data.item_type | translate}}</td>
-                     <td>{{data.item_number}}</td>
-                     <td>{{data.item_name}}</td>
-                     <td>{{data.item_qty}}</td>
-                     <td>{{data.product_uom_name}}</td>
-                     <td>{{data.price_unit}}</td>
-                     <td>{{data.price_total}}</td>                   
-                
+                     <td  *ngIf=" data.excuted > data.item_qty">
+                        <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.first_subsection_name}}</span>
+                     </td>
+
+                     <td  *ngIf=" data.excuted > data.item_qty">
+                        <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.main_section_name}}</span>
+                     </td>               
+                     <td  *ngIf="data.excuted > data.item_qty">
+                        <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_number}}</span>
+                     </td>
+                     <td  *ngIf="data.excuted > data.item_qty">
+                        <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_name}}</span>
+                     </td>    
+                     <td  *ngIf="data.excuted > data.item_qty">               
+                          <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_type | translate}}</span>
+                     </td> 
+                     <td  *ngIf="data.excuted > data.item_qty">
+                        <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.product_uom_name}}</span>
+                     </td>
+                     <td  *ngIf="data.excuted > data.item_qty">
+                        <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_qty}}</span>
+                     </td>
+                     <td  *ngIf="data.excuted > data.item_qty">
+                        <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.price_unit}}</span>
+                     </td>
+                     <td  *ngIf="data.excuted > data.item_qty">
+                        <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.price_total}}</span>
+                     </td>                   
+                     <td  *ngIf=" data.excuted > data.item_qty">
+                        <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.excuted}}</span>
+                     </td>
+                     <td  *ngIf=" data.excuted > data.item_qty">
+                        <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.total_excuted}}</span>
+                     </td>
                    
-                 
+            
                   </tr>
-               </tbody>
+               
+
+            </tbody>
             </table>
             <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
             previousLabel="{{'Previous'|translate}}"
@@ -94,14 +270,19 @@
             (pageChange)="page = $event"></pagination-controls>
          </div>
         <div  fxLayout="row wrap" fxLayoutAlign="space-between center">
-          <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+          <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" fxFlex.gt-md="30">
              <mat-label style="font-weight: bold;">{{'Total Price'|translate}} : {{total_budget}}</mat-label>
           </div>
           <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" fxFlex.gt-md="30">
             <mat-label style="font-weight: bold;">{{'Total Budget with vat'|translate}} : {{total_budget_vat}}</mat-label>
          </div>
-         <div fxFlex.gt-sm="29" fxFlex.gt-xs="29" fxFlex="100" fxFlex.gt-md="29">
+         <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" fxFlex.gt-md="30" 
+         [ngStyle]="{ 'display': (disappearDisount ? 'none' :  'block' ) }"
+         >
             <mat-label style="font-weight: bold;">{{'Total After Discount'|translate}} : {{totaldis}}</mat-label>
+         </div>
+         <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" fxFlex.gt-md="30">
+            <mat-label style="font-weight: bold;"  [ngStyle]="{ 'display': (disappearDisount ? 'block' :  'none' ) }">{{'Total Executed Quantity'|translate}} : {{total_excuted}}</mat-label>
          </div>
         </div>
       </div>

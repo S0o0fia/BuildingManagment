@@ -22,6 +22,9 @@ import { ProjectitemsComponent} from './Components/projectitems/projectitems.com
 import { UnderdevelopmentComponent } from './Components/underdevelopment/underdevelopment.component';
 import { MirapproveComponent } from './Components/mirapprove/mirapprove.component';
 import { ApproveQuantitiesComponent } from './Components/approve-quantities/approve-quantities.component';
+import { CollectTableComponent } from './Components/collect-table/collect-table.component';
+import { CountdetailsComponent } from './Components/countdetails/countdetails.component';
+import { CountitemdetailsComponent } from './Components/countitemdetails/countitemdetails.component';
 
 
 
@@ -80,10 +83,23 @@ const appRoutes: Routes = [
                component:RfidetailsComponent
             },
             {
+               path:'countitemdetails/:id',
+               component:CountitemdetailsComponent
+            },
+            
+            {
                path:'receiveitem',
                component:RquestforRecieveItemsComponent
             },
-             
+            {
+               path:'collect',
+               component:CollectTableComponent
+            },
+            {
+               path:'countdetails',
+               component:CountdetailsComponent
+            },
+                          
             {
                path:'mirdetails/:id',
                component:MirapproveComponent

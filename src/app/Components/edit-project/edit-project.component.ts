@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreService } from 'app/Service/core/core.service';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { FileUploader } from 'ng2-file-upload';
 
 @Component({
   selector: 'ms-edit-project',
@@ -17,6 +18,7 @@ export class EditProjectComponent implements OnInit {
   exType : number=0;
   myForm: FormGroup;
   arr: FormArray;
+  uploader: FileUploader = new FileUploader({url: ''});
   extension_time_days : number = 0;
   extension_time_month : number =0;
   extension_time_date: Date = new Date();
