@@ -69,7 +69,7 @@
                                  </button>
                                  <mat-menu #menu="matMenu">
                                   <div  *ngFor=" let list of dropList">  
-                                   <button mat-menu-item (click)="Choose(list , data.id)">{{list|translate}}</button>
+                                   <button mat-menu-item (click)="Choose(list , data.id , data.name)">{{list|translate}}</button>
                                  </div>
                                  </mat-menu>
                                  </td>

@@ -27,6 +27,8 @@ export class CollectTableComponent implements OnInit {
   CountItems : Countitem [] =[];
   count_id : number; 
   qty : number ;
+  projectname : string;
+
   approves : any = [];
   constructor(public service : CoreService , public router : Router) 
   {
@@ -34,6 +36,7 @@ export class CollectTableComponent implements OnInit {
     this.minDate = new Date(1900,1,1);
     this.maxDate = new Date(2050,1,1);
     this.project_id = +localStorage.getItem('projectid');
+    this.projectname = localStorage.getItem('projectname');
    }
 
   ngOnInit() {

@@ -22,6 +22,7 @@ export class CountdetailsComponent implements OnInit {
   totalRec : number;
   page: number = 1;
   statename : string;
+  projectname : string;
   
  
   constructor(public service : CoreService,
@@ -31,7 +32,7 @@ export class CountdetailsComponent implements OnInit {
 
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-
+      this.projectname = localStorage.getItem('projectname');
       this.statename = "draft";
 
     }
@@ -43,7 +44,7 @@ export class CountdetailsComponent implements OnInit {
       
     }
 ngOnInit() {
-this.pageTitleService.setTitle("قائمة طلبات الحصر");
+this.pageTitleService.setTitle('قائمة طلبات الحصر ' +' / '+this.projectname);
 
  this.service.getCount().subscribe(
    data=> {this.counttable = data as any;

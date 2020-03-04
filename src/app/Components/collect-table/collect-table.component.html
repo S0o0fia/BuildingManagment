@@ -3,7 +3,7 @@
        <div class="gene-card-title">
           <div fxLayout="row" fxLayoutAlign="start center">
              <div fxLayout="column">
-                <h4>{{'Request for Inventroy Qunatities'|translate}}</h4>
+                <h4> {{projectname}}  / {{'Request for Inventroy Qunatities'|translate}}</h4>
              </div>
            
             
@@ -123,8 +123,8 @@
                         <th style="text-align: center;">{{'Controls'|translate}}</th>
                      </tr>
                   </thead>
-                  <tbody>
-                     <tr *ngFor="let item of Location; let i = index" style="text-align: center;">
+                  <tbody *ngFor="let item of Location; let i = index">
+                     <tr *ngIf="item.invoiced == false"  style="text-align: center;">
                         <td>{{item.rfi_id}}</td>
                         <td>{{item.name}}</td>
                          <td>

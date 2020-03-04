@@ -15,9 +15,13 @@ export class ProjectitemsComponent implements OnInit {
   itemsData : Projectitem [] = [];
   type : any =[];
   projectid : number;
+  projectname : string;
   
   constructor(private services : CoreService)
- { }
+ { 
+
+  this.projectname = localStorage.getItem('projectname');
+ }
 
   ngOnInit() {
     this.services.getProjectitemtype().subscribe(

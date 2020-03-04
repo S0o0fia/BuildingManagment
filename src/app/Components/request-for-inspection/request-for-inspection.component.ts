@@ -22,7 +22,7 @@ export class RequestForInspectionComponent implements OnInit {
   totalRec : number;
   page: number = 1;
   statename : string;
-  
+  projectname : string;
  
   constructor(public service : CoreService,
     private pageTitleService: PageTitleService ,private router:Router, private dialog: MatDialog) { 
@@ -31,7 +31,7 @@ export class RequestForInspectionComponent implements OnInit {
 
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-
+      this.projectname = localStorage.getItem('projectname');
       this.statename = "draft";
 
     }
@@ -43,7 +43,7 @@ export class RequestForInspectionComponent implements OnInit {
       
     }
 ngOnInit() {
-this.pageTitleService.setTitle("طلبات فحص الأعمال  ");
+this.pageTitleService.setTitle(this.projectname +' / '+"طلبات فحص الأعمال  ");
 
  this.service.getRFI_tbl().subscribe(
    data=> this.RFI_tbl = data,

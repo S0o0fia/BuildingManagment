@@ -42,6 +42,7 @@ export class QuantitytableComponent implements OnInit {
   disappearDisount : boolean = false; 
   total_excuted : number ;
   filterbyExceed : boolean = false;
+  projectname : string;
   
   HideDiscount()
   {
@@ -95,6 +96,7 @@ export class QuantitytableComponent implements OnInit {
 
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
+        this.projectname = localStorage.getItem('projectname');
 
      
 
@@ -105,7 +107,7 @@ ngOnInit() {
 
 
 
-this.pageTitleService.setTitle("جدول الكميات");
+this.pageTitleService.setTitle(this.projectname +' / '+"جدول الكميات");
 
 this.service.gettotal().subscribe(
   data=>{

@@ -34,7 +34,8 @@ export class AddrecieveditemComponent implements OnInit {
   mirid  :number;
   matiral :Matetrial;
   getMIR: any=[];
-;
+  projectname : string;
+
   hi(val , code)
   {
      this.facroty_id = val;
@@ -59,6 +60,7 @@ export class AddrecieveditemComponent implements OnInit {
       this.reqDate = new Date();
       this.lng=46.6753;
       this.lat=24.7136;
+      this.projectname = localStorage.getItem('projectname');
     }
   	
     openSnackBar(message: string, action: string) {

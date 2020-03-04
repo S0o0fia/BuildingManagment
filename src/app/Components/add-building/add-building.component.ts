@@ -26,6 +26,7 @@ export class AddBuildingComponent implements OnInit {
   neightborhood : string;
   filename : string;
   data : any[];
+  projectname : string;
     
 
      /**
@@ -67,6 +68,8 @@ export class AddBuildingComponent implements OnInit {
     this.buildinglocation =  new FormControl('' , Validators.required);
     this.Municipal =  new FormControl('' , Validators.required);
     this.Neighborhood =  new FormControl('' , Validators.required);
+    
+    this.projectname = localStorage.getItem('projectname');
      
    
     }

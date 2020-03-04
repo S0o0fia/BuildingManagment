@@ -13,6 +13,7 @@ export interface NewProject {
     first_pay_percentage : number;
     proj_duration_days : number;
     proj_duration_monthes :number;
+    with_vat : boolean;
     project_date : string ;
     project_hijri_date : string;
     delivery_date:string;
@@ -24,6 +25,7 @@ export interface NewProject {
     proj_situation : string;
     date_situation : string;
     multi_qty_table : boolean ;
+
 
     
     

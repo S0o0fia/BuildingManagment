@@ -12,10 +12,12 @@ import { TranslateService } from '@ngx-translate/core';
 export class AddDiscountComponent implements OnInit {
   minDate : Date;
   maxDate : Date;
+  projectname : string;
   constructor(   public dialogRef: MatDialogRef<AddExtractComponent>,
     @Inject(MAT_DIALOG_DATA) private pageTitleService: PageTitleService,private translate : TranslateService) {
       this.minDate = new Date(1900,1,1);
       this.maxDate = new Date(2050,1,1);
+      this.projectname = localStorage.getItem('projectname');
     }
   	
    

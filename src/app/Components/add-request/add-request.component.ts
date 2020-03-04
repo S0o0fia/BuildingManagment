@@ -58,6 +58,7 @@ export class AddRequestComponent implements OnInit {
 
 
   fileToUpload: File = null
+  projectname : string ;
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -158,7 +159,7 @@ export class AddRequestComponent implements OnInit {
     ,private translate : TranslateService , private  services :CoreService) {
       this.minDate = new Date(1900,1,1);
       this.maxDate = new Date(2050,1,1);
-
+     this.projectname = localStorage.getItem('projectname');
 
 
       

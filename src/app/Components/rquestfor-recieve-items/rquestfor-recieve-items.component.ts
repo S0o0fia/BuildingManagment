@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RquestforRecieveItemsComponent implements OnInit {
   getMIR : any = [];
+   projectname : string;
   constructor(public service : CoreService, public router : Router,
     private pageTitleService: PageTitleService , private dialog: MatDialog) { 
 
@@ -19,7 +20,7 @@ export class RquestforRecieveItemsComponent implements OnInit {
 
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-
+      this.projectname = localStorage.getItem('projectname');
    
 
     }
@@ -31,7 +32,7 @@ export class RquestforRecieveItemsComponent implements OnInit {
 
     Qty_tbl : any ;
 ngOnInit() {
-this.pageTitleService.setTitle("طلبات تسليم المواد");
+this.pageTitleService.setTitle(this.projectname +' / '+"طلبات تسليم المواد");
 this.service.getMIR().subscribe(
   data=>this.getMIR=data,
   err=>console.log(err) 

@@ -68,7 +68,7 @@ export class CreatprojectComponent implements OnInit {
   hasAnotherDropZoneOver = false;
   from_hijri : string;
   qty_type : boolean;
-
+  with_vat : boolean = false;
   containfirst : boolean = false;
 
 
@@ -123,10 +123,13 @@ export class CreatprojectComponent implements OnInit {
      );
   }
 
-  conationfpay()
+  conationfpay(event)
   { 
-    
+    if(event.checked == true)
     this.containfirst = true;
+    else 
+    this.containfirst = false;
+
     
     }
   durationType(value)
@@ -146,28 +149,35 @@ export class CreatprojectComponent implements OnInit {
      else if (this.project_amount == null)
       this.perface_ratio = 0 ; 
      else 
-   this.perface_ratio =  (this.first_pay/this.project_amount)*100;
+   this.perface_ratio =  (this.first_pay/100)*(this.project_amount);
   }
 caldurationm(value)
 {
    let days = this.startdate.getDay();
    let Month = this.startdate.getMonth();
    let Year = this.startdate.getFullYear();
+
    days+=1;
+
    Month += value;
+
    this.deliverdate = new Date(Year , Month , days);
-   this.deliverdate_hijri = new Date(Year , Month , days);
+   
     
    if(this.duration == 2){
-    this.project_duration_days = value*29.5;
+    this.project_duration_days = Math.round(value*29.5);
+    
+
    }
 
     
    if(this.duration == 3){
-    this.project_duration_days = value*30.4;
+    
+    this.project_duration_days = Math.round(value*30.4);
    }
 
 }
+
 
 openDialog(): void {
    const dialogRef = this.dialog.open(AddBuildingComponent, {
@@ -187,32 +197,16 @@ caldurationd(value)
    let days = this.startdate.getDay();
    let Month = this.startdate.getMonth();
    let Year = this.startdate.getFullYear();
-   if(this.duration == 2)
-   {
- 
-    Month += Math.round(value/29.5);
-
-   }
-   if(this.duration == 3)
-   {
-    
-    Month += Math.round(value/30.4);
-
-   }
   
-   days += value %30 + 1;
+   
+   days += Math.round( value %30.4 );    
+   Month += Math.round(value/30.4);
+
    this.deliverdate = new Date(Year , Month , days);
-   this.deliverdate_hijri = new Date(Year , Month , days);
-   if(this.duration == 2)
-   {
-    this.project_duration_months= Math.round(value/29.5);
+  this.project_duration_h_months =  Math.round(value/29.5);
+  this.project_duration_months = Math.round(value/30.4);
+  
 
-   }
-   if(this.duration == 3)
-   {
-    this.project_duration_h_months= Math.round(value/30.4);
-
-   }
 }
   nextStep() {
     const format = 'MM/dd/yyyy';
@@ -242,14 +236,15 @@ caldurationd(value)
         delivery_hijri_date : deliverDateHihri.toString(),
         first_pay_percentage : this.perface_ratio , 
         project_date : startDate.toString() ,
-        project_hijri_date : startDateHiri.toString(),
+        project_hijri_date : this.from_hijri,
         project_type : this.type ,
         project_net : this.netcost,
         proj_number: this.proj_number,
         sig_date: segDate.toString() ,
         proj_situation : this.stiuation ,
         date_situation : sdate , 
-        multi_qty_table : this.qty_type
+        multi_qty_table : this.qty_type , 
+        with_vat : this.with_vat
 
 
         
@@ -301,5 +296,11 @@ caldurationd(value)
          err=> {console.log(err);}
       );
      
+  }
+
+  ChooseVat(val)
+  {
+    console.log(val);
+    this.with_vat = val;
   }
 }

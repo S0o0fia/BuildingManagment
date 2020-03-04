@@ -35,12 +35,14 @@ export class CreatequantityComponent implements OnInit {
   total_price : number;
   newQty : Quantity;
   items : any = [];
+  projectname : string;
  
   constructor(   public dialogRef: MatDialogRef<QuantitytableComponent>, private router : Router
     ,private _snackBar: MatSnackBar , @Inject(MAT_DIALOG_DATA) public data: Quantity,private fb: FormBuilder, private pageTitleService: PageTitleService
     ,private translate : TranslateService , private coreService:CoreService) {
       this.minDate = new Date(1900,1,1);
       this.maxDate = new Date(2050,1,1);
+      this.projectname = localStorage.getItem('projectname');
     }
   	
    

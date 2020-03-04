@@ -103,10 +103,11 @@ export class CrmComponent implements OnInit, OnDestroy {
       /*
          ----------Choose from drop down list  ----------
       */
-      Choose(list , id)
+      Choose(list , id , name)
       {
         
          localStorage.setItem('projectid' , id);
+         localStorage.setItem('projectname' , name);
          switch(list)
          {
             case "Edit Project":

@@ -43,16 +43,15 @@
                             </div>
                          </div>
                       </div>
-                         <!--Consultant Name-->
+                      <!--Consultant Name-->
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
-                                    <mat-label>{{'Consultant Name'|translate}}</mat-label>
+                              <mat-label>{{'Consultant Name'|translate}}</mat-label>
                                <mat-select matNativeControl required name="consultant_name"
-                               [(ngModel)]="consultant_name">
-                                  <div *ngFor="let user of users">
-                                  <div *ngIf = "user.user_job == 'consultant'">
-                               
+                              [(ngModel)]="consultant_name">
+                                 <div *ngFor="let user of users">
+                                 <div *ngIf = "user.user_job == 'consultant'">                               
                                 <mat-option value="{{user.id}}" >{{user.name}}</mat-option>
                               </div> 
                               </div>
@@ -98,7 +97,7 @@
                               placeholder="{{'Session From Hijri'|translate}}" type="text" >                                                    
                            </mat-form-field>
                     </div>
-                          </div>
+                   </div>
                       <div fxLayout="row" fxLayoutAlign="start">
                          <button mat-button type="button" disabled>{{'Previous'|translate }}</button>
                          <button mat-button mat-raised-button [disabled]="!form.valid" (click)="nextStep()" type="submit" >{{'Next'|translate }} </button>
@@ -107,10 +106,10 @@
 
                 </form>
              </mat-tab>
+            
              <mat-tab label="{{'Step 2'|translate}}" [disabled]="!form.valid">
                 <form #form2="ngForm" >
                    <div fxLayout="column">
-                     
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                          
                          <!--Project Amount-->
@@ -123,50 +122,51 @@
                                (change)="raito()">
                            </mat-form-field>
                         </div>
-                        <!--Choose type of VAT-->
 
+                        <!--Choose type of VAT-->
                          <div fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100" fxFlex.gt-md="40">
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                            <mat-label >* {{'Choose'|translate}}</mat-label>
                               <mat-radio-group aria-label="Select an option">
                                  <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                 <mat-radio-button   value="1">{{'With Vat'|translate}}</mat-radio-button>
+                                 <mat-radio-button (click)="ChooseVat(true)"  value="1">{{'With Vat'|translate}}</mat-radio-button>
                                  </div>
                                  <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                 <mat-radio-button   value="2" >{{'Without Vat'|translate}}</mat-radio-button>
+                                 <mat-radio-button  (click)="ChooseVat(false)"  value="2" >{{'Without Vat'|translate}}</mat-radio-button>
                                  </div>
                            </mat-radio-group>
+                     
                            </div>
                          </div>
                          
                       </div>
 
                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                        <mat-checkbox (change)="conationfpay()">{{'Contract contain first pay'|translate}}</mat-checkbox>
+                        <mat-checkbox (change)="conationfpay($event)">{{'Contract contain first pay'|translate}}</mat-checkbox>
                       </div>
           
                          <!--Preface Payment Ratio-->
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <mat-form-field class="full-wid mrgn-b-lg ">
-                              <input matInput placeholder="{{'First Payment'|translate}}"
+                        <div fxFlex.gt-sm="60" fxFlex.gt-xs="60" fxFlex="100" fxFlex.gt-md="60">
+                      
+                           <mat-form-field class="half-wid mrgn-b-lg ">
+                              <input matInput  placeholder="{{'Preface Payment Ratio'|translate}}"
                               name="first_pay"  [(ngModel)]="first_pay" 
                               [disabled]="containfirst == false"
-                              type="number" (change)="raito()"> % 
-                              
+                              type="number" (change)="raito()"> 
                              </mat-form-field>
-                        </div>
-                       
-                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                           <br>
-                           <mat-form-field class="full-wid mrgn-b-lg ">
-                            <input matInput placeholder="{{'Preface Payment Ratio'|translate}}"
-                            name="perface_ratio"  [(ngModel)] = "perface_ratio"
-                            type="text" required disabled>
-                           </mat-form-field>
-                        </div>
-                         
-                        
+                             % 
+                              &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp; &nbsp;   &nbsp;
+                             <mat-form-field class="half-wid mrgn-b-lg ">
+                              <input matInput placeholder="{{'First Payment'|translate}}"
+                              name="perface_ratio"  [(ngModel)] = "perface_ratio"
+                              type="text" required disabled>
+                             </mat-form-field>
+                             SR
+                                                      
+                        </div>  
                      </div>
+
                      <!--Project Duration-->
                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-label fxLayoutAlign="start center" >* {{'Project Duration'|translate}}</mat-label>
@@ -205,7 +205,7 @@
                               <mat-form-field class="full-wid mrgn-b-lg ">
                                  <input matInput name="project_duration_h_months" [(ngModel)]="project_duration_h_months"
                                  (change)="caldurationm(project_duration_h_months)"
-                                 placeholder="{{'Duration with Gorgiean Months'|translate}}" type="number" required
+                                 placeholder="{{'Duration with Higiri Months'|translate}}" type="number" required
                                  [disabled]="duration != 2">
                                </mat-form-field>
                            </div>
@@ -224,6 +224,7 @@
                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <mat-label fxLayoutAlign="start center" >* {{'Session To'|translate}}</mat-label>
                         
+
                      
                       </div>
                     
@@ -251,6 +252,17 @@
              <mat-tab label="{{'Step 3'|translate}}" [disabled]="!form2.valid">
                 <form #form3="ngForm" (ngSubmit)="SaveData()">
 
+                  <br/>  <br/> 
+
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                   <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                 
+                         <mat-checkbox 
+                         (change)="IsChecked(true)">{{'Multiple Quantity Tables'|translate}}</mat-checkbox>
+                         
+                   </div>
+                  </div>
+                    <br/>  <br/>  
                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
 
                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
@@ -277,21 +289,12 @@
                                cdkTextareaAutosize
                                 #autosize="cdkTextareaAutosize"
                                  cdkAutosizeMinRows="1"
-                                  cdkAutosizeMaxRows="5" required></textarea>
+                                  cdkAutosizeMaxRows="5"></textarea>
                    </mat-form-field>
                      </div>
                    </div>
-
-                    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                      
-                           <mat-checkbox 
-                           (change)="IsChecked(true)">{{'Multiple Quantity Tables'|translate}}</mat-checkbox>
-                           
-                     </div>
-                    </div>
-                      <br/>
-                      <mat-divider></mat-divider>
+                
+                     
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                       <mat-label  class="mrgn-b-md">{{'Upload queue'|translate}}</mat-label>

@@ -102,13 +102,16 @@ export class CoreService {
 		'","proj_state":"'+value.proj_state+
 		'","proj_situation":"'+value.proj_situation+
 		'","date_situation":"'+value.date_situation+
-		'","description":"'+value.description+'"}';
-
+		'","description":"'+value.description+
+		'","with_vat":'+value.with_vat+
+		'}';
+        console.log(projecturl);
 		const headers = new HttpHeaders();
 	
 		headers.set('Content-Type', 'application/json; charset=utf-8');
 		return this.http.post(this.apiURL+projecturl, null);
 	}
+
 
 	getQty_tbl()
 	{
