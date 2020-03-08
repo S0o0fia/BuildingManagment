@@ -15,7 +15,10 @@ export class ExractsComponent implements OnInit {
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
   Invoices:any[]=[];
-  constructor(private router : Router , public service : CoreService) { }
+  projectname : string;
+  constructor(private router : Router , public service : CoreService) {
+    this.projectname = localStorage.getItem('projectname');
+   }
     
 
      /**
@@ -34,7 +37,9 @@ export class ExractsComponent implements OnInit {
     ngOnInit() {
       this.service.getInvoice().subscribe(
         data=> this.Invoices = data as any ,
-        err=> console.log(err));      
+        err=> console.log(err));  
+        
+        console.log(this.Invoices);
   }
    
 

@@ -10,6 +10,7 @@ import { DatePipe, formatDate } from '@angular/common';
 import { AddBuildingComponent } from '../add-building/add-building.component';
 import { MatDialog } from '@angular/material';
 import { FileUploader } from 'ng2-file-upload';
+import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
 
 @Component({
   selector: 'ms-creatproject',
@@ -87,7 +88,7 @@ export class CreatprojectComponent implements OnInit {
       this.hasAnotherDropZoneOver = e;
   }
 
-  constructor( private pageTitleService: PageTitleService, 
+  constructor( private pageTitleService: PageTitleService, private formatPipe: NumberFormatPipe,
                
                private translate : TranslateService , public service : CoreService
                 , public fb: FormBuilder , private dialog: MatDialog) {
@@ -150,6 +151,8 @@ export class CreatprojectComponent implements OnInit {
       this.perface_ratio = 0 ; 
      else 
    this.perface_ratio =  (this.first_pay/100)*(this.project_amount);
+
+   
   }
 caldurationm(value)
 {

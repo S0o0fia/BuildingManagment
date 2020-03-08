@@ -124,38 +124,102 @@
                      </tr>
                   </thead>
                   <tbody *ngFor="let item of Location; let i = index">
-                     <tr *ngIf="item.invoiced == false"  style="text-align: center;">
+                     <tr  style="text-align: center;">
                         <td>{{item.rfi_id}}</td>
                         <td>{{item.name}}</td>
                          <td>
-                           <mat-form-field class="full-wid mrgn-b-lg">
-                             
-                              <input matInput name="qty"  
-                               [(ngModel)]="item.qty" 
-                              placeholder={{item.qty}}
-                              />
-                        </mat-form-field>
+                          
+                        <mat-form-field class=" qua-wid mrgn-b-lg">
+                           <mat-label>{{'Length'|translate}}</mat-label>
+                           <input matInput name="qty_length"  
+                            [(ngModel)]="qty_length" 
+                              (change)="calQty()"
+                           placeholder={{qty_length}}
+                           />
+                     </mat-form-field>
+                  &nbsp; 
+                  &nbsp; 
+
+                     <mat-form-field class="qua-wid mrgn-b-lg">
+                        <mat-label>{{'Width'|translate}}</mat-label>
+                        <input matInput name="qty_width"  
+                         [(ngModel)]="qty_width" 
+                         (change)="calQty()"
+                        placeholder={{qty_width}}
+                        />
+                  </mat-form-field>
+                  &nbsp; 
+                  &nbsp; 
+                  <mat-form-field class=" qua-wid mrgn-b-lg">
+                     <mat-label>{{'Height'|translate}}</mat-label>
+                     <input matInput name="qty_height"  
+                      [(ngModel)]="qty_height" 
+                      (change)="calQty()"
+                     placeholder={{qty_height}}
+                     />
+               </mat-form-field>
+               &nbsp; 
+               &nbsp;
+               <mat-form-field class="qua-wid mrgn-b-lg" >
+                  <mat-label>{{'Quantity'|translate}}</mat-label>
+                  <input matInput name="qty"  
+                  disabled
+                   [(ngModel)]="qty" 
+                 
+                  />
+            </mat-form-field>
+           
                          </td>
                          <td>
-                           <mat-form-field class="full-wid mrgn-b-lg">
-                              <mat-label>{{'Approved Quantity'|translate}}</mat-label>
-                              <input matInput name="approve"  
-                             
-                              [(ngModel)]="item.approve"
+                           
+                        <mat-form-field class="qua-wid mrgn-b-lg">
+
+                            <mat-label>{{'Length'|translate}}</mat-label>
+                           <input matInput name="approved_length"  
+                           (change)="calApprove()"
+                           [(ngModel)]="approved_length"
+                           />
+                     </mat-form-field>
+                     &nbsp; &nbsp;
+                         <mat-form-field class="qua-wid mrgn-b-lg">
+                           <mat-label>{{'Width'|translate}}</mat-label>
+                              <input matInput name="approved_width"  
+                              (change)="calApprove()"
+                              [(ngModel)]="approved_width"
                               />
                         </mat-form-field>
+                        &nbsp; &nbsp;
+                        <mat-form-field class="qua-wid mrgn-b-lg">
+                            <mat-label>{{'Height'|translate}}</mat-label>
+                           <input matInput name="approved_height"  
+                           (change)="calApprove()"
+                           [(ngModel)]="approved_height"
+                           />
+                     </mat-form-field>
+                     &nbsp; &nbsp;
+                     <mat-form-field class="qua-wid mrgn-b-lg">
+                        <mat-label>{{'Quantity'|translate}}</mat-label>
+                        <input matInput name="approve"  
+                       disabled
+                        [(ngModel)]="approve"
+                        />
+                  </mat-form-field>
+                
                          </td>
                          <td>
                             <mat-icon matTooltip="{{'Delete'|translate}}" (click)="delete(i)">delete</mat-icon>
                        </td>
                      </tr>
-                  </tbody>
-               </table>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="end end">
-               <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="AddCount()">{{'Add'|translate}}</button>
                    
-              </div>
+                  </tbody>
+                 
+               </table>
+               <div fxLayout="row" fxLayoutAlign="end end">
+                  <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="AddCount()">{{'Add'|translate}}</button>
+                      
+             </div>
+            </div>
+           
          </div>
    </mat-card>
    </div>

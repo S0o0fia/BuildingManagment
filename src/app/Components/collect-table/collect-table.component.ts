@@ -28,6 +28,13 @@ export class CollectTableComponent implements OnInit {
   count_id : number; 
   qty : number ;
   projectname : string;
+  qty_width : number=0;
+  qty_length : number=0; 
+  qty_height : number=0;
+  approved_height : number=0;
+  approved_length : number=0;
+  approved_width : number=0;
+
 
   approves : any = [];
   constructor(public service : CoreService , public router : Router) 
@@ -74,7 +81,8 @@ export class CollectTableComponent implements OnInit {
           this.RFI_Location.forEach(element => {
               if(element['rfi_id'] == val)
               {
-                this.Location.push(element);
+                if(element['invoiced']==false)
+                {this.Location.push(element);}
               }
           });
         },
@@ -134,14 +142,23 @@ export class CollectTableComponent implements OnInit {
       data=> {
         this.count_id = data['count_id'] as number;
         this.Location.forEach(element => {
+  
+        
           this.CountItems.push({
-            approved_qty : element.approve ,
+            approved_qty : this.approve ,
             count_id : this.count_id , 
             location : element.name ,
             location_id : element.id,
             name : "" ,
-            qty : element.qty
+            qty : this.qty , 
+            approved_height : this.approved_height , 
+            approved_length : this.approved_length , 
+            approved_width : this.approved_width , 
+            qty_height : this.qty_height , 
+            qty_length : this.qty_length , 
+            qty_width : this.qty_width
           })
+       
         });
       
 
@@ -164,6 +181,14 @@ export class CollectTableComponent implements OnInit {
   
   
   } 
+  calQty()
+  {
+    this.qty = this.qty_height*this.qty_length*this.qty_width;
+  }
+  calApprove()
+  {
+    this.approve = this.approved_height*this.approved_length*this.approved_width;
+  }
    
  
 }

@@ -346,9 +346,19 @@ i {
 .full-wid {
     width: 100%;
 }
+.qua-wid {
+    width: 20%;
+}
+
+.sm-wid
+{
+    width: 10%; 
+}
+
 .height-full {
    height: 100%;
 }
+
 .card-full-height{
    height: calc(100% - 2rem) !important;
 }

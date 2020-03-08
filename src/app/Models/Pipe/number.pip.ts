@@ -52,8 +52,8 @@ export class NumberFormatPipe implements PipeTransform {
             x = y2[0] +  y1;
         } else {
             x = x1 + x2;
-            if (this.missingOneDecimalCheck(x)) return x += '0';
-            if (this.missingAllDecimalsCheck(x)) return x += ',00';
+            if (this.missingOneDecimalCheck(x)) return x ;
+            if (this.missingAllDecimalsCheck(x)) return x ;
         }
 
         return x;
