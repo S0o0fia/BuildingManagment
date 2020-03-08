@@ -114,11 +114,11 @@
                          
                          <!--Project Amount-->
                          <div fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100" fxFlex.gt-md="40">
-                           <mat-form-field class="full-wid mrgn-b-lg ">
+                           <mat-form-field class="full-wid mrgn-b-lg">
                               <br>
                                <input matInput 
-                               name="project_amount"  [(ngModel)]="project_amount" 
-                               placeholder="{{'Project Amount'|translate}}" type="number" required
+                               name="project_amount"  [(ngModel)]="project_amount" (blur)="transformAmount($event)"
+                               placeholder="{{'Project Amount'|translate}}" required [(value)]="formattedAmount"
                                (change)="raito()">
                            </mat-form-field>
                         </div>
@@ -368,7 +368,7 @@
                    </div>
                 </form>
              </mat-tab>
-             <mat-tab label="{{'Step 4'|translate}}" [disabled]="!form.valid"
+             <mat-tab label="{{'Step 4'|translate}}" [disabled]="!form2.valid"
              (onLoad)="SaveData()" >
             
                 <div fxLayout="column">

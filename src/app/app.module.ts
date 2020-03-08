@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA , Pipe , PipeTransform} from '@angular
 import 'hammerjs';
 import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -342,7 +342,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	,
 	bootstrap: [GeneAppComponent],
 	providers: [
-	
+		CurrencyPipe,
 		MenuItems,
 		BreadcrumbService,
 		PageTitleService,

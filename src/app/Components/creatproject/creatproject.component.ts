@@ -6,15 +6,21 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { NewProject } from 'app/Models/Project/new-project';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { ProjectModel } from 'app/Models/Project/project-model';
-import { DatePipe, formatDate } from '@angular/common';
+import { DatePipe, formatDate, CurrencyPipe } from '@angular/common';
 import { AddBuildingComponent } from '../add-building/add-building.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { FileUploader } from 'ng2-file-upload';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'app/Service/custompipe/format-datepicker';
 
 @Component({
   selector: 'ms-creatproject',
   templateUrl: './creatproject.component.html',
-  styleUrls: ['./creatproject.component.scss']
+  styleUrls: ['./creatproject.component.scss'],
+  providers: [
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: APP_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+    // {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 })
 export class CreatprojectComponent implements OnInit {
 
@@ -43,8 +49,8 @@ export class CreatprojectComponent implements OnInit {
   status  :string = ""; 
   stiuation : string = "";
   description  :string = ""; 
-  startdate_hijri : Date = new Date();
-  startdate:Date = new Date();
+  startdate_hijri : Date;
+  startdate:Date;
   minDate:Date;
   maxDate :Date;
   lng : number;
@@ -57,12 +63,12 @@ export class CreatprojectComponent implements OnInit {
   project_duration_days : number = 0;
   project_duration_months : number = 0;
   project_duration_h_months : number = 0;
-  deliverdate : Date = new Date()  ;
-  deliverdate_hijri : Date = new Date();
+  deliverdate : Date;
+  deliverdate_hijri : Date;
   type : string="";
   proj_number: string = "";
-  sig_date : Date = new Date(); 
-  stiuationdate : Date = new Date();
+  sig_date : Date; 
+  stiuationdate : Date;
   uploader: FileUploader = new FileUploader({url: ''});
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
@@ -70,6 +76,9 @@ export class CreatprojectComponent implements OnInit {
   qty_type : boolean;
   with_vat : boolean = false;
   containfirst : boolean = false;
+
+    formattedAmount: string = '';
+    
 
 
 
@@ -90,7 +99,7 @@ export class CreatprojectComponent implements OnInit {
   constructor( private pageTitleService: PageTitleService, 
                
                private translate : TranslateService , public service : CoreService
-                , public fb: FormBuilder , private dialog: MatDialog) {
+                , public fb: FormBuilder , private dialog: MatDialog,private currencyPipe:CurrencyPipe) {
 
                   this.minDate = new Date(1900,1,1);
                   this.maxDate = new Date(2050,1,1);
@@ -151,6 +160,14 @@ export class CreatprojectComponent implements OnInit {
      else 
    this.perface_ratio =  (this.first_pay/100)*(this.project_amount);
   }
+
+  transformAmount(element){
+    this.formattedAmount = this.currencyPipe.transform(this.project_amount,'ر.س');
+    // Remove or comment this line if you dont want to show the formatted amount in the textbox.
+    element.target.value = this.formattedAmount;
+}
+
+
 caldurationm(value)
 {
    let days = this.startdate.getDay();
@@ -251,7 +268,8 @@ caldurationd(value)
         }
         
      console.log(this.newProject);
-     this.selectedIndex += 1;
+     debugger;
+     this.selectedIndex = this.selectedIndex+1;
   }
  
   IsChecked(val)
@@ -279,7 +297,8 @@ caldurationd(value)
    //    lantitude : this.lat ,
    //    longitude : this.lng ,
    // }
-     this.selectedIndex -= 1;
+   debugger;
+     this.selectedIndex = this.selectedIndex-1;
   }   
 
    placeMarker(position: any) {
