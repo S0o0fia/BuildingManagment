@@ -129,7 +129,18 @@ this.service.gettotal().subscribe(
 
 this.service.getQty_tbl().subscribe(
    (res)=> {this.Qty_tbl = res 
-            console.log(this.Qty_tbl);
+           
+    //for number formatting 
+this.Qty_tbl.forEach(element => {
+  element.item_qty = this.formatPipe.transform(element.item_qty);
+  element.price_unit = this.formatPipe.transform(element.price_unit);
+  element.price_total = this.formatPipe.transform(element.price_total);
+  element.excuted = this.formatPipe.transform(element.excuted);
+  element.total_excuted = this.formatPipe.transform(element.total_excuted);
+
+  
+});  
+
           },
    (err)=> console.log(err)
 );
@@ -165,9 +176,9 @@ this.service.getQty_tbl().subscribe(
     
     });
 
-   
+     
 
-    
+
   }
 
   opendiscount()

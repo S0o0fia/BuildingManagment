@@ -91,10 +91,10 @@
                         <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }" >
                            <span>{{data.main_section_name}}</span>
                         </td>               
-                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                        <td style="width:7%" [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.item_number}}</span>
                         </td>
-                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                        <td  [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.item_name}}</span>
                         </td>    
                         <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
@@ -189,8 +189,9 @@
                         <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
                            <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_name}}</span>
                         </td>    
-                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name"></td>                
+                        <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">               
                              <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.item_type | translate}}</span>
+                           </td>   
                         <td  *ngIf=" data.first_subsection_name == item_name || data.main_section_name == type_name">
                            <span [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">{{data.product_uom_name}}</span>
                         </td>

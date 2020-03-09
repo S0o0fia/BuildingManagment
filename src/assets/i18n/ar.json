@@ -758,7 +758,11 @@
            "Specify Works" : "تخصص الاعمال" , 
            "Search by" : "بحث بـ"  ,
            "Request for Inventroy Qunatities" :"طلب حصر مواد",
-           "List of Count":"قائمة طلبات الحصر"
+           "List of Count":"قائمة طلبات الحصر" ,
+           "Height":"الارتفاع",
+           "Width":"العرض" ,
+           "Length":"الطول"
+ 
          
 
            

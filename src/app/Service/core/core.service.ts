@@ -415,12 +415,16 @@ export class CoreService {
 	file : any;
 	UploadFile(fd:File)
 	{  
-		let headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8' });
+		let headers = new HttpHeaders({ 'Content-Type': '"multipart/form-data;'});
 		const formData: FormData = new FormData();
 		formData.append('fileKey', fd, fd.name);
-		let url= "/test?db=nqproject&token="+localStorage.getItem('token');
+		let url= "/attachment/safaa?db=nqproject&token="+localStorage.getItem('token')+'&values='+
+		'{"project_id":'+localStorage.getItem('projectid')+
+		',"name":"filename"}';
+	  
+		return this.http.post(this.apiURL+url , formData , {headers})
+		;
 	
-		return this.http.post(this.apiURL+url+'&file='+formData.get('fileKey') ,null);
 	}
 
 	CreateComment ( comment : Comment )
@@ -471,7 +475,13 @@ export class CoreService {
 		',"location" :"'+countitem.location+
 		'","location_id":'+countitem.location_id+
 		',"qty":'+countitem.qty+
+		',"qty_height":'+countitem.qty_height+
+		',"qty_length":'+countitem.qty_length+
+		',"qty_width":'+countitem.qty_width+
 		',"approved_qty":'+countitem.approved_qty+
+		',"approved_height":'+countitem.approved_height+
+		',"approved_length":'+countitem.approved_length+
+		',"approved_width+":'+countitem.approved_width+
 		'}';
         console.log(itemUrl);
 		return this.http.post(this.apiURL+itemUrl , null);

@@ -30,10 +30,11 @@ export class AddExtractComponent implements OnInit {
   approved: any[]=[];
   dis : number = 0;
   dis_amount : number = 0;
+  projectname : string;
   
   constructor( private dialog: MatDialog , public service : CoreService , private router : Router , 
     public _snackBar : MatSnackBar) { 
-
+      this.projectname = localStorage.getItem('projectname');
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
