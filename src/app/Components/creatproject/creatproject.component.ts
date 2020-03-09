@@ -51,7 +51,7 @@ export class CreatprojectComponent implements OnInit {
   stiuation : string = "";
   description  :string = ""; 
   startdate_hijri : Date;
-  startdate:Date;
+  startdate:Date=new Date();
   minDate:Date;
   maxDate :Date;
   lng : number;
@@ -64,12 +64,12 @@ export class CreatprojectComponent implements OnInit {
   project_duration_days : number = 0;
   project_duration_months : number = 0;
   project_duration_h_months : number = 0;
-  deliverdate : Date;
+  deliverdate : Date=new Date();
   deliverdate_hijri : Date;
   type : string="";
   proj_number: string = "";
   sig_date : Date; 
-  stiuationdate : Date;
+  stiuationdate : Date=new Date();
   uploader: FileUploader = new FileUploader({url: ''});
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
@@ -229,11 +229,14 @@ caldurationd(value)
 
 }
   nextStep() {
-    const format = 'MM/dd/yyyy';
+    debugger;
+    const format = 'dd/MM/yyyy';
     const locale = 'en-US';
     let startDate = formatDate(this.startdate, format, locale);
+    this.startdate_hijri=this.startdate;
     let startDateHiri = formatDate(this.startdate_hijri, format, locale);
     let deliverDate = formatDate(this.deliverdate, format, locale);
+    this.deliverdate_hijri=this.deliverdate;
     let deliverDateHihri = formatDate(this.deliverdate_hijri, format, locale); 
     let segDate = formatDate(this.sig_date, format, locale); 
     let sdate = formatDate(this.stiuationdate, format, locale); 
@@ -272,7 +275,7 @@ caldurationd(value)
         
      console.log(this.newProject);
      debugger;
-     this.selectedIndex = this.selectedIndex+1;
+     this.selectedIndex += 1;
   }
  
   IsChecked(val)
@@ -300,8 +303,8 @@ caldurationd(value)
    //    lantitude : this.lat ,
    //    longitude : this.lng ,
    // }
-   debugger;
-     this.selectedIndex = this.selectedIndex-1;
+
+   this.selectedIndex -= 1;
   }   
 
    placeMarker(position: any) {
