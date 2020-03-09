@@ -51,7 +51,7 @@ export class CreatprojectComponent implements OnInit {
   stiuation : string = "";
   description  :string = ""; 
   startdate_hijri : Date;
-  startdate:Date=new Date();
+  startdate:Date;
   minDate:Date;
   maxDate :Date;
   lng : number;
@@ -114,7 +114,8 @@ export class CreatprojectComponent implements OnInit {
                }
 
   ngOnInit() {
-     this.pageTitleService.setTitle("إنشاء مشروع جديد");
+     this.pageTitleService.setTitle("إنشاء مشروع جديد");     
+    
      this.service.getUsers().subscribe(
        data=>{this.users=data ;
      
