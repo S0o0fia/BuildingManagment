@@ -436,6 +436,8 @@
    "Save"   :  "حفظ",
    "Add Product"  :  "أضف منتج",
    "Add Description" : "اضف وصفا",
+   "Number" : "عدد" ,
+   "Measurements" : "القياسات",
    "Signle Quantity Table" : "جدول كميات واحد" ,
    "Multiple Quantity Tables" : "جدول كميات متعدد",
    "Project Type" : "نوع المشروع" ,
@@ -476,6 +478,9 @@
     "Projects Managment" :"إدارة تنفيذ المرافق البلدية",
     "Projects Managment Program" :"إدارة تنفيذ المرافق البلدية" ,
     "Based on Completion Rate" : "حسب نسبة الإنجاز",
+  
+    "Pervoiusly" : "السابقة",
+    "For Now":"الحالية" ,
     "All":"الكل",
     "Based on Name" : "حسب الاسم",
     "ID" : "م",

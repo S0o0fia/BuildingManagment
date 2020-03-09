@@ -34,7 +34,9 @@ export class CollectTableComponent implements OnInit {
   approved_height : number=0;
   approved_length : number=0;
   approved_width : number=0;
-
+  item_number : string;
+  item_name : string;
+  unit : string;
 
   approves : any = [];
   constructor(public service : CoreService , public router : Router) 
@@ -52,11 +54,28 @@ export class CollectTableComponent implements OnInit {
       err=>console.log(err)
     )
     
+  
+    
   }
+  BindItemnumber(item_number ,id , unit)
+  {
+    this.item_number = item_number ; 
+    this.item_id = id;
+    this.unit = unit;
+  }
+
+  BindItemname(item_name , id , unit)
+  {
+    this.item_name = item_name;
+    this.item_id = id;
+    this.unit = unit;
+  }
+
   Item(val)
   {
-    this.item_id = val ;
+    this.item_id = val;
   }
+
   ShowRFI()
   {
     const format = 'MM/dd/yyyy';

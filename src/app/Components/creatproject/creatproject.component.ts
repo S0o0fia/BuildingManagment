@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
 import { CoreService } from 'app/service/core/core.service';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { NewProject } from 'app/Models/Project/new-project';
@@ -79,10 +78,6 @@ export class CreatprojectComponent implements OnInit {
   containfirst : boolean = false;
 
     formattedAmount: string = '';
-    
-
-
-
      /**
       *fileOverBase fires during 'over' and 'out' events for Drop Area.
       */
@@ -101,16 +96,11 @@ export class CreatprojectComponent implements OnInit {
                
                private translate : TranslateService , public service : CoreService
                 , public fb: FormBuilder , private dialog: MatDialog,private currencyPipe:CurrencyPipe) {
-
                   this.minDate = new Date(1900,1,1);
                   this.maxDate = new Date(2050,1,1);
-
                   this.lng=46.6753;
                   this.lat=24.7136;
-
-                  this.qty_type = false;
-
-                 
+                  this.qty_type = false;                 
                }
 
   ngOnInit() {
@@ -237,7 +227,7 @@ caldurationd(value)
     let deliverDateHihri = formatDate(this.deliverdate_hijri, format, locale); 
     let segDate = formatDate(this.sig_date, format, locale); 
     let sdate = formatDate(this.stiuationdate, format, locale); 
-     this.newProject={
+    this.newProject={
         
         name : this.name ,
         proj_state:this.status,
@@ -271,7 +261,6 @@ caldurationd(value)
         }
         
      console.log(this.newProject);
-     debugger;
      this.selectedIndex = this.selectedIndex+1;
   }
  
