@@ -19,8 +19,8 @@ import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
   styleUrls: ['./creatproject.component.scss'],
   providers: [
     {provide: DateAdapter, useClass: AppDateAdapter},
-    {provide: APP_DATE_FORMATS, useValue: APP_DATE_FORMATS}
-    // {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+    // {provide: APP_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
   ]
 })
 export class CreatprojectComponent implements OnInit {
