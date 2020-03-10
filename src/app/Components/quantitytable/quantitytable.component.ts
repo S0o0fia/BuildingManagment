@@ -52,12 +52,33 @@ export class QuantitytableComponent implements OnInit {
      this.disappearDisount = true;
   }
 
-  FilterExceed()
+  FilterExceed(value)
   {
-    if(this.filterbyExceed == true)
-     this.filterbyExceed = false;
-     else 
-     this.filterbyExceed = true;
+    if(value.checked){
+      this.Qty_tbl=this.Qty_tbls.filter(x=>x.excuted > x.item_qty);
+      this.Qty_tbl.forEach(element => {
+        element.item_qty = this.formatPipe.transform(element.item_qty);
+        element.price_unit = this.formatPipe.transform(element.price_unit);
+        element.price_total = this.formatPipe.transform(element.price_total);
+        element.excuted = this.formatPipe.transform(element.excuted);
+        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+      }); 
+    }else{
+      this.Qty_tbl=this.Qty_tbls;
+      this.Qty_tbl.forEach(element => {
+        element.item_qty = this.formatPipe.transform(element.item_qty);
+        element.price_unit = this.formatPipe.transform(element.price_unit);
+        element.price_total = this.formatPipe.transform(element.price_total);
+        element.excuted = this.formatPipe.transform(element.excuted);
+        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+      }); 
+    }
+    
+
+    // if(this.filterbyExceed == true)
+    //  this.filterbyExceed = false;
+    //  else 
+    //  this.filterbyExceed = true;
   }
 
   bindProjectType(name)
@@ -67,21 +88,49 @@ export class QuantitytableComponent implements OnInit {
 
   }
 
-  bindItemType(name)
+  bindItemType(name,type)
   {
-    this.type_name = name;
-
-    this.Qty_tbl=this.Qty_tbls.filter(x=>x.first_subsection_name== this.type_name);
-    this.Qty_tbl.forEach(element => {
-      element.item_qty = this.formatPipe.transform(element.item_qty);
-      element.price_unit = this.formatPipe.transform(element.price_unit);
-      element.price_total = this.formatPipe.transform(element.price_total);
-      element.excuted = this.formatPipe.transform(element.excuted);
-      element.total_excuted = this.formatPipe.transform(element.total_excuted);
-    
-      
-    }); 
-
+    // this.type_name = name;
+    if(this.item_type ==0 && this.proj_item ==0){
+      this.Qty_tbl=this.Qty_tbls;
+      this.Qty_tbl.forEach(element => {
+        element.item_qty = this.formatPipe.transform(element.item_qty);
+        element.price_unit = this.formatPipe.transform(element.price_unit);
+        element.price_total = this.formatPipe.transform(element.price_total);
+        element.excuted = this.formatPipe.transform(element.excuted);
+        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+      }); 
+    }
+    if(this.item_type !=0 && this.proj_item !=0){
+      this.Qty_tbl=this.Qty_tbls.filter(x=>x.first_subsection_id== this.proj_item && x.main_section_id== this.item_type);
+      this.Qty_tbl.forEach(element => {
+        element.item_qty = this.formatPipe.transform(element.item_qty);
+        element.price_unit = this.formatPipe.transform(element.price_unit);
+        element.price_total = this.formatPipe.transform(element.price_total);
+        element.excuted = this.formatPipe.transform(element.excuted);
+        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+      }); 
+    }
+    if(this.proj_item !=0 && this.item_type ==0){
+      this.Qty_tbl=this.Qty_tbls.filter(x=>x.first_subsection_id== this.proj_item);
+      this.Qty_tbl.forEach(element => {
+        element.item_qty = this.formatPipe.transform(element.item_qty);
+        element.price_unit = this.formatPipe.transform(element.price_unit);
+        element.price_total = this.formatPipe.transform(element.price_total);
+        element.excuted = this.formatPipe.transform(element.excuted);
+        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+      }); 
+    }
+    if(this.item_type !=0 && this.proj_item ==0){
+      this.Qty_tbl=this.Qty_tbls.filter(x=>x.main_section_id== this.item_type);
+      this.Qty_tbl.forEach(element => {
+        element.item_qty = this.formatPipe.transform(element.item_qty);
+        element.price_unit = this.formatPipe.transform(element.price_unit);
+        element.price_total = this.formatPipe.transform(element.price_total);
+        element.excuted = this.formatPipe.transform(element.excuted);
+        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+      }); 
+    }
     
     this.service.gettotals(this.proj_item , this.item_type).subscribe(
       data=> {

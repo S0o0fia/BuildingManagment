@@ -28,9 +28,9 @@
                <mat-form-field class="full-wid mrgn-b-lg">
                      <mat-label>{{'Project Items'|translate}}</mat-label>
                      <mat-select  name="proj_item"  [(ngModel)]="proj_item">
-                         <mat-option  (click)="bindItemType(all)" value="0">{{'All'|translate}}</mat-option>
+                         <mat-option  (click)="bindItemType(all,'projectContent')" value="0">{{'All'|translate}}</mat-option>
                      <div *ngFor="let data of projectitems">
-                         <mat-option  (click)="bindItemType(data.name)" value={{data.id}}>{{data.name}}</mat-option>
+                         <mat-option  (click)="bindItemType(data.id,'projectContent')" value={{data.id}}>{{data.name}}</mat-option>
                        </div>
                     </mat-select>
                      
@@ -41,9 +41,9 @@
                <mat-form-field class="full-wid mrgn-b-lg">
                      <mat-label>{{'Type Of Works'|translate}}</mat-label>
                      <mat-select  name="item_type"  [(ngModel)]="item_type">
-                        <mat-option  (click)="bindItemType(all)" value="0">{{'All'|translate}}</mat-option>
+                        <mat-option  (click)="bindItemType(all,'bussinessType')" value="0">{{'All'|translate}}</mat-option>
                         <div *ngFor="let data of section">
-                         <mat-option  (click)="bindItemType(data.name)" value={{data.id}}>{{data.name}}</mat-option>
+                         <mat-option  (click)="bindItemType(data.id,'bussinessType')" value={{data.id}}>{{data.name}}</mat-option>
                         </div>
                      </mat-select>
                      
@@ -52,7 +52,7 @@
          </div>
          <div fxLayout="row wrap" fxLayoutAlign="space-between center">
             <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
-          <mat-checkbox (click)="FilterExceed()">{{'Exceed Qunatiyu with Contracted Qunatity'|translate}}</mat-checkbox>
+          <mat-checkbox (change)="FilterExceed($event)">{{'Exceed Qunatiyu with Contracted Qunatity'|translate}}</mat-checkbox>
             </div>
             <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
                <mat-checkbox (click)="HideDiscount()">{{'Hide Total Amount with Discount'|translate}}</mat-checkbox>
@@ -79,7 +79,7 @@
                   <th>{{'Total Excuted'|translate}}</th>
                   </tr>
                </thead>
-               <tbody *ngIf='item_type == 0  && proj_item == 0 && filterbyExceed == false '>
+               <tbody>
                   <tr  *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
                      itemsPerPage: 10,
                      currentPage: page,
@@ -125,7 +125,7 @@
 
 
            
-                <tbody  *ngIf='item_type != 0 && proj_item != 0' > 
+                <!-- <tbody  *ngIf='item_type != 0 && proj_item != 0' > 
                  <tr *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
                      itemsPerPage: 10,
                      currentPage: page,
@@ -263,7 +263,7 @@
                   </tr>
                
 
-            </tbody>
+               </tbody> -->
             </table>
             <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
             previousLabel="{{'Previous'|translate}}"
