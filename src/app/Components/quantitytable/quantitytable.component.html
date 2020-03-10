@@ -66,10 +66,11 @@
             <table class="table table-hover table-middle th-fw-light mb-0">
                <thead>
                   <tr>
-                  <th>{{'Project Items'|translate}}</th>
+                  <!-- <th>{{'Project Items'|translate}}</th>
                   <th>{{'Type Of Works'|translate}}</th>
                   <th>{{'Item Number'|translate}}</th>
-                  <th >{{'Item Name'|translate}}</th>
+                  <th >{{'Item Name'|translate}}</th> -->
+                  <th></th>
                   <th>{{'Items Type'|translate}}</th>
                   <th>{{'Unit'|translate}}</th>
                   <th>{{'Contracted Quantities'|translate}}</th>
@@ -80,12 +81,13 @@
                   </tr>
                </thead>
                <tbody>
-                  <tr  *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
+                  <ng-container *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
                      itemsPerPage: 10,
                      currentPage: page,
-                     totalItems: totalRec }">
-                                   
-                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                     totalItems: totalRec };">
+                     <tr>
+                                    
+                        <!-- <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.first_subsection_name}}</span>
                         </td>
                         <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }" >
@@ -96,7 +98,19 @@
                         </td>
                         <td  [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.item_name}}</span>
-                        </td>    
+                        </td>     -->
+                        <td>
+                           <span (click)="openCloseRow(data.id)">
+                                 <button *ngIf="rowSelected!=data.id; else close" color="primary"  mat-icon-button matTooltip="{{'More Options'|translate}}" [matMenuTriggerFor]="menu"   >
+                                    <mat-icon>arrow_drop_down</mat-icon>
+                                 </button>
+                                 <ng-template #close>
+                                       <button color="primary"  mat-icon-button matTooltip="{{'More Options'|translate}}" [matMenuTriggerFor]="menu"   >
+                                          <mat-icon>arrow_drag_up</mat-icon>
+                                       </button>
+                                   </ng-template>
+                                 </span>
+                        </td>
                         <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.item_type | translate}}</span>
                         </td>                
@@ -118,9 +132,36 @@
                         <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.total_excuted}}</span>
                         </td>
-                      
-                    
                      </tr>
+
+                     <tr *ngIf="rowSelected==data.id">
+                           <td></td>
+                           <td colspan="4">
+                               <table class="table table-striped">
+                                    <th>{{'Project Items'|translate}}</th>
+                                    <th>{{'Type Of Works'|translate}}</th>
+                                    <th>{{'Item Number'|translate}}</th>
+                                    <th >{{'Item Name'|translate}}</th>
+                                   <tbody>
+                                       <tr>                                  
+                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                                <span>{{data.first_subsection_name}}</span>
+                                             </td>
+                                             <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }" >
+                                                <span>{{data.main_section_name}}</span>
+                                             </td>               
+                                             <td style="width:7%" [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                                <span>{{data.item_number}}</span>
+                                             </td>
+                                             <td  [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                                <span>{{data.item_name}}</span>
+                                             </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </td>
+                       </tr>
+                  </ng-container>
                 </tbody>
 
 

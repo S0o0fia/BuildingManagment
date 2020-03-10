@@ -21,6 +21,7 @@ import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
   styleUrls: ['./quantitytable.component.scss'],
 
 })
+
 export class QuantitytableComponent implements OnInit {
   collapseSidebarStatus: any;
   mySubscription : any;
@@ -43,7 +44,10 @@ export class QuantitytableComponent implements OnInit {
   total_excuted : number ;
   filterbyExceed : boolean = false;
   projectname : string;
+
+  public rowSelected : any = -1;
   
+
   HideDiscount()
   {
      if(  this.disappearDisount == true)
@@ -51,6 +55,12 @@ export class QuantitytableComponent implements OnInit {
      else 
      this.disappearDisount = true;
   }
+
+  openCloseRow(id): void {
+    debugger;
+    this.rowSelected = this.rowSelected == -1 ? id : -1;
+    console.log(this.rowSelected);
+    }
 
   FilterExceed(value)
   {
@@ -150,16 +160,13 @@ export class QuantitytableComponent implements OnInit {
   }
 
   constructor(public service : CoreService,  private router : Router, private formatPipe: NumberFormatPipe , 
-      private pageTitleService: PageTitleService , private dialog: MatDialog , private discount : MatDialog) { 
+      private pageTitleService: PageTitleService , private dialog: MatDialog , private discount : MatDialog,) { 
 
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         this.projectname = localStorage.getItem('projectname');
-
-     
-
       }
   
  Qty_tbl : any =[] ;
