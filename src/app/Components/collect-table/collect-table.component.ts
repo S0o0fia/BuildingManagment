@@ -57,15 +57,19 @@ export class CollectTableComponent implements OnInit {
   
     
   }
-  BindItemnumber(item_number ,id , unit)
+  BindItemnumber( item_number, id, unit)
   {
+    debugger;
+    //this.item_number=null;
     this.item_number = item_number ; 
     this.item_id = id;
     this.unit = unit;
   }
 
-  BindItemname(item_name , id , unit)
+  BindItemname( item_name , id , unit)
   {
+    debugger;
+    //this.item_name=null
     this.item_name = item_name;
     this.item_id = id;
     this.unit = unit;

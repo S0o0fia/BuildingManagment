@@ -14,12 +14,10 @@
             <mat-label class="text-center">{{'Item Number'|translate}}</mat-label>
             <mat-form-field class="full-wid mrgn-b-lg ">
                <mat-label>{{'Item Number'|translate}}</mat-label>
-               <mat-select>
-                 <div *ngFor= "let item of items">
-                  <mat-option                 
-                  (click)="BindItemname(item.item_name , item.id , item.product_uom_name )" value={{item.item_number}}>{{item.item_number}}
+               <mat-select [(ngModel)]="item_number">
+                  <mat-option  *ngFor= "let item of items"               
+                  (click)="BindItemname(item.item_name , item.id , item.product_uom_name )" [value]="item.item_number">{{item.item_number}}
                </mat-option>
-               </div>
               </mat-select>               
          </mat-form-field>
       </div>
@@ -28,12 +26,10 @@
          <mat-label class="text-center">{{'Item Name'|translate}}</mat-label>
          <mat-form-field class="full-wid mrgn-b-lg ">
             <mat-label>{{'Item Name'|translate}}</mat-label>
-            <mat-select >
-              <div *ngFor= "let item of items">
-               <mat-option   
-               (click)="BindItemnumber(item.item_number , item.id , item.product_uom_name )" value={{item.item_name}}>{{item.item_name}}
+            <mat-select [(ngModel)]="item_name">
+               <mat-option  *ngFor= "let item of items"
+               (click)="BindItemnumber(item.item_number , item.id , item.product_uom_name )" [value]="item.item_name">{{item.item_name}}
             </mat-option>
-              </div>
            </mat-select>
             
       </mat-form-field>
