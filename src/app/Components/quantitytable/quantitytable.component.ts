@@ -71,7 +71,16 @@ export class QuantitytableComponent implements OnInit {
   {
     this.type_name = name;
 
-
+    this.Qty_tbl=this.Qty_tbls.filter(x=>x.first_subsection_name== this.type_name);
+    this.Qty_tbl.forEach(element => {
+      element.item_qty = this.formatPipe.transform(element.item_qty);
+      element.price_unit = this.formatPipe.transform(element.price_unit);
+      element.price_total = this.formatPipe.transform(element.price_total);
+      element.excuted = this.formatPipe.transform(element.excuted);
+      element.total_excuted = this.formatPipe.transform(element.total_excuted);
+    
+      
+    }); 
 
     
     this.service.gettotals(this.proj_item , this.item_type).subscribe(
@@ -87,6 +96,8 @@ export class QuantitytableComponent implements OnInit {
      }, 
       err=>console.log(err)
     )
+
+     
   }
 
   constructor(public service : CoreService,  private router : Router, private formatPipe: NumberFormatPipe , 
@@ -103,6 +114,7 @@ export class QuantitytableComponent implements OnInit {
       }
   
  Qty_tbl : any =[] ;
+ Qty_tbls:any[]=[];
 ngOnInit() {
 
 
@@ -128,7 +140,9 @@ this.service.gettotal().subscribe(
 );
 
 this.service.getQty_tbl().subscribe(
-   (res)=> {this.Qty_tbl = res 
+   (res)=> {
+     this.Qty_tbls = JSON.parse(JSON.stringify(res));
+     this.Qty_tbl = res;
            
     //for number formatting 
 this.Qty_tbl.forEach(element => {
