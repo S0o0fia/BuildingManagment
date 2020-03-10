@@ -323,7 +323,6 @@ export class AddRequestComponent implements OnInit {
       horizontalPosition : 'center' ,
       panelClass: ['my-snack-bar']
     });
-
     return true;
     
   }
