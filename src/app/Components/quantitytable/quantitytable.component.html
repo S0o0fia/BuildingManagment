@@ -66,23 +66,13 @@
             <table class="table table-hover table-middle th-fw-light mb-0 ">
                <thead>
                   <tr>
-<<<<<<< HEAD
-                  <!-- <th>{{'Project Items'|translate}}</th>
-=======
-                  <th>#</th>   
+                     <th></th>
                   <th>{{'Project Items'|translate}}</th>
->>>>>>> 10-3-2020(2)
                   <th>{{'Type Of Works'|translate}}</th>
                   <th>{{'Item Number'|translate}}</th>
-                  <th >{{'Item Name'|translate}}</th> -->
-                  <th></th>
-                  <th>{{'Items Type'|translate}}</th>
-                  <th>{{'Unit'|translate}}</th>
-                  <th>{{'Contracted Quantities'|translate}}</th>
-                  <th>{{'Unit Price'|translate}}</th>
-                  <th>{{'Total Quantities Price'|translate}}</th>
-                  <th>{{'Extecuted Quantities'|translate}}</th>
-                  <th>{{'Total Excuted'|translate}}</th>
+                  <th >{{'Item Name'|translate}}</th>
+                
+                 
                   </tr>
                </thead>
                <tbody>
@@ -117,51 +107,56 @@
                                  </span>
                         </td>
                         <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                           <span>{{data.item_type | translate}}</span>
-                        </td>                
-                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                           <span>{{data.product_uom_name}}</span>
+                           <span>{{data.first_subsection_name}}</span>
                         </td>
-                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                           <span>{{data.item_qty}}</span>
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }" >
+                           <span>{{data.main_section_name}}</span>
+                        </td>               
+                        <td style="width:7%" [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.item_number}}</span>
                         </td>
-                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                           <span>{{data.price_unit}}</span>
+                        <td  [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.item_name}}</span>
                         </td>
-                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                           <span>{{data.price_total}}</span>
-                        </td>                   
-                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                           <span>{{data.excuted}}</span>
-                        </td>
-                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                           <span>{{data.total_excuted}}</span>
-                        </td>
+
                      </tr>
 
                      <tr *ngIf="rowSelected==data.id">
                            <td></td>
-                           <td colspan="4">
+                           <td colspan="7">
                                <table class="table table-striped">
-                                    <th>{{'Project Items'|translate}}</th>
-                                    <th>{{'Type Of Works'|translate}}</th>
-                                    <th>{{'Item Number'|translate}}</th>
-                                    <th >{{'Item Name'|translate}}</th>
+                                 <th>{{'Items Type'|translate}}</th>
+                                 <th>{{'Unit'|translate}}</th>
+                                 <th>{{'Contracted Quantities'|translate}}</th>
+                                 <th>{{'Unit Price'|translate}}</th>
+                                 <th>{{'Total Quantities Price'|translate}}</th>
+                                 <th>{{'Extecuted Quantities'|translate}}</th>
+                                 <th>{{'Total Excuted'|translate}}</th>
                                    <tbody>
-                                       <tr>                                  
+                                       <tr>  
                                           <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                                                <span>{{data.first_subsection_name}}</span>
-                                             </td>
-                                             <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }" >
-                                                <span>{{data.main_section_name}}</span>
-                                             </td>               
-                                             <td style="width:7%" [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                                                <span>{{data.item_number}}</span>
-                                             </td>
-                                             <td  [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                                                <span>{{data.item_name}}</span>
-                                             </td>
-                                       </tr>
+                                             <span>{{data.item_type | translate}}</span>
+                                          </td>                
+                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                             <span>{{data.product_uom_name}}</span>
+                                          </td>
+                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                             <span>{{data.item_qty}}</span>
+                                          </td>
+                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                             <span>{{data.price_unit}}</span>
+                                          </td>
+                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                             <span>{{data.price_total}}</span>
+                                          </td>                   
+                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                             <span>{{data.excuted}}</span>
+                                          </td>
+                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                             <span>{{data.total_excuted}}</span>
+                                          </td>
+                                              
+                                                                              </tr>
                                    </tbody>
                                </table>
                            </td>

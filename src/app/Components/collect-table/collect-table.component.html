@@ -164,15 +164,15 @@
                         <td>{{item.rfi_id}}</td>
                         <td>{{item.name}}</td>
                         <td>
-                           <mat-form-field class="qua-wid mrgn-b-lg" >
-                              <mat-label>Description</mat-label>
+                           <mat-form-field class="half-wid  mrgn-b-lg" >
+                              <mat-label>{{'Description'|translate}}</mat-label>
                               <input matInput name="desc"                                
                                [(ngModel)]="item.description"                              
                               />
                         </mat-form-field>
                         </td>
                         <td>
-                           <mat-form-field class=" half-wid mrgn-b-lg">
+                           <mat-form-field class=" half-wid   mrgn-b-lg">
                            <input matInput  
                           [(ngModel)]="item.Number"
                           placeholder="{{'Number'| translate}}"
@@ -181,8 +181,8 @@
                         </td>
                         <td>
                           
-                           <mat-form-field class="qua-wid mrgn-b-lg" >
-                              <mat-label>Percentage</mat-label>
+                           <mat-form-field class="half-wid  mrgn-b-lg" >
+                              <mat-label>{{'Completion Rate'|translate}}</mat-label>
                               <input matInput name="percentage"                                
                                [(ngModel)]="item.percentage"                              
                               />
@@ -190,7 +190,7 @@
                          </td>
                        <td>
                         
-                        <mat-form-field class=" qua-wid mrgn-b-lg">
+                        <mat-form-field class=" half-wid  mrgn-b-lg">
                            <mat-label>{{'Length'|translate}}</mat-label>
                            <input matInput name="qty_length"  
                             [(ngModel)]="item.qty_length" 
@@ -201,7 +201,7 @@
                   &nbsp; 
                   &nbsp; 
 
-                     <mat-form-field class="qua-wid mrgn-b-lg" *ngIf="dimension>1">
+                     <mat-form-field class="half-wid  mrgn-b-lg" *ngIf="dimension>1">
                         <mat-label>{{'Width'|translate}}</mat-label>
                         <input matInput name="qty_width" 
                          [(ngModel)]="item.qty_width" 
@@ -211,7 +211,7 @@
                   </mat-form-field>
                   &nbsp; 
                   &nbsp; 
-                  <mat-form-field class=" qua-wid mrgn-b-lg" *ngIf="dimension>2">
+                  <mat-form-field class=" half-wid  mrgn-b-lg" *ngIf="dimension>2">
                      <mat-label>{{'Height'|translate}}</mat-label>
                      <input matInput name="qty_height" 
                       [(ngModel)]="item.qty_height" 
@@ -221,7 +221,7 @@
                </mat-form-field>
                &nbsp; 
                &nbsp;
-               <mat-form-field class="qua-wid mrgn-b-lg" *ngIf="1>2">
+               <mat-form-field class="half-wid  mrgn-b-lg" *ngIf="1>2">
                   <mat-label>{{'Total'|translate}}</mat-label>
                   <input matInput name="qty"  
                   disabled
@@ -235,7 +235,7 @@
                          
                          <!-- <td>
                            
-                        <mat-form-field class="qua-wid mrgn-b-lg">
+                        <mat-form-field class="half-wid  mrgn-b-lg">
 
                             <mat-label>{{'Length'|translate}}</mat-label>
                            <input matInput name="approved_length"  
@@ -244,7 +244,7 @@
                            />
                      </mat-form-field>
                      &nbsp; &nbsp;
-                         <mat-form-field class="qua-wid mrgn-b-lg">
+                         <mat-form-field class="half-wid  mrgn-b-lg">
                            <mat-label>{{'Width'|translate}}</mat-label>
                               <input matInput name="approved_width"  
                               (change)="calApprove()"
@@ -252,7 +252,7 @@
                               />
                         </mat-form-field>
                         &nbsp; &nbsp;
-                        <mat-form-field class="qua-wid mrgn-b-lg">
+                        <mat-form-field class="half-wid  mrgn-b-lg">
                             <mat-label>{{'Height'|translate}}</mat-label>
                            <input matInput name="approved_height"  
                            (change)="calApprove()"
@@ -260,7 +260,7 @@
                            />
                      </mat-form-field>
                      &nbsp; &nbsp;
-                     <mat-form-field class="qua-wid mrgn-b-lg">
+                     <mat-form-field class="half-wid  mrgn-b-lg">
                         <mat-label>{{'Total'|translate}}</mat-label>
                         <input matInput name="approve"  
                        disabled
