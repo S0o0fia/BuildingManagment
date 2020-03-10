@@ -162,7 +162,7 @@
                               name="perface_ratio"  [(ngModel)] = "perface_ratio"
                               type="text" required disabled>
                              </mat-form-field>
-                             SR
+                            ر.س
                                                       
                         </div>  
                      </div>
@@ -173,7 +173,7 @@
                                  <br>
                            <mat-radio-group aria-label="Select an option">
                                 <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                <mat-radio-button  (change)="durationType(1)"  value="1"> {{'Duration with Days'|translate}} </mat-radio-button>
+                                <mat-radio-button  (change)="durationType(1)"  value="1" > {{'Duration with Days'|translate}} </mat-radio-button>
                                 </div>
                                 <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                                  <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
@@ -196,7 +196,7 @@
                               <input matInput name="project_duration_days" [(ngModel)]="project_duration_days"
                               (change)="caldurationd(project_duration_days)"
                               placeholder="{{'Project Duration With Days'|translate}}" type="number"
-                              [disabled]="duration != 1" >
+                              [disabled]="duration != 1" required>
                             </mat-form-field>
                          </div>
                          
@@ -206,7 +206,7 @@
                                  <input matInput name="project_duration_h_months" [(ngModel)]="project_duration_h_months"
                                  (change)="caldurationm(project_duration_h_months)"
                                  placeholder="{{'Duration with Higiri Months'|translate}}" type="number" required
-                                 [disabled]="duration != 2">
+                                 [disabled]="duration != 2" required>
                                </mat-form-field>
                            </div>
                            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
@@ -214,7 +214,7 @@
                                  <input matInput name="project_duration_months" [(ngModel)]="project_duration_months"
                                  (change)="caldurationm(project_duration_months)"
                                  placeholder="{{'Duration with Gorgiean Months'|translate}}" type="number" required
-                                 [disabled]="duration != 3">
+                                 [disabled]="duration != 3" required>
                                </mat-form-field>
                            </div>
                              
