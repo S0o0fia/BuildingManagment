@@ -28,15 +28,19 @@ export class CollectTableComponent implements OnInit {
   count_id : number; 
   qty : number ;
   projectname : string;
-  qty_width : number=0;
-  qty_length : number=0; 
-  qty_height : number=0;
-  approved_height : number=0;
-  approved_length : number=0;
-  approved_width : number=0;
+  qty_width : number;
+  qty_length : number; 
+  qty_height : number;
+  approved_height : number;
+  approved_length : number;
+  approved_width : number;
   item_number : string;
   item_name : string;
   unit : string;
+  mNumber : number=1;
+  percentage : number;
+  dimension : number;
+  description : string;
 
   approves : any = [];
   constructor(public service : CoreService , public router : Router) 
@@ -57,22 +61,26 @@ export class CollectTableComponent implements OnInit {
   
     
   }
-  BindItemnumber( item_number, id, unit)
+  BindItemnumber( item_number, id, unit, dimension, description)
   {
     debugger;
     //this.item_number=null;
     this.item_number = item_number ; 
     this.item_id = id;
     this.unit = unit;
+    this.dimension=dimension;
+    this.description=description;
   }
 
-  BindItemname( item_name , id , unit)
+  BindItemname( item_name , id , unit, dimension, description)
   {
     debugger;
     //this.item_name=null
     this.item_name = item_name;
     this.item_id = id;
     this.unit = unit;
+    this.dimension=dimension;
+    this.description=description;
   }
 
   Item(val)
@@ -97,6 +105,7 @@ export class CollectTableComponent implements OnInit {
     
     if(isChecked.checked)
     {
+      debugger;
       this.service.getItemRFI().subscribe(
         data=> {
           this.RFI_Location = data;
@@ -113,6 +122,7 @@ export class CollectTableComponent implements OnInit {
       );
     }
     else if(!isChecked.checked){
+      debugger;
       this.service.getItemRFI().subscribe(
         data=> {
           this.RFI_Location = data;
@@ -168,18 +178,21 @@ export class CollectTableComponent implements OnInit {
   
         
           this.CountItems.push({
-            approved_qty : this.approve ,
+            //approved_qty : this.approve ,
             count_id : this.count_id , 
             location : element.name ,
             location_id : element.id,
-            name : "" ,
+            //name : "" ,
             qty : this.qty , 
-            approved_height : this.approved_height , 
-            approved_length : this.approved_length , 
-            approved_width : this.approved_width , 
-            qty_height : this.qty_height , 
+            // approved_height : this.approved_height , 
+            // approved_length : this.approved_length , 
+            // approved_width : this.approved_width , 
+            qty_height : this.dimension>2 ? this.qty_height : 0, 
             qty_length : this.qty_length , 
-            qty_width : this.qty_width
+            qty_width : this.dimension>1 ? this.qty_width : 0,
+            description:this.description,
+            qty_unit : this.mNumber,
+            qty_pers : this.percentage
           })
        
         });
@@ -206,12 +219,26 @@ export class CollectTableComponent implements OnInit {
   } 
   calQty()
   {
-    this.qty = this.qty_height*this.qty_length*this.qty_width;
+    debugger;
+    if(this.dimension==1){
+      this.qty = this.qty_length*this.mNumber;
+    }
+    else if(this.dimension==2){
+      this.qty = this.qty_length*this.qty_width*this.mNumber;
+    }
+    else{
+      this.qty = this.qty_height*this.qty_length*this.qty_width*this.mNumber;
+    }
+    
+    this.calpercentage();
   }
   calApprove()
   {
     this.approve = this.approved_height*this.approved_length*this.approved_width;
   }
-   
+   calpercentage(){
+    debugger;
+     this.percentage=this.qty/100;
+   }
  
 }
