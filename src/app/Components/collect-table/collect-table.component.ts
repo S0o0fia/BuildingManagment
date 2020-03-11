@@ -41,7 +41,7 @@ export class CollectTableComponent implements OnInit {
   percentage : number;
   dimension : number;
   description : string;
-
+  editRowIndex: number = -1;
   approves : any = [];
   constructor(public service : CoreService , public router : Router) 
   {
@@ -61,7 +61,7 @@ export class CollectTableComponent implements OnInit {
   
     
   }
-  BindItemnumber( item_number, id, unit, dimension, description)
+  BindItemnumber( item_number, id, unit, dimension)
   {
     debugger;
     //this.item_number=null;
@@ -69,10 +69,9 @@ export class CollectTableComponent implements OnInit {
     this.item_id = id;
     this.unit = unit;
     this.dimension=dimension;
-    this.description=description;
   }
 
-  BindItemname( item_name , id , unit, dimension, description)
+  BindItemname( item_name , id , unit, dimension)
   {
     debugger;
     //this.item_name=null
@@ -80,14 +79,17 @@ export class CollectTableComponent implements OnInit {
     this.item_id = id;
     this.unit = unit;
     this.dimension=dimension;
-    this.description=description;
   }
 
   Item(val)
   {
     this.item_id = val;
   }
-
+//   onEdit(index: number,eve) {
+//     debugger;
+//     this.editRowIndex = index;
+//     this.Location[index]["Number"] = this.mNumber + eve.key;
+// }
   ShowRFI()
   {
     const format = 'MM/dd/yyyy';
@@ -105,7 +107,6 @@ export class CollectTableComponent implements OnInit {
     
     if(isChecked.checked)
     {
-      debugger;
       this.service.getItemRFI().subscribe(
         data=> {
           this.RFI_Location = data;
@@ -114,7 +115,10 @@ export class CollectTableComponent implements OnInit {
               if(element['rfi_id'] == val)
               {
                 if(element['invoiced']==false)
-                {this.Location.push(element);}
+                {
+                  debugger;
+                  this.Location.push(element);
+                }
               }
           });
         },
@@ -122,7 +126,6 @@ export class CollectTableComponent implements OnInit {
       );
     }
     else if(!isChecked.checked){
-      debugger;
       this.service.getItemRFI().subscribe(
         data=> {
           this.RFI_Location = data;
@@ -130,8 +133,9 @@ export class CollectTableComponent implements OnInit {
           this.RFI_Location.forEach(element => {
               if(element['rfi_id'] == val)
               {
+                debugger;
                 if(i != 0)
-                this.Location.splice(0  , i);
+                this.Location.splice(i  , 1);
                 else
                 this.Location.pop();
                   
@@ -146,7 +150,7 @@ export class CollectTableComponent implements OnInit {
   delete(index)
   {
     if(index != 0)
-    this.Location.splice(0  , index);
+    this.Location.splice(index, 1);
     else
     this.Location.pop();
   }
@@ -183,16 +187,16 @@ export class CollectTableComponent implements OnInit {
             location : element.name ,
             location_id : element.id,
             //name : "" ,
-            qty : this.qty , 
+            qty : element.qty , 
             // approved_height : this.approved_height , 
             // approved_length : this.approved_length , 
             // approved_width : this.approved_width , 
-            qty_height : this.dimension>2 ? this.qty_height : 0, 
-            qty_length : this.qty_length , 
-            qty_width : this.dimension>1 ? this.qty_width : 0,
-            description:this.description,
-            qty_unit : this.mNumber,
-            qty_pers : this.percentage
+            qty_height : this.dimension>2 ? element.qty_height : 0, 
+            qty_length : element.qty_length , 
+            qty_width : this.dimension>1 ? element.qty_width : 0,
+            description:element.description,
+            qty_unit : element.Number,
+            qty_pers : element.percentage
           })
        
         });
@@ -217,28 +221,30 @@ export class CollectTableComponent implements OnInit {
   
   
   } 
-  calQty()
+  calQty(i)
   {
     debugger;
+    i.qty=0;
     if(this.dimension==1){
-      this.qty = this.qty_length*this.mNumber;
+      i.qty = (i.qty_length*i.Number)*i.percentage/100;
     }
     else if(this.dimension==2){
-      this.qty = this.qty_length*this.qty_width*this.mNumber;
+      i.qty = (i.qty_length*i.qty_width*i.Number)*i.percentage/100;
     }
     else{
-      this.qty = this.qty_height*this.qty_length*this.qty_width*this.mNumber;
+      i.qty = (i.qty_height*i.qty_length*i.qty_width*i.Number)*i.percentage/100;
     }
     
-    this.calpercentage();
+    //this.calpercentage(i);
   }
   calApprove()
   {
     this.approve = this.approved_height*this.approved_length*this.approved_width;
   }
-   calpercentage(){
+   calpercentage(i){
     debugger;
-     this.percentage=this.qty/100;
+    i.qty_pers=0;
+     i.percentage=i.qty/100;
    }
  
 }
