@@ -30,8 +30,8 @@ const MENUITEMS = [
      
     },
     {
-      state: 'attendece',
-      name: 'Attendece',
+      state: 'attendance',
+      name: 'Attendance',
       type: 'link',
       icon: 'access_alarm',
      
