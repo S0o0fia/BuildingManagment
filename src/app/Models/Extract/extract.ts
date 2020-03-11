@@ -1,6 +1,7 @@
 export interface Extract {
     name : string;
-    date : string;
+    date_from : string;
+    date_to : string;
     paid : number;
     Total_vat : number;
     total_discount : number;
