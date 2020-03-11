@@ -479,6 +479,7 @@ export class CoreService {
 
 	createCount(counts: Count)
 	{
+		debugger;
 		let count = '/count/create?db=nqproject&token='+localStorage.getItem('token')+
 		'&values={"quantity_id" : '+counts.qunatity_id+
 		',"date_from":"'+counts.fromdate+
@@ -491,19 +492,18 @@ export class CoreService {
 
 	createcountItem(countitem : Countitem)
 	{
+		debugger;
 		let itemUrl = '/count/items/create?db=nqproject&token='+localStorage.getItem('token')+
-		'&values={"name" : "Count- '+countitem.name+
-		'","count_id":'+countitem.count_id+
+		'&values={"count_id":'+countitem.count_id+
 		',"location" :"'+countitem.location+
-		'","location_id":'+countitem.location_id+
-		',"qty":'+countitem.qty+
+		'","location_id":'+countitem.location_id+		
+		',"description":"'+countitem.description+
+		'","qty":'+countitem.qty+
 		',"qty_height":'+countitem.qty_height+
 		',"qty_length":'+countitem.qty_length+
 		',"qty_width":'+countitem.qty_width+
-		',"approved_qty":'+countitem.approved_qty+
-		',"approved_height":'+countitem.approved_height+
-		',"approved_length":'+countitem.approved_length+
-		',"approved_width+":'+countitem.approved_width+
+		',"qty_unit":'+countitem.qty_unit+
+		',"qty_pers":'+countitem.qty_pers+
 		'}';
         console.log(itemUrl);
 		return this.http.post(this.apiURL+itemUrl , null);

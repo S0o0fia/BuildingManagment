@@ -14,12 +14,10 @@
             <mat-label class="text-center">{{'Item Number'|translate}}</mat-label>
             <mat-form-field class="full-wid mrgn-b-lg ">
                <mat-label>{{'Item Number'|translate}}</mat-label>
-               <mat-select>
-                 <div *ngFor= "let item of items">
-                  <mat-option                 
-                  (click)="BindItemname(item.item_name , item.id , item.product_uom_name )" value={{item.item_number}}>{{item.item_number}}
+               <mat-select [(ngModel)]="item_number">
+                  <mat-option  *ngFor= "let item of items"               
+                  (click)="BindItemname(item.item_name , item.id , item.product_uom_name, item.dimension, description)" [value]="item.item_number">{{item.item_number}}
                </mat-option>
-               </div>
               </mat-select>               
          </mat-form-field>
       </div>
@@ -28,12 +26,10 @@
          <mat-label class="text-center">{{'Item Name'|translate}}</mat-label>
          <mat-form-field class="full-wid mrgn-b-lg ">
             <mat-label>{{'Item Name'|translate}}</mat-label>
-            <mat-select >
-              <div *ngFor= "let item of items">
-               <mat-option   
-               (click)="BindItemnumber(item.item_number , item.id , item.product_uom_name )" value={{item.item_name}}>{{item.item_name}}
+            <mat-select [(ngModel)]="item_name">
+               <mat-option  *ngFor= "let item of items"
+               (click)="BindItemnumber(item.item_number , item.id , item.product_uom_name, item.dimension, description)" [value]="item.item_name">{{item.item_name}}
             </mat-option>
-              </div>
            </mat-select>
             
       </mat-form-field>
@@ -144,84 +140,100 @@
                      <tr style="text-align: center;">
                         <th style="text-align: center;">{{'ID'|translate}}</th>
                         <th style="text-align: center;">{{'Inspect Location'|translate}}</th>
+                        <th style="text-align: center;">{{'Description'|translate}}</th>
                         <th style="text-align: center;">{{'Number'|translate}}</th>
+                        <th style="text-align: center;">{{'Completion Rate'|translate}}</th>
                         <th style="text-align: center;">{{'Executed Quantity'|translate}} 
                            <br> 
                            <mat-label>{{'Measurements'|translate}}</mat-label>
                           
                         </th>
-                        <th style="text-align: center;">{{'Completion Rate'|translate}}</th>
+                        
 
-                        <th style="text-align: center;">{{'Approved Quantity'|translate}}
+                        <!-- <th style="text-align: center;">{{'Approved Quantity'|translate}}
                         <br> 
                         <mat-label>{{'Measurements'|translate}}</mat-label>
                      
-                     </th>
-                     <th style="text-align: center;">{{'Completion Rate'|translate}}</th>
+                     </th> -->
+                     <!-- <th style="text-align: center;">{{'Completion Rate'|translate}}</th> -->
                         <th style="text-align: center;">{{'Controls'|translate}}</th>
                      </tr>
                   </thead>
-                  <tbody *ngFor="let item of Location; let i = index">
+                  <tbody *ngFor="let item of Location; let i = index"  >
                      <tr  style="text-align: center;">
                         <td>{{item.rfi_id}}</td>
                         <td>{{item.name}}</td>
                         <td>
+                           <mat-form-field class="qua-wid mrgn-b-lg" >
+                              <mat-label>Description</mat-label>
+                              <input matInput name="desc"                                
+                               [(ngModel)]="item.description"                              
+                              />
+                        </mat-form-field>
+                        </td>
+                        <td>
                            <mat-form-field class=" half-wid mrgn-b-lg">
                            <input matInput  
-                          
+                          [(ngModel)]="item.Number"
                           placeholder="{{'Number'| translate}}"
                           />
                         </mat-form-field>
                         </td>
+                        <td>
+                          
+                           <mat-form-field class="qua-wid mrgn-b-lg" >
+                              <mat-label>Percentage</mat-label>
+                              <input matInput name="percentage"                                
+                               [(ngModel)]="item.percentage"                              
+                              />
+                        </mat-form-field>
+                         </td>
                        <td>
                         
                         <mat-form-field class=" qua-wid mrgn-b-lg">
                            <mat-label>{{'Length'|translate}}</mat-label>
                            <input matInput name="qty_length"  
-                            [(ngModel)]="qty_length" 
-                              (change)="calQty()"
+                            [(ngModel)]="item.qty_length" 
+                              (change)="calQty(item)"
                            placeholder={{qty_length}}
                            />
                      </mat-form-field>
                   &nbsp; 
                   &nbsp; 
 
-                     <mat-form-field class="qua-wid mrgn-b-lg">
+                     <mat-form-field class="qua-wid mrgn-b-lg" *ngIf="dimension>1">
                         <mat-label>{{'Width'|translate}}</mat-label>
-                        <input matInput name="qty_width"  
-                         [(ngModel)]="qty_width" 
-                         (change)="calQty()"
+                        <input matInput name="qty_width" 
+                         [(ngModel)]="item.qty_width" 
+                         (change)="calQty(item)"
                         placeholder={{qty_width}}
                         />
                   </mat-form-field>
                   &nbsp; 
                   &nbsp; 
-                  <mat-form-field class=" qua-wid mrgn-b-lg">
+                  <mat-form-field class=" qua-wid mrgn-b-lg" *ngIf="dimension>2">
                      <mat-label>{{'Height'|translate}}</mat-label>
-                     <input matInput name="qty_height"  
-                      [(ngModel)]="qty_height" 
-                      (change)="calQty()"
+                     <input matInput name="qty_height" 
+                      [(ngModel)]="item.qty_height" 
+                      (change)="calQty(item)"
                      placeholder={{qty_height}}
                      />
                </mat-form-field>
                &nbsp; 
                &nbsp;
-               <mat-form-field class="qua-wid mrgn-b-lg" >
+               <mat-form-field class="qua-wid mrgn-b-lg" *ngIf="1>2">
                   <mat-label>{{'Total'|translate}}</mat-label>
                   <input matInput name="qty"  
                   disabled
-                   [(ngModel)]="qty" 
-                 
+                   [(ngModel)]="item.qty" 
+                 (change)="calpercentage(item)"
                   />
             </mat-form-field>
            
                          </td>
 
-                         <td>
-                          
-
-                         </td>
-                         <td>
+                         
+                         <!-- <td>
                            
                         <mat-form-field class="qua-wid mrgn-b-lg">
 
@@ -256,7 +268,7 @@
                         />
                   </mat-form-field>
                 
-                         </td>
+                         </td> -->
                          <td>
                             <mat-icon matTooltip="{{'Delete'|translate}}" (click)="delete(i)">delete</mat-icon>
                        </td>
