@@ -87,7 +87,7 @@ export class CountitemdetailsComponent implements OnInit {
     },
      err=>console.log(err)
    );
-   
+   debugger;
    //Get The RFI's Items based in Rfi id 
    this.service.getCountItem( this.id).subscribe(
      data =>

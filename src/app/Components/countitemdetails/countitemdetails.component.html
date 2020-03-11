@@ -71,30 +71,38 @@
                   <thead>
                      <tr>
                          <th style="text-align: center;">{{'Inspect Location'|translate}}</th>
-                 
+                         <th style="text-align: center;">{{'Description'|translate}}</th>
+                         <th style="text-align: center;">{{'Number'|translate}}</th>
+                         <th style="text-align: center;">{{'Length'|translate}}</th>
                         <th style="text-align: center;">{{'Width'|translate}}</th>
                         <th style="text-align: center;">{{'Height'|translate}}</th>
-                        <th style="text-align: center;">{{'Length'|translate}}</th>
+                        <th style="text-align: center;">{{'Percentage'|translate}}</th>
                         <th style="text-align: center;">{{'Executed Quantity'|translate}}</th>
-                    
+                        
+                        <th style="text-align: center;">{{'Number'|translate}}</th>
+                        <th style="text-align: center;">{{'Length'|translate}}</th>
                         <th style="text-align: center;">{{'Width'|translate}}</th>
                         <th style="text-align: center;">{{'Height'|translate}}</th>
-                        <th style="text-align: center;">{{'Length'|translate}}</th>
+                        <th style="text-align: center;">{{'Percentage'|translate}}</th>
                         <th style="text-align: center;">{{'Approved Quantity'|translate}}</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr *ngFor="let item of Items" style="text-align: center;">
                          <td style="text-align: center;">{{item.location}}</td>
-                    
+                         <td style="text-align: center;">{{item.description}}</td>
+                         <td style="text-align: center;">{{item.number}}</td>
+                         <td style="text-align: center;">{{item.qty_length}}</td>
                          <td style="text-align: center;">{{item.qty_width}}</td>
                          <td style="text-align: center;">{{item.qty_height}}</td>
-                         <td style="text-align: center;">{{item.qty_length}}</td>
+                         <td style="text-align: center;">{{item.qty_pers}}</td>
                          <td style="text-align: center;">{{item.qty}}</td>
+                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_number" [value]="item.number"/></td>
+                         <td class="sm-wid"  style="text-align: center;"><input matInput name="approved_length" [(ngModel)]="item.approved_length"/></td>
                          <td class="sm-wid" style="text-align: center;"><input matInput name="approved_width" [(ngModel)]="item.approved_width"/></td>
                          <td class="sm-wid" style="text-align: center;"><input matInput name="approved_height" [(ngModel)]="item.approved_height"/></td>
-                         <td class="sm-wid"  style="text-align: center;"><input matInput name="approved_length" [(ngModel)]="item.approved_length"/></td>
-                         <td class="sm-wid" style="text-align: center;"><input matInput name="approve" [(ngModel)]="item.approved_qty"/></td>
+                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_percentage" [value]="item.qty_pers"/></td>
+                         <td class="sm-wid" style="text-align: center;"><input matInput name="approve" [value]="item.qty"/></td>
                         
                      </tr>
                   </tbody>

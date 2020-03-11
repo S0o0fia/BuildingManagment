@@ -495,6 +495,7 @@ export class CoreService {
 
 	getCountItem(id)
 	{
+		debugger;
 		let counturl = '/count/items/get?db=nqproject&token='+localStorage.getItem('token')+'&count_id='+id;
 		return this.http.get<any[]>(this.apiURL+counturl);
 	}
