@@ -11,7 +11,7 @@
        </div>
        <div class="gene-card-content">
           <mat-tab-group [selectedIndex]="selectedIndex">
-             <mat-tab label="{{'Step 1'|translate}}">
+             <mat-tab label="{{'Step 1'|translate}}" [disabled]="selectedIndex != 0" >
                 <form #form="ngForm" >
                    <div fxLayout="column">
                       <!--Proejct Name-->
@@ -84,7 +84,7 @@
                               <input matInput 
                               name="startdate" [(ngModel)]="startdate" 
                               [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
-                               placeholder="{{'Session From Grogorian'|translate}}" >
+                               placeholder="{{'Session From Grogorian'|translate}}">
                               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                               <mat-datepicker #picker></mat-datepicker>                         
                            </mat-form-field>
@@ -107,7 +107,7 @@
                 </form>
              </mat-tab>
             
-             <mat-tab label="{{'Step 2'|translate}}" [disabled]="!form.valid">
+             <mat-tab label="{{'Step 2'|translate}}" [disabled]="selectedIndex != 1" >
                 <form #form2="ngForm" >
                    <div fxLayout="column">
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
@@ -129,7 +129,7 @@
                             <mat-label >* {{'Choose'|translate}}</mat-label>
                               <mat-radio-group aria-label="Select an option">
                                  <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
-                                 <mat-radio-button (click)="ChooseVat(true)"  value="1">{{'With Vat'|translate}}</mat-radio-button>
+                                 <mat-radio-button (click)="ChooseVat(true)"  value="1" checked="checked" >{{'With Vat'|translate}}</mat-radio-button>
                                  </div>
                                  <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                                  <mat-radio-button  (click)="ChooseVat(false)"  value="2" >{{'Without Vat'|translate}}</mat-radio-button>
@@ -232,13 +232,13 @@
                       
                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                         <mat-form-field class="mrgn-b-lg " fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                           <input matInput name="deliverdate"
-                            [(ngModel)]="deliverdate"  
+                           <input matInput 
+                           name="deliverdate" [(ngModel)]="deliverdate" 
                            [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
-                            placeholder="{{'Session To Grogorian'|translate}}"
-                            >
+                            placeholder="{{'Session To Grogorian'|translate}}">
                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                            <mat-datepicker #picker2></mat-datepicker>                         
+                                           
                         </mat-form-field>
                  </div>
                </div>
@@ -249,7 +249,7 @@
                    </div>
                 </form>
              </mat-tab>
-             <mat-tab label="{{'Step 3'|translate}}" [disabled]="!form2.valid">
+             <mat-tab label="{{'Step 3'|translate}}" [disabled]="selectedIndex != 2" >
                 <form #form3="ngForm" (ngSubmit)="SaveData()">
 
                   <br/>  <br/> 
@@ -364,12 +364,11 @@
 
                    <div fxLayout="row" fxLayoutAlign="center">
                       <button mat-button type="button" (click)="previousStep()">{{'Previous'|translate }}</button>
-                      <button mat-button mat-raised-button [disabled]="!form3.valid" (click)="nextStep()" color="accent"  type="submit">{{'New Project'|translate }}</button>
+                      <button mat-button mat-raised-button [disabled]="!form3.valid" (click)="SaveData()" color="accent"  type="submit">{{'New Project'|translate }}</button>
                    </div>
                 </form>
              </mat-tab>
-             <mat-tab label="{{'Step 4'|translate}}" [disabled]="!form2.valid"
-             (onLoad)="SaveData()" >
+             <mat-tab label="{{'Step 4'|translate}}" [disabled]="selectedIndex!=3" >
             
                 <div fxLayout="column">
                    <div class="custom-pad text-center">
