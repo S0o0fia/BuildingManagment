@@ -478,7 +478,7 @@
     "Projects Managment" :"إدارة تنفيذ المرافق البلدية",
     "Projects Managment Program" :"إدارة تنفيذ المرافق البلدية" ,
     "Based on Completion Rate" : "حسب نسبة الإنجاز",
-  
+    "Hide" : "إخفاء",
     "Pervoiusly" : "السابقة",
     "For Now":"الحالية" ,
     "All":"الكل",
@@ -758,7 +758,7 @@
            "Items Type" : "نوع البند" ,
            "contracted" : "تعاقدي" , 
            "calibrate" : "معايرة" ,
-           "Prepare Item" :"البند التحضيري" ,
+           "Prepare Item" :"بند تحضيري" ,
            "Filter by":"فرز حسب" ,
            "Specify Works" : "تخصص الاعمال" , 
            "Search by" : "بحث بـ"  ,
@@ -766,7 +766,8 @@
            "List of Count":"قائمة طلبات الحصر" ,
            "Height":"الارتفاع",
            "Width":"العرض" ,
-           "Length":"الطول"
+           "Length":"الطول" ,
+           "Count Number":"رقم الحصر"
  
          
 

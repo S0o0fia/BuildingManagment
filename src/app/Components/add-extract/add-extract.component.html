@@ -22,14 +22,27 @@
                           </div>
                           <!--Extract Number-->
                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                <mat-form-field class="full-wid mrgn-b-lg">
-                                        <input matInput 
-                                        name="extract_date" [(ngModel)]="extract_date"
-                                        [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
-                                         placeholder="{{'Extract Date'|translate}}">
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>  
-                                </mat-form-field>
+                               <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
+                                 <mat-form-field class="full-wid mrgn-b-lg">
+                                    <input matInput 
+                                    name="from_extract_date"  [(ngModel)]="from_extract_date"
+                                    [min]="minDate" [max]="maxDate" [matDatepicker]="picker1"
+                                     placeholder="{{'From'|translate}}">
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker1></mat-datepicker>  
+                            </mat-form-field>
+                               </div>
+                               &nbsp;  &nbsp;  &nbsp;
+                               <div  fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                                 <mat-form-field class="full-wid mrgn-b-lg">
+                                    <input matInput 
+                                    name="to_extract_date"  [(ngModel)]="to_extract_date"
+                                    [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
+                                     placeholder="{{'To'|translate}}">
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>  
+                            </mat-form-field>
+                               </div>
                           </div>
                            <!--Total work performed in the abstract-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
@@ -123,31 +136,144 @@
                                           </div>
                     <mat-divider></mat-divider>
                     <div class="gene-card-content pad-t-none">
-                            <div class="table-responsive">
+                     <div class="table-responsive">
+                        <table class="table table-hover table-middle th-fw-light mb-0"  style="background-color: #C1C7C9;">
+                           <thead>
+                              <tr class="text-center">
+                                 <th class="text-center">{{'Choose'|translate}}</th>
+                                 <th class="text-center">{{'Count Number'|translate}}</th>
+                                 <th class="text-center">{{'From'|translate}}</th>
+                                 <th class="text-center">{{'To'|translate}}</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr *ngFor="let item of approved ; let i = index;">
+                                 <td style="text-align: center;">
+                                    <mat-checkbox (change)="getCountItem($event , item.item_number ,item.count_id)"></mat-checkbox>
+                                 </td>
+                                 <td style="text-align: center;">
+                                  {{item.count_id}}
+                                 </td>
+                                 <td style="text-align: center;">
+                                    {{item.count_from}}
+                                   </td>
+                                
+                                   <td style="text-align: center;">
+                                    {{item.count_to}}
+                                   </td>
+                                  
+                                
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+
+                   <div fxLayout="row" fxLayoutAlign="center">                     
+                     <button style="text-align: center;" mat-button mat-raised-button color="accent" 
+                     (click)="AddItem()" type="submit"></button>
+                   </div>
+                   <br>
+                   <br>
+                        <div class="table-responsive">
                                <table class="table table-hover table-middle th-fw-light mb-0">
                                   <thead>
                                      <tr>
-                                        <th>#</th>
-                                        <th>{{'Item Number'|translate}}</th>
-                                        <th>{{'Item Name'|translate}}</th>
-                                        <th>{{'Quantity'|translate}}</th>
-                                        <th>{{'Price'|translate}}</th>
-                                        <th>{{'Total Price'|translate}}</th>
-                                        <th>{{'Controls'|translate}}</th>
+                                        <th style="text-align: center;">{{'ID'|translate}}</th>
+                                        <th  style="text-align: center;">{{'Item Number'|translate}}</th>
+                                        <th  style="text-align: center;">{{'Item Name'|translate}}</th>
+                                         <th  style="text-align: center;">{{'Controls'|translate}}</th>
                                      </tr>
                                   </thead>
                                   <tbody>
-                                     <tr *ngFor="let item of approved ; let i = index">
-                                   
-                                        <td>#</td>
+                                     <ng-container *ngFor="let item of ApprovedCountItem ; let i = index"  style="text-align: center;">
+                                   <tr>
+                                       <td>
+                                          <span (click)="openCloseRow(item.id = 0 )">
+                                                <button *ngIf="rowSelected!=item.id; else close" color="primary"  mat-icon-button matTooltip="{{'More Options'|translate}}" [matMenuTriggerFor]="menu"   >
+                                                   <mat-icon>arrow_drop_down</mat-icon>
+                                                </button>
+                                                <ng-template #close>
+                                                      <button color="primary"  mat-icon-button matTooltip="{{'Hide'|translate}}" [matMenuTriggerFor]="menu"   >
+                                                         <mat-icon>arrow_drop_up</mat-icon>
+                                                      </button>
+                                                  </ng-template>
+                                                </span>
+                                       </td>
                                         <td>{{item.number}}</td>
-                                        <td>{{item.name}}</td>
-                                        <td>{{item.approved_qty}}</td>
-                                        <td>{{item.price}}</td>
-                                        <td>{{item.price * item.approved_qty}}</td>
+                                        <td style="width:70%;">{{item.name}}</td>
+                                        
                                         <td><button (click)="removeitem(i)" color="warn" mat-button><mat-icon>delete</mat-icon></button></td>
                                      </tr>
-                                  
+
+                                     <tr *ngIf="rowSelected==item.id" style="background-color: #C1C7C9;">
+                                       <td></td>
+                                       <td colspan="4">
+                                        <table class="table table-striped">
+                                        <th  style="text-align: center;">{{'Contracted Quantities'|translate}}</th>
+                                        <th  style="text-align: center;">{{'Executed Quantity'|translate}}</th>
+                                        <th  style="text-align: center;">{{'Price'|translate}}</th>
+                                        <th  style="text-align: center;" >{{'Total Price'|translate}}</th>
+                                               <tbody>
+                                                   <tr style="text-align: center;">
+                                                      <td >{{item.qty}}</td>
+                                        <td >
+                                           <mat-label style="font-weight: bolder;">{{'Pervoiusly'|translate}}</mat-label>
+                                          
+                                           &nbsp;    &nbsp; 
+                                           <mat-label style="font-weight: bolder;">{{'For Now'|translate}}</mat-label>
+                                      
+                                           &nbsp; &nbsp;
+                                           <mat-label style="font-weight: bolder;">{{'Total'|translate}}</mat-label>
+                                           &nbsp;     &nbsp;  
+                                           <br>
+                                           {{ item.p_approved_qty  - item.approved_qty }}
+                                           
+                                           &nbsp; &nbsp;
+                                           {{item.approved_qty}}
+                                           &nbsp; &nbsp;
+                                           {{item.p_approved_qty}}
+
+                                        
+                                           <br>
+                                          </td>
+                                        <td style="text-align: center;">
+                                          <mat-label style="font-weight: bolder;">{{'Pervoiusly'|translate}}</mat-label>
+                                          &nbsp; &nbsp;
+                                           <mat-label style="font-weight: bolder;">{{'For Now'|translate}}</mat-label>
+
+                                           &nbsp; &nbsp;
+                                           <mat-label style="font-weight: bolder;">{{'Total'|translate}}</mat-label>
+                                           &nbsp; &nbsp;
+                                           <br>
+                                           {{item.price}}
+                                           &nbsp; &nbsp;
+                                           {{item.price}}
+                                           &nbsp; &nbsp;
+                                           {{item.price + item.price}}
+                                          </td>
+                                        <td>
+                                          <mat-label style="font-weight: bolder;">{{'Pervoiusly'|translate}}
+                                          
+                                          </mat-label>
+                                          &nbsp; &nbsp;
+                                           <mat-label style="font-weight: bolder;">{{'For Now'|translate}}</mat-label>
+
+                                           &nbsp; &nbsp;
+                                           <mat-label style="font-weight: bolder;">{{'Total'|translate}}</mat-label>
+                                           &nbsp; 
+                                           <br>
+                                           {{item.price * (item.p_approved_qty  - item.approved_qty)}}
+                                           &nbsp; &nbsp;
+                                           {{item.price * item.approved_qty}}
+                                           &nbsp; &nbsp;
+                                           {{item.price * item.approved_qty + item.price * (item.p_approved_qty  - item.approved_qty)}}
+                                         </td>
+                                          </tr>
+                                         </tbody>
+                                        </table>
+                                       </td>
+                                     </tr>
+                                    </ng-container>
                                   </tbody>
                                </table>
                             </div>
@@ -168,40 +294,33 @@
                         <form #form="ngForm">
                           
                              
-                              <mat-form-field class="full-wid mrgn-b-lg">
-                                    <mat-label>{{'Discounts Type'|translate}}</mat-label>
-                                    <mat-select name="dis" [(ngModel)]="dis" >
-                                              <mat-option value="1" >
-                                                   {{'Delay penalty'|translate}}
-                                              </mat-option>
-                                              <mat-option value="1" >
-                                                {{'A well-executed fine'|translate}}
-                                             </mat-option>
-                                             <mat-option value="1" >
-                                                {{'Downpayment'|translate}}
-                                             </mat-option>
-                                             <mat-option value="1" >
-                                                {{'The value of the previous abstracts'|translate}}
-                                             </mat-option>
-                                            </mat-select>                                            
+                              <mat-form-field class="half-wid mrgn-b-lg">
+                                 <input matInput name="discounts" [(ngModel)]="discounts"
+                                 placeholder="{{'Discounts Type'|translate}}" type="text" required>                                    
                               </mat-form-field>
-
-                              <mat-form-field class="full-wid mrgn-b-lg"> 
+                          &nbsp; &nbsp;
+                              <mat-form-field class="half-wid mrgn-b-lg"> 
                                    <input matInput name="dis_amount" [(ngModel)]="dis_amount" 
                                  placeholder="{{'Total Discounts'|translate}}" type="number" required>   
                            </mat-form-field>
+                           &nbsp; &nbsp;
+                           <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="AddDiscount()">{{'Add' |translate}}</button>
+                       
                         </form>
+                          
                         </div>
                        </div>
-                   
-                       <span fxFlex></span>
                       
+                      
+                       <span fxFlex></span>
                       
                        <!-- <div fxLayout="column">
                             <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialogDiscount()">{{'Add Item'|translate}}</button>
                          </div> -->
                     </div>
                     
+                        </div>
+                   <div >
                         </div>
                     <mat-divider></mat-divider>
                
@@ -218,11 +337,12 @@
                                  </tr>
                               </thead>
                               <tbody>
-                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                 <tr *ngFor="let item of discount ; let i = index;">
+                                    <td>#</td>
+                                    <td>{{item.discount}}</td>
+                                    <td>{{item.amount}}</td>
+                                    <td><button (click)="removediscount(i)" color="warn" mat-button><mat-icon>delete</mat-icon></button></td>
+                                   
                           </tr>
                               </tbody>
                            </table>

@@ -19,6 +19,7 @@ import { Extract } from '../../Models/Extract/extract';
 import { Comment } from '../../Models/Comment/comment';
 import { Count } from 'app/Models/Count/count';
 import { Countitem } from 'app/Models/Count/countitem';
+import { Extractitem } from 'app/Models/Extract/extractitem';
 @Injectable({
 	providedIn: 'root'
 })
@@ -392,7 +393,8 @@ export class CoreService {
 	{
 	   let extracturl = "/invoice/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
 	   '"name":"'+values.name+
-	   '","date":"'+values.date+
+	   '","date_from":"'+values.date_from+
+	   '","date_to":"'+values.date_to+
 	   '","paid":'+values.paid+
 	   ',"Total_vat":'+values.Total_vat+
 	   ',"total_discount":'+values.total_discount+
@@ -400,6 +402,26 @@ export class CoreService {
 	   ',"total_price":'+values.total_price+
 	   ',"project_id":'+values.project_id+
 	   '}';
+
+	   console.log(extracturl);
+	   return this.http.post(this.apiURL+extracturl , null);
+
+
+	}
+
+	createInvoiceitem (values : Extractitem)
+	{
+	   let extracturl = "/invoice/items/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
+	   '"item_number":"'+values.item_number+
+	   '","item_name":"'+values.item_name+
+	   '","qty":'+values.qty+
+	   ',"approved_qty":'+values.approved_qty+
+	   ',"p_approved_qty":'+values.p_approved_qty+
+	   ',"price":'+values.price+
+	   ',"project_invoice_id":'+values.extract_id+
+	   '}';
+
+	   console.log(extracturl);
 	   return this.http.post(this.apiURL+extracturl , null);
 
 

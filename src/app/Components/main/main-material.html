@@ -125,7 +125,7 @@
             <mat-checkbox [(ngModel)]="dark" (change) = "addClassOnBody($event)" [align]="end">{{'Dark Mode'| translate }}</mat-checkbox>
          </div>
          <div>
-            <mat-checkbox (change)="changeRTL($event.checked)" >{{'RTL'| translate }}</mat-checkbox>
+            <mat-checkbox (change)="changeRTL($event.checked)" checked="checked">{{'RTL'| translate }}</mat-checkbox>
          </div>
          <div>
             <mat-select placeholder="Language" class="mt-1" [(ngModel)]="currentLang" #langSelect="ngModel" (ngModelChange)="translate.use(currentLang)">
