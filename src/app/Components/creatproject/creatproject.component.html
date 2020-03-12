@@ -250,7 +250,7 @@
                 </form>
              </mat-tab>
              <mat-tab label="{{'Step 3'|translate}}" [disabled]="selectedIndex != 2" >
-                <form #form3="ngForm">
+                <form #form3="ngForm" (ngSubmit)="SaveData()">
 
                   <br/>  <br/> 
 
@@ -364,7 +364,7 @@
 
                    <div fxLayout="row" fxLayoutAlign="center">
                       <button mat-button type="button" (click)="previousStep()">{{'Previous'|translate }}</button>
-                      <button mat-button mat-raised-button [disabled]="!form3.valid" (click)="SaveData()" color="accent"  type="submit">{{'New Project'|translate }}</button>
+                      <button mat-button mat-raised-button [disabled]="!form3.valid" color="accent"  type="submit">{{'New Project'|translate }}</button>
                    </div>
                 </form>
              </mat-tab>
