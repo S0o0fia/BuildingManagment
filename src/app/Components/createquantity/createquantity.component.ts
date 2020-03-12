@@ -43,6 +43,7 @@ export class CreatequantityComponent implements OnInit {
       this.minDate = new Date(1900,1,1);
       this.maxDate = new Date(2050,1,1);
       this.projectname = localStorage.getItem('projectname');
+      dialogRef.disableClose = true;
     }
   	
    

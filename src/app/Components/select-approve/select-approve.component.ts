@@ -19,7 +19,7 @@ export class SelectApproveComponent implements OnInit {
   constructor( public dialogRef: MatDialogRef<RfidetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any , public service : CoreService)
     {
-  
+      dialogRef.disableClose = true;
     }
     
 

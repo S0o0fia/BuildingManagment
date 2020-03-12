@@ -161,7 +161,7 @@ export class AddRequestComponent implements OnInit {
       this.maxDate = new Date(2050,1,1);
      this.projectname = localStorage.getItem('projectname');
 
-
+     dialogRef.disableClose = true;
       
     }
   	//Method to fill the Table of items

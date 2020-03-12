@@ -70,7 +70,7 @@ export class AddBuildingComponent implements OnInit {
     this.Neighborhood =  new FormControl('' , Validators.required);
     
     this.projectname = localStorage.getItem('projectname');
-     
+    dialogRef.disableClose = true;
    
     }
   	
