@@ -39,7 +39,7 @@
 
             <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
                <mat-form-field class="full-wid mrgn-b-lg">
-                     <mat-label>{{'Type Of Works'|translate}}</mat-label>
+                     <mat-label>{{'Specify Works'|translate}}</mat-label>
                      <mat-select  name="item_type"  [(ngModel)]="item_type">
                         <mat-option  (click)="bindItemType(all,'bussinessType')" value="0">{{'All'|translate}}</mat-option>
                         <div *ngFor="let data of section">
@@ -70,8 +70,7 @@
                   <th>{{'Project Items'|translate}}</th>
                   <th>{{'Type Of Works'|translate}}</th>
                   <th>{{'Item Number'|translate}}</th>
-                  <th >{{'Item Name'|translate}}</th>
-                
+                  <th >{{'Item Name'|translate}}</th> 
                  
                   </tr>
                </thead>
@@ -100,8 +99,8 @@
                                     <mat-icon>arrow_drop_down</mat-icon>
                                  </button>
                                  <ng-template #close>
-                                       <button color="primary"  mat-icon-button matTooltip="{{'More Options'|translate}}" [matMenuTriggerFor]="menu"   >
-                                          <mat-icon>arrow_drag_up</mat-icon>
+                                       <button color="primary"  mat-icon-button matTooltip="{{'Hide'|translate}}" [matMenuTriggerFor]="menu"   >
+                                          <mat-icon>arrow_drop_up</mat-icon>
                                        </button>
                                    </ng-template>
                                  </span>
@@ -118,10 +117,9 @@
                         <td  [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.item_name}}</span>
                         </td>
-
                      </tr>
 
-                     <tr *ngIf="rowSelected==data.id">
+                     <tr *ngIf="rowSelected==data.id" style="background-color: #C1C7C9;">
                            <td></td>
                            <td colspan="7">
                                <table class="table table-striped">
@@ -156,7 +154,7 @@
                                              <span>{{data.total_excuted}}</span>
                                           </td>
                                               
-                                                                              </tr>
+                                     </tr>
                                    </tbody>
                                </table>
                            </td>
