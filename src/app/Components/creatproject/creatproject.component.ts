@@ -7,7 +7,7 @@ import { PageTitleService } from '../core/page-title/page-title.service';
 import { ProjectModel } from 'app/Models/Project/project-model';
 import { DatePipe, formatDate, CurrencyPipe } from '@angular/common';
 import { AddBuildingComponent } from '../add-building/add-building.component';
-import { MatDialog, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MatDialog, DateAdapter, MAT_DATE_FORMATS, MatSnackBar } from '@angular/material';
 import { FileUploader } from 'ng2-file-upload';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'app/Service/custompipe/format-datepicker';
 import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
@@ -63,7 +63,7 @@ export class CreatprojectComponent implements OnInit {
   project_duration_days : number = 0;
   project_duration_months : number = 0;
   project_duration_h_months : number = 0;
-  deliverdate : Date=new Date();
+  deliverdate : Date;
   deliverdate_hijri : Date;
   type : string="";
   proj_number: string = "";
@@ -72,7 +72,7 @@ export class CreatprojectComponent implements OnInit {
   uploader: FileUploader = new FileUploader({url: ''});
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
-  from_hijri : string;
+  from_hijri : string="";
   qty_type : boolean;
   with_vat : boolean = false;
   containfirst : boolean = false;
@@ -93,11 +93,12 @@ export class CreatprojectComponent implements OnInit {
   }
 
   constructor( private pageTitleService: PageTitleService, private formatPipe: NumberFormatPipe,
-               
+               private _snackBar: MatSnackBar ,
                private translate : TranslateService , public service : CoreService
                 , public fb: FormBuilder , private dialog: MatDialog,private currencyPipe:CurrencyPipe) {
                   this.minDate = new Date(1900,1,1);
                   this.maxDate = new Date(2050,1,1);
+                  this.deliverdate = null;
                   this.lng=46.6753;
                   this.lat=24.7136;
                   this.qty_type = false;                 
@@ -120,8 +121,19 @@ export class CreatprojectComponent implements OnInit {
      subscribe(
          (data) =>{this.ProjectList = data;
            console.log(data)},
-         (err) => {console.log(err)}
+         (err) => {console.log(err) ; 
+        
+        
+        }
      );
+  }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition : 'center' ,
+      panelClass: ['my-snack-bar']
+    });
   }
 
   conationfpay(event)
@@ -274,29 +286,13 @@ caldurationd(value)
     this.qty_type = val;
   }
   previousStep() {
-    const format = 'MM/dd/yyyy';
+    const format = 'dd/MM/yyyy';
     const locale = 'en-US';
     let formattedDate = formatDate(this.startdate, format, locale);
+    this.selectedIndex -= 1;
    
-   
-   //   this.newProject={
-   //    name : this.name ,
-   //    proj_state:this.status,
-   //    budget_year:this.budget_year ,
-   //    proj_consultant:+this.consultant_name,
-   //    contact_no:this.contact_number,
-   //    proj_contractor:+this.contractor_name , 
-   //    description:this.description ,
-   //    first_pay : this.first_pay , 
-   //    proj_duration :this.project_duration , 
-   //    project_val:this.project_amount , 
-   //    from_date : formattedDate.toString(),
-   //    lantitude : this.lat ,
-   //    longitude : this.lng ,
-   // }
-
-   this.selectedIndex -= 1;
-  }   
+  }
+  
 
    placeMarker(position: any) {
    this.lat = position.coords.lat;
@@ -306,10 +302,16 @@ caldurationd(value)
    }
   SaveData()
   {
+   
      console.log(this.newProject);
       this.service.createProject(this.newProject).subscribe(
-         (data)=>{ console.log(data)} ,
-         err=> {console.log(err);}
+         (data)=>{ console.log(data) ; 
+         
+          this.selectedIndex +=1;
+        } ,
+         err=> {console.log(err); 
+          let msg = this.openSnackBar("لم يتم إضافة المشروع تأكد من إدخالك للبيانات" , "إالغاء" );
+        }
       );
      
   }

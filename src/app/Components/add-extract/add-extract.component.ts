@@ -18,6 +18,7 @@ export class AddExtractComponent implements OnInit {
   extract_number : string;
   extract_date : Date = new Date();
   total_work : number = 0;
+  discounts : string = "";
   total_discount : number = 0;
   Net_amout : number = 0;
   total_Vat : number = 0;
@@ -31,7 +32,19 @@ export class AddExtractComponent implements OnInit {
   dis : number = 0;
   dis_amount : number = 0;
   projectname : string;
-  
+  public rowSelected : any = -1;
+  ApprovedCountItem : any =[];
+  added : boolean = false;
+  discount : any = [];
+  from_extract_date : Date = new Date() ;
+  to_extract_date : Date =  new Date()  ;
+ 
+  openCloseRow(id): void
+ {
+    this.rowSelected = this.rowSelected == -1 ? id : -1;
+    console.log(this.ApprovedCountItem);
+  }
+
   constructor( private dialog: MatDialog , public service : CoreService , private router : Router , 
     public _snackBar : MatSnackBar) { 
       this.projectname = localStorage.getItem('projectname');
@@ -52,7 +65,9 @@ export class AddExtractComponent implements OnInit {
     );
 
     this.service.getApproveQty().subscribe(
-       data => this.approve = data as any ,
+       data =>{ this.approve = data as any ;
+      console.log(data);
+      },
         err=> console.log(err)
 
     );
@@ -76,11 +91,14 @@ export class AddExtractComponent implements OnInit {
   {
     const format = 'MM/dd/yyyy';
     const locale = 'en-US';
-    let exDate = formatDate(this.extract_date, format, locale);
+    let from_exDate = formatDate(this.from_extract_date, format, locale);
+    let to_exDate = formatDate(this.to_extract_date, format, locale);
     
     this.ext= {
+
       Total_vat : this.total_Vat ,
-      date : exDate ,
+      date_from : from_exDate ,
+      date_to : to_exDate ,
       name : this.extract_number ,
       paid : this.paid , 
       project_id : this.projectid , 
@@ -91,15 +109,12 @@ export class AddExtractComponent implements OnInit {
     this.service.createInvoice(this.ext).subscribe(
       data=>{
         this.extract_id = data['invoice_id'];
-         
-        let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
+         let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
                         if(msg)
                         {
                          this.router.navigate(['/home/abstracts']);
                         }
 
-
-       
       } ,
       err => console.log(err)
     );
@@ -171,4 +186,48 @@ export class AddExtractComponent implements OnInit {
       
     });
   }
+
+  getCountItem(event , item_number , count_id)
+  {
+    if(event.checked)
+    {
+      this.approved.forEach(element => {
+        if(element.item_number == item_number)
+        {
+          this.ApprovedCountItem.forEach(element2 => {
+               if(element2.count_id == count_id)  
+               { 
+                 element2.approved_qty += element.approved_qty;
+                 this.added = true;
+               }
+                 
+          });     
+
+          if(this.added == false)
+          {
+            this.ApprovedCountItem.push(element);
+          }
+        }
+      });
+    }
+  }
+  AddDiscount()
+  {
+     this.discount.push({
+       discount : this.discounts , 
+       amount : this.dis_amount
+     });
+
+     this.total_discount += this.dis_amount;
+     this.Net_amout -= this.dis_amount;
+     this.total_Vat = (this.Net_amout)+(this.Net_amout*0.05);
+  }
+  removediscount(index)
+{
+  this.total_discount -= this.discount[index].amount;
+  this.Net_amout += this.discount[index].amount;
+  this.total_Vat = (this.Net_amout)+(this.Net_amout*0.05);
+  this.discount.splice(index , 1);
+  
+}
 }
