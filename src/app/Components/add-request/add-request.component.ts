@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { RequestForInspectionComponent } from '../request-for-inspection/request-for-inspection.component';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { Rfi } from 'app/Models/RFI/rfi';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,11 +9,17 @@ import { CoreService } from 'app/Service/core/core.service';
 import { formatDate } from '@angular/common';
 import { InspctionId } from 'app/Models/inspction_id/inspction-id';
 import { FileUploader , FileSelectDirective } from 'ng2-file-upload';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'app/Service/custompipe/format-datepicker';
 const URL = 'http://nqraait.ddns.net:8070/api/test?db=nqproject&token='+localStorage.getItem('token');
 @Component({
   selector: 'ms-add-request',
   templateUrl: './add-request.component.html',
-  styleUrls: ['./add-request.component.scss']
+  styleUrls: ['./add-request.component.scss'],
+  providers: [
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    // {provide: APP_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 })
 export class AddRequestComponent implements OnInit {
 
