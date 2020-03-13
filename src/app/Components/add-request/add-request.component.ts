@@ -256,6 +256,7 @@ export class AddRequestComponent implements OnInit {
   //to get the selected item name  binding with its number
   BindItemname(value , id)
   {
+    debugger;
     this.item_name = value;
     this.item_id = id;
   }
@@ -263,6 +264,7 @@ export class AddRequestComponent implements OnInit {
   //to get the seleced item number binding with its name
   BindItemnumber(value , id)
   {
+    debugger;
     this.item_number = value;
     this.item_id = id;
   }
