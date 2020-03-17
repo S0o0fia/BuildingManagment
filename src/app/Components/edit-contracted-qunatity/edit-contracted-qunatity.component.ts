@@ -13,7 +13,7 @@ export class EditContractedQunatityComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public qunatity : number
      ) 
     {
-          
+      dialogRef.disableClose = true;
     }
 
   onNoClick(val): void {

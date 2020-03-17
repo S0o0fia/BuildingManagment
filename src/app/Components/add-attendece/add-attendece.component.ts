@@ -17,6 +17,7 @@ export class AddAttendeceComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)  private pageTitleService: PageTitleService,private translate : TranslateService) {
       this.minDate = new Date(1900,1,1);
       this.maxDate = new Date(2050,1,1);
+      dialogRef.disableClose = true;
     }
   	
    

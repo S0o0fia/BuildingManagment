@@ -61,6 +61,7 @@ export class AddrecieveditemComponent implements OnInit {
       this.lng=46.6753;
       this.lat=24.7136;
       this.projectname = localStorage.getItem('projectname');
+      dialogRef.disableClose = true;
     }
   	
     openSnackBar(message: string, action: string) {

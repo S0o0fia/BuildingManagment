@@ -173,7 +173,7 @@
                               </mat-form-field>
                        </div>
                        <!--Total-->
-                       <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32"
+                       <!-- <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32"
                        
                        style=" margin-top:0.5%;">
                         <mat-form-field class="full-wid mrgn-b-lg ">
@@ -181,7 +181,7 @@
                               <input matInput name="total" [(ngModel)]="total"
                               placeholder="{{'Total'|translate}}" type="number" disabled>       
                          </mat-form-field>
-                        </div>
+                        </div> -->
                   </div>
                 
                   <div>
@@ -208,7 +208,7 @@
                                        <tr>
                                           <th>{{'Inspect Location'|translate}}</th>
                                           <th>{{'Quantity'|translate}}</th>
-                                          <th>{{'Total'|translate}}</th>
+                                          <!-- <th>{{'Total'|translate}}</th> -->
                                           <th>{{'Controls'|translate}}</th>
                                         </tr>
                                     </thead>
@@ -216,7 +216,7 @@
                                        <tr *ngFor="let item of itemDate; let i = index" >
                                           <td>{{item.inspect_location}}</td>
                                           <td>{{item.qty}}</td>
-                                          <td>{{item.total}}</td>
+                                          <!-- <td>{{item.total}}</td> -->
                                          
                                           <td><mat-icon (click)="removeitem(i)" matTooltip="{{'Delete' | translate}}">delete</mat-icon></td>
                                         </tr>

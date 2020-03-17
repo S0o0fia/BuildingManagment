@@ -110,6 +110,7 @@ export class CoreService {
 		const headers = new HttpHeaders();
 	
 		headers.set('Content-Type', 'application/json; charset=utf-8');
+		debugger;
 		return this.http.post(this.apiURL+projecturl, null);
 	}
 
