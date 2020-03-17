@@ -243,6 +243,8 @@ caldurationd(value)
     let deliverDateHihri = formatDate(this.deliverdate_hijri, format, locale); 
     let segDate = formatDate(this.sig_date, format, locale); 
     let sdate = formatDate(this.stiuationdate, format, locale); 
+    if(this.first_pay == undefined) this.first_pay = 0 ;
+    if(this.perface_ratio == undefined) this.perface_ratio =0;
     this.newProject={
         
         name : this.name ,

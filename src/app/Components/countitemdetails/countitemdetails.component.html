@@ -98,11 +98,11 @@
                          <td style="text-align: center;">{{item.qty_pers}}</td>
                          <td style="text-align: center;">{{item.qty}}</td>
                          <td class="sm-wid" style="text-align: center;"><input matInput name="approved_number" [value]="item.qty_unit"/></td>
-                         <td class="sm-wid"  style="text-align: center;"><input matInput name="approved_length" [value]="item.qty_length"/></td>
-                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_width" [value]="item.qty_width"/></td>
-                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_height" [value]="item.qty_height"/></td>
+                         <td class="sm-wid"  style="text-align: center;"><input matInput name="approved_length" [value]="item.approved_length"/></td>
+                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_width" [value]="item.approved_width"/></td>
+                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_height" [value]="item.approved_height"/></td>
                          <td class="sm-wid" style="text-align: center;"><input matInput name="approved_percentage" [value]="item.qty_pers"/></td>
-                         <td class="sm-wid" style="text-align: center;"><input matInput name="approve" [value]="item.qty"/></td>
+                         <td class="sm-wid" style="text-align: center;"><input matInput name="approve" [value]="item.approved_qty"/></td>
                         
                      </tr>
                   </tbody>

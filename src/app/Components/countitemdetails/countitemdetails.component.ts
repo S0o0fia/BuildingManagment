@@ -66,7 +66,7 @@ export class CountitemdetailsComponent implements OnInit {
    this.service.getCount().subscribe(
     data => {
    
-     console.log(data);
+    
       data.forEach(element => {
            if(element.id == this.id)
           {this.count.push(element);

@@ -230,4 +230,9 @@ export class AddExtractComponent implements OnInit {
   this.discount.splice(index , 1);
   
 }
+
+AddItem () 
+{
+  
+}
 }
