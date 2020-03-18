@@ -21,11 +21,7 @@ export class AddDiscountComponent implements OnInit {
       dialogRef.disableClose = true;
     }
   	
-   
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+  
  
   
   ngOnInit() {

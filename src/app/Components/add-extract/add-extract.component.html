@@ -15,14 +15,30 @@
                        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                           <!--Extract Number-->
                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                           <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45" style="margin-top: 0.75%;">
                              <mat-form-field class="full-wid mrgn-b-lg">
                                     <input matInput name="extract_number" [(ngModel)]="extract_number"
                                     placeholder="{{'Extract Number'|translate}}" type="text" required>       
                              </mat-form-field>
+                           </div>
+                           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49" style="margin-right: 3%;">
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                  <mat-label>{{'Extract Type'|translate}}</mat-label>   
+                                 <mat-select>
+                                    <mat-option value="current">{{'Current'|translate}} </mat-option>
+                                    <mat-option value="final">{{'Final'|translate}}</mat-option>
+                               </mat-select>
+                              </mat-form-field>
+                            </div>
                           </div>
+                       
+                        
+                          <mat-lable>{{'Date of Approve Collect'|translate}}</mat-lable>    
+                          <br>
                           <!--Extract Number-->
                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                               <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
+                         
+                           <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
                                  <mat-form-field class="full-wid mrgn-b-lg">
                                     <input matInput 
                                     name="from_extract_date"  [(ngModel)]="from_extract_date"
@@ -141,9 +157,9 @@
                            <thead>
                               <tr class="text-center">
                                  <th class="text-center">{{'Choose'|translate}}</th>
-                                 <th class="text-center">{{'Count Number'|translate}}</th>
-                                 <th class="text-center">{{'From'|translate}}</th>
-                                 <th class="text-center">{{'To'|translate}}</th>
+                                 <th class="text-center">{{'Collect Request Number'|translate}}</th>
+                                 <th class="text-center">{{'From Duration'|translate}}</th>
+                                 <th class="text-center">{{'To Duration'|translate}}</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -187,20 +203,20 @@
                                   <tbody>
                                      <ng-container *ngFor="let item of ApprovedCountItem ; let i = index"  style="text-align: center;">
                                    <tr>
-                                       <td>
+                                       <td  style="text-align: center;">
                                           <span (click)="openCloseRow(item.id = 0 )">
                                                 <button *ngIf="rowSelected!=item.id; else close" color="primary"  mat-icon-button matTooltip="{{'More Options'|translate}}" [matMenuTriggerFor]="menu"   >
                                                    <mat-icon>arrow_drop_down</mat-icon>
                                                 </button>
                                                 <ng-template #close>
-                                                      <button color="primary"  mat-icon-button matTooltip="{{'Hide'|translate}}" [matMenuTriggerFor]="menu"   >
+                                                      <button color="primary"   mat-icon-button matTooltip="{{'Hide'|translate}}" [matMenuTriggerFor]="menu"   >
                                                          <mat-icon>arrow_drop_up</mat-icon>
                                                       </button>
                                                   </ng-template>
                                                 </span>
                                        </td>
-                                        <td>{{item.number}}</td>
-                                        <td style="width:70%;">{{item.name}}</td>
+                                        <td  style="text-align: center;">{{item.number}}</td>
+                                        <td style="width:70%; text-align: center;">{{item.name}}</td>
                                         
                                         <td><button (click)="removeitem(i)" color="warn" mat-button><mat-icon>delete</mat-icon></button></td>
                                      </tr>
@@ -212,62 +228,62 @@
                                         <th  style="text-align: center;">{{'Contracted Quantities'|translate}}</th>
                                         <th  style="text-align: center;">{{'Executed Quantity'|translate}}</th>
                                         <th  style="text-align: center;">{{'Price'|translate}}</th>
-                                        <th  style="text-align: center;" >{{'Total Price'|translate}}</th>
+                                        <th  style="text-align: center;" >{{'Amount of Excuted Works'|translate}}</th>
                                                <tbody>
                                                    <tr style="text-align: center;">
                                                       <td >{{item.qty}}</td>
-                                        <td >
-                                           <mat-label style="font-weight: bolder;">{{'Pervoiusly'|translate}}</mat-label>
+                                        <td   style="text-align: center;">
+                                         <div>
+                                          <mat-label style="font-weight: bolder; text-align: center; padding: 3%;">{{'Pervoiusly'|translate}}</mat-label>
                                           
-                                           &nbsp;    &nbsp; 
-                                           <mat-label style="font-weight: bolder;">{{'For Now'|translate}}</mat-label>
+                                          
+                                           <mat-label style="font-weight: bolder; text-align: center; padding: 3%;">{{'For Now'|translate}}</mat-label>
                                       
-                                           &nbsp; &nbsp;
-                                           <mat-label style="font-weight: bolder;">{{'Total'|translate}}</mat-label>
-                                           &nbsp;     &nbsp;  
-                                           <br>
-                                           {{ item.p_approved_qty  - item.approved_qty }}
-                                           
-                                           &nbsp; &nbsp;
-                                           {{item.approved_qty}}
-                                           &nbsp; &nbsp;
-                                           {{item.p_approved_qty}}
-
                                         
-                                           <br>
+                                           <mat-label style="font-weight: bolder; text-align: center; padding:3%;">{{'Total'|translate}}</mat-label>
+                                           
+                                          </div>
+                                           <div>
+                                          <span style="text-align: center; margin: 7%;">
+                                           {{ item.p_approved_qty  - item.approved_qty }}
+                                          </span>
+                                          
+                                           <span  style="text-align: center; margin: 7%;">
+                                           {{item.approved_qty}}
+                                          </span>
+                                          
+                                           <span  style="text-align: center; margin: 7%;">
+                                           {{item.p_approved_qty}}
+                                          </span>
+                                        
+                                       </div>
                                           </td>
                                         <td style="text-align: center;">
-                                          <mat-label style="font-weight: bolder;">{{'Pervoiusly'|translate}}</mat-label>
-                                          &nbsp; &nbsp;
-                                           <mat-label style="font-weight: bolder;">{{'For Now'|translate}}</mat-label>
-
-                                           &nbsp; &nbsp;
-                                           <mat-label style="font-weight: bolder;">{{'Total'|translate}}</mat-label>
-                                           &nbsp; &nbsp;
-                                           <br>
+                                          
                                            {{item.price}}
-                                           &nbsp; &nbsp;
-                                           {{item.price}}
-                                           &nbsp; &nbsp;
-                                           {{item.price + item.price}}
+                                         
                                           </td>
-                                        <td>
-                                          <mat-label style="font-weight: bolder;">{{'Pervoiusly'|translate}}
+                                        <td  style="text-align: center;">
+                                          <div>
+                                          <mat-label style="font-weight: bolder; text-align: center; padding: 3%;">{{'Pervoiusly'|translate}}
                                           
                                           </mat-label>
-                                          &nbsp; &nbsp;
-                                           <mat-label style="font-weight: bolder;">{{'For Now'|translate}}</mat-label>
+                                       
+                                           <mat-label style="font-weight: bolder; text-align: center; padding: 3%;">{{'For Now'|translate}}</mat-label>
 
-                                           &nbsp; &nbsp;
-                                           <mat-label style="font-weight: bolder;">{{'Total'|translate}}</mat-label>
-                                           &nbsp; 
-                                           <br>
-                                           {{item.price * (item.p_approved_qty  - item.approved_qty)}}
-                                           &nbsp; &nbsp;
-                                           {{item.price * item.approved_qty}}
-                                           &nbsp; &nbsp;
+                                         
+                                           <mat-label style="font-weight: bolder; text-align: center; padding: 3%;">{{'Total'|translate}}</mat-label>
+                                           </div>
+                                           <div>
+                                           <span style="text-align: center ; margin: 7%;">{{item.price * (item.p_approved_qty  - item.approved_qty)}}</span>
+                                           
+                                           <span style="text-align: center; margin: 7%;">{{item.price * item.approved_qty}}</span> 
+                                          
+                                           <span style="text-align: center; margin: 7%;">
                                            {{item.price * item.approved_qty + item.price * (item.p_approved_qty  - item.approved_qty)}}
-                                         </td>
+                                          </span>
+                                           </div>
+                                          </td>
                                           </tr>
                                          </tbody>
                                         </table>

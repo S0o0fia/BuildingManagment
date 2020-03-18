@@ -620,6 +620,7 @@
         "Works Hours": "ساعات العمل" ,
         "Total_Discount":"إجمالي الخصم",
         "Contract Amount after Discount":"قيمة العقد بعد التخفيض" , 
+        "Amount of Excuted Works" :"قيمة الأعمال المنفذة",
         "Amount of Available Works" : "قيمة الأعمال المتاحة",
         "Project Start Date" : "تاريخ بدء المشروع" ,
         "Extenstion Time" : "التمديدات الزمنية",
@@ -781,8 +782,12 @@
            "Height":"الارتفاع",
            "Width":"العرض" ,
            "Length":"الطول" ,
-           "Count Number":"رقم الحصر"
- 
+           "Count Number":"رقم الحصر" , 
+           "Extract Type": "نوع المستخلص" ,
+           "Current" : "جاري" , 
+           "Final" : "ختامي" , 
+           "Date of Approve Collect" : "تاريخ اعتماد الحصر"
+  
          
 
            
