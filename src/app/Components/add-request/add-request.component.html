@@ -160,7 +160,7 @@
                         <mat-form-field class="full-wid mrgn-b-lg ">
                              
                               <input matInput name="inspect_loc" [(ngModel)]="inspect_loc" (click)='setVisible()'
-                              placeholder="{{'Inspect Location'|translate}}" type="text" required>       
+                              placeholder="{{'Inspect Location'|translate}}" type="text" >       
                         </mat-form-field>
                  </div>
                 
@@ -169,7 +169,7 @@
                               <mat-form-field class="full-wid mrgn-b-lg ">
                                    
                                     <input matInput name="qty" [(ngModel)]="qty" (change)="Visibles()"
-                                    placeholder="{{'Executed Quantity'|translate}}" type="number" required>       
+                                    placeholder="{{'Executed Quantity'|translate}}" type="number" >       
                               </mat-form-field>
                        </div>
                        <!--Total-->
@@ -197,7 +197,7 @@
          </mat-card>
          <!--Table of Added Items-->
          <mat-card  class="full-wid mrgn-b-lg ">
-               <mat-label>{{'Added Items'|translate}}</mat-label>
+               <mat-label>{{'Added Locations'|translate}}</mat-label>
                <div class="gene-card-content">
                   <div fxLayout="column">
                      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
@@ -232,8 +232,8 @@
       </div>
                     
                        <div fxLayout="row" fxLayoutAlign="space-between">
-                             <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add'|translate }}</button>
                              <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
+                             <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Submited'|translate }}</button>
                              
                        </div>
                        

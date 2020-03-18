@@ -7,7 +7,7 @@ import { PageTitleService } from '../core/page-title/page-title.service';
 import { ProjectModel } from 'app/Models/Project/project-model';
 import { DatePipe, formatDate, CurrencyPipe } from '@angular/common';
 import { AddBuildingComponent } from '../add-building/add-building.component';
-import { MatDialog, DateAdapter, MAT_DATE_FORMATS, MatSnackBar } from '@angular/material';
+import { MatDialog, DateAdapter, MAT_DATE_FORMATS, MatSnackBar, MatHorizontalStepper } from '@angular/material';
 import { FileUploader } from 'ng2-file-upload';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'app/Service/custompipe/format-datepicker';
 import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
@@ -168,7 +168,7 @@ export class CreatprojectComponent implements OnInit {
   }
 
   transformAmount(element){
-    this.formattedAmount = this.currencyPipe.transform(this.project_amount,'ر.س');
+    this.formattedAmount = this.currencyPipe.transform(this.project_amount , "   ر.س");
     // Remove or comment this line if you dont want to show the formatted amount in the textbox.
     element.target.value = this.formattedAmount;
 }
@@ -180,16 +180,17 @@ caldurationm(value)
    let Month = this.startdate.getMonth();
    let Year = this.startdate.getFullYear();
 
-   days+=1;
+ 
 
-   Month += value;
 
-   this.deliverdate = new Date(Year , Month , days);
+  
    
     
    if(this.duration == 2){
     this.project_duration_days = Math.round(value*29.5);
-    
+    Month += Math.round(this.project_duration_days/30.4);
+    days += Math.round(this.project_duration_days%30.4);
+    this.deliverdate = new Date(Year , Month , days);
 
    }
 
@@ -197,6 +198,9 @@ caldurationm(value)
    if(this.duration == 3){
     
     this.project_duration_days = Math.round(value*30.4);
+    Month += Math.round(this.project_duration_days/30.4);
+    days += Math.round(this.project_duration_days%30.4);
+    this.deliverdate = new Date(Year , Month , days);
    }
 
 }
@@ -312,7 +316,7 @@ caldurationd(value)
           this.selectedIndex +=1;
         } ,
          err=> {console.log(err); 
-          let msg = this.openSnackBar("لم يتم إضافة المشروع تأكد من إدخالك للبيانات" , "إالغاء" );
+          let msg = this.openSnackBar(err.error.msg, "إالغاء" );
         }
       );
      

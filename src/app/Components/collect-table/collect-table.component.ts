@@ -4,6 +4,8 @@ import { formatDate } from '@angular/common';
 import { Count } from 'app/Models/Count/count';
 import { Countitem } from 'app/Models/Count/countitem';
 import { Router } from '@angular/router';
+import { CountdetailsComponent } from '../countdetails/countdetails.component';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'ms-collect-table',
@@ -43,7 +45,9 @@ export class CollectTableComponent implements OnInit {
   description : string;
   editRowIndex: number = -1;
   approves : any = [];
-  constructor(public service : CoreService , public router : Router) 
+  request_number : number;
+  constructor(public dialogRef: MatDialogRef<CountdetailsComponent> ,
+    public service : CoreService , public router : Router) 
   {
 
     this.minDate = new Date(1900,1,1);

@@ -29,7 +29,7 @@ export class AddRequestComponent implements OnInit {
   req_number : string;
   item_number : string;
   item_name : string;
-  qty : number=0;
+  qty : number;
   types : any =[];
   itemDate : NewItemRFI[]=[];
   typename : number;
@@ -181,7 +181,9 @@ export class AddRequestComponent implements OnInit {
       total : this.total
       });
       
-      
+      this.inspect_loc = "";
+      this.qty = null  
+    
 
     }
 

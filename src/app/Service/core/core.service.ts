@@ -135,6 +135,7 @@ export class CoreService {
 		'","request_id":'+localStorage.getItem('projectid')+
 		',"request_type":'+value.request_ids+
 		',"pitem":"'+value.pitem+
+		
 		'","quantity_id":'+value.item_id+
 		',"item_id":'+value.work_location+
 		',"inspect_date":"'+value.inspect_date+

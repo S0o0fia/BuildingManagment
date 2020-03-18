@@ -121,6 +121,7 @@
                                placeholder="{{'Project Amount'|translate}}" required [(value)]="formattedAmount"
                                (change)="raito()">
                            </mat-form-field>
+                       
                         </div>
 
                         <!--Choose type of VAT-->
@@ -250,7 +251,7 @@
                 </form>
              </mat-tab>
              <mat-tab label="{{'Step 3'|translate}}" [disabled]="selectedIndex != 2" >
-                <form #form3="ngForm" (ngSubmit)="SaveData()">
+                <form #form3="ngForm">
 
                   <br/>  <br/> 
 
@@ -285,11 +286,8 @@
                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                    <mat-form-field class="full-wid mrgn-b-lg ">
                      <mat-label>{{'Project Description'|translate}}</mat-label>
-                     <textarea matInput name="description"  [(ngModel)]="description"
-                               cdkTextareaAutosize
-                                #autosize="cdkTextareaAutosize"
-                                 cdkAutosizeMinRows="1"
-                                  cdkAutosizeMaxRows="5" required></textarea>
+                     <input matInput name="description"  [(ngModel)]="description"
+                               required />
                    </mat-form-field>
                      </div>
                    </div>
@@ -364,7 +362,9 @@
 
                    <div fxLayout="row" fxLayoutAlign="center">
                       <button mat-button type="button" (click)="previousStep()">{{'Previous'|translate }}</button>
-                      <button mat-button mat-raised-button [disabled]="!form3.valid" color="accent"  type="submit">{{'New Project'|translate }}</button>
+                      <button mat-button mat-raised-button 
+                      (click)="SaveData()"
+                      [disabled]="!form3.valid" color="accent"  type="submit">{{'New Project'|translate }}</button>
                    </div>
                 </form>
              </mat-tab>

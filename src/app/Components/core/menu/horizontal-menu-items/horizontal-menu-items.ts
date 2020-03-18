@@ -99,12 +99,7 @@ const MENUITEMS = [
             type: 'link',
             icon: 'mail'
          },
-         {
-            state: 'horizontal/chat',
-            name: 'CHAT',
-            type: 'link',
-            icon: 'chat'
-         },
+         
          {
             state: 'horizontal/calendar',
             name: 'CALENDAR',

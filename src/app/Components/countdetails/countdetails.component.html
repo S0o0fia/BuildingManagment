@@ -9,15 +9,15 @@
              </div> <span fxFlex></span>
              
              <div fxLayout="column">
-                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Add Request'|translate}}</button>
+                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Apply Collect Request'|translate}}</button>
              </div> 
           </div>
          
           <br/>
           <div fxLayout="row" fxLayoutAlign="center center">
-           <button class="mrgn-b-xs" mat-raised-button  style="background-color: rgb(252, 252, 9) ; color: black; padding: 1%; font-size: medium; font-weight: bold;" (click)="state('draft')">{{'draft'|translate}}</button>
-           <button class="mrgn-b-xs" mat-raised-button  style="background-color: orange; color: white;  padding: 1%; font-size: medium; font-weight: bold;" (click)="state('waiting')">{{'waiting'|translate}}</button>
-           <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')" style=" padding: 1%; font-size: medium; font-weight: bold;">{{'accepted'|translate}}</button>
+           <button class="mrgn-b-xs" mat-raised-button color="warn"  style=" color: white; padding: 1%; padding-left: 3%; padding-right: 3%; font-size: medium; font-weight: bold;" (click)="state('draft')">{{'draft'|translate}}</button>
+           <button class="mrgn-b-xs" mat-raised-button  style="background-color: goldenrod; color: white;  padding: 1%; font-size: medium; font-weight: bold;" (click)="state('waiting')">{{'waiting'|translate}}</button>
+           <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')" style=" padding: 1%;  padding-left: 3%; padding-right: 3%; font-size: medium; font-weight: bold;">{{'accepted'|translate}}</button>
            </div>
           <br/>
           
@@ -28,11 +28,11 @@
              <table class="table table-hover table-middle th-fw-light mb-0">
                 <thead>
                    <tr>
-                      <th style="text-align: center;" >{{'ID'|translate}}</th>
-                      <th style="text-align: center;">{{'From'|translate}}</th>
-                       <th style="text-align: center;">{{'To'|translate}}</th>
+                      <th style="text-align: center;" >{{'Request Number'|translate}}</th>
+                      <th style="text-align: center;">{{'From Duration'|translate}}</th>
+                       <th style="text-align: center;">{{'To Duration'|translate}}</th>
                       <th style="text-align: center;">{{'Item Name'|translate}}</th>
-                    
+                      <th style="text-align: center;">{{'Status'|translate}}</th>
                       <th style="text-align: center;">{{'Controls'|translate}}</th>
                    </tr>
                 </thead>

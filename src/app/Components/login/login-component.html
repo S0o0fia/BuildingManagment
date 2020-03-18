@@ -18,13 +18,7 @@
                   <mat-form-field class="full-wid mrgn-b-md ">
                      <input matInput placeholder="{{'Password'|translate}}" type="password" name="password" required [(ngModel)]="password">
                   </mat-form-field>
-                  <div fxLayout="row" fxLayoutAlign="start center">
-                     <div fxLayout="column">
-                        <mat-checkbox class="remember-me">{{'Remember Me'|translate}}</mat-checkbox>
-                     </div>
-                     <span fxFlex></span>
-                     <div><a [routerLink]="['/session/forgot-password']">{{'Forgot Password?'|translate}}</a></div>
-                  </div>
+               
                   <button class="login" mat-raised-button [disabled]="!form.valid">{{'SIGN IN'|translate}}</button>
                 
                </div>

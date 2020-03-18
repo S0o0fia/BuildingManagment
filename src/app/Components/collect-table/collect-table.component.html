@@ -10,7 +10,7 @@
           <span fxFlex></span> 
        </div>
        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-         <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
             <mat-label class="text-center">{{'Item Number'|translate}}</mat-label>
             <mat-form-field class="full-wid mrgn-b-lg ">
                <mat-label>{{'Item Number'|translate}}</mat-label>
@@ -22,7 +22,7 @@
          </mat-form-field>
       </div>
 
-      <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
          <mat-label class="text-center">{{'Item Name'|translate}}</mat-label>
          <mat-form-field class="full-wid mrgn-b-lg ">
             <mat-label>{{'Item Name'|translate}}</mat-label>
@@ -34,22 +34,30 @@
             
       </mat-form-field>
    </div>
+      </div>
 
-   <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
-      <mat-label class="text-center">{{'Unit'|translate}}</mat-label>
-      <mat-form-field class="full-wid mrgn-b-lg ">
-         <mat-label>{{'Unit'|translate}}</mat-label>
-            <input  matInput name="unit" [(ngModel)]="unit" type="text" disabled  />
-        </mat-form-field>
-</div>
-         </div>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+            <mat-label>{{'Unit'|translate}}</mat-label>
+            <mat-form-field class="full-wid mrgn-b-lg ">
+                  <input  matInput name="unit" [(ngModel)]="unit" type="text" disabled  />
+              </mat-form-field>
+             </div>
+             <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+               <mat-label>{{'Collect Request Number'|translate}}</mat-label>
+               <mat-form-field class="full-wid mrgn-b-lg ">
+                     <input  matInput name="request_number" [(ngModel)]="request_number" type="text" disabled />
+                 </mat-form-field>
+               </div>
+       </div>
         
        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-          
+         <mat-label>{{'Collect Duration'|translate}}</mat-label>
          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+       
          <div fxFlex.gt-sm="48" fxFlex.gt-xs="48" fxFlex="100" fxFlex.gt-md="48">
             
-            <mat-label>{{'From'|translate}}</mat-label>
+            <mat-label>{{'From Duration'|translate}}</mat-label>
                <mat-form-field class="full-wid mrgn-b-lg"> 
                   <input matInput  name="fromd" [(ngModel)]="fromd"
                  [min]="minDate" [max]="maxDate" [matDatepicker]="from"
@@ -61,7 +69,7 @@
 
          <div fxFlex.gt-sm="51" fxFlex.gt-xs="51" fxFlex="100" fxFlex.gt-md="51" style="margin-right:5%;">
             
-            <mat-label>{{'To'|translate}}</mat-label>
+            <mat-label>{{'To Duration'|translate}}</mat-label>
           
             <mat-form-field class="full-wid mrgn-b-lg"> 
                <input matInput name="tod" [(ngModel)]="tod"
@@ -87,11 +95,11 @@
             <table class="table table-hover table-middle th-fw-light mb-0">
                <thead>
                   <tr class="text-center">
-                     <th class="text-center">{{'Choose'|translate}}</th>
-                     <th class="text-center">{{'Request Number'|translate}}</th>
-                     <th class="text-center">{{'Request Type'|translate}}</th>
-                     <th class="text-center">{{'Project Items'|translate}}</th>
-                     <th class="text-center">{{'Date'|translate}}</th>
+                     <th style="text-align: center;">{{'Choose'|translate}}</th>
+                     <th style="text-align: center;">{{'Inspect Rquest Number'|translate}}</th>
+                     <th style="text-align: center;">{{'Inspect Request Type'|translate}}</th>
+                     <th style="text-align: center;">{{'Project Items'|translate}}</th>
+                     <th style="text-align: center;">{{'Date'|translate}}</th>
                   </tr>
                </thead>
                <tbody>
@@ -161,9 +169,9 @@
                   </thead>
                   <tbody *ngFor="let item of Location; let i = index"  >
                      <tr  style="text-align: center;">
-                        <td>{{item.rfi_id}}</td>
-                        <td>{{item.name}}</td>
-                        <td>
+                        <td style="text-align: center;">{{item.rfi_id}}</td>
+                        <td style="text-align: center;">{{item.name}}</td>
+                        <td style="text-align: center;">
                            <mat-form-field class="half-wid  mrgn-b-lg" >
                               <mat-label>{{'Description'|translate}}</mat-label>
                               <input matInput name="desc"                                
@@ -171,7 +179,7 @@
                               />
                         </mat-form-field>
                         </td>
-                        <td>
+                        <td style="text-align: center;">
                            <mat-form-field class=" half-wid   mrgn-b-lg">
                            <input matInput  
                           [(ngModel)]="item.Number"
@@ -179,18 +187,19 @@
                           />
                         </mat-form-field>
                         </td>
-                        <td>
+                        <td style="text-align: center;">
                           
                            <mat-form-field class="half-wid  mrgn-b-lg" >
-                              <mat-label>{{'Completion Rate'|translate}}</mat-label>
+                              <mat-label>{{'Completion Rate'|translate}}  %</mat-label>
                               <input matInput name="percentage"                                
                                [(ngModel)]="item.percentage"                              
                               />
                         </mat-form-field>
+                       
                          </td>
-                       <td>
+                       <td style="text-align: center;">
                         
-                        <mat-form-field class=" half-wid  mrgn-b-lg">
+                        <mat-form-field class=" qua-wid  mrgn-b-lg">
                            <mat-label>{{'Length'|translate}}</mat-label>
                            <input matInput name="qty_length"  
                             [(ngModel)]="item.qty_length" 
@@ -201,7 +210,7 @@
                   &nbsp; 
                   &nbsp; 
 
-                     <mat-form-field class="half-wid  mrgn-b-lg" *ngIf="dimension>1">
+                     <mat-form-field class="qua-wid  mrgn-b-lg" *ngIf="dimension>1">
                         <mat-label>{{'Width'|translate}}</mat-label>
                         <input matInput name="qty_width" 
                          [(ngModel)]="item.qty_width" 
@@ -211,7 +220,7 @@
                   </mat-form-field>
                   &nbsp; 
                   &nbsp; 
-                  <mat-form-field class=" half-wid  mrgn-b-lg" *ngIf="dimension>2">
+                  <mat-form-field class=" qua-wid  mrgn-b-lg" *ngIf="dimension>2">
                      <mat-label>{{'Height'|translate}}</mat-label>
                      <input matInput name="qty_height" 
                       [(ngModel)]="item.qty_height" 
@@ -221,7 +230,7 @@
                </mat-form-field>
                &nbsp; 
                &nbsp;
-               <mat-form-field class="half-wid  mrgn-b-lg" *ngIf="1>2">
+               <mat-form-field class="qua-wid  mrgn-b-lg" *ngIf="1>2">
                   <mat-label>{{'Total'|translate}}</mat-label>
                   <input matInput name="qty"  
                   disabled
@@ -267,7 +276,7 @@
                   </mat-form-field>
                 
                          </td> -->
-                         <td>
+                         <td style="text-align: center;">
                             <mat-icon matTooltip="{{'Delete'|translate}}" (click)="delete(i)">delete</mat-icon>
                        </td>
                      </tr>
@@ -275,13 +284,16 @@
                   </tbody>
                  
                </table>
-               <div fxLayout="row" fxLayoutAlign="end end">
-                  <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="AddCount()">{{'Add'|translate}}</button>
-                      
-             </div>
+               
             </div>
            
          </div>
+         <div fxLayout="row" fxLayoutAlign="space-between">
+            <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
+                         
+            <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="AddCount()">{{'Add'|translate}}</button>
+       </div>
    </mat-card>
+  
    </div>
    

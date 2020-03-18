@@ -46,7 +46,9 @@ ngOnInit() {
 this.pageTitleService.setTitle(this.projectname +' / '+"طلبات فحص الأعمال  ");
 
  this.service.getRFI_tbl().subscribe(
-   data=> this.RFI_tbl = data,
+   data=> {this.RFI_tbl = data;
+  console.log(data)
+  },
    err=> console.log(err)
  );
 

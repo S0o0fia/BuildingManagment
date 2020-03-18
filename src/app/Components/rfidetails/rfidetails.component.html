@@ -26,8 +26,8 @@
                          <tr  fxLayout="column"   fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column" >
                             <td>{{'Request Number'|translate}}</td>
                             <td>{{'Request Type'|translate}}</td>
-                            <td>{{'Location of Works'|translate}}</td>
-                            <td>{{'By Contractor'|translate}}</td>
+                            <td>{{'Project Items'|translate}}</td>
+                           
                             <td>{{'Request Status'|translate}}</td>
                             <td>{{'Item Number'|translate}}</td>
                             <td style="padding-bottom: 20%;;">{{'Item Name'|translate}}</td>
@@ -40,7 +40,7 @@
                            <td>{{item.request_num}}</td>
                            <td>{{item.request_name}}</td>
                            <td>{{item.work_location}}</td>
-                           <td>{{user}}</td>
+                        
                            <td>{{state | translate}}</td>
                            <td>{{item.item_number}}</td>
                            <td>{{item.item_name}}</td>
@@ -53,7 +53,7 @@
         <div class="gene-card-title">
             <div fxLayout="row" fxLayoutAlign="space-around center">
                <div fxLayout="column">
-                  <h4>{{'Added Items'|translate}}</h4>
+                  <h4>{{'Inspect Location'|translate}}</h4>
    
                </div> <span fxFlex></span>
                
@@ -67,10 +67,10 @@
               
                <table class="table table-hover table-middle th-fw-light mb-0">
                   <thead>
-                     <tr>
-                         <th>{{'Inspect Location'|translate}}</th>
-                        <th>{{'Executed Quantity'|translate}}</th>
-                        <th>{{'Controls'|translate}}</th>
+                     <tr style="text-align: center;">
+                         <th style="text-align: center;">{{'Location'|translate}}</th>
+                        <th style="text-align: center;">{{'Executed Quantity'|translate}}</th>
+                        <th style="text-align: center;">{{'Controls'|translate}}</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -78,13 +78,17 @@
                          <td>{{item.name}}</td>
                          <td>{{item.qty}}</td>
                          <td>
-                            <mat-icon matTooltip="{{'Edit Contract Quantity'|translate}}" (click)="openDialog(item.id)">edit</mat-icon>
+                            <mat-icon matTooltip="{{'Delete'|translate}}" >delete</mat-icon>
                        </td>
                      </tr>
                   </tbody>
                </table>
+
+             
             </div>
+          
          </div>
+         <td>{{'By Contractor'|translate}} : {{user}}</td>
     </mat-card>
 
     <mat-card>

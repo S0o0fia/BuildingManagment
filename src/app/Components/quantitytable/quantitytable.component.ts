@@ -197,6 +197,7 @@ this.service.gettotal().subscribe(
 
 this.service.getQty_tbl().subscribe(
    (res)=> {
+     console.log(res);
      this.Qty_tbls = JSON.parse(JSON.stringify(res));
      this.Qty_tbl = res;
            

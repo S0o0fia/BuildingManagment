@@ -116,7 +116,7 @@ export class CountitemdetailsComponent implements OnInit {
         this.Items.forEach(element => {
           this.service.approveCountQty(element.id , element.approved_qty).subscribe(
             data=>{
-              this.openSnackBar("تم اعتماد الاستشاري ","إغلاق"); 
+              this.openSnackBar("تم اعتماد حاسب الكميات المختص ","إغلاق"); 
               location.reload();
             }, 
             err=> console.log(err)

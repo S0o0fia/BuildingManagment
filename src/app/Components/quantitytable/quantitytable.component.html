@@ -116,8 +116,9 @@
                         <td style="width:7%" [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.item_number}}</span>
                         </td>
-                        <td  [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                           <span>{{data.item_name}}</span>
+                        <td  [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }"
+                           style="text-align: right;">
+                           <span +style="text-align: right;">{{data.item_name}}</span>
                         </td>
                      </tr>
 
