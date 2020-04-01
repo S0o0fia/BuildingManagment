@@ -29,9 +29,10 @@
                 <thead>
                    <tr>
                       <th></th>
-                      <th style="text-align: center;">{{'From Duration'|translate}}</th>
-                       <th style="text-align: center;">{{'To Duration'|translate}}</th>
-                      <th style="text-align: center;">{{'Status'|translate}}</th>
+                      <th style="text-align: center;" >{{'Request Number'|translate}}</th>
+                                 <th style="text-align: center;">{{'Item Name'|translate}}</th>
+                                 <th style="text-align: center;">{{'Controls'|translate}}</th>
+                      
                    </tr>
                 </thead>
                 <tbody>
@@ -54,28 +55,30 @@
                                       </ng-template>
                                     </span>
                            </td>
-                      <td style="text-align: center;">{{data.date_from}}</td>
-                      <td style="text-align: center;">{{data.date_to}}</td>
-                      <td style="text-align: center;">{{data.state | translate}}</td>
+                           <td style="text-align: center;">{{data.id}}</td>      
+                           <td style="text-align: center;" ng-show="45 > data.quantity_name">{{data.quantity_name}}</td>
+                           <td style="text-align: center;">
+                              <div class="dropdown row">
+                                    <button mat-icon-button  (click)="countdetails(data.id)" matTooltip="{{'Detials'|translate}}" >
+                                                 <mat-icon  color="primary">arrow_back</mat-icon>
+                                           </button>
+                                  </div>
+                            </td> 
+                      
                    </tr>
                    <tr *ngIf="rowSelected==data.id" style="background-color: #C1C7C9;">
                         <td></td>
                         <td colspan="3">
                             <table class="table table-striped">
-                                 <th style="text-align: center;" >{{'Request Number'|translate}}</th>
-                                 <th style="text-align: center;">{{'Item Name'|translate}}</th>
-                                 <th style="text-align: center;">{{'Controls'|translate}}</th>
+                              <th style="text-align: center;">{{'From Duration'|translate}}</th>
+                              <th style="text-align: center;">{{'To Duration'|translate}}</th>
+                             <th style="text-align: center;">{{'Status'|translate}}</th>
                                 <tbody>
                                     <tr>
-                                          <td style="text-align: center;">{{data.id}}</td>      
-                                          <td style="text-align: center;" ng-show="data.quantity_name > 75">{{data.quantity_name}}</td>
-                                          <td style="text-align: center;">
-                                                <div class="dropdown row">
-                                                      <button mat-icon-button  (click)="countdetails(data.id)" matTooltip="{{'Detials'|translate}}" >
-                                                                   <mat-icon  color="primary">arrow_back</mat-icon>
-                                                             </button>
-                                                    </div>
-                                              </td>     
+                                       <td style="text-align: center;">{{data.date_from}}</td>
+                                       <td style="text-align: center;">{{data.date_to}}</td>
+                                       <td style="text-align: center;">{{data.state | translate}}</td>
+                                          
                                   </tr>
                                 </tbody>
                             </table>

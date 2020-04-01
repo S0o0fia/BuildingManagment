@@ -20,11 +20,11 @@
                 <thead>
                    <tr>
                       <th></th>
-                      <th>{{'From'|translate}}</th>
-                      <th>{{'To'|translate}}</th>
-                      <th>{{'Total_Vat'|translate}}</th>
-                      <th>{{'Total_Discount'|translate}}</th>
-                  
+                   
+                      <th>{{'Extract Number'|translate}}</th>
+                      <th>{{'Executed Business Amount'|translate}}</th>
+                      <th>{{'The amount paid'|translate}}</th>
+                      <th>{{'Total Price'|translate}}</th>
                      
                    </tr>
                 </thead>
@@ -34,11 +34,11 @@
                      currentPage: page,
                      totalItems: totalRec };">
                    <tr style="text-align: center;">
-                      <td>{{invoice.date_from}}</td>
-                      <td>{{invoice.date_to}}</td>
-                     <td>{{invoice.Total_vat}}</td>
-                      <td>{{invoice.total_discount}}</td>
-                     
+                 
+                       <td>{{invoice.id}}</td>
+                                          <td>{{invoice.total_excuted}}</td>
+                                          <td>{{invoice.paid}}</td>
+                                          <td>{{invoice.total_price}}</td>
                    </tr>
 
                    <tr *ngIf="rowSelected==data.id" style="background-color: #C1C7C9;">
@@ -58,16 +58,17 @@
                            </td>
                         <td colspan="4">
                             <table class="table table-striped">
-                                 <th>{{'Extract Number'|translate}}</th>
-                                 <th>{{'Executed Business Amount'|translate}}</th>
-                                 <th>{{'The amount paid'|translate}}</th>
-                                 <th>{{'Total Price'|translate}}</th>
+                              <th>{{'From'|translate}}</th>
+                              <th>{{'To'|translate}}</th>
+                              <th>{{'Total_Vat'|translate}}</th>
+                              <th>{{'Total_Discount'|translate}}</th>
                                 <tbody>
                                     <tr>  
-                                          <td>{{invoice.id}}</td>
-                                          <td>{{invoice.total_excuted}}</td>
-                                          <td>{{invoice.paid}}</td>
-                                          <td>{{invoice.total_price}}</td>
+                                       <td>{{invoice.date_from}}</td>
+                                       <td>{{invoice.date_to}}</td>
+                                      <td>{{invoice.Total_vat}}</td>
+                                       <td>{{invoice.total_discount}}</td>
+                                      
                                            
                                   </tr>
                                 </tbody>
