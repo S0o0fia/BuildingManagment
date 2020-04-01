@@ -57,7 +57,6 @@ export class QuantitytableComponent implements OnInit {
   }
 
   openCloseRow(id): void {
-    debugger;
     this.rowSelected = this.rowSelected == -1 ? id : -1;
     console.log(this.rowSelected);
     }

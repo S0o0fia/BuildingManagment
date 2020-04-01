@@ -16,6 +16,7 @@ export class ExractsComponent implements OnInit {
   hasAnotherDropZoneOver = false;
   Invoices:any[]=[];
   projectname : string;
+  public rowSelected : any = -1;
   constructor(private router : Router , public service : CoreService) {
     this.projectname = localStorage.getItem('projectname');
    }
@@ -48,4 +49,9 @@ export class ExractsComponent implements OnInit {
     this.router.navigate(['/home/addextract']);
 
   }
+
+  openCloseRow(id): void {
+    this.rowSelected = this.rowSelected == -1 ? id : -1;
+    console.log(this.rowSelected);
+    }
 }

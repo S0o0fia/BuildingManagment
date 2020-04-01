@@ -23,7 +23,7 @@ export class CountdetailsComponent implements OnInit {
   page: number = 1;
   statename : string;
   projectname : string;
-  
+  public rowSelected : any = -1;
  
   constructor(public service : CoreService,
     private pageTitleService: PageTitleService ,private router:Router, private dialog: MatDialog) { 
@@ -57,6 +57,11 @@ this.pageTitleService.setTitle('قائمة طلبات الحصر ' +' / '+this.p
 
 this.totalRec = this.counttable.length;
 }
+
+openCloseRow(id): void {
+  this.rowSelected = this.rowSelected == -1 ? id : -1;
+  console.log(this.rowSelected);
+  }
 
 openDialog(): void {
   const dialogRef = this.dialog.open( CollectTableComponent, {

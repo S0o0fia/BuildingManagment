@@ -19,33 +19,62 @@
              <table class="table table-hover table-middle th-fw-light mb-0">
                 <thead>
                    <tr>
-                      <th>#</th>
-                      <th>{{'Extract Number'|translate}}</th>
+                      <th></th>
                       <th>{{'From'|translate}}</th>
                       <th>{{'To'|translate}}</th>
-                      <th>{{'Executed Business Amount'|translate}}</th>
                       <th>{{'Total_Vat'|translate}}</th>
-                      <th>{{'The amount paid'|translate}}</th>
                       <th>{{'Total_Discount'|translate}}</th>
-                      <th>{{'Total Price'|translate}}</th>
                   
                      
                    </tr>
                 </thead>
                 <tbody>
-                   <tr *ngFor="let invoice of Invoices" style="text-align: center;">
-                      <td>#</td>
-                      <td>{{invoice.id}}</td>
+                     <ng-container *ngFor="let invoice of invoices | paginate: { id: 'listing_pagination',
+                     itemsPerPage: 10,
+                     currentPage: page,
+                     totalItems: totalRec };">
+                   <tr style="text-align: center;">
                       <td>{{invoice.date_from}}</td>
                       <td>{{invoice.date_to}}</td>
-
-                      <td>{{invoice.total_excuted}}</td>
                      <td>{{invoice.Total_vat}}</td>
-                      <td>{{invoice.paid}}</td>
                       <td>{{invoice.total_discount}}</td>
-                      <td>{{invoice.total_price}}</td>
                      
                    </tr>
+
+                   <tr *ngIf="rowSelected==data.id" style="background-color: #C1C7C9;">
+                        <td>
+                              <span (click)="openCloseRow(invoice.id)">
+                                     <button *ngIf="rowSelected!=invoice.id; else close" color="primary"  mat-icon-button matTooltip="{{'More Options'|translate}}"  > 
+                                        <!--[matMenuTriggerFor]="menu" -->
+                                       <mat-icon>arrow_drop_down</mat-icon>
+                                    </button>
+                                    <ng-template #close>
+                                          <button color="primary"  mat-icon-button matTooltip="{{'Hide'|translate}}" >
+                                                <!-- [matMenuTriggerFor]="menu" -->
+                                             <mat-icon>arrow_drop_up</mat-icon>
+                                          </button>
+                                      </ng-template>
+                                    </span>
+                           </td>
+                        <td colspan="4">
+                            <table class="table table-striped">
+                                 <th>{{'Extract Number'|translate}}</th>
+                                 <th>{{'Executed Business Amount'|translate}}</th>
+                                 <th>{{'The amount paid'|translate}}</th>
+                                 <th>{{'Total Price'|translate}}</th>
+                                <tbody>
+                                    <tr>  
+                                          <td>{{invoice.id}}</td>
+                                          <td>{{invoice.total_excuted}}</td>
+                                          <td>{{invoice.paid}}</td>
+                                          <td>{{invoice.total_price}}</td>
+                                           
+                                  </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                   </ng-container>
                 </tbody>
              </table>
           </div>
