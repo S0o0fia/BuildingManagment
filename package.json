@@ -38,6 +38,7 @@
         "angular-file-uploader": "^5.0.2",
         "angular-instantsearch": "^2.1.0",
         "angular-tree-component": "^8.2.0",
+        "angular2-multiselect-dropdown": "^4.6.3",
         "angular2-text-mask": "^9.0.0",
         "card": "^2.4.0",
         "chart.js": "^2.8.0",
