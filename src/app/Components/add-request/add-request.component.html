@@ -104,7 +104,7 @@
                   <mat-form-field class="full-wid mrgn-b-lg ">
                        
                      <mat-label>{{'Item Number'|translate}}</mat-label>
-                     <!-- <mat-select name="item_number" [(ngModel)]="item_number">
+                     <mat-select name="item_number" [(ngModel)]="item_number">
                       <div *ngFor="let data of quantitys">
                        <div *ngIf="data.main_section_id == typename">  
                         <mat-option  value={{data.item_number}} (click)="BindItemname(data.item_name , data.id)">
@@ -112,14 +112,14 @@
                        </mat-option>
                      </div>
                      </div>
-                     </mat-select>    -->
-                     <mat-autocomplete #auto="matAutocomplete">
+                     </mat-select>   
+                     <!-- <mat-autocomplete #auto="matAutocomplete">
                         <mat-optgroup *ngFor="data of quantitys | async" [label]="data.item_name">
                           <mat-option *ngFor="let option of data.options" [value]="option">
                             {{option.item_name}}
                           </mat-option>
                         </mat-optgroup>
-                      </mat-autocomplete>
+                      </mat-autocomplete> -->
                   </mat-form-field>
                   </div>
 

@@ -120,11 +120,27 @@ export class AddExtractComponent implements OnInit {
             project_invoice_id : this.extract_id
           }).subscribe(
             data=>{
-              let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
-              if(msg)
-              {
-               this.router.navigate(['/home/abstracts']);
-              }
+              this.ApprovedCountItem.forEach(e2 => {
+                this.service.createInvoiceitem({
+                  approved_qty : e2.approved_qty , 
+                  extract_id : this.extract_id , 
+                  item_name : e2.name , 
+                  item_number : e2.number , 
+                  p_approved_qty : e2.p_approved_qty , 
+                  price : e2.price , 
+                  qty : e2.qty
+                }).subscribe(
+                  data=> {
+                    let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
+                    if(msg)
+                    {
+                     this.router.navigate(['/home/abstracts']);
+                    }
+                  } , 
+                  err=>console.log(err)
+                )
+              });
+              
 
 
             } , 

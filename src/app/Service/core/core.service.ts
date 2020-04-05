@@ -190,7 +190,7 @@ export class CoreService {
 	}
 	
 	getMainSectionList(){
-		let mainSectionUrl='/section/get?token='+localStorage.getItem('token');
+		let mainSectionUrl='/section/get?token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem("projectid");;
 	   return this.http.get(this.apiURL+mainSectionUrl);
 	}
 
@@ -391,7 +391,20 @@ export class CoreService {
 		return this.http.get(this.apiURL+getinvoice);
 	}
 
+	getInvoiceitems(id)
+	{
+		let getinvoiceitem = "/invoice/items/get?db=nqproject&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid')+
+		'&project_invoice_id='+id;
+		return this.http.get(this.apiURL+getinvoiceitem);
+	}
 
+	getInvoicediscount(id)
+	{
+		let getinvoicedisciunt = "/invoice/discount/get?db=nqproject&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid')+
+		'&project_invoice_id='+id;
+		console.log(getinvoicedisciunt);
+		return this.http.get(this.apiURL+getinvoicedisciunt);
+	}
 	createInvoice (values : Extract)
 	{
 	   let extracturl = "/invoice/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
@@ -424,7 +437,7 @@ export class CoreService {
 	   ',"project_invoice_id":'+values.extract_id+
 	   '}';
 
-	 
+	    console.log(extracturl);
 	   return this.http.post(this.apiURL+extracturl , null);
 
 

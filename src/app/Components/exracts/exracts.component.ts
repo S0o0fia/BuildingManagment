@@ -42,12 +42,16 @@ export class ExractsComponent implements OnInit {
         data=> this.Invoices = data as any ,
         err=> console.log(err));  
         
-this.totalRec = this.Invoices.length;
+        console.log(this.Invoices.length);
+       this.totalRec = this.Invoices.length;
 
 
   }
    
-
+  invoicedetails(id)
+  {
+    this.router.navigate(['home/abstractsdetials',id]);
+  }
   open()
   {
     this.router.navigate(['/home/addextract']);

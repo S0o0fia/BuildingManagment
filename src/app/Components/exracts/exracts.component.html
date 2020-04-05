@@ -25,6 +25,7 @@
                       <th  style="text-align: center;">{{'Executed Business Amount'|translate}}</th>
                       <th  style="text-align: center;">{{'The amount paid'|translate}}</th>
                       <th  style="text-align: center;">{{'Total Price'|translate}}</th>
+                      <th style="text-align: center;">{{'Controls'|translate}}</th>
                      
                    </tr>
                 </thead>
@@ -52,6 +53,17 @@
                                           <td  style="text-align: center;">{{invoice.total_excuted}}</td>
                                           <td  style="text-align: center;">{{invoice.paid}}</td>
                                           <td  style="text-align: center;">{{invoice.total_price}}</td>
+
+
+                                          
+                         <td>
+                           <div class="dropdown row">
+                                 <button mat-icon-button  (click)="invoicedetails(invoice.id)" matTooltip="{{'Detials'|translate}}" >
+                                              <mat-icon  color="primary">arrow_back</mat-icon>
+                                        </button>
+                               </div>
+                         </td>
+                       
                    </tr>
 
                    <tr *ngIf="rowSelected==invoice.id" style="background-color: #C1C7C9;">
@@ -73,11 +85,16 @@
                                   </tr>
                                 </tbody>
                             </table>
+
                         </td>
                     </tr>
                    </ng-container>
                 </tbody>
              </table>
+             <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
+             previousLabel="{{'Previous'|translate}}"
+              nextLabel="{{'Next'|translate}}"
+             (pageChange)="page = $event"></pagination-controls>
           </div>
        </div>
     </mat-card>
