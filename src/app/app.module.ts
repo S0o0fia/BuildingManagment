@@ -91,6 +91,7 @@ import { NumberFormatPipe } from './Models/Pipe/number.pip';
 import { CollectTableComponent } from './Components/collect-table/collect-table.component';
 import { CountdetailsComponent } from './Components/countdetails/countdetails.component';
 import { CountitemdetailsComponent } from './Components/countitemdetails/countitemdetails.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 
 
@@ -117,7 +118,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	imports: [
 		BrowserModule,
 		NgxPaginationModule,
-        
+        AngularMultiSelectModule,
 	
 		AgmCoreModule.forRoot({
 			apiKey: 'AIzaSyBe4r21LOoFNKUy6Dv3o4H16ozLT473wvs'
