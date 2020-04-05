@@ -16,6 +16,8 @@ export class ExractsComponent implements OnInit {
   hasAnotherDropZoneOver = false;
   Invoices:any[]=[];
   projectname : string;
+  totalRec : number;
+  page: number = 1;
   public rowSelected : any = -1;
   constructor(private router : Router , public service : CoreService) {
     this.projectname = localStorage.getItem('projectname');
@@ -40,7 +42,9 @@ export class ExractsComponent implements OnInit {
         data=> this.Invoices = data as any ,
         err=> console.log(err));  
         
-        console.log(this.Invoices);
+this.totalRec = this.Invoices.length;
+
+
   }
    
 

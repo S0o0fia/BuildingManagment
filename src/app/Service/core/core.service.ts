@@ -20,6 +20,7 @@ import { Comment } from '../../Models/Comment/comment';
 import { Count } from 'app/Models/Count/count';
 import { Countitem } from 'app/Models/Count/countitem';
 import { Extractitem } from 'app/Models/Extract/extractitem';
+import { InvoiceDiscount } from 'app/Models/Extract/invoice-discount';
 @Injectable({
 	providedIn: 'root'
 })
@@ -397,7 +398,8 @@ export class CoreService {
 	   '"name":"'+values.name+
 	   '","date_from":"'+values.date_from+
 	   '","date_to":"'+values.date_to+
-	   '","paid":'+values.paid+
+	   '","invoice_type":"'+values.invoice_type+
+	   '","paid":'+values.paid+	   
 	   ',"Total_vat":'+values.Total_vat+
 	   ',"total_discount":'+values.total_discount+
 	   ',"total_excuted":'+values.total_excuted+
@@ -405,7 +407,6 @@ export class CoreService {
 	   ',"project_id":'+values.project_id+
 	   '}';
 
-	   console.log(extracturl);
 	   return this.http.post(this.apiURL+extracturl , null);
 
 
@@ -423,10 +424,20 @@ export class CoreService {
 	   ',"project_invoice_id":'+values.extract_id+
 	   '}';
 
-	   console.log(extracturl);
+	 
 	   return this.http.post(this.apiURL+extracturl , null);
 
 
+	}
+
+	createInvoiceDiscount(value : InvoiceDiscount)
+	{
+	  let invoicediscount="/invoice/discount/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
+	  '"name":"'+value.name+
+	  '","total":'+value.total+
+	  ',"project_invoice_id":'+value.project_invoice_id+'}';
+	  console.log(invoicediscount);
+	  return this.http.post(this.apiURL+invoicediscount , null);
 	}
 
 	getInvoiceName()

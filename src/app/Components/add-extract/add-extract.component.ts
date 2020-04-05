@@ -38,6 +38,7 @@ export class AddExtractComponent implements OnInit {
   discount : any = [];
   from_extract_date : Date = new Date() ;
   to_extract_date : Date =  new Date()  ;
+  invoice_type : string ;
  
   openCloseRow(id): void
  {
@@ -104,17 +105,35 @@ export class AddExtractComponent implements OnInit {
       project_id : this.projectid , 
       total_discount : this.total_discount , 
       total_excuted : this.total_work,
-      total_price: this.Net_amout
+      total_price: this.Net_amout ,
+      invoice_type : this.invoice_type
     };
+    console.log(this.ext)
     this.service.createInvoice(this.ext).subscribe(
       data=>{
         this.extract_id = data['invoice_id'];
-         let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
-                        if(msg)
-                        {
-                         this.router.navigate(['/home/abstracts']);
-                        }
+        console.log(this.extract_id);
+        this.discount.forEach(e => {
+          this.service.createInvoiceDiscount({
+            name : e['discount'] , 
+            total : e['amount'] , 
+            project_invoice_id : this.extract_id
+          }).subscribe(
+            data=>{
+              let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
+              if(msg)
+              {
+               this.router.navigate(['/home/abstracts']);
+              }
 
+
+            } , 
+            err=>console.log(err)
+
+          );
+          
+        });
+       
       } ,
       err => console.log(err)
     );

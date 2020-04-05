@@ -8,5 +8,6 @@ export interface Extract {
     total_excuted : number;
     total_price : number;
     project_id  : number;
+    invoice_type : string;
 
 }
