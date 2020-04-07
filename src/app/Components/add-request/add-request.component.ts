@@ -10,6 +10,7 @@ import { formatDate } from '@angular/common';
 import { InspctionId } from 'app/Models/inspction_id/inspction-id';
 import { FileUploader , FileSelectDirective } from 'ng2-file-upload';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'app/Service/custompipe/format-datepicker';
+import { AnimationQueryOptions } from '@angular/animations';
 const URL = 'http://nqraait.ddns.net:8070/api/test?db=nqproject&token='+localStorage.getItem('token');
 @Component({
   selector: 'ms-add-request',
@@ -61,10 +62,12 @@ export class AddRequestComponent implements OnInit {
   Visible : boolean = false;   
   price : number;
   total_price : number;             
-
-
+base64:any;
+BASE64_MARKER: string = ';base64,';
+base64string:any;
   fileToUpload: File = null
   projectname : string ;
+  fileExtension: string;
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -131,6 +134,45 @@ export class AddRequestComponent implements OnInit {
      
 
   }
+
+  onSelectFiles(event) {
+    debugger;
+    this.fileExtension='';
+    var file = event.target.files[0];
+    this.fileExtension = '.' + file.name.split('.').pop();
+    if (file) {
+      let reader = new FileReader();
+      reader.onload = (e: any) => {
+       // this.site.fileLocation = image;
+      //  if(this.isNewSite){
+      //   this.image = e.target.result
+      //  }else{
+      //   this.image = e.target.result
+      //  }
+        var base64Index = e.target.result.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
+        this.base64string = e.target.result.substring(base64Index);
+      }
+      this.base64=reader.readAsDataURL(file);
+    }
+  }
+
+  // changeListener($event) : void {
+  //   debugger;
+  //   this.readThis($event.target);
+  // }
+  
+  // readThis(inputValue: any): void {
+  //   debugger;
+  //   var file:File = inputValue.files[0];
+  //   var myReader:FileReader = new FileReader();
+  
+  //   myReader.onloadend = (e) => {
+  //     this.base64 = myReader.result.toString();
+  //     //var base64Index = e.target.result.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
+  //     this.base64string = e.target;
+  //   }
+  //   this.base64 = myReader.readAsDataURL(file);
+  // }
   
   onFileSelected(event)
   {

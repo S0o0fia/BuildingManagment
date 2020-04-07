@@ -146,7 +146,7 @@ export class RfidetailsComponent implements OnInit {
 
   Save()
   {
-    
+    debugger;
     this.Comment = {
       comments : this.details , 
   

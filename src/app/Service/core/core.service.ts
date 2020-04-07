@@ -453,6 +453,7 @@ export class CoreService {
 
 	CreateComment ( comment : Comment )
 	{
+		debugger;
 		let url = '/rfi/comments/create?db=nqproject&token='+localStorage.getItem('token')+
 		'&values={'+
 		'"section_id":'+comment.section_id+
@@ -463,6 +464,28 @@ export class CoreService {
 		'"}';
           console.log(url);
 		return this.http.post(this.apiURL+url , null);
+	}
+
+	CreateCommentForCount ( comment : Comment )
+	{
+		debugger;
+		let url = '/count/comments/create?db=nqproject&token='+localStorage.getItem('token')+
+		'&values={'+
+		'"section_id":'+comment.section_id+
+		',"comments":"'+comment.comments+
+		'","count_id":'+comment.rfi_id+
+		',"name":"'+comment.create_uid+
+		
+		'"}';
+          console.log(url);
+		return this.http.post(this.apiURL+url , null);
+	}
+
+	getCommentForCount ( id)
+	{
+		debugger;
+		let url = '/count/comments/get?db=nqproject&token='+localStorage.getItem('token')+'&count_id='+id;
+		return this.http.get(this.apiURL+url);
 	}
 
 	getComment ( id)
