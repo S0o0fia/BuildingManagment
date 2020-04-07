@@ -13,12 +13,19 @@
               
               <br/>
               <div fxLayout="row" fxLayoutAlign="center center">
-               <button class="mrgn-b-xs" mat-raised-button color="primary" >{{'draft'|translate}}</button>
+               <!-- <button class="mrgn-b-xs" mat-raised-button color="primary" >{{'draft'|translate}}</button>
                <button class="mrgn-b-xs" mat-raised-button color="primary" >{{'waiting'|translate}}</button>
                <button class="mrgn-b-xs" mat-raised-button color="accent" >{{'accepted'|translate}}</button>
                <button class="mrgn-b-xs" mat-raised-button color="accent" >{{'accepted-with-comment'|translate}}</button>
                <button class="mrgn-b-xs" mat-raised-button color="warn" >{{'rejected'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button color="warn">{{'reject-resend'|translate}}</button>
+               <button class="mrgn-b-xs" mat-raised-button color="warn">{{'reject-resend'|translate}}</button> -->
+
+               <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('draft')"> {{'draft'|translate}} <br> <span>No Code</span> </button>
+               <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('waiting')"> {{'waiting'|translate}}  <br> <span >No Code</span></button>
+               <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')">{{'accepted'|translate}} <br> Code A </button>
+               <button class="mrgn-b-xs" mat-raised-button style="background-color: orange; color: white;" (click)="state('accepted-with-comment')">{{'accepted-with-comment'|translate}} <br> Code B</button>
+               <button class="mrgn-b-xs" mat-raised-button style="background-color: rgb(252, 252, 9) ; color: black;"  (click)="state('reject-resend')">{{'reject-resend'|translate}} <br> Code C</button>
+               <button class="mrgn-b-xs" mat-raised-button color="warn" (click)="state('rejected')">{{'rejected'|translate}} <br> Code D </button>
               </div>
               <br/>
               
@@ -35,17 +42,38 @@
              <thead>
                 <tr>
                    <th>{{'Request Number'|translate}}</th>
-                   <th>{{'Factory Name'|translate}}</th>
+                   <!-- <th>{{'Factory Name'|translate}}</th> -->
                    <th>{{'The date of application'|translate}}</th>
                    <th>{{'Status'|translate}}</th>
                    <th>{{'Controls'|translate}}</th>
                 </tr>
              </thead>
-             <tbody>
-               <tr *ngFor="let mir of getMIR">
+             <tbody *ngFor="let mir of getMIR">
+               <tr *ngIf="statename == null | paginate: { id: 'listing_pagination',
+               itemsPerPage: 10,
+               currentPage: page,
+               totalItems: totalRec }">
 
                   <td>{{mir.name}}</td>
-                  <td>{{mir.items_ids[0].factory_name}}</td>
+                  <!-- <td>{{mir.items_ids[0].factory_name}}</td> -->
+                  <td>{{mir.request_date}}</td>
+                  <td>{{mir.state|translate}}</td>
+                  <td>
+                       <div class="row">
+                          <button mat-button (click)="mirdetails(mir.id)" >
+                           <mat-icon color="primary" matTooltip="{{'Detials'|translate}}" >arrow_left </mat-icon>
+                        </button>
+                       </div>
+                   </td>
+                
+                </tr>
+                <tr *ngIf="mir.state == statename | paginate: { id: 'listing_pagination',
+               itemsPerPage: 10,
+               currentPage: page,
+               totalItems: totalRec }">
+
+                  <td>{{mir.name}}</td>
+                  <!-- <td>{{mir.items_ids[0].factory_name}}</td> -->
                   <td>{{mir.request_date}}</td>
                   <td>{{mir.state|translate}}</td>
                   <td>

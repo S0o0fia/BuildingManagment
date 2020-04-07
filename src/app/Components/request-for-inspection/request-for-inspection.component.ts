@@ -32,7 +32,7 @@ export class RequestForInspectionComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       this.projectname = localStorage.getItem('projectname');
-      this.statename = "draft";
+      //this.statename = "draft";
 
     }
 
@@ -55,6 +55,7 @@ this.pageTitleService.setTitle(this.projectname +' / '+"طلبات فحص الأ
 
 
 this.totalRec = this.RFI_tbl.length;
+//this.statename=null;
 }
 
 openDialog(): void {

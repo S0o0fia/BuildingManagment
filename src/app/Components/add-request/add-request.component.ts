@@ -68,6 +68,7 @@ base64string:any;
   fileToUpload: File = null
   projectname : string ;
   fileExtension: string;
+  image: any;
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -135,26 +136,19 @@ base64string:any;
 
   }
 
-  onSelectFiles(event) {
+  onSelectFiles(evt) {
     debugger;
-    this.fileExtension='';
-    var file = event.target.files[0];
+    var file = evt.target.files[0];
+    var reader = new FileReader();
     this.fileExtension = '.' + file.name.split('.').pop();
-    if (file) {
-      let reader = new FileReader();
-      reader.onload = (e: any) => {
-       // this.site.fileLocation = image;
-      //  if(this.isNewSite){
-      //   this.image = e.target.result
-      //  }else{
-      //   this.image = e.target.result
-      //  }
-        var base64Index = e.target.result.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
-        this.base64string = e.target.result.substring(base64Index);
-      }
-      this.base64=reader.readAsDataURL(file);
-    }
-  }
+   
+        reader.onloadend = (e) => {
+          this.image = reader.result;
+          var base64Index = this.image.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
+          this.base64 = this.image.substring(base64Index);
+        }
+        reader.readAsDataURL(file);
+  };
 
   // changeListener($event) : void {
   //   debugger;

@@ -213,7 +213,7 @@ export class CoreService {
 	}
 	getRFI_tbl()
 	{
-		
+		debugger;
 		let RFIUrl= "/rfi/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get<GetRFI[]>(this.apiURL+RFIUrl);
 
@@ -248,7 +248,7 @@ export class CoreService {
 	 
 	getMIR ()
 	{
- 
+ debugger;
 		let mirget = "/mir/get?db="+this.db+"&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get<any[]>(this.apiURL+mirget);
 	}
