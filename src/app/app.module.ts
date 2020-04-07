@@ -92,7 +92,8 @@ import { CollectTableComponent } from './Components/collect-table/collect-table.
 import { CountdetailsComponent } from './Components/countdetails/countdetails.component';
 import { CountitemdetailsComponent } from './Components/countitemdetails/countitemdetails.component';
 
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ExtractdetailsComponent } from './Components/extractdetails/extractdetails.component';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyCE0po6Q8jGuBEds-A903KEU4U6Cerojzo",
@@ -126,6 +127,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		FormsModule,
 		FileUploadModule,
 		ReactiveFormsModule,
+		MatAutocompleteModule,
 		RoutingModule,
 		MatDatepickerModule,
 		FlexLayoutModule,
@@ -308,7 +310,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		ApproveQuantitiesComponent,
 		CollectTableComponent,
 		CountdetailsComponent,
-		CountitemdetailsComponent
+		CountitemdetailsComponent,
+		ExtractdetailsComponent
 
 	
 		

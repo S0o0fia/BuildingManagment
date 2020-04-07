@@ -768,6 +768,8 @@
            "Total After Discount":"الإجمالي بعد الخصم",
            "Delay penalty" : "غرامة تأخير",
            "A well-executed fine":"غرامة حسن التنفيذ" ,
+           "final" : "نهائي",
+           "current": "جاري" ,
            "Downpayment":"الدفعة المقدمة",
            "The value of the previous abstracts":"قيمة المستخلصات السابقة " , 
            "Items Type" : "نوع البند" ,
@@ -786,7 +788,8 @@
            "Extract Type": "نوع المستخلص" ,
            "Current" : "جاري" , 
            "Final" : "ختامي" , 
-           "Date of Approve Collect" : "تاريخ اعتماد الحصر"
+           "Date of Approve Collect" : "تاريخ اعتماد الحصر" , 
+           "Extract Details" : "تفاصيل المستخلص"
   
          
 

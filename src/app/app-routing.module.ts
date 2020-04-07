@@ -25,6 +25,7 @@ import { ApproveQuantitiesComponent } from './Components/approve-quantities/appr
 import { CollectTableComponent } from './Components/collect-table/collect-table.component';
 import { CountdetailsComponent } from './Components/countdetails/countdetails.component';
 import { CountitemdetailsComponent } from './Components/countitemdetails/countitemdetails.component';
+import { ExtractdetailsComponent } from './Components/extractdetails/extractdetails.component';
 
 
 
@@ -130,6 +131,10 @@ const appRoutes: Routes = [
          , {
             path:'abstracts',
             component:ExractsComponent
+         }
+         , {
+            path:'abstractsdetials/:id',
+            component:ExtractdetailsComponent
          }
          , {
             path:'addextract',
