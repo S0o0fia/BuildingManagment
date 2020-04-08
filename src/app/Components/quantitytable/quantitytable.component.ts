@@ -99,6 +99,45 @@ export class QuantitytableComponent implements OnInit {
 
   bindItemType(name,type)
   {
+
+    if(name == 'all' )
+    {
+      this.service.gettotal().subscribe(
+        data=> {
+                console.log(data);
+                 this.total_budget = data[0].total as number;
+                 this.dis = data[0].discount as number;
+                 this.totaldis = this.total_budget - this.dis;
+                 this.total_budget_vat = ((this.total_budget)+(this.total_budget*0.05));
+  
+                 this.total_budget = this.formatPipe.transform(this.total_budget);
+                 this.totaldis = this.formatPipe.transform(this.totaldis);
+                 this.total_budget_vat = this.formatPipe.transform(this.total_budget_vat);
+       }, 
+        err=>console.log(err)
+      )
+
+    }
+    else 
+    {
+      this.disappearDisount = true;
+      this.service.gettotals(this.proj_item , this.item_type).subscribe(
+        data=> {
+                console.log(data);
+                 this.total_budget = data[0].total as number;
+                 this.dis = data[0].discount as number;
+                 this.totaldis = this.total_budget - this.dis;
+                 this.total_budget_vat = ((this.total_budget)+(this.total_budget*0.05));
+  
+                 this.total_budget = this.formatPipe.transform(this.total_budget);
+                 this.totaldis = this.formatPipe.transform(this.totaldis);
+                 this.total_budget_vat = this.formatPipe.transform(this.total_budget_vat);
+       }, 
+        err=>console.log(err)
+      )
+    }
+  
+
     // this.type_name = name;
     if(this.item_type ==0 && this.proj_item ==0){
       this.Qty_tbl=this.Qty_tbls;
@@ -140,22 +179,7 @@ export class QuantitytableComponent implements OnInit {
         element.total_excuted = this.formatPipe.transform(element.total_excuted);   
       }); 
     }
-    
-    this.service.gettotals(this.proj_item , this.item_type).subscribe(
-      data=> {
-               this.total_budget = data[0].total as number;
-               this.dis = data[0].discount as number;
-               this.totaldis = this.total_budget - this.dis;
-               this.total_budget_vat = ((this.total_budget)+(this.total_budget*0.05));
-
-               this.total_budget = this.formatPipe.transform(this.total_budget);
-               this.totaldis = this.formatPipe.transform(this.totaldis);
-               this.total_budget_vat = this.formatPipe.transform(this.total_budget_vat);
-     }, 
-      err=>console.log(err)
-    )
-
-     
+        
   }
 
   constructor(public service : CoreService,  private router : Router, private formatPipe: NumberFormatPipe , 

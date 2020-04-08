@@ -28,7 +28,7 @@
                <mat-form-field class="full-wid mrgn-b-lg">
                      <mat-label>{{'Project Items'|translate}}</mat-label>
                      <mat-select  name="proj_item"  [(ngModel)]="proj_item">
-                         <mat-option  (click)="bindItemType(all,'projectContent')" value="0">{{'All'|translate}}</mat-option>
+                         <mat-option  (click)="bindItemType('all','projectContent')" value="0">{{'All'|translate}}</mat-option>
                      <div *ngFor="let data of projectitems">
                          <mat-option  (click)="bindItemType(data.id,'projectContent')" value={{data.id}}>{{data.name}}</mat-option>
                        </div>
@@ -41,7 +41,7 @@
                <mat-form-field class="full-wid mrgn-b-lg">
                      <mat-label>{{'Specify Works'|translate}}</mat-label>
                      <mat-select  name="item_type"  [(ngModel)]="item_type">
-                        <mat-option  (click)="bindItemType(all,'bussinessType')" value="0">{{'All'|translate}}</mat-option>
+                        <mat-option  (click)="bindItemType('all','bussinessType')" value="0">{{'All'|translate}}</mat-option>
                         <div *ngFor="let data of section">
                          <mat-option  (click)="bindItemType(data.id,'bussinessType')" value={{data.id}}>{{data.name}}</mat-option>
                         </div>
@@ -71,7 +71,8 @@
                   <th>{{'Type Of Works'|translate}}</th>
                   <th>{{'Item Number'|translate}}</th>
                   <th >{{'Item Name'|translate}}</th> 
-                 
+                  <th>{{'Total Quantities Price'|translate}}</th>
+                  <th>{{'Total Excuted'|translate}}</th>
                   </tr>
                </thead>
                <tbody>
@@ -117,22 +118,28 @@
                            <span>{{data.item_number}}</span>
                         </td>
                         <td  [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }"
-                           style="text-align: right;">
+                           style="text-align: right;" >
                            <span style="text-align: right;">{{data.item_name}}</span>
                         </td>
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.price_total}}</span>
+                        </td>   
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.total_excuted}}</span>
+                        </td>
+                      
                      </tr>
 
                      <tr *ngIf="rowSelected==data.id" style="background-color: #C1C7C9;">
                            <td></td>
-                           <td colspan="7">
+                           <td colspan="5">
                                <table class="table table-striped">
                                  <th>{{'Items Type'|translate}}</th>
                                  <th>{{'Unit'|translate}}</th>
                                  <th>{{'Contracted Quantities'|translate}}</th>
                                  <th>{{'Unit Price'|translate}}</th>
-                                 <th>{{'Total Quantities Price'|translate}}</th>
                                  <th>{{'Extecuted Quantities'|translate}}</th>
-                                 <th>{{'Total Excuted'|translate}}</th>
+                                
                                    <tbody>
                                        <tr>  
                                           <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
@@ -147,14 +154,9 @@
                                           <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                                              <span>{{data.price_unit}}</span>
                                           </td>
-                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                                             <span>{{data.price_total}}</span>
-                                          </td>                   
+                                                         
                                           <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                                              <span>{{data.excuted}}</span>
-                                          </td>
-                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                                             <span>{{data.total_excuted}}</span>
                                           </td>
                                               
                                      </tr>
@@ -314,10 +316,12 @@
          </div>
         <div  fxLayout="row wrap" fxLayoutAlign="space-between center">
           <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" fxFlex.gt-md="30">
-             <mat-label style="font-weight: bold;">{{'Total Price'|translate}} : {{total_budget}}</mat-label>
+             <mat-label style="font-weight: bold;"
+           
+             >{{'Total Price'|translate}} : {{total_budget}}</mat-label>
           </div>
           <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" fxFlex.gt-md="30">
-            <mat-label style="font-weight: bold;">{{'Total Budget with vat'|translate}} : {{total_budget_vat}}</mat-label>
+            <mat-label style="font-weight: bold;" [ngStyle]="{ 'display': (disappearDisount ? 'none' :  'block' ) }">{{'Total Budget with vat'|translate}} : {{total_budget_vat}}</mat-label>
          </div>
          <div fxFlex.gt-sm="30" fxFlex.gt-xs="30" fxFlex="100" fxFlex.gt-md="30" 
          [ngStyle]="{ 'display': (disappearDisount ? 'none' :  'block' ) }"

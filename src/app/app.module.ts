@@ -120,7 +120,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		NgxPaginationModule,
 	
 		AgmCoreModule.forRoot({
-			apiKey: 'AIzaSyBe4r21LOoFNKUy6Dv3o4H16ozLT473wvs'
+			apiKey: 'AIzaSyARLJcKPev4Ot6baTkjNKjczRDHYlFhgzo'
 		  }),
 		BrowserAnimationsModule, 
 		FileUploadModule ,

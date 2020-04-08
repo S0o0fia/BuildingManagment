@@ -271,18 +271,20 @@ export class CoreService {
 	{
 		let mirequest  ="/mir/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
 		+'","request_date":"'+value.request_date +'"}';
+		console.log(mirequest);
         return this.http.post(this.apiURL+mirequest ,null);
 	}
 
 	createMIRItem(value : Matetrial)
 	{
-		let miritem  ="/mir/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
-		+'","material_id":'+value.material_id
-		+',"approved_qty" :'+value.approved_qty
+		let miritem  ="/mir/items/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
+		+'","material_id":"'+value.material_id
+		+'","approved_qty" :'+value.approved_qty
 		+',"factory_id":'+value.factory_id
 		+',"mir_id":'+value.mir_id
-		+',"qty":'+value.qty
+		+',"qty":'+value.qty+
 		'}';
+		console.log(miritem);
         return this.http.post(this.apiURL+miritem ,null);
 	}
 

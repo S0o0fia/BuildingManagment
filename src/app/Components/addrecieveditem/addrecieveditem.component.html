@@ -38,7 +38,7 @@
                                  <mat-label>{{'Factroy Name'|translate}}</mat-label>
                                  <mat-select name="factroy_id"  [(ngModel)]="factroy_id" >
                                     <div *ngFor="let fact of item.factory">
-                                    <mat-option value={{fact.name}} (click)="hi(fact.name ,item.code)">
+                                    <mat-option value={{fact.name}} (click)="hi(fact.facroty_id ,item.code)">
                                        {{fact.name}}
                                    </mat-option>
                                 </div>
@@ -54,7 +54,7 @@
                               <div *ngFor="let fact of item.factory">
                               <div *ngIf="factroy_id == fact.name">  
                               <div *ngFor="let matrial of fact.materials">
-                                 <mat-option value={{matrial.code}} (click) = "addmat(matrial.code , matrial.name)">
+                                 <mat-option value={{matrial.code}} (click) = "addmat(matrial.id , matrial.name)">
                                     {{matrial.name}}
                                 </mat-option>
                              </div>

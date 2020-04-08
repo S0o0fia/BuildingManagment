@@ -8,6 +8,7 @@ import { CoreService } from 'app/Service/core/core.service';
 import { formatDate } from '@angular/common';
 import { Matetrial } from 'app/Models/Material/matetrial';
 import { Mirdata } from 'app/Models/MIR Request/mirdata';
+import { Mat } from 'app/Models/Material/mat';
 
 @Component({
   selector: 'ms-addrecieveditem',
@@ -98,9 +99,8 @@ export class AddrecieveditemComponent implements OnInit {
     this.service.getMIRequest().subscribe(
       data => {
            this.mirrequest = data;
-           
-          
-         
+           console.log(this.mirrequest);
+       
       },
       err => console.log(err)
     ); 
@@ -125,47 +125,39 @@ export class AddrecieveditemComponent implements OnInit {
       
         
         this.mirid = data['mir_id'] as number;
-        
+
+         
         this.matrial.forEach(element => {
-          this.addmatrial.push({
-            factory_id : this.facroty_id,
+         console.log(element);
+          this.service.createMIRItem({
+            factory_id : +this.facroty_id,
             material_id : element.code,
             name :element.name ,
-            qty : this.qty ,
+            qty : +this.qty ,
             mir_id : this.mirid,
-            approved_qty : this.qty
-            
-          });
+            approved_qty : +this.qty            
         
-        });
-          
-       
+        }).subscribe(
+            data=>{
   
-        
- 
- 
-      } , 
+             let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
+             if(msg)
+             {
+               location.reload();
+             }
+             console.log(data)},
+            err=>console.log(err)
+          );
+        });
+        } , 
       err=> console.log(err)
     );
 
-    if(this.addmatrial != null)
-    {
-      this.addmatrial.forEach(e=>{
+   
         
-        this.service.createMIRItem(e).subscribe(
-          data=>{
-
-           let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
-           if(msg)
-           {
-             location.reload();
-           }
-           console.log(data)},
-          err=>console.log(err)
-        );
-      });
+       
       
-    }
+  
 
   // this.matrial.forEach(element=>{
   //   this.service.createMIRItem(element).subscribe(
