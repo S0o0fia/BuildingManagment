@@ -123,7 +123,7 @@ export class CoreService {
 	}
 	getType_forRFI ()
 	{
-		let typeRfi = "/types/get?db="+this.db+"&token="+localStorage.getItem("token");
+		let typeRfi = "/types/get?db="+this.db+"&token="+localStorage.getItem("token")+"&project_id="+localStorage.getItem('projectid');
 		return  this.http.get(this.apiURL+typeRfi);
 	
 	}
@@ -491,12 +491,12 @@ export class CoreService {
 		return this.http.post(this.apiURL+url , null);
 	}
 
-	CreateCommentForCount ( comment : Comment )
+	CreateCommentForCount ( comment : any )
 	{
 		debugger;
 		let url = '/count/comments/create?db=nqproject&token='+localStorage.getItem('token')+
 		'&values={'+
-		'"section_id":'+comment.section_id+
+		'"user_id":'+comment.user_id+
 		',"comments":"'+comment.comments+
 		'","count_id":'+comment.rfi_id+
 		',"name":"'+comment.create_uid+

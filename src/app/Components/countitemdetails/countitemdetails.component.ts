@@ -34,8 +34,11 @@ export class CountitemdetailsComponent implements OnInit {
   Comments : any = [];
   item:any;
   detail:any;
-  Comment: { comments: string; create_uid: string; rfi_id: number; section_id: number; };
+  Commentt: { comments: string; create_uid: string; rfi_id: number; user_id: number };
   type_id: any;
+  users: any=[];
+  user_id: number;
+  dimesion:number;
  
   
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
@@ -60,7 +63,7 @@ export class CountitemdetailsComponent implements OnInit {
      horizontalPosition : 'center' ,
      panelClass: ['my-snack-bar']
    });
- }
+  }
 
 
 
@@ -73,6 +76,14 @@ export class CountitemdetailsComponent implements OnInit {
     err => console.log(err)
         
    );
+
+   //get users list
+   this.service.getUsers().subscribe(
+    data=>{this.users=data ;
+  debugger
+   },
+    err=> console.log(err)
+  );
 
    //get Comments
    this.service.getCommentForCount(this.id    
@@ -89,6 +100,7 @@ export class CountitemdetailsComponent implements OnInit {
           {this.count.push(element);
             this.state = element.state;
             this.consultant_approve = element.state;
+            this.dimesion=element.dimension;
             if(this.consultant_approve == "waiting" || this.consultant_approve == "draft")
             {
              this.consultant_btn = "Consultant Approve";
@@ -115,8 +127,6 @@ export class CountitemdetailsComponent implements OnInit {
              console.log(element);
              this.Items.push(element);
            
-            
-            
           
 
        });
@@ -171,17 +181,17 @@ export class CountitemdetailsComponent implements OnInit {
  Save()
   {
     debugger;
-    this.Comment = {
+    this.Commentt = {
       comments : this.detail , 
   
       create_uid : this.user , 
       rfi_id : this.id , 
-      section_id : this.type_id
+      user_id : this.user_id
 
     }
 
     //Cretate Comment
-    this.service.CreateCommentForCount(this.Comment).subscribe(
+    this.service.CreateCommentForCount(this.Commentt).subscribe(
       data=>{
         console.log(data) ;
         location.reload();
@@ -193,6 +203,6 @@ export class CountitemdetailsComponent implements OnInit {
 
   Typeids ( val )
   {
-    this.type_id = val;
+    this.user_id = val;
   }
 }

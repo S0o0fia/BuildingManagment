@@ -33,19 +33,23 @@
                             <td>{{'Request Status'|translate}}</td>
                             
                             <td style="padding-bottom:1%;;">{{'Item Name'|translate}}</td>
+
+                            <td style="padding-bottom:1%;;">{{'Unit of Measure'}}</td>
                            
                          </tr>
                       </thead>
                       <tbody  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
                          <tr  *ngFor="let item of count"   fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
                           
-                           <td>{{item.id}}</td>
+                           <td>{{item.name}}</td>
                            <td>{{item.date_from}}</td>
                            <td>{{item.date_to}}</td>
                        
                            <td>{{state | translate}}</td>
                           
                            <td>{{item.quantity_name}}</td>
+
+                           <td>{{item.product_uom_name}}</td>
                          
                          </tr>
                       </tbody>
@@ -93,14 +97,14 @@
                          <th style="text-align: center;">{{'Description'|translate}}</th>
                          <th style="text-align: center;">{{'Number'|translate}}</th>
                          <th style="text-align: center;">{{'Length'|translate}}</th>
-                        <th style="text-align: center;">{{'Width'|translate}}</th>
+                        <th style="text-align: center;" >{{'Width'|translate}}</th>
                         <th style="text-align: center;">{{'Height'|translate}}</th>
                         <th style="text-align: center;">{{'Percentage'|translate}}</th>
                         <th style="text-align: center;">{{'Executed Quantity'|translate}}</th>
                          <th style="text-align: center;">{{'Number'|translate}}</th>
                         <th style="text-align: center;">{{'Length'|translate}}</th>
-                        <th style="text-align: center;">{{'Width'|translate}}</th>
-                        <th style="text-align: center;">{{'Height'|translate}}</th>
+                        <th style="text-align: center;" *ngIf="dimension>1">{{'Width'|translate}}</th>
+                        <th style="text-align: center;" *ngIf="dimension>2">{{'Height'|translate}}</th>
                         <th style="text-align: center;">{{'Percentage'|translate}}</th>
                         <th style="text-align: center;">{{'Approved Quantity'|translate}}</th>
                      </tr>
@@ -111,8 +115,8 @@
                          <td style="text-align: center;">{{item.description}}</td>
                          <td style="text-align: center;">{{item.qty_unit}}</td>
                          <td style="text-align: center;">{{item.qty_length}}</td>
-                         <td style="text-align: center;">{{item.qty_width}}</td>
-                         <td style="text-align: center;">{{item.qty_height}}</td>
+                         <td style="text-align: center;" *ngIf="dimension>1">{{item.qty_width}}</td>
+                         <td style="text-align: center;" *ngIf="dimension>2">{{item.qty_height}}</td>
                          <td style="text-align: center;">{{item.qty_pers}}</td>
                          <td style="text-align: center;">{{item.qty}}</td>
                          <td class="sm-wid" style="text-align: center;"><input matInput name="approved_number" [value]="item.qty_unit"/></td>
@@ -136,9 +140,9 @@
                           <mat-form-field class="full-wid mrgn-b-lg">
                                 <mat-label>{{'Department'|translate}}</mat-label>
                                 <mat-select name="department">      
-                                     <div *ngFor="let item of type"> 
+                                     <div *ngFor="let item of users"> 
                                       <mat-option (click)="Typeids(item.id)" value={{item.id}}>
-                                         {{item.type}}
+                                         {{item.name}}
                                       </mat-option>
                                      </div>
                               </mat-select>
@@ -170,7 +174,7 @@
                 <mat-card style="text-align: center;"> 
                     <h5>{{comment.user_name}}</h5>
                     <h5>{{comment.comments}}</h5>
-                    <h6>بواسطة</h6>
+                    <!-- <h6>بواسطة</h6> -->
                     <h6>{{comment.name}}</h6>
                </mat-card>
                </div>
