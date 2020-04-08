@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CoreService } from 'app/service/core/core.service';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
@@ -11,7 +11,12 @@ import { MatDialog, DateAdapter, MAT_DATE_FORMATS, MatSnackBar, MatHorizontalSte
 import { FileUploader } from 'ng2-file-upload';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'app/Service/custompipe/format-datepicker';
 import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
-
+import {
+  NgbDateStruct, NgbCalendar, NgbCalendarIslamicUmalqura, NgbDatepickerI18n 
+} from '@ng-bootstrap/ng-bootstrap';
+const WEEKDAYS = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
+const MONTHS = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال',
+  'ذو القعدة', 'ذو الحجة'];
 @Component({
   selector: 'ms-creatproject',
   templateUrl: './creatproject.component.html',
@@ -19,10 +24,15 @@ import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
   providers: [
     {provide: DateAdapter, useClass: AppDateAdapter},
     // {provide: APP_DATE_FORMATS, useValue: APP_DATE_FORMATS}
-    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS},
+    //for Hijri Calender 
+    {provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura},
+    {provide: NgbDatepickerI18n, useClass: CreatprojectComponent}
   ]
 })
-export class CreatprojectComponent implements OnInit {
+
+
+export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit  {
 
 //    longitude = 20.728218;
 // latitude = 52.128973;
@@ -33,7 +43,7 @@ export class CreatprojectComponent implements OnInit {
 
 
 // this.markers.push({ latitude: lat, longitude: lng });}
-
+  model: NgbDateStruct;
   selectedIndex: number = 0;
   ProjectList   : any;
   newProject : NewProject;
@@ -76,6 +86,7 @@ export class CreatprojectComponent implements OnInit {
   qty_type : boolean;
   with_vat : boolean = false;
   containfirst : boolean = false;
+  today = this.calendar.getToday();
 
     formattedAmount: string = '';
      /**
@@ -94,8 +105,10 @@ export class CreatprojectComponent implements OnInit {
 
   constructor( private pageTitleService: PageTitleService, private formatPipe: NumberFormatPipe,
                private _snackBar: MatSnackBar ,
-               private translate : TranslateService , public service : CoreService
-                , public fb: FormBuilder , private dialog: MatDialog,private currencyPipe:CurrencyPipe) {
+               private translate : TranslateService , public service : CoreService ,
+               private calendar: NgbCalendar ,
+                 public fb: FormBuilder , private dialog: MatDialog,private currencyPipe:CurrencyPipe) {
+                 super();
                   this.minDate = new Date(1900,1,1);
                   this.maxDate = new Date(2050,1,1);
                   this.deliverdate = null;
@@ -236,7 +249,7 @@ caldurationd(value)
 
 }
   nextStep() {
-    debugger;
+    this.from_hijri = this.model.day+"/"+this.model.month+"/"+this.model.year;
     const format = 'dd/MM/yyyy';
     const locale = 'en-US';
     let startDate = formatDate(this.startdate, format, locale);
@@ -326,5 +339,23 @@ caldurationd(value)
   {
     console.log(val);
     this.with_vat = val;
+  }
+
+
+  //for hjri calender
+  getWeekdayShortName(weekday: number) {
+    return WEEKDAYS[weekday - 1];
+  }
+
+  getMonthShortName(month: number) {
+    return MONTHS[month - 1];
+  }
+
+  getMonthFullName(month: number) {
+    return MONTHS[month - 1];
+  }
+
+  getDayAriaLabel(date: NgbDateStruct): string {
+    return '${date.day}-${date.month}-${date.year}';
   }
 }

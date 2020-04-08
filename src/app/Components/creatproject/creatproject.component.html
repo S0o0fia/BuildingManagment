@@ -81,21 +81,38 @@
                              <!--Session From Grogorian-->
                        <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                            <mat-form-field class="full-wid mrgn-b-lg ">
-                              <input matInput 
+                              <input matInput  placeholder= "{{'Session From Grogorian'|translate}}"
                               name="startdate" [(ngModel)]="startdate" 
+
                               [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
                                >
                               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                               <mat-datepicker #picker></mat-datepicker>                         
                            </mat-form-field>
-                    </div>
+                        </div>
                     
-                          <!--Session From Grogorian-->
+                          <!--Session From Hijri-->
                           <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                         
                            <mat-form-field class="full-wid mrgn-b-lg ">
-                             <input  matInput  name="from_hijri"   [(ngModel)]="from_hijri"
-                              placeholder="{{'Session From Hijri'|translate}}" type="text" >                                                    
-                           </mat-form-field>
+                         
+                           <input matInput placeholder="{{'Session From Hijri'|translate}}" 
+                           class="rtl" [firstDayOfWeek]="7"
+                           placement="bottom" [positionTarget]="buttonEl" [footerTemplate]="footerTemplate"
+                           name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                           <mat-datepicker-toggle #buttonEl matSuffix [for]="d"  (click)="d.toggle()"></mat-datepicker-toggle>
+                             
+                           
+                           <ng-template #footerTemplate>
+                              <hr class="my-0">
+                              <div fxLayout="row" fxLayoutAlign="space-between">
+                              <button mat-button color="primary" (click)="model = today; d.close()">{{'Today'|translate}}</button>
+                              <button mat-button color="warn" (click)="d.close()">{{'Cancel'|translate}}</button>
+                           </div>
+                            </ng-template>
+                          
+                        </mat-form-field>
+                         
                     </div>
                    </div>
                       <div fxLayout="row" fxLayoutAlign="start">

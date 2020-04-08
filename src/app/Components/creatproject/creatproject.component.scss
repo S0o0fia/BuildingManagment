@@ -67,3 +67,18 @@ input
  {
     height: 700px !important;
  }
+
+
+ #d {
+   position: absolute;
+   background-color: white;
+
+   .ngb-dp-header {
+       background-color: rgba(52,104,191,1);
+   }
+
+   select {
+       background-color: rgba(52,104,191,1);
+       color: white;
+   }
+}

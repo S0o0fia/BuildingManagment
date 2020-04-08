@@ -94,6 +94,7 @@ import { CountitemdetailsComponent } from './Components/countitemdetails/countit
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ExtractdetailsComponent } from './Components/extractdetails/extractdetails.component';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyCE0po6Q8jGuBEds-A903KEU4U6Cerojzo",
@@ -118,7 +119,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	imports: [
 		BrowserModule,
 		NgxPaginationModule,
-	
+		NgbDatepickerModule.forRoot() ,
 		AgmCoreModule.forRoot({
 			apiKey: 'AIzaSyARLJcKPev4Ot6baTkjNKjczRDHYlFhgzo'
 		  }),

@@ -26,6 +26,7 @@ import { CollectTableComponent } from './Components/collect-table/collect-table.
 import { CountdetailsComponent } from './Components/countdetails/countdetails.component';
 import { CountitemdetailsComponent } from './Components/countitemdetails/countitemdetails.component';
 import { ExtractdetailsComponent } from './Components/extractdetails/extractdetails.component';
+import {  NgbCalendarIslamicUmalqura, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -154,6 +155,8 @@ const appRoutes: Routes = [
 @NgModule({
   	imports: [RouterModule.forRoot(appRoutes)],
  	exports: [RouterModule],
-  	providers: []
+  	providers: [
+     
+     ]
 })
 export class RoutingModule { }
