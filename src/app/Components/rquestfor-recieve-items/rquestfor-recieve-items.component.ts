@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class RquestforRecieveItemsComponent implements OnInit {
   getMIR : any = [];
    projectname : string;
+  statename: string;
   constructor(public service : CoreService, public router : Router,
     private pageTitleService: PageTitleService , private dialog: MatDialog) { 
 
@@ -32,6 +33,7 @@ export class RquestforRecieveItemsComponent implements OnInit {
 
     Qty_tbl : any ;
 ngOnInit() {
+  debugger;
 this.pageTitleService.setTitle(this.projectname +' / '+"طلبات تسليم المواد");
 this.service.getMIR().subscribe(
   data=>this.getMIR=data,
@@ -51,6 +53,14 @@ openDialog(): void {
     console.log('The dialog was closed');
     
   });
+}
+
+state(key:string)
+{
+  debugger;
+ this.statename = key;
+
+  
 }
 }
 

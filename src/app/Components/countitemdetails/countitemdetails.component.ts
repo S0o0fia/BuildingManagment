@@ -31,6 +31,11 @@ export class CountitemdetailsComponent implements OnInit {
   type : any = [];
   details : string;
   typeid : number;
+  Comments : any = [];
+  item:any;
+  detail:any;
+  Comment: { comments: string; create_uid: string; rfi_id: number; section_id: number; };
+  type_id: any;
  
   
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
@@ -61,6 +66,18 @@ export class CountitemdetailsComponent implements OnInit {
 
 
  ngOnInit() {
+
+  //get Type of comments
+  this.service.getType_forRFI().subscribe(
+    data=> this.type = data , 
+    err => console.log(err)
+        
+   );
+
+   //get Comments
+   this.service.getCommentForCount(this.id    
+    ).subscribe( data=> this.Comments = data , 
+    err=> console.log(err));
  
    //getting R0FI Data 
    this.service.getCount().subscribe(
@@ -149,4 +166,33 @@ export class CountitemdetailsComponent implements OnInit {
  {
    this.router.navigate(['home/table/countdetails']);
  }
+
+
+ Save()
+  {
+    debugger;
+    this.Comment = {
+      comments : this.detail , 
+  
+      create_uid : this.user , 
+      rfi_id : this.id , 
+      section_id : this.type_id
+
+    }
+
+    //Cretate Comment
+    this.service.CreateCommentForCount(this.Comment).subscribe(
+      data=>{
+        console.log(data) ;
+        location.reload();
+      } , 
+      err=> console.log(err)
+    );
+   
+  }
+
+  Typeids ( val )
+  {
+    this.type_id = val;
+  }
 }

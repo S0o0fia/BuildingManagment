@@ -10,6 +10,7 @@ import { formatDate } from '@angular/common';
 import { InspctionId } from 'app/Models/inspction_id/inspction-id';
 import { FileUploader , FileSelectDirective } from 'ng2-file-upload';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'app/Service/custompipe/format-datepicker';
+import { AnimationQueryOptions } from '@angular/animations';
 const URL = 'http://nqraait.ddns.net:8070/api/test?db=nqproject&token='+localStorage.getItem('token');
 @Component({
   selector: 'ms-add-request',
@@ -61,10 +62,13 @@ export class AddRequestComponent implements OnInit {
   Visible : boolean = false;   
   price : number;
   total_price : number;             
-
-
+base64:any;
+BASE64_MARKER: string = ';base64,';
+base64string:any;
   fileToUpload: File = null
   projectname : string ;
+  fileExtension: string;
+  image: any;
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -131,6 +135,38 @@ export class AddRequestComponent implements OnInit {
      
 
   }
+
+  onSelectFiles(evt) {
+    debugger;
+    var file = evt.target.files[0];
+    var reader = new FileReader();
+    this.fileExtension = '.' + file.name.split('.').pop();
+   
+        reader.onloadend = (e) => {
+          this.image = reader.result;
+          var base64Index = this.image.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
+          this.base64 = this.image.substring(base64Index);
+        }
+        reader.readAsDataURL(file);
+  };
+
+  // changeListener($event) : void {
+  //   debugger;
+  //   this.readThis($event.target);
+  // }
+  
+  // readThis(inputValue: any): void {
+  //   debugger;
+  //   var file:File = inputValue.files[0];
+  //   var myReader:FileReader = new FileReader();
+  
+  //   myReader.onloadend = (e) => {
+  //     this.base64 = myReader.result.toString();
+  //     //var base64Index = e.target.result.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
+  //     this.base64string = e.target;
+  //   }
+  //   this.base64 = myReader.readAsDataURL(file);
+  // }
   
   onFileSelected(event)
   {

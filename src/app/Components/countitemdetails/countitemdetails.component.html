@@ -126,6 +126,55 @@
                   </tbody>
                </table>
             </div>
+            <div>
+               <mat-card>
+                  <form>
+                    <div fxLayout="column">
+                    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                      <!--Department-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                          <mat-form-field class="full-wid mrgn-b-lg">
+                                <mat-label>{{'Department'|translate}}</mat-label>
+                                <mat-select name="department">      
+                                     <div *ngFor="let item of type"> 
+                                      <mat-option (click)="Typeids(item.id)" value={{item.id}}>
+                                         {{item.type}}
+                                      </mat-option>
+                                     </div>
+                              </mat-select>
+                          </mat-form-field>
+                       </div>
+                         <!--Note-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                    <mat-label>{{'Details'|translate}}</mat-label>
+                                    <textarea matInput name="detail"  
+                                    cdkTextareaAutosize [(ngModel)]="detail"
+                                     #autosize="cdkTextareaAutosize"
+                                      cdkAutosizeMinRows="1"
+                                       cdkAutosizeMaxRows="5"></textarea> 
+                              </mat-form-field>
+                           </div>
+                    </div>
+                           <div fxLayout="row" fxLayoutAlign="center">
+                                  <button mat-button mat-raised-button color="accent" type="button" dir="ltr"
+                                  (click)="Save()"
+                                  >{{'Save'|translate }}</button>
+                           </div>
+                    </div>
+                  </form>
+                </mat-card>
+            </div>
+            <div style="overflow-y:scroll; height:200px;">
+               <div *ngFor="let comment of Comments"  >
+                <mat-card style="text-align: center;"> 
+                    <h5>{{comment.user_name}}</h5>
+                    <h5>{{comment.comments}}</h5>
+                    <h6>بواسطة</h6>
+                    <h6>{{comment.name}}</h6>
+               </mat-card>
+               </div>
+                </div>
          </div>
          <td>{{'By Contractor'|translate}} : {{user}}  , {{'By Date'|translate}} :</td> 
     </mat-card>

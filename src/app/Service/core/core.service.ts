@@ -213,7 +213,7 @@ export class CoreService {
 	}
 	getRFI_tbl()
 	{
-		
+		debugger;
 		let RFIUrl= "/rfi/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get<GetRFI[]>(this.apiURL+RFIUrl);
 
@@ -248,13 +248,14 @@ export class CoreService {
 	 
 	getMIR ()
 	{
- 
+ debugger;
 		let mirget = "/mir/get?db="+this.db+"&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get<any[]>(this.apiURL+mirget);
 	}
 
 	getMirItem ()
 	{
+		debugger;
 		let miritemget = "/mir/items/get?db="+this.db+"&token="+localStorage.getItem('token');
 		return this.http.get<Miritems[]>(this.apiURL+miritemget);
 	}
@@ -269,6 +270,7 @@ export class CoreService {
 	}
 	createMIR(value : Mirequest)
 	{
+		debugger;
 		let mirequest  ="/mir/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
 		+'","request_date":"'+value.request_date +'"}';
 		console.log(mirequest);
@@ -278,8 +280,12 @@ export class CoreService {
 	createMIRItem(value : Matetrial)
 	{
 		let miritem  ="/mir/items/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
+<<<<<<< HEAD
 		+'","material_id":"'+value.material_id
 		+'","approved_qty" :'+value.approved_qty
+=======
+		+'","material_id":'+value.material_id
+>>>>>>> 0e18fb1f7eed6776443db8d07f27ae3b72491b57
 		+',"factory_id":'+value.factory_id
 		+',"mir_id":'+value.mir_id
 		+',"qty":'+value.qty+
@@ -479,6 +485,7 @@ export class CoreService {
 
 	CreateComment ( comment : Comment )
 	{
+		debugger;
 		let url = '/rfi/comments/create?db=nqproject&token='+localStorage.getItem('token')+
 		'&values={'+
 		'"section_id":'+comment.section_id+
@@ -489,6 +496,28 @@ export class CoreService {
 		'"}';
           console.log(url);
 		return this.http.post(this.apiURL+url , null);
+	}
+
+	CreateCommentForCount ( comment : Comment )
+	{
+		debugger;
+		let url = '/count/comments/create?db=nqproject&token='+localStorage.getItem('token')+
+		'&values={'+
+		'"section_id":'+comment.section_id+
+		',"comments":"'+comment.comments+
+		'","count_id":'+comment.rfi_id+
+		',"name":"'+comment.create_uid+
+		
+		'"}';
+          console.log(url);
+		return this.http.post(this.apiURL+url , null);
+	}
+
+	getCommentForCount ( id)
+	{
+		debugger;
+		let url = '/count/comments/get?db=nqproject&token='+localStorage.getItem('token')+'&count_id='+id;
+		return this.http.get(this.apiURL+url);
 	}
 
 	getComment ( id)

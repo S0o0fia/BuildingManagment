@@ -61,7 +61,7 @@
                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                      <input type="file"
                      id="file"
-                     (change)="handleFileInput($event.target.files)">
+                     (change)="onSelectFiles($event)">
                      <button (click)="onUpload()"> Upload</button>
                     </div>
 
