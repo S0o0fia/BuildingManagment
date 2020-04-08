@@ -82,6 +82,7 @@ export class AddrecieveditemComponent implements OnInit {
 
   addItem()
   {
+    debugger;
     this.matrial.push({
       code :this.mat_code ,
       name :this.mat_name,
@@ -110,6 +111,7 @@ export class AddrecieveditemComponent implements OnInit {
   
   Save()
   {
+    debugger;
     const format = 'MM/dd/yyyy';
     const locale = 'en-US';
     let startdate= formatDate(this.reqDate, format, locale);
@@ -124,19 +126,25 @@ export class AddrecieveditemComponent implements OnInit {
       data=>{
       
         
-        this.mirid = data['mir_id'] as number;
-        
-        this.matrial.forEach(element => {
-          this.addmatrial.push({
-            factory_id : this.facroty_id,
-            material_id : element.code,
-            name :element.name ,
-            qty : this.qty ,
-            mir_id : this.mirid,
-            approved_qty : this.qty
+        this.mirid = data["mir_id"];
+        // this.matrial.forEach(element => {
+        //   this.addmatrial.push({
+        //     factory_id : this.facroty_id,
+        //     material_id : element.code,
+        //     name :element.name ,
+        //     qty : this.qty ,
+        //     mir_id : this.mirid,
             
-          });
-        
+        //   });
+          this.matrial.forEach(function (value) {
+            this.addmatrial.push({
+              factory_id : this.facroty_id,
+              material_id : value.code,
+              name :value.name ,
+              qty : this.qty ,
+              mir_id : this.mirid,
+        });
+        debugger;
         });
           
        
@@ -148,8 +156,9 @@ export class AddrecieveditemComponent implements OnInit {
       err=> console.log(err)
     );
 
-    if(this.addmatrial != null)
+    if(this.addmatrial.length>0)
     {
+      debugger;
       this.addmatrial.forEach(e=>{
         
         this.service.createMIRItem(e).subscribe(
