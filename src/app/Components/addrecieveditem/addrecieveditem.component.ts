@@ -126,7 +126,6 @@ export class AddrecieveditemComponent implements OnInit {
       data=>{
       
         
-<<<<<<< HEAD
         this.mirid = data['mir_id'] as number;
 
          
@@ -142,30 +141,6 @@ export class AddrecieveditemComponent implements OnInit {
         
         }).subscribe(
             data=>{
-=======
-        this.mirid = data["mir_id"];
-        // this.matrial.forEach(element => {
-        //   this.addmatrial.push({
-        //     factory_id : this.facroty_id,
-        //     material_id : element.code,
-        //     name :element.name ,
-        //     qty : this.qty ,
-        //     mir_id : this.mirid,
-            
-        //   });
-          this.matrial.forEach(function (value) {
-            this.addmatrial.push({
-              factory_id : this.facroty_id,
-              material_id : value.code,
-              name :value.name ,
-              qty : this.qty ,
-              mir_id : this.mirid,
-        });
-        debugger;
-        });
-          
-       
->>>>>>> 0e18fb1f7eed6776443db8d07f27ae3b72491b57
   
              let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
              if(msg)
@@ -180,14 +155,7 @@ export class AddrecieveditemComponent implements OnInit {
       err=> console.log(err)
     );
 
-<<<<<<< HEAD
    
-=======
-    if(this.addmatrial.length>0)
-    {
-      debugger;
-      this.addmatrial.forEach(e=>{
->>>>>>> 0e18fb1f7eed6776443db8d07f27ae3b72491b57
         
        
       

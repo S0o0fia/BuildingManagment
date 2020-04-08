@@ -1,122 +1,122 @@
 <mat-card dir="rtl">
-        <div class="gene-card-title">
-           <div fxLayout="row" fxLayoutAlign="start center">
-              <div fxLayout="column" fxLayoutAlign="start center">
-                 <h3> {{projectname}} / {{'Add Request'|translate}}</h3>
-              </div>
-              <span fxFlex></span>
-           </div>
-           <mat-divider></mat-divider>
-        </div>
-        <div class="gene-card-content" *ngFor="let item of mirrequest">
-              <form #form="ngForm">
-                    <div fxLayout="column">
-                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                          <!--Item Number-->
-                          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                             <mat-form-field class="full-wid mrgn-b-lg">
-                              <input matInput name="code"  
-                              placeholder="{{'Request Number'|translate}}" type="text" disabled >  
-                                <label>{{item.code}}</label>   
-                             </mat-form-field>
-                          </div>
-                            <!--Date of delivery request-->
-                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                              <mat-form-field fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                              <input matInput 
-                                  name="reqDate"  [(ngModel)]="reqDate"
-                                  [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
-                                   placeholder="{{'Date of delivery request'|translate}}">
-                                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                  <mat-datepicker #picker2></mat-datepicker> 
-                                 </mat-form-field>
-                               </div>
-
-                             <!--Factroy Name-->
-                             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                              <mat-form-field class="full-wid mrgn-b-lg">
-                                 <mat-label>{{'Factroy Name'|translate}}</mat-label>
-                                 <mat-select name="factroy_id"  [(ngModel)]="factroy_id" >
-                                    <div *ngFor="let fact of item.factory">
-                                    <mat-option value={{fact.name}} (click)="hi(fact.facroty_id ,item.code)">
-                                       {{fact.name}}
-                                   </mat-option>
-                                </div>
-                               </mat-select>
-                           </mat-form-field>
-                           </div>
-
-                         <!--Material supplied-->
-                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                           <mat-form-field class="full-wid mrgn-b-lg">
-                              <mat-label>{{'Material supplied'|translate}}</mat-label>
-                              <mat-select name="mat_name">
-                              <div *ngFor="let fact of item.factory">
-                              <div *ngIf="factroy_id == fact.name">  
-                              <div *ngFor="let matrial of fact.materials">
-                                 <mat-option value={{matrial.code}} (click) = "addmat(matrial.id , matrial.name)">
-                                    {{matrial.name}}
-                                </mat-option>
-                             </div>
-                             </div>
-                             </div>
-                            </mat-select>
+   <div class="gene-card-title">
+      <div fxLayout="row" fxLayoutAlign="start center">
+         <div fxLayout="column" fxLayoutAlign="start center">
+            <h3> {{projectname}} / {{'Add Request'|translate}}</h3>
+         </div>
+         <span fxFlex></span>
+      </div>
+      <mat-divider></mat-divider>
+   </div>
+   <div class="gene-card-content" *ngFor="let item of mirrequest">
+         <form #form="ngForm">
+               <div fxLayout="column">
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                     <!--Item Number-->
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg">
+                         <input matInput name="code"  
+                         placeholder="{{'Request Number'|translate}}" type="text" disabled >  
+                           <label>{{item.code}}</label>   
                         </mat-form-field>
-                          </div>
-                         
-                        <!--Qunatity-->
-                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                          <mat-form-field class="full-wid mrgn-b-lg">
-                                <input matInput name="qty" [(ngModel)]="qty"
-                                placeholder="{{'Quantity'|translate}}" type="number" required>  
+                     </div>
+                       <!--Date of delivery request-->
+                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                         <mat-form-field fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                         <input matInput 
+                             name="reqDate"  [(ngModel)]="reqDate"
+                             [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
+                              placeholder="{{'Date of delivery request'|translate}}">
+                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                             <mat-datepicker #picker2></mat-datepicker> 
                             </mat-form-field>
-                       </div>    
-                               
+                          </div>
+
+                        <!--Factroy Name-->
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                         <mat-form-field class="full-wid mrgn-b-lg">
+                            <mat-label>{{'Factroy Name'|translate}}</mat-label>
+                            <mat-select name="factroy_id"  [(ngModel)]="factroy_id" >
+                               <div *ngFor="let fact of item.factory">
+                               <mat-option value={{fact.name}} (click)="hi(fact.facroty_id ,item.code)">
+                                  {{fact.name}}
+                              </mat-option>
+                           </div>
+                          </mat-select>
+                      </mat-form-field>
                       </div>
 
-                      <div fxLayout="row" fxLayoutAlign="center">
-                        <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add Quantity'|translate }}</button>
-                    </div> 
-
-
-                    <mat-card  class="full-wid mrgn-b-lg ">
-                     <mat-label>{{'Material supplied'|translate}}</mat-label>
-                     <div class="gene-card-content">
-                        <div fxLayout="column">
-                           <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                                 <div class="table-responsive" id="dvPdf">
-                 
-                                       <table class="table table-hover table-middle th-fw-light mb-0">
-                                          <thead>
-                                             <tr>
-                                                <th>{{'Material supplied'|translate}}</th>
-                                                <th>{{'Quantity'|translate}}</th>
-                                                <th>{{'Controls'|translate}}</th>
-                                              </tr>
-                                          </thead>
-                                          <tbody>
-                                             <tr *ngFor="let item of matrial; let i = index" >
-                                                <td>{{item.name}}</td>
-                                                <td>{{item.qty}}</td>
-                                                <td><mat-icon (click)="removeitem(i)" matTooltip="{{'Delete' | translate}}">delete</mat-icon></td>
-                                              </tr>
-                                          </tbody>
-                                       </table>
-                                    </div>
-      
-                     </div>
+                    <!--Material supplied-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                      <mat-form-field class="full-wid mrgn-b-lg">
+                         <mat-label>{{'Material supplied'|translate}}</mat-label>
+                         <mat-select name="mat_name">
+                         <div *ngFor="let fact of item.factory">
+                         <div *ngIf="factroy_id == fact.name">  
+                         <div *ngFor="let matrial of fact.materials">
+                            <mat-option value={{matrial.code}} (click) = "addmat(matrial.id , matrial.name)">
+                               {{matrial.name}}
+                           </mat-option>
                         </div>
-                           </div>     
-               </mat-card>
+                        </div>
+                        </div>
+                       </mat-select>
+                   </mat-form-field>
+                     </div>
+                    
+                   <!--Qunatity-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                     <mat-form-field class="full-wid mrgn-b-lg">
+                           <input matInput name="qty" [(ngModel)]="qty"
+                           placeholder="{{'Quantity'|translate}}" type="number" required>  
+                       </mat-form-field>
+                  </div>    
+                          
+                 </div>
+
+                 <div fxLayout="row" fxLayoutAlign="center">
+                   <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add Quantity'|translate }}</button>
+               </div> 
+
+
+               <mat-card  class="full-wid mrgn-b-lg ">
+                <mat-label>{{'Material supplied'|translate}}</mat-label>
+                <div class="gene-card-content">
+                   <div fxLayout="column">
+                      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                            <div class="table-responsive" id="dvPdf">
+            
+                                  <table class="table table-hover table-middle th-fw-light mb-0">
+                                     <thead>
+                                        <tr>
+                                           <th>{{'Material supplied'|translate}}</th>
+                                           <th>{{'Quantity'|translate}}</th>
+                                           <th>{{'Controls'|translate}}</th>
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                        <tr *ngFor="let item of matrial; let i = index" >
+                                           <td>{{item.name}}</td>
+                                           <td>{{item.qty}}</td>
+                                           <td><mat-icon (click)="removeitem(i)" matTooltip="{{'Delete' | translate}}">delete</mat-icon></td>
+                                         </tr>
+                                     </tbody>
+                                  </table>
+                               </div>
+ 
+                </div>
+                   </div>
+                      </div>     
+          </mat-card>
 
 
 
-                       <div fxLayout="row" fxLayoutAlign="space-between">
-                             <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add'|translate }}</button>
-                             <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
-                             
-                       </div>
-                    </div>
-                 </form>
-        </div>
-     </mat-card>
+                  <div fxLayout="row" fxLayoutAlign="space-between">
+                        <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add'|translate }}</button>
+                        <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
+                        
+                  </div>
+               </div>
+            </form>
+   </div>
+</mat-card>
