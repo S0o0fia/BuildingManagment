@@ -12,7 +12,7 @@
                           <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()">{{'Back'|translate}}</button>
                           <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
                            (click)="ApproveDraft()">{{'Draft Approve'|translate}}</button>
-                           <button class="mrgn-b-xs" [disabled]="consultant_approve == 'accepted'" mat-raised-button color="warn" (click)="ApproveConsultant()">{{'Collector Specialist'|translate}}</button>
+                           <button *ngIf="consultant_approve!='draft'" class="mrgn-b-xs" [disabled]="consultant_approve == 'accepted'" mat-raised-button color="warn" (click)="ApproveConsultant()">{{'Collector Specialist'|translate}}</button>
                 
                         </div>
                        </div> 
@@ -97,8 +97,8 @@
                          <th style="text-align: center;">{{'Description'|translate}}</th>
                          <th style="text-align: center;">{{'Number'|translate}}</th>
                          <th style="text-align: center;">{{'Length'|translate}}</th>
-                        <th style="text-align: center;" >{{'Width'|translate}}</th>
-                        <th style="text-align: center;">{{'Height'|translate}}</th>
+                        <th style="text-align: center;" *ngIf="dimension>1">{{'Width'|translate}}</th>
+                        <th style="text-align: center;" *ngIf="dimension>2">{{'Height'|translate}}</th>
                         <th style="text-align: center;">{{'Percentage'|translate}}</th>
                         <th style="text-align: center;">{{'Executed Quantity'|translate}}</th>
                          <th style="text-align: center;">{{'Number'|translate}}</th>
@@ -120,10 +120,10 @@
                          <td style="text-align: center;">{{item.qty_pers}}</td>
                          <td style="text-align: center;">{{item.qty}}</td>
                          <td class="sm-wid" style="text-align: center;"><input matInput name="approved_number" [value]="item.qty_unit"/></td>
-                         <td class="sm-wid"  style="text-align: center;"><input matInput name="approved_length" [value]="item.approved_length"/></td>
-                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_width" [value]="item.approved_width"/></td>
-                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_height" [value]="item.approved_height"/></td>
-                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_percentage" [value]="item.qty_pers"/></td>
+                         <td class="sm-wid"  style="text-align: center;"><input matInput name="approved_length" [value]="item.approved_length" [(ngModel)]="approved_length"/></td>
+                         <td class="sm-wid" style="text-align: center;" *ngIf="dimension>1"><input matInput name="approved_width" [value]="item.approved_width" [(ngModel)]="approved_width"/></td>
+                         <td class="sm-wid" style="text-align: center;" *ngIf="dimension>2"><input matInput name="approved_height" [value]="item.approved_height" [(ngModel)]="approved_height"/></td>
+                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_percentage" [value]="item.qty_pers" [(ngModel)]="approved_pers"/></td>
                          <td class="sm-wid" style="text-align: center;"><input matInput name="approve" [value]="item.approved_qty"/></td>
                         
                      </tr>

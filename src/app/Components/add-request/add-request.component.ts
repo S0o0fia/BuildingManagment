@@ -69,6 +69,8 @@ base64string:any;
   projectname : string ;
   fileExtension: string;
   image: any;
+  imageSrc: any;
+  filename: any;
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -136,20 +138,41 @@ base64string:any;
 
   }
 
+  _handleReaderLoaded(e) {
+    debugger
+    let reader = e.target;
+    this.imageSrc = reader.result;
+    var base64Index = this.imageSrc.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
+    this.base64 = this.imageSrc.substring(base64Index);
+    console.log(this.imageSrc);
+    alert(this.base64);
+  }
+
   onSelectFiles(evt) {
     debugger;
-    var file = evt.target.files[0];
-    var reader = new FileReader();
-    this.fileExtension = '.' + file.name.split('.').pop();
+  //   var file = evt.target.files[0];
+  //   var reader = new FileReader();
+  //   this.fileExtension = '.' + file.name.split('.').pop();
    
-        reader.onloadend = (e) => {
-          this.image = reader.result;
-          var base64Index = this.image.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
-          this.base64 = this.image.substring(base64Index);
-        }
-        reader.readAsDataURL(file);
-  };
+  //       reader.onloadend = (e) => {
+  //         this.image = reader.result;
+  //         var base64Index = this.image.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
+  //         this.base64 = this.image.substring(base64Index);
+  //       }
+  //       reader.readAsDataURL(file);
+  // };
 
+  var file = evt.dataTransfer ? evt.dataTransfer.files[0] : evt.target.files[0];
+  this.filename=file.name;
+    //var pattern = /image-*/;
+    var reader = new FileReader();
+    // if (!file.type.match(pattern)) {
+    //   alert("invalid format");
+    //   return;
+    // }
+    reader.onload = this._handleReaderLoaded.bind(this);
+    var str=reader.readAsDataURL(file);
+  }
   // changeListener($event) : void {
   //   debugger;
   //   this.readThis($event.target);
@@ -175,9 +198,9 @@ base64string:any;
   onUpload()
   {
      
-    
-     
-     this.services.UploadFile(this.fileToUpload).subscribe(
+    var lastRFI= Number(localStorage.getItem("lastRFI"));
+     var rfi_id=lastRFI+1;
+     this.services.UploadFile(this.filename, this.base64, rfi_id).subscribe(
        res=>console.log(res),
        err=>console.log(err)
      );

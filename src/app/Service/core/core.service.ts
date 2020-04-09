@@ -462,16 +462,22 @@ export class CoreService {
 
 
 	file : any;
-	UploadFile(fd:File)
+	UploadFile(filename: string, base64: string, rfi_id: number)
 	{  
-		let headers = new HttpHeaders({ 'Content-Type': '"multipart/form-data;'});
-		const formData: FormData = new FormData();
-		formData.append('fileKey', fd, fd.name);
-		let url= "/attachment/safaa?db=nqproject&token="+localStorage.getItem('token')+'&values='+
-		'{"project_id":'+localStorage.getItem('projectid')+
-		',"name":"filename"}';
-	  
-		return this.http.post(this.apiURL+url , formData , {headers})
+		// let headers = new HttpHeaders({ 'Content-Type': '"multipart/form-data;'});
+		// const formData: FormData = new FormData();
+		// formData.append('fileKey', fd, fd.name);
+		// let url= "/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values='+
+		// '{"project_id":'+localStorage.getItem('projectid')+
+		// ',"name":"filename"}';
+	  debugger;
+		let url="/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
+	  '"name":"'+filename+
+	  '","base64":"'+base64+
+	  '","project_id":'+localStorage.getItem('projectid')+
+	  ',"rfi_id":'+rfi_id+'}';
+
+		return this.http.post(this.apiURL+url, null)
 		;
 	
 	}
@@ -583,11 +589,17 @@ export class CoreService {
 		return this.http.post(this.apiURL+counturl ,null);
 	}
 
-	approveCountQty(id : number , approve : number)
+	approveCountQty(id : number, approve : number, uom: any, app_len: any, app_wid: any, app_hei: any, app_per: any)
 	{
+		debugger;
       let countQtydd = '/count/items/approved_qty?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
 	  '"approved_qty":"'+approve+
 	  '", "id":'+id +
+	  '", "approved_unit":'+uom +
+	  '", "approved_length":'+app_len +
+	  '", "approved_width":'+app_wid +
+	  '", "approved_height":'+app_hei +
+	  '", "approved_pers":'+app_per +
 	  '}';	 
 	  return this.http.post(this.apiURL+countQtydd ,null);
 	}

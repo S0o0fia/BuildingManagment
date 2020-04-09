@@ -39,6 +39,11 @@ export class CountitemdetailsComponent implements OnInit {
   users: any=[];
   user_id: number;
   dimesion:number;
+  uom: any;
+  approved_length: any;
+  approved_width: any;
+  approved_height: any;
+  approved_pers: any;
  
   
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
@@ -100,6 +105,7 @@ export class CountitemdetailsComponent implements OnInit {
           {this.count.push(element);
             this.state = element.state;
             this.consultant_approve = element.state;
+            this.uom=element.uom;
             this.dimesion=element.dimension;
             if(this.consultant_approve == "waiting" || this.consultant_approve == "draft")
             {
@@ -141,7 +147,7 @@ export class CountitemdetailsComponent implements OnInit {
      this.service.setCountState("accepted" , this.id).subscribe(
        data=> {
         this.Items.forEach(element => {
-          this.service.approveCountQty(element.id , element.approved_qty).subscribe(
+          this.service.approveCountQty(element.id, element.approved_qty, this.uom, this.approved_length, this.approved_width, this.approved_height, this.approved_pers).subscribe(
             data=>{
               this.openSnackBar("تم اعتماد حاسب الكميات المختص ","إغلاق"); 
               location.reload();
