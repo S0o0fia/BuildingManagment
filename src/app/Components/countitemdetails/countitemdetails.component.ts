@@ -38,7 +38,7 @@ export class CountitemdetailsComponent implements OnInit {
   type_id: any;
   users: any=[];
   user_id: number;
-  dimesion:number;
+  dimension:number;
   uom: any;
   approved_length: any;
   approved_width: any;
@@ -106,7 +106,7 @@ export class CountitemdetailsComponent implements OnInit {
             this.state = element.state;
             this.consultant_approve = element.state;
             this.uom=element.uom;
-            this.dimesion=element.dimension;
+            this.dimension=element.dimension;
             if(this.consultant_approve == "waiting" || this.consultant_approve == "draft")
             {
              this.consultant_btn = "Consultant Approve";
