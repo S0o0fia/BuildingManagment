@@ -48,7 +48,7 @@ this.pageTitleService.setTitle('قائمة طلبات الحصر ' +' / '+this.p
 
  this.service.getCount().subscribe(
    data=> {this.counttable = data as any;
-   
+   debugger;
   },
    err=> console.log(err)
  );

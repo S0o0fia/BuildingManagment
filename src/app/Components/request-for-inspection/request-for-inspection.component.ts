@@ -43,10 +43,13 @@ export class RequestForInspectionComponent implements OnInit {
       
     }
 ngOnInit() {
+  localStorage.setItem("lastRFI", null);
 this.pageTitleService.setTitle(this.projectname +' / '+"طلبات فحص الأعمال  ");
 
  this.service.getRFI_tbl().subscribe(
    data=> {this.RFI_tbl = data;
+    localStorage.setItem("lastRFI", Math.max.apply(Math, this.RFI_tbl.map(function(o) { return o.id; })))
+    //alert(localStorage.getItem("lastRFI"));
   console.log(data)
   },
    err=> console.log(err)

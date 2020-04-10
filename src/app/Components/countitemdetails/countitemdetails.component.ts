@@ -34,8 +34,16 @@ export class CountitemdetailsComponent implements OnInit {
   Comments : any = [];
   item:any;
   detail:any;
-  Comment: { comments: string; create_uid: string; rfi_id: number; section_id: number; };
+  Commentt: { comments: string; create_uid: string; rfi_id: number; user_id: number };
   type_id: any;
+  users: any=[];
+  user_id: number;
+  dimesion:number;
+  uom: any;
+  approved_length: any;
+  approved_width: any;
+  approved_height: any;
+  approved_pers: any;
  
   
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
@@ -60,7 +68,7 @@ export class CountitemdetailsComponent implements OnInit {
      horizontalPosition : 'center' ,
      panelClass: ['my-snack-bar']
    });
- }
+  }
 
 
 
@@ -73,6 +81,14 @@ export class CountitemdetailsComponent implements OnInit {
     err => console.log(err)
         
    );
+
+   //get users list
+   this.service.getUsers().subscribe(
+    data=>{this.users=data ;
+  debugger
+   },
+    err=> console.log(err)
+  );
 
    //get Comments
    this.service.getCommentForCount(this.id    
@@ -89,6 +105,8 @@ export class CountitemdetailsComponent implements OnInit {
           {this.count.push(element);
             this.state = element.state;
             this.consultant_approve = element.state;
+            this.uom=element.uom;
+            this.dimesion=element.dimension;
             if(this.consultant_approve == "waiting" || this.consultant_approve == "draft")
             {
              this.consultant_btn = "Consultant Approve";
@@ -115,8 +133,6 @@ export class CountitemdetailsComponent implements OnInit {
              console.log(element);
              this.Items.push(element);
            
-            
-            
           
 
        });
@@ -131,7 +147,7 @@ export class CountitemdetailsComponent implements OnInit {
      this.service.setCountState("accepted" , this.id).subscribe(
        data=> {
         this.Items.forEach(element => {
-          this.service.approveCountQty(element.id , element.approved_qty).subscribe(
+          this.service.approveCountQty(element.id, element.approved_qty, this.uom, this.approved_length, this.approved_width, this.approved_height, this.approved_pers).subscribe(
             data=>{
               this.openSnackBar("تم اعتماد حاسب الكميات المختص ","إغلاق"); 
               location.reload();
@@ -171,17 +187,17 @@ export class CountitemdetailsComponent implements OnInit {
  Save()
   {
     debugger;
-    this.Comment = {
+    this.Commentt = {
       comments : this.detail , 
   
       create_uid : this.user , 
       rfi_id : this.id , 
-      section_id : this.type_id
+      user_id : this.user_id
 
     }
 
     //Cretate Comment
-    this.service.CreateCommentForCount(this.Comment).subscribe(
+    this.service.CreateCommentForCount(this.Commentt).subscribe(
       data=>{
         console.log(data) ;
         location.reload();
@@ -193,6 +209,6 @@ export class CountitemdetailsComponent implements OnInit {
 
   Typeids ( val )
   {
-    this.type_id = val;
+    this.user_id = val;
   }
 }

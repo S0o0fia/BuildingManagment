@@ -123,7 +123,7 @@ export class CoreService {
 	}
 	getType_forRFI ()
 	{
-		let typeRfi = "/types/get?db="+this.db+"&token="+localStorage.getItem("token");
+		let typeRfi = "/types/get?db="+this.db+"&token="+localStorage.getItem("token")+"&project_id="+localStorage.getItem('projectid');
 		return  this.http.get(this.apiURL+typeRfi);
 	
 	}
@@ -214,7 +214,7 @@ export class CoreService {
 	}
 	getRFI_tbl()
 	{
-		
+		debugger;
 		let RFIUrl= "/rfi/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get<GetRFI[]>(this.apiURL+RFIUrl);
 
@@ -249,13 +249,14 @@ export class CoreService {
 	 
 	getMIR ()
 	{
- 
+ debugger;
 		let mirget = "/mir/get?db="+this.db+"&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get<any[]>(this.apiURL+mirget);
 	}
 
 	getMirItem ()
 	{
+		debugger;
 		let miritemget = "/mir/items/get?db="+this.db+"&token="+localStorage.getItem('token');
 		return this.http.get<Miritems[]>(this.apiURL+miritemget);
 	}
@@ -270,22 +271,20 @@ export class CoreService {
 	}
 	createMIR(value : Mirequest)
 	{
+		debugger
 		let mirequest  ="/mir/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
 		+'","request_date":"'+value.request_date +'"}';
-		console.log(mirequest);
         return this.http.post(this.apiURL+mirequest ,null);
 	}
 
 	createMIRItem(value : Matetrial)
 	{
 		let miritem  ="/mir/items/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
-		+'","material_id":"'+value.material_id
-		+'","approved_qty" :'+value.approved_qty
+		+'","material_id":'+value.material_id
 		+',"factory_id":'+value.factory_id
 		+',"mir_id":'+value.mir_id
-		+',"qty":'+value.qty+
+		+',"qty":'+value.qty
 		'}';
-		console.log(miritem);
         return this.http.post(this.apiURL+miritem ,null);
 	}
 
@@ -465,22 +464,29 @@ export class CoreService {
 
 
 	file : any;
-	UploadFile(fd:File)
+	UploadFile(filename: string, base64: string, rfi_id: number)
 	{  
-		let headers = new HttpHeaders({ 'Content-Type': '"multipart/form-data;'});
-		const formData: FormData = new FormData();
-		formData.append('fileKey', fd, fd.name);
-		let url= "/attachment/safaa?db=nqproject&token="+localStorage.getItem('token')+'&values='+
-		'{"project_id":'+localStorage.getItem('projectid')+
-		',"name":"filename"}';
-	  
-		return this.http.post(this.apiURL+url , formData , {headers})
+		// let headers = new HttpHeaders({ 'Content-Type': '"multipart/form-data;'});
+		// const formData: FormData = new FormData();
+		// formData.append('fileKey', fd, fd.name);
+		// let url= "/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values='+
+		// '{"project_id":'+localStorage.getItem('projectid')+
+		// ',"name":"filename"}';
+	  debugger;
+		let url="/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
+	  '"name":"'+filename+
+	  '","base64":"'+base64+
+	  '","project_id":'+localStorage.getItem('projectid')+
+	  ',"rfi_id":'+rfi_id+'}';
+
+		return this.http.post(this.apiURL+url, null)
 		;
 	
 	}
 
 	CreateComment ( comment : Comment )
 	{
+		debugger;
 		let url = '/rfi/comments/create?db=nqproject&token='+localStorage.getItem('token')+
 		'&values={'+
 		'"section_id":'+comment.section_id+
@@ -493,6 +499,7 @@ export class CoreService {
 		return this.http.post(this.apiURL+url , null);
 	}
 
+<<<<<<< HEAD
 	
 	CreateCommentForCount ( comment : Comment )
 	{
@@ -501,6 +508,16 @@ export class CoreService {
 		'"section_id":'+comment.section_id+
 		',"comments":"'+comment.comments+
 		'","rfi_id":'+comment.rfi_id+
+=======
+	CreateCommentForCount ( comment : any )
+	{
+		debugger;
+		let url = '/count/comments/create?db=nqproject&token='+localStorage.getItem('token')+
+		'&values={'+
+		'"user_id":'+comment.user_id+
+		',"comments":"'+comment.comments+
+		'","count_id":'+comment.rfi_id+
+>>>>>>> e27e7875beb32e629a66f859294b4ff3e6021a14
 		',"name":"'+comment.create_uid+
 		
 		'"}';
@@ -510,7 +527,12 @@ export class CoreService {
 
 	getCommentForCount ( id)
 	{
+<<<<<<< HEAD
 		let url = '/count/comments/get?db=nqproject&token='+localStorage.getItem('token')+'&rfi_id='+id;
+=======
+		debugger;
+		let url = '/count/comments/get?db=nqproject&token='+localStorage.getItem('token')+'&count_id='+id;
+>>>>>>> e27e7875beb32e629a66f859294b4ff3e6021a14
 		return this.http.get(this.apiURL+url);
 	}
 
@@ -584,11 +606,17 @@ export class CoreService {
 		return this.http.post(this.apiURL+counturl ,null);
 	}
 
-	approveCountQty(id : number , approve : number)
+	approveCountQty(id : number, approve : number, uom: any, app_len: any, app_wid: any, app_hei: any, app_per: any)
 	{
+		debugger;
       let countQtydd = '/count/items/approved_qty?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
 	  '"approved_qty":"'+approve+
 	  '", "id":'+id +
+	  '", "approved_unit":'+uom +
+	  '", "approved_length":'+app_len +
+	  '", "approved_width":'+app_wid +
+	  '", "approved_height":'+app_hei +
+	  '", "approved_pers":'+app_per +
 	  '}';	 
 	  return this.http.post(this.apiURL+countQtydd ,null);
 	}

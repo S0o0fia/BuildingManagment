@@ -114,7 +114,7 @@ export class CollectTableComponent implements OnInit {
       this.service.getItemRFI().subscribe(
         data=> {
           this.RFI_Location = data;
-       
+       debugger;
           this.RFI_Location.forEach(element => {
               if(element['rfi_id'] == val)
               {
