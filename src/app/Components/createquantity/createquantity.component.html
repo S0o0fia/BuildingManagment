@@ -33,16 +33,14 @@
                         <!--Main Section-->
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <mat-form-field class="full-wid mrgn-b-lg">
-                                 <mat-label>{{'Type Of Works'|translate}}</mat-label>
+                                 <mat-label>{{'Specify Works'|translate}}</mat-label>
                                  <mat-select  matNativeControl required name="mainid" [(ngModel)]="mainid">
-                                       <div *ngFor="let section of Mainsection">
-                                    <div *ngIf="section.parent_id==''">        
+                                  <div *ngFor="let section of Mainsection">
                                    <mat-option value={{section.id}}>
                                      {{section.name}}
                                    </mat-option>
-                                   </div>
                               </div> 
-                                 </mat-select>
+                          </mat-select>
                            </mat-form-field>
                         </div>
                        <!-- Type of Work-->

@@ -56,7 +56,9 @@ export class CreatequantityComponent implements OnInit {
   ngOnInit() {
     
     this.coreService.getMainSectionList().subscribe(
-      data=>this.Mainsection = data, 
+      data=>{this.Mainsection = data ; 
+        console.log(this.Mainsection);
+      }, 
       err=> console.log(err)
     );
 
