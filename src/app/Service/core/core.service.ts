@@ -35,8 +35,8 @@ export class CoreService {
 	horizontalSideNavOpen : boolean = false; 	
 	projectDetailsContent : any;
 	editProductData 		 : any;	
-	public apiURL : string = 'http://nqraait.ddns.net:8070/api';
-	public db: string='nqproject';
+	public apiURL : string = 'http://nqraait.ddns.net:8077/api';
+	public db: string='pm_train';
 	
 	constructor(private matDialog : MatDialog,
 					private http : HttpClient){
