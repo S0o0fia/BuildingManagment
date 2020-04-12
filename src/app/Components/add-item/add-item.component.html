@@ -60,8 +60,12 @@
                    
                      </div>
                        <div fxLayout="row" fxLayoutAlign="space-between">
-                             <button mat-button mat-raised-button color="accent" type="submit">{{'Add'|translate }}</button>
-                             <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
+                             <button mat-button mat-raised-button color="accent" type="submit">{{'Add'|translate }}
+                                <mat-icon>done_outline</mat-icon>
+                             </button>
+                             <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}
+                              <mat-icon>cancel</mat-icon>  
+                             </button>
                              
                        </div>
                     </div>

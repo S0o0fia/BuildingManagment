@@ -1,5 +1,6 @@
 {  
    "Menus (dropdowns)" : "القوائم (القوائم المنسدلة)",
+   "Enter": "مدخل" ,
    "Cart" : "عربة التسوق",
    "Options" : "خيارات",
    "General" : "جنرال لواء",
@@ -791,7 +792,9 @@
            "Current" : "جاري" , 
            "Final" : "ختامي" , 
            "Date of Approve Collect" : "تاريخ اعتماد الحصر" , 
-           "Extract Details" : "تفاصيل المستخلص"
+           "Extract Details" : "تفاصيل المستخلص" , 
+           "Attachments" : "المرفقات" , 
+           "Download" : "تحميل"
   
          
 

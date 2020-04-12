@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap');
 mat-icon-button
 {
     width: 25%;
@@ -30,4 +33,20 @@ tr th
 {
     text-align: center;
 
+}
+
+
+tr , td  , th
+{
+    text-align: center !important;
+}
+
+th , button , thead{
+   
+    font-size: medium;
+    font-family: 'Cairo', sans-serif;
+}
+
+h4{
+    font-family: 'Tajawal', sans-serif;
 }

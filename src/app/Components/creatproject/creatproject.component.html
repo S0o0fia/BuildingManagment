@@ -11,7 +11,7 @@
        </div>
        <div class="gene-card-content">
           <mat-tab-group [selectedIndex]="selectedIndex">
-             <mat-tab label="{{'Step 1'|translate}}" [disabled]="selectedIndex != 0" >
+             <mat-tab label="{{'Step 1'|translate}} " [disabled]="selectedIndex != 0" >   
                 <form #form="ngForm" >
                    <div fxLayout="column">
                       <!--Proejct Name-->
@@ -116,8 +116,9 @@
                     </div>
                    </div>
                       <div fxLayout="row" fxLayoutAlign="start">
-                         <button mat-button type="button" disabled>{{'Previous'|translate }}</button>
-                         <button mat-button mat-raised-button [disabled]="!form.valid" (click)="nextStep()" type="submit" >{{'Next'|translate }} </button>
+                         <button mat-button type="button" disabled>  <mat-icon>navigate_next</mat-icon>{{'Previous'|translate }}</button>
+                         <button mat-button mat-raised-button [disabled]="!form.valid" (click)="nextStep()" type="submit" >
+                            {{'Next'|translate }} <mat-icon>navigate_before</mat-icon> </button>
                       </div>
                    </div>
 
@@ -261,8 +262,9 @@
                  </div>
                </div>
                       <div fxLayout="row" fxLayoutAlign="start">
-                         <button mat-button type="button" (click)="previousStep()">{{'Previous'|translate }}</button>
-                         <button mat-button mat-raised-button [disabled]="!form2.valid" (click)="nextStep()" type="button">{{'Next'|translate }}</button>
+                         <button mat-button type="button" (click)="previousStep()">   <mat-icon>navigate_next</mat-icon> {{'Previous'|translate }}</button>
+                         <button mat-button mat-raised-button [disabled]="!form2.valid" (click)="nextStep()" type="button">
+                            {{'Next'|translate }}  <mat-icon>navigate_before</mat-icon></button>
                       </div>
                    </div>
                 </form>
@@ -378,7 +380,9 @@
                   </div>
 
                    <div fxLayout="row" fxLayoutAlign="center">
-                      <button mat-button type="button" (click)="previousStep()">{{'Previous'|translate }}</button>
+                      <button mat-button type="button" (click)="previousStep()">  <mat-icon>navigate_next</mat-icon> {{'Previous'|translate }}
+                         
+                      </button>
                       <button mat-button mat-raised-button 
                       (click)="SaveData()"
                       [disabled]="!form3.valid" color="accent"  type="submit">{{'New Project'|translate }}</button>

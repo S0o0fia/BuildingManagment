@@ -1,7 +1,7 @@
 <div class="container" fxLayout="wrap row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutAlign="center">
     <mat-card>
             <div class="gene-card-title">
-                    <div fxLayout="row" fxLayoutAlign="space-around center">
+                    <div fxLayout="row" fxLayoutAlign="space-around center"   fxLayout.xs="column">
                        <div fxLayout="column">
                           <h4>{{'Request Status'|translate}}</h4>
            
@@ -9,7 +9,9 @@
                        
                        <div fxLayout="column">
                           <div class="row">
-                          <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()">{{'Back'|translate}}</button>
+                          <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()">
+                          <mat-icon>exit_to_app</mat-icon>                             
+                           {{'Back'|translate}}</button>
                           <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
                            (click)="ApproveDraft()">{{'Draft Approve'|translate}}</button>
                         </div>
@@ -91,11 +93,13 @@
    
                </div> <span fxFlex></span>
                
-               <div fxLayout="row">
+               <div fxLayout="row"  fxLayout.xs="column"  >
                  
                   <button class="mrgn-b-xs" [disabled]="consultant_approve != 'waiting'" mat-raised-button color="accent" (click)="openDialogApprove()">{{consultant_btn|translate}}</button>
                   <button class="mrgn-b-xs" mat-raised-button color="warn">{{'Result Approve'|translate}}</button>
-                  <button class="mrgn-b-xs" mat-raised-button color="primary">{{'Print'|translate}}</button>
+                  <button class="mrgn-b-xs" mat-raised-button color="primary">{{'Print'|translate}}
+                     <mat-icon>print</mat-icon>
+                  </button>
             
                </div> 
             </div>
@@ -137,7 +141,10 @@
                          </div>
                   </div>
                          <div fxLayout="row" fxLayoutAlign="center">
-                                <button mat-button mat-raised-button color="accent" type="button" dir="ltr">{{'Save'|translate }}</button>
+                                <button mat-button mat-raised-button color="accent" type="button" dir="ltr">
+                                 <mat-icon>save</mat-icon>  
+                                 {{'Save'|translate }}
+                                </button>
                          </div>
                   </div>
                 </form>

@@ -2,21 +2,25 @@
 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
     <mat-card>
        <div class="gene-card-title">
-          <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxLayout="row" fxLayoutAlign="space-around center"  fxLayout.xs="column">
              <div fxLayout="column">
                 <h4>{{'List of Count'|translate}}</h4>
  
              </div> <span fxFlex></span>
              
              <div fxLayout="column">
-                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Apply Collect Request'|translate}}</button>
+                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">
+                  <mat-icon>queue</mat-icon>  
+                  {{'Apply Collect Request'|translate}}</button>
              </div> 
           </div>
          
           <br/>
-          <div fxLayout="row" fxLayoutAlign="center center">
-           <button class="mrgn-b-xs" mat-raised-button color="warn"  style=" color: white; padding: 1%; padding-left: 3%; padding-right: 3%; font-size: medium; font-weight: bold;" (click)="state('draft')">{{'draft'|translate}}</button>
-           <button class="mrgn-b-xs" mat-raised-button  style="background-color: goldenrod; color: white;  padding: 1%; font-size: medium; font-weight: bold;" (click)="state('waiting')">{{'waiting'|translate}}</button>
+          <div fxLayout="row" fxLayoutAlign="center center"  fxLayout.xs="column">
+           <button class="mrgn-b-xs" mat-raised-button color="warn"  style=" color: white; padding: 1%; padding-left: 3%; padding-right: 3%; font-size: medium; font-weight: bold;" (click)="state('draft')">{{'draft'|translate}}
+            
+           </button>
+           <button class="mrgn-b-xs" mat-raised-button  style="background-color: rgb(243, 163, 16); color: white;  padding: 1%; font-size: medium; font-weight: bold;" (click)="state('waiting')">{{'waiting'|translate}}</button>
            <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')" style=" padding: 1%;  padding-left: 3%; padding-right: 3%; font-size: medium; font-weight: bold;">{{'accepted'|translate}}</button>
            </div>
           <br/>

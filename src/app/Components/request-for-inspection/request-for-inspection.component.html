@@ -2,19 +2,20 @@
 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
         <mat-card>
            <div class="gene-card-title">
-              <div fxLayout="row" fxLayoutAlign="space-around center">
+              <div fxLayout="row" fxLayoutAlign="space-around center"  fxLayout.xs="column">
                  <div fxLayout="column">
                     <h4>{{'Request for Inspection'|translate}}</h4>
      
                  </div> <span fxFlex></span>
                  
                  <div fxLayout="column">
-                    <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Add Request'|translate}}</button>
+                    <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">
+                       <mat-icon>queue</mat-icon> {{'Add Request'|translate}}</button>
                  </div> 
               </div>
              
               <br/>
-              <div fxLayout="row" fxLayoutAlign="center center">
+              <div fxLayout="row" fxLayoutAlign="center center"  fxLayout.xs="column">
                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('draft')"> {{'draft'|translate}} <br> <span>No Code</span> </button>
                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('waiting')"> {{'waiting'|translate}}  <br> <span >No Code</span></button>
                <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')">{{'accepted'|translate}} <br> Code A </button>

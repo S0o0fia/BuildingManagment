@@ -33,7 +33,7 @@ export class RfidetailsComponent implements OnInit {
    details : string;
    typeid : number;
    Comment : Comment;
-   
+   download : string = "http://nqraait.ddns.net:8070/api/attachment/get?db=nqproject&token=kJO8U4D1NwGT_VZ79u84huzsYdH45PkD1oK_baBfcUkprMf1C3dY-5PTXz2m4sG2IGGF0GZZpjl0Ii0VcNmrsg&attach_id=";
    Comments : any = [];
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
     ,private _snackBar: MatSnackBar ,public dialog: MatDialog) { 

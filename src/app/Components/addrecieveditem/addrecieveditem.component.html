@@ -75,12 +75,13 @@
                  </div>
 
                  <div fxLayout="row" fxLayoutAlign="center">
-                   <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add Quantity'|translate }}</button>
+                   <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">
+                      {{'Add Quantity'|translate }}  <mat-icon>queue</mat-icon></button>
                </div> 
 
 
                <mat-card  class="full-wid mrgn-b-lg ">
-                <mat-label>{{'Material supplied'|translate}}</mat-label>
+                <mat-label calss="title">{{'Material supplied'|translate}}</mat-label>
                 <div class="gene-card-content">
                    <div fxLayout="column">
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
@@ -112,8 +113,12 @@
 
 
                   <div fxLayout="row" fxLayoutAlign="space-between">
-                        <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add'|translate }}</button>
-                        <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
+                        <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}
+                           <mat-icon>cancel</mat-icon>
+                        </button>
+                        <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add'|translate }}
+                              <mat-icon>done_outline</mat-icon>
+                        </button>
                         
                   </div>
                </div>

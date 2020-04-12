@@ -62,7 +62,9 @@
                           </div>
                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                            <div fxLayout="row" fxLayoutAlign="center">
-                              <button mat-button (click)="showItems()" color="accent">{{'Show Approved Items'|translate }}</button>
+                              <button mat-raised-button (click)="showItems()" color="accent">{{'Show Approved Items'|translate }}
+                                 <mat-icon>visibility</mat-icon>
+                              </button>
                            </div>
                           </div>
                            <!--Total work performed in the abstract-->
@@ -109,7 +111,10 @@
   
   
                        <div fxLayout="row" fxLayoutAlign="center">
-                             <button mat-button mat-raised-button color="accent" (click)="AddExtract()" type="submit">{{'Add'|translate }}</button>
+                             <button mat-button mat-raised-button color="accent" (click)="AddExtract()" type="submit">
+                                {{'Add'|translate }}
+                              <mat-icon>queue</mat-icon>
+                              </button>
                                                         
                        </div>
                     </div>
@@ -327,7 +332,9 @@
                                  placeholder="{{'Total Discounts'|translate}}" type="number" required>   
                            </mat-form-field>
                            &nbsp; &nbsp;
-                           <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="AddDiscount()">{{'Add' |translate}}</button>
+                           <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="AddDiscount()">{{'Add' |translate}}
+                              <mat-icon>queue</mat-icon>
+                           </button>
                        
                         </form>
                           

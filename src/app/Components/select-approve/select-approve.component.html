@@ -42,9 +42,13 @@
   </div>
                 
                    <div fxLayout="row" fxLayoutAlign="space-between" mat-dialog-actions>
-                         <button mat-button mat-raised-button color="accent"   (click)="onNoClick()" cdkFocusInitial>{{'Approve'|translate }}</button>
-                         <button mat-button mat-raised-button color="warn"   (click)="close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
-                         
+      
+                         <button mat-button mat-raised-button color="warn"   (click)="close()"  type="button" dir="ltr">{{'Cancel'|translate }}
+                            <mat-icon>cancel</mat-icon>
+                         </button>
+                         <button mat-button mat-raised-button color="accent"   (click)="onNoClick()" cdkFocusInitial>{{'Approve'|translate }}
+                            <mat-icon>done_outline</mat-icon>
+                         </button>                   
                    </div>
                 </div>
              </form>

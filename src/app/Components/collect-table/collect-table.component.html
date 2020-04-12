@@ -1,5 +1,6 @@
 <div fxLayout="row wrap" fxLayoutAlign=" start" class="gene-form-wizard" dir="rtl">
-    <mat-card fxFlex="100%">
+
+   <mat-card fxFlex="100%">
        <div class="gene-card-title">
           <div fxLayout="row" fxLayoutAlign="start center">
              <div fxLayout="column">
@@ -90,8 +91,12 @@
 
        </div>
        <div fxLayout="row" fxLayoutAlign="center">
-         <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="ShowRFI()">{{'Submit'|translate}}</button>
-             
+         <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="ShowRFI()">
+        
+            {{'Submit'|translate}} 
+            <mat-icon>queue</mat-icon>
+
+         </button>
         </div>
       
       </div >
@@ -300,11 +305,13 @@
            
          </div>
          <div fxLayout="row" fxLayoutAlign="space-between">
-            <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
+            <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">
+               {{'Cancel'|translate }}     <mat-icon>cancel</mat-icon></button>
                          
-            <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="AddCount()">{{'Add'|translate}}</button>
+            <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="AddCount()">{{'Add'|translate}}     <mat-icon>done_outline</mat-icon></button>
        </div>
    </mat-card>
   
-   </div>
+
+</div>
    

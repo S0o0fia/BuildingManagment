@@ -7,6 +7,10 @@
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
-      <button mat-button color="warn"  (click)="onNoClick(qunatity)">{{'Cancel'|translate}}</button>
-      <button mat-button color="accent"  [mat-dialog-close]="qunatity" cdkFocusInitial>{{'Add' | translate}}</button>
+      <button mat-button color="warn"  (click)="onNoClick(qunatity)">{{'Cancel'|translate}} 
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <button mat-button color="accent"  [mat-dialog-close]="qunatity" cdkFocusInitial>{{'Add' | translate}}
+        <mat-icon>done_outline</mat-icon>
+      </button>
 </div>

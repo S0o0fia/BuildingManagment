@@ -2,7 +2,7 @@
         <div class="gene-card-title">
            <div fxLayout="row" fxLayoutAlign="start center">
               <div fxLayout="column" fxLayoutAlign="start center">
-                 <h3>{{projectname}} / {{'Add Request'|translate}} </h3>
+                 <h3 >{{projectname}} / {{'Add Request'|translate}} </h3>
               </div>
               <span fxFlex></span>
            </div>
@@ -58,18 +58,22 @@
                         </mat-form-field>
                     </div>
                        <!--Attachment-->
-                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                     <input type="file"
-                     id="file"
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100"
+                    fxLayoutAlign="center"
+                    >
+                     <input type="file" mat-input
+                     id="file" ng2FileSelect
                      (change)="onSelectFiles($event)">
-                     <button (click)="onUpload()"> Upload</button>
+                     <button (click)="onUpload()"  mat-raised-button color="accent"> {{'Upload'|translate}}
+                        <mat-icon>cloud_upload</mat-icon> 
+                     </button>
                     </div>
 
                  </div>
 
                  <!--Items--> 
                     <mat-card  class="full-wid mrgn-b-lg ">
-                     <mat-label>{{'Items'|translate}}</mat-label>
+                     <mat-label class="title">{{'Items'|translate}}</mat-label>
                      <div class="gene-card-content">
                       
                 <!-- <div fxLayout="column">
@@ -197,7 +201,7 @@
                   
                  <!--Item Information-->
                     <mat-card  class="full-wid mrgn-b-lg ">
-                        <mat-label>{{'Inspect Location'|translate}}</mat-label>
+                        <mat-label class="title">{{'Inspect Location'|translate}}</mat-label>
                         <div class="gene-card-content">
              
                    <div fxLayout="column">
@@ -238,12 +242,12 @@
                  
         
               <div fxLayout="row" fxLayoutAlign="center">
-                  <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add'|translate }}</button>
+                  <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add'|translate }}  <mat-icon>queue</mat-icon> </button>
              </div> 
          </mat-card>
          <!--Table of Added Items-->
          <mat-card  class="full-wid mrgn-b-lg ">
-               <mat-label>{{'Added Locations'|translate}}</mat-label>
+               <mat-label class="title">{{'Added Locations'|translate}}</mat-label>
                <div class="gene-card-content">
                   <div fxLayout="column">
                      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
@@ -278,8 +282,8 @@
       </div>
                     
                        <div fxLayout="row" fxLayoutAlign="space-between">
-                             <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}</button>
-                             <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Submited'|translate }}</button>
+                             <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}  <mat-icon>cancel</mat-icon></button>
+                             <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Submited'|translate }}  <mat-icon>done_outline</mat-icon></button>
                              
                        </div>
                        

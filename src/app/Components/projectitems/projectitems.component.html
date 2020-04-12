@@ -2,7 +2,7 @@
     <div class="gene-card-title">
        <div fxLayout="row" fxLayoutAlign="space-around center">
           <div fxLayout="column">
-             <h5>{{projectname}} / {{'Project Items'|translate}}</h5>
+             <h4>{{projectname}} / {{'Project Items'|translate}}</h4>
           </div> <span fxFlex></span>
        </div>      
        <mat-divider></mat-divider>
@@ -37,7 +37,10 @@
             </div>
             <div>
               <div fxLayout="row" fxLayoutAlign="center">
-                    <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add Project Item'|translate }}</button>
+                    <button mat-button mat-raised-button color="accent" (click)="addItem()" fxLayoutAlign="center" type="button">{{'Add Project Item'|translate }}
+
+                     <mat-icon>queue</mat-icon>
+                    </button>
                </div>
             </div>
         </div>
@@ -69,7 +72,9 @@
      </div>
      <div fxLayout="row" fxLayoutAlign="center">
         <button mat-button mat-raised-button color="accent" [disabled]="itemsData.length == 0"
-         fxLayoutAlign="center" type="button" (click)="SaveData()">{{'Add All'|translate }}</button>
+         fxLayoutAlign="center" type="button" (click)="SaveData()">{{'Add All'|translate }}
+      <mat-icon>done_outline</mat-icon>
+      </button>
     </div>
 </div>
 </mat-card>

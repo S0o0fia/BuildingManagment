@@ -9,8 +9,12 @@
             
             <div fxLayout="column">
                <div class="row">
-               <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Add'|translate}}</button>
-               <button  matTooltip="{{'Discount'|translate}}" class="mrgn-b-xs" mat-raised-button color="primary" (click)="opendiscount()"><mat-icon>money_off</mat-icon></button>
+               <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">
+                  {{'Add'|translate}}
+                  <mat-icon>queue</mat-icon>
+               </button>
+               <button  matTooltip="{{'Discount'|translate}}" class="mrgn-b-xs" mat-raised-button color="primary" 
+               (click)="opendiscount()"><mat-icon>money_off</mat-icon></button>
             </div>
             </div> 
          </div>

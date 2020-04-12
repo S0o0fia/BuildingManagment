@@ -19,7 +19,10 @@
                      <input matInput placeholder="{{'Password'|translate}}" type="password" name="password" required [(ngModel)]="password">
                   </mat-form-field>
                
-                  <button class="login" mat-raised-button [disabled]="!form.valid">{{'SIGN IN'|translate}}</button>
+                  <button class="login" mat-raised-button [disabled]="!form.valid">
+                     <mat-icon>open_in_browser</mat-icon>
+                     {{'SIGN IN'|translate}}                     
+                  </button>
                 
                </div>
                </form>
