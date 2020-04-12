@@ -14,6 +14,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import * as JSpfd from 'jspdf' 
 import { DiscountComponent } from '../discount/discount.component';
 import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'ms-quantitytable',
@@ -28,10 +29,10 @@ export class QuantitytableComponent implements OnInit {
   browserRefresh = false;
   totalRec : number;
   page: number = 1;
-  total_budget : number ;
-  total_budget_vat :number;
+  total_budget : any ;
+  total_budget_vat :any;
   dis : number ; 
-  totaldis : number;
+  totaldis : any;
   projectitem : string ;
   section : any = [];
   projectitems : any =[];
@@ -41,10 +42,10 @@ export class QuantitytableComponent implements OnInit {
   item_name : string;
   all : number = 0;
   disappearDisount : boolean = false; 
-  total_excuted : number ;
+  total_excuted : any ;
   filterbyExceed : boolean = false;
   projectname : string;
-
+  formattedAmount: string = '';
   public rowSelected : any = -1;
   
 
@@ -96,13 +97,18 @@ export class QuantitytableComponent implements OnInit {
     
 
   }
-
+  transformAmount(value){
+    this.formattedAmount = this.currencyPipe.transform( value , "   ر.س");
+    // Remove or comment this line if you dont want to show the formatted amount in the textbox.
+    return this.formattedAmount;
+}
   bindItemType(name,type)
   {
+    alert(this.item_type);
 
-    if(name == 'all' )
+    if(name == 'all')
     {
-      this.service.gettotal().subscribe(
+      this.service.gettotals(this.proj_item , this.item_type).subscribe(
         data=> {
                 console.log(data);
                  this.total_budget = data[0].total as number;
@@ -183,7 +189,7 @@ export class QuantitytableComponent implements OnInit {
   }
 
   constructor(public service : CoreService,  private router : Router, private formatPipe: NumberFormatPipe , 
-      private pageTitleService: PageTitleService , private dialog: MatDialog , private discount : MatDialog,) { 
+      private pageTitleService: PageTitleService , private dialog: MatDialog , private discount : MatDialog,private currencyPipe:CurrencyPipe) { 
 
         const dialogConfig = new MatDialogConfig();
 
@@ -209,10 +215,10 @@ this.service.gettotal().subscribe(
     this.total_budget_vat = ((this.total_budget)+(this.total_budget*0.05));
     this.total_excuted =   data[0].total_excuted as number
 
-    this.total_budget = this.formatPipe.transform(this.total_budget);
-    this.totaldis = this.formatPipe.transform(this.totaldis);
-    this.total_budget_vat = this.formatPipe.transform(this.total_budget_vat);
-    this.total_excuted = this.formatPipe.transform(this.total_excuted);
+    this.total_budget = this.transformAmount(this.total_budget);
+    this.totaldis = this.transformAmount(this.totaldis);
+    this.total_budget_vat = this.transformAmount(this.total_budget_vat);
+    this.total_excuted = this.transformAmount(this.total_excuted);
     
   }, 
   err => console.log(err)
@@ -220,18 +226,17 @@ this.service.gettotal().subscribe(
 
 this.service.getQty_tbl().subscribe(
    (res)=> {
-     debugger;
      console.log(res);
      this.Qty_tbls = JSON.parse(JSON.stringify(res));
      this.Qty_tbl = res;
            
     //for number formatting 
 this.Qty_tbl.forEach(element => {
-  element.item_qty = this.formatPipe.transform(element.item_qty);
-  element.price_unit = this.formatPipe.transform(element.price_unit);
-  element.price_total = this.formatPipe.transform(element.price_total);
-  element.excuted = this.formatPipe.transform(element.excuted);
-  element.total_excuted = this.formatPipe.transform(element.total_excuted);
+  element.item_qty = this.transformAmount(element.item_qty);
+  element.price_unit = this.transformAmount(element.price_unit);
+  element.price_total = this.transformAmount(element.price_total);
+  element.excuted = this.transformAmount(element.excuted);
+  element.total_excuted = this.transformAmount(element.total_excuted);
 
   
 });  

@@ -349,6 +349,7 @@ export class CoreService {
 
 	gettotals(project_items_id , main_section_id)
 	{
+		debugger;
 		let total ="/total/get?db="+this.db+"&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid')
 		+'&project_items_id='+project_items_id+'&main_section_id='+main_section_id;
 		return this.http.get(this.apiURL+total);
