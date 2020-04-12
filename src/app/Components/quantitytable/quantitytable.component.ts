@@ -241,7 +241,7 @@ this.Qty_tbl.forEach(element => {
 );
 
 
- this.service.getMainSectionList().subscribe(
+ this.service.getMainSectionList(true).subscribe(
    data=> this.section = data , 
    err => console.log(err)
  )
@@ -250,7 +250,7 @@ this.Qty_tbl.forEach(element => {
    data=> this.projectitems = data , 
    err=> console.log(err)
  )
-
+console.log(this.Qty_tbl);
  
  this.totalRec = this.Qty_tbl.length;
   }

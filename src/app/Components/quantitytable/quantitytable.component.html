@@ -132,6 +132,7 @@
 
                      <tr *ngIf="rowSelected==data.id" style="background-color: #C1C7C9;">
                            <td></td>
+                           <td></td>
                            <td colspan="5">
                                <table class="table table-striped">
                                  <th>{{'Items Type'|translate}}</th>
@@ -160,6 +161,13 @@
                                           </td>
                                               
                                      </tr>
+                                     <tr>
+                                        <th>{{'Description'|translate}}</th>
+                                       <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                       
+                                          <span>   {{data.description}} </span>
+                                    </td> 
+                                  </tr>
                                    </tbody>
                                </table>
                            </td>

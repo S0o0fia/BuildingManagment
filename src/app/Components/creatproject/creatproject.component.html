@@ -98,7 +98,7 @@
                          
                            <input matInput placeholder="{{'Session From Hijri'|translate}}" 
                            class="rtl" [firstDayOfWeek]="7"
-                           placement="bottom" [positionTarget]="buttonEl" [footerTemplate]="footerTemplate"
+                           placement="top" [positionTarget]="buttonEl" [footerTemplate]="footerTemplate"
                            name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
                            <mat-datepicker-toggle #buttonEl matSuffix [for]="d"  (click)="d.toggle()"></mat-datepicker-toggle>
                              

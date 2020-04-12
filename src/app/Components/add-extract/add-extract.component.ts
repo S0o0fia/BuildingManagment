@@ -36,7 +36,7 @@ export class AddExtractComponent implements OnInit {
   ApprovedCountItem : any =[];
   added : boolean = false;
   discount : any = [];
-  from_extract_date : Date = new Date() ;
+  from_extract_date :string ;
   to_extract_date : Date =  new Date()  ;
   invoice_type : string ;
  
@@ -61,17 +61,14 @@ export class AddExtractComponent implements OnInit {
 
   ngOnInit() {
     this.service.getInvoiceName().subscribe(
-      data=> this.extract_number = data[0].sequence,
+      data=> {
+        this.extract_number = data[0].sequence;
+        this.from_extract_date = data[0].date_from ; 
+      },
       err=>console.log(err)
     );
 
-    this.service.getApproveQty().subscribe(
-       data =>{ this.approve = data as any ;
-      console.log(data);
-      },
-        err=> console.log(err)
-
-    );
+   
   }
 
   openDialogItem(): void {
@@ -266,8 +263,22 @@ export class AddExtractComponent implements OnInit {
   
 }
 
-AddItem () 
+showItems()
 {
-  
+    const format = 'MM/dd/yyyy';
+    const locale = 'en-US';
+    let from_exDate = formatDate(this.from_extract_date, format, locale);
+    let to_exDate = formatDate(this.to_extract_date, format, locale);
+    let projectid = localStorage.getItem('projectid');
+    this.service.getApprovedQty(projectid , from_exDate , to_exDate).subscribe(
+      data =>{ 
+     this.approve = data as any ;
+     console.log(data);
+
+     },
+       err=> console.log(err)
+
+   );
+
 }
 }

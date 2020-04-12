@@ -1,187 +1,187 @@
 <div class="container" fxLayout="wrap row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutAlign="center">
-    <mat-card>
-            <div class="gene-card-title">
-                    <div fxLayout="row" fxLayoutAlign="space-between center">
-                       <div fxLayout="column">
-                          <h4>{{'Request Status'|translate}}</h4>
-           
-                       </div> <span fxFlex></span>
-                       
-                       <div fxLayout="column">
-                          <div class="row">
-                          <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()">{{'Back'|translate}}</button>
-                          <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
-                           (click)="ApproveDraft()">{{'Draft Approve'|translate}}</button>
-                           <button *ngIf="consultant_approve!='draft'" class="mrgn-b-xs" [disabled]="consultant_approve == 'accepted'" mat-raised-button color="warn" (click)="ApproveConsultant()">{{'Collector Specialist'|translate}}</button>
-                
-                        </div>
-                       </div> 
-                    </div>
-                   
-                    <mat-divider></mat-divider>
-         </div>
-         <div class="gene-card-content pad-t-none">
-                <div class="table-responsive" id="dvPdf">
-                  
-                   <table class=" table-responsive table" fxLayout="row">
-                      <thead  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column">
-                         <tr  fxLayout="column"   fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column" >
-                            <td>{{'Request Number'|translate}}</td>
-                            <td>{{'From Duration'|translate}}</td>
-                            <td>{{'To Duration'|translate}}</td>
-                          
-                            <td>{{'Request Status'|translate}}</td>
-                            
-                            <td style="padding-bottom:1%;;">{{'Item Name'|translate}}</td>
-
-                            <td style="padding-bottom:1%;;">{{'Unit of Measure'}}</td>
-                           
-                         </tr>
-                      </thead>
-                      <tbody  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
-                         <tr  *ngFor="let item of count"   fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
-                          
-                           <td>{{item.name}}</td>
-                           <td>{{item.date_from}}</td>
-                           <td>{{item.date_to}}</td>
-                       
-                           <td>{{state | translate}}</td>
-                          
-                           <td>{{item.quantity_name}}</td>
-
-                           <td>{{item.product_uom_name}}</td>
-                         
-                         </tr>
-                      </tbody>
-                   </table>
-                </div>
-             </div>
-        <div class="gene-card-title">
-            <div fxLayout="row" fxLayoutAlign="space-around center">
-               <div fxLayout="column">
-                  <h4>{{'Inspect Location'|translate}}</h4>
-   
-               </div> <span fxFlex></span>
+   <mat-card>
+           <div class="gene-card-title">
+                   <div fxLayout="row" fxLayoutAlign="space-between center">
+                      <div fxLayout="column">
+                         <h4>{{'Request Status'|translate}}</h4>
+          
+                      </div> <span fxFlex></span>
+                      
+                      <div fxLayout="column">
+                         <div class="row">
+                         <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()">{{'Back'|translate}}</button>
+                         <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
+                          (click)="ApproveDraft()">{{'Draft Approve'|translate}}</button>
+                          <button *ngIf="consultant_approve!='draft'" class="mrgn-b-xs" [disabled]="consultant_approve == 'accepted'" mat-raised-button color="warn" (click)="ApproveConsultant()">{{'Collector Specialist'|translate}}</button>
                
-             
-            </div>
-           
-            <mat-divider></mat-divider>
-         </div>
-         <div class="gene-card-content pad-t-none">
-            <div class="table-responsive" id="dvPdf">
-               <table class="table  table-middle th-fw-light mb-0">
-                  <tbody>
-                     <tr>
-                        <th style="text-align: center;"></th>
-                        <th style="text-align: center;"></th>
-                        <th style="text-align: center;"></th>
-                        <th style="text-align: center;">{{'Contructor'|translate}}</th>
-                       <th style="text-align: center;"></th>
-                       <th style="text-align: center;"></th>
-                       <th style="text-align: center;"></th>
-                       <th style="text-align: center;"></th>
-                        <th style="text-align: center;"></th>
-                       <th style="text-align: center;"></th>
-                       <th style="text-align: center;">{{'Consultant'|translate}}</th>
-                       <th style="text-align: center;"></th>
-                       <th style="text-align: center;"></th>
-                       <th style="text-align: center;"></th>
-                     </tr>
-                  </tbody>
-               </table>
-               <table class="table table-hover table-middle th-fw-light mb-0">
-                  <thead>
-                     <tr>
-                         <th style="text-align: center;">{{'Inspect Location'|translate}}</th>
-                         <th style="text-align: center;">{{'Description'|translate}}</th>
-                         <th style="text-align: center;">{{'Number'|translate}}</th>
-                         <th style="text-align: center;">{{'Length'|translate}}</th>
-                        <th style="text-align: center;" *ngIf="dimension>1">{{'Width'|translate}}</th>
-                        <th style="text-align: center;" *ngIf="dimension>2">{{'Height'|translate}}</th>
-                        <th style="text-align: center;">{{'Percentage'|translate}}</th>
-                        <th style="text-align: center;">{{'Executed Quantity'|translate}}</th>
-                         <th style="text-align: center;">{{'Number'|translate}}</th>
-                        <th style="text-align: center;">{{'Length'|translate}}</th>
-                        <th style="text-align: center;" *ngIf="dimension>1">{{'Width'|translate}}</th>
-                        <th style="text-align: center;" *ngIf="dimension>2">{{'Height'|translate}}</th>
-                        <th style="text-align: center;">{{'Percentage'|translate}}</th>
-                        <th style="text-align: center;">{{'Approved Quantity'|translate}}</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr *ngFor="let item of Items" style="text-align: center;">
-                         <td style="text-align: center;">{{item.location}}</td>
-                         <td style="text-align: center;">{{item.description}}</td>
-                         <td style="text-align: center;">{{item.qty_unit}}</td>
-                         <td style="text-align: center;">{{item.qty_length}}</td>
-                         <td style="text-align: center;" *ngIf="dimension>1">{{item.qty_width}}</td>
-                         <td style="text-align: center;" *ngIf="dimension>2">{{item.qty_height}}</td>
-                         <td style="text-align: center;">{{item.qty_pers}}</td>
-                         <td style="text-align: center;">{{item.qty}}</td>
-                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_number" [value]="item.qty_unit"/></td>
-                         <td class="sm-wid"  style="text-align: center;"><input matInput name="approved_length" [value]="item.approved_length" [(ngModel)]="approved_length"/></td>
-                         <td class="sm-wid" style="text-align: center;" *ngIf="dimension>1"><input matInput name="approved_width" [value]="item.approved_width" [(ngModel)]="approved_width"/></td>
-                         <td class="sm-wid" style="text-align: center;" *ngIf="dimension>2"><input matInput name="approved_height" [value]="item.approved_height" [(ngModel)]="approved_height"/></td>
-                         <td class="sm-wid" style="text-align: center;"><input matInput name="approved_percentage" [value]="item.qty_pers" [(ngModel)]="approved_pers"/></td>
-                         <td class="sm-wid" style="text-align: center;"><input matInput name="approve" [value]="item.approved_qty"/></td>
-                        
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-            <div>
-               <mat-card>
-                  <form>
-                    <div fxLayout="column">
-                    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                      <!--Department-->
-                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
-                          <mat-form-field class="full-wid mrgn-b-lg">
-                                <mat-label>{{'Department'|translate}}</mat-label>
-                                <mat-select name="department">      
-                                     <div *ngFor="let item of users"> 
-                                      <mat-option (click)="Typeids(item.id)" value={{item.id}}>
-                                         {{item.name}}
-                                      </mat-option>
-                                     </div>
-                              </mat-select>
-                          </mat-form-field>
                        </div>
-                         <!--Note-->
-                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
-                              <mat-form-field class="full-wid mrgn-b-lg">
-                                    <mat-label>{{'Details'|translate}}</mat-label>
-                                    <textarea matInput name="detail"  
-                                    cdkTextareaAutosize [(ngModel)]="detail"
-                                     #autosize="cdkTextareaAutosize"
-                                      cdkAutosizeMinRows="1"
-                                       cdkAutosizeMaxRows="5"></textarea> 
-                              </mat-form-field>
-                           </div>
-                    </div>
-                           <div fxLayout="row" fxLayoutAlign="center">
-                                  <button mat-button mat-raised-button color="accent" type="button" dir="ltr"
-                                  (click)="Save()"
-                                  >{{'Save'|translate }}</button>
-                           </div>
-                    </div>
-                  </form>
-                </mat-card>
-            </div>
-            <div style="overflow-y:scroll; height:200px;">
-               <div *ngFor="let comment of Comments"  >
-                <mat-card style="text-align: center;"> 
-                    <h5>{{comment.user_name}}</h5>
-                    <h5>{{comment.comments}}</h5>
-                    <!-- <h6>بواسطة</h6> -->
-                    <h6>{{comment.name}}</h6>
-               </mat-card>
+                      </div> 
+                   </div>
+                  
+                   <mat-divider></mat-divider>
+        </div>
+        <div class="gene-card-content pad-t-none">
+               <div class="table-responsive" id="dvPdf">
+                 
+                  <table class=" table-responsive table" fxLayout="row">
+                     <thead  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column">
+                        <tr  fxLayout="column"   fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column" >
+                           <td>{{'Request Number'|translate}}</td>
+                           <td>{{'From Duration'|translate}}</td>
+                           <td>{{'To Duration'|translate}}</td>
+                         
+                           <td>{{'Request Status'|translate}}</td>
+                           
+                           <td style="padding-bottom:1%;;">{{'Item Name'|translate}}</td>
+
+                           <td style="padding-bottom:1%;;">{{'Unit of Measure'}}</td>
+                          
+                        </tr>
+                     </thead>
+                     <tbody  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
+                        <tr  *ngFor="let item of count"   fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
+                         
+                          <td>{{item.name}}</td>
+                          <td>{{item.date_from}}</td>
+                          <td>{{item.date_to}}</td>
+                      
+                          <td>{{state | translate}}</td>
+                         
+                          <td>{{item.quantity_name}}</td>
+
+                          <td>{{item.product_uom_name}}</td>
+                        
+                        </tr>
+                     </tbody>
+                  </table>
                </div>
-                </div>
-         </div>
-         <td>{{'By Contractor'|translate}} : {{user}}  , {{'By Date'|translate}} :</td> 
-    </mat-card>
+            </div>
+       <div class="gene-card-title">
+           <div fxLayout="row" fxLayoutAlign="space-around center">
+              <div fxLayout="column">
+                 <h4>{{'Inspect Location'|translate}}</h4>
+  
+              </div> <span fxFlex></span>
+              
+            
+           </div>
+          
+           <mat-divider></mat-divider>
+        </div>
+        <div class="gene-card-content pad-t-none">
+           <div class="table-responsive" id="dvPdf">
+              <table class="table  table-middle th-fw-light mb-0">
+                 <tbody>
+                    <tr>
+                       <th style="text-align: center;"></th>
+                       <th style="text-align: center;"></th>
+                       <th style="text-align: center;"></th>
+                       <th style="text-align: center;">{{'Contructor'|translate}}</th>
+                      <th style="text-align: center;"></th>
+                      <th style="text-align: center;"></th>
+                      <th style="text-align: center;"></th>
+                      <th style="text-align: center;"></th>
+                       <th style="text-align: center;"></th>
+                      <th style="text-align: center;"></th>
+                      <th style="text-align: center;">{{'Consultant'|translate}}</th>
+                      <th style="text-align: center;"></th>
+                      <th style="text-align: center;"></th>
+                      <th style="text-align: center;"></th>
+                    </tr>
+                 </tbody>
+              </table>
+              <table class="table table-hover table-middle th-fw-light mb-0">
+                 <thead>
+                    <tr>
+                        <th style="text-align: center;">{{'Inspect Location'|translate}}</th>
+                        <th style="text-align: center;">{{'Description'|translate}}</th>
+                        <th style="text-align: center;">{{'Number'|translate}}</th>
+                        <th style="text-align: center;">{{'Length'|translate}}</th>
+                       <th style="text-align: center;" *ngIf="dimension>1">{{'Width'|translate}}</th>
+                       <th style="text-align: center;" *ngIf="dimension>2">{{'Height'|translate}}</th>
+                       <th style="text-align: center;">{{'Percentage'|translate}}</th>
+                       <th style="text-align: center;">{{'Executed Quantity'|translate}}</th>
+                        <th style="text-align: center;">{{'Number'|translate}}</th>
+                       <th style="text-align: center;">{{'Length'|translate}}</th>
+                       <th style="text-align: center;" *ngIf="dimension>1">{{'Width'|translate}}</th>
+                       <th style="text-align: center;" *ngIf="dimension>2">{{'Height'|translate}}</th>
+                       <th style="text-align: center;">{{'Percentage'|translate}}</th>
+                       <th style="text-align: center;">{{'Approved Quantity'|translate}}</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <tr *ngFor="let item of Items" style="text-align: center;">
+                        <td style="text-align: center;">{{item.location}}</td>
+                        <td style="text-align: center;">{{item.description}}</td>
+                        <td style="text-align: center;">{{item.qty_unit}}</td>
+                        <td style="text-align: center;">{{item.qty_length}}</td>
+                        <td style="text-align: center;" *ngIf="dimension>1">{{item.qty_width}}</td>
+                        <td style="text-align: center;" *ngIf="dimension>2">{{item.qty_height}}</td>
+                        <td style="text-align: center;">{{item.qty_pers}}</td>
+                        <td style="text-align: center;">{{item.qty}}</td>
+                        <td class="sm-wid" style="text-align: center;"><input matInput name="approved_number" [value]="item.qty_unit"/></td>
+                        <td class="sm-wid"  style="text-align: center;"><input matInput name="approved_length" [value]="item.approved_length" [(ngModel)]="approved_length"/></td>
+                        <td class="sm-wid" style="text-align: center;" *ngIf="dimension>1"><input matInput name="approved_width" [value]="item.approved_width" [(ngModel)]="approved_width"/></td>
+                        <td class="sm-wid" style="text-align: center;" *ngIf="dimension>2"><input matInput name="approved_height" [value]="item.approved_height" [(ngModel)]="approved_height"/></td>
+                        <td class="sm-wid" style="text-align: center;"><input matInput name="approved_percentage" [value]="item.qty_pers" [(ngModel)]="approved_pers"/></td>
+                        <td class="sm-wid" style="text-align: center;"><input matInput name="approve" [value]="item.approved_qty"/></td>
+                       
+                    </tr>
+                 </tbody>
+              </table>
+           </div>
+           <div>
+              <mat-card>
+                 <form>
+                   <div fxLayout="column">
+                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                     <!--Department-->
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                         <mat-form-field class="full-wid mrgn-b-lg">
+                               <mat-label>{{'Department'|translate}}</mat-label>
+                               <mat-select name="department">      
+                                    <div *ngFor="let item of users"> 
+                                     <mat-option (click)="Typeids(item.id)" value={{item.id}}>
+                                        {{item.name}}
+                                     </mat-option>
+                                    </div>
+                             </mat-select>
+                         </mat-form-field>
+                      </div>
+                        <!--Note-->
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                             <mat-form-field class="full-wid mrgn-b-lg">
+                                   <mat-label>{{'Details'|translate}}</mat-label>
+                                   <textarea matInput name="detail"  
+                                   cdkTextareaAutosize [(ngModel)]="detail"
+                                    #autosize="cdkTextareaAutosize"
+                                     cdkAutosizeMinRows="1"
+                                      cdkAutosizeMaxRows="5"></textarea> 
+                             </mat-form-field>
+                          </div>
+                   </div>
+                          <div fxLayout="row" fxLayoutAlign="center">
+                                 <button mat-button mat-raised-button color="accent" type="button" dir="ltr"
+                                 (click)="Save()"
+                                 >{{'Save'|translate }}</button>
+                          </div>
+                   </div>
+                 </form>
+               </mat-card>
+           </div>
+           <div style="overflow-y:scroll; height:200px;">
+              <div *ngFor="let comment of Comments"  >
+               <mat-card style="text-align: center;"> 
+                   <h5>{{comment.user_name}}</h5>
+                   <h5>{{comment.comments}}</h5>
+                   <!-- <h6>بواسطة</h6> -->
+                   <h6>{{comment.name}}</h6>
+              </mat-card>
+              </div>
+               </div>
+        </div>
+        <td>{{'By Contractor'|translate}} : {{user}}  , {{'By Date'|translate}} :</td> 
+   </mat-card>
+  
    
-    
 </div>

@@ -189,8 +189,9 @@ export class CoreService {
 		return this.http.post(this.apiURL+createQtyturl , null);
 	}
 	
-	getMainSectionList(){
-		let mainSectionUrl='/section/get?token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem("projectid");;
+	getMainSectionList(filter = false){
+		let mainSectionUrl='/section/get?token='+localStorage.getItem('token')+
+		'&project_id='+localStorage.getItem("projectid")+'&filter='+filter;
 	   return this.http.get(this.apiURL+mainSectionUrl);
 	}
 
@@ -349,7 +350,7 @@ export class CoreService {
 	gettotals(project_items_id , main_section_id)
 	{
 		let total ="/total/get?db="+this.db+"&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid')
-		+'&project_items_id='+project_items_id+'&main_section_id'+main_section_id;
+		+'&project_items_id='+project_items_id+'&main_section_id='+main_section_id;
 		return this.http.get(this.apiURL+total);
 	}
 
@@ -373,6 +374,7 @@ export class CoreService {
 	{
 	   let approve = "/approved_qty/get?db=nqproject&token="+localStorage.getItem('token')+"&project_id="+projectid+
 	   "&from_date="+fromdate+"&to="+todate;
+	   console.log(approve);
 	   return this.http.get(this.apiURL+approve );
 
 	}
@@ -603,5 +605,10 @@ export class CoreService {
 	  '}';	 
 	  return this.http.post(this.apiURL+countQtydd ,null);
 	}
+
+
+
+
+
 }
 
