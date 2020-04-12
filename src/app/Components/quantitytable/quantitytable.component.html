@@ -69,6 +69,7 @@
                      <th></th>
                   <th>{{'Project Items'|translate}}</th>
                   <th>{{'Type Of Works'|translate}}</th>
+                  <th>{{'Description'|translate}}</th>
                   <th>{{'Item Number'|translate}}</th>
                   <th >{{'Item Name'|translate}}</th> 
                   <th>{{'Total Quantities Price'|translate}}</th>
@@ -80,7 +81,7 @@
                      itemsPerPage: 10,
                      currentPage: page,
                      totalItems: totalRec };">
-                     <tr>
+                     <tr [ngStyle]="{'background-color': (rowSelected==data.id ? '#C1C7C9' : 'white')}">
                                     
                         <!-- <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.first_subsection_name}}</span>
@@ -113,7 +114,10 @@
                         </td>
                         <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }" >
                            <span>{{data.main_section_name}}</span>
-                        </td>               
+                        </td>     
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }" >
+                           <span>{{data.description}}</span>
+                        </td>          
                         <td style="width:7%" [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.item_number}}</span>
                         </td>
@@ -161,16 +165,10 @@
                                           </td>
                                               
                                      </tr>
-                                     <tr>
-                                        <th>{{'Description'|translate}}</th>
-                                       <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                                       
-                                          <span>   {{data.description}} </span>
-                                    </td> 
-                                  </tr>
                                    </tbody>
                                </table>
                            </td>
+                           <td></td>
                        </tr>
                   </ng-container>
                 </tbody>
