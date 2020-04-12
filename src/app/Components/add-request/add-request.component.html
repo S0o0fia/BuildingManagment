@@ -72,7 +72,7 @@
                      <mat-label>{{'Items'|translate}}</mat-label>
                      <div class="gene-card-content">
                       
-                <div fxLayout="column">
+                <!-- <div fxLayout="column">
                
                     
                      <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" fxFlex.gt-md="50" style="margin-left:5%;" fxLayoutAlign="center">
@@ -96,7 +96,7 @@
                            </mat-form-field>
                        </div>
 
-                   </div>
+                   </div> -->
                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
 
                      
@@ -119,11 +119,12 @@
                           matInput
                           [formControl]="myControl"
                           [matAutocomplete]="auto"
+                          [(ngModel)]="item_number"
                         />
                      
                         <mat-autocomplete #auto="matAutocomplete">
-                          <mat-option *ngFor="let option of (filteredNumbers | async)" [value]="option">
-                            {{ option }}
+                          <mat-option *ngFor="let option of (filteredNumbers | async)" [value]="option.item_number" (click)="BindItemname(option.item_name , option.id)">
+                            {{ option.item_number }}
                           </mat-option>
                         </mat-autocomplete>
                   </mat-form-field>
@@ -166,11 +167,12 @@
                           matInput
                           [formControl]="myControl1"
                           [matAutocomplete]="auto1"
+                          [(ngModel)]="item_name"
                         />
                      
                         <mat-autocomplete #auto1="matAutocomplete">
-                          <mat-option *ngFor="let option of (filteredNames | async)" [value]="option">
-                            {{ option }}
+                          <mat-option *ngFor="let option of (filteredNames | async)" [value]="option.item_name" (click)="BindItemnumber(option.item_number , option.id )">
+                            {{ option.item_name }}
                           </mat-option>
                         </mat-autocomplete>
                      </mat-form-field>

@@ -81,8 +81,8 @@ base64string:any;
   filteredNumbers: Observable<string[]>;
   filteredNames: Observable<string[]>;
 
-  itemName: string[]=[];
-  itemNumber: string[]=[];
+  itemName: any[]=[];
+  itemNumber: any[]=[];
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -296,18 +296,18 @@ base64string:any;
     const filterValue = value.toLowerCase();
     this.quantitys.forEach(element=>
       {
-       this.itemNumber.push(element.item_number);
+       this.itemNumber.push({"id":element.id,"item_number":element.item_number,"item_name":element.item_name});
       });
-    return this.itemNumber.filter(option => option.toLowerCase().includes(filterValue));
+    return this.itemNumber.filter(option => option.item_number.toLowerCase().includes(filterValue));
   }
   
   private _filter1(value: string): string[] {
     const filterValue = value.toLowerCase();
     this.quantitys.forEach(element=>
       {
-       this.itemName.push(element.item_name);
+       this.itemName.push({"id":element.id,"item_name":element.item_name,"item_number":element.item_number});
       });
-    return this.itemName.filter(option => option.toLowerCase().includes(filterValue));
+    return this.itemName.filter(option => option.item_name.toLowerCase().includes(filterValue));
   }
 
   ngOnInit() {  
