@@ -104,7 +104,7 @@
                   <mat-form-field class="full-wid mrgn-b-lg ">
                        
                      <mat-label>{{'Item Number'|translate}}</mat-label>
-                     <mat-select name="item_number" [(ngModel)]="item_number">
+                     <!-- <mat-select name="item_number" [(ngModel)]="item_number">
                       <div *ngFor="let data of quantitys">
                        <div *ngIf="data.main_section_id == typename">  
                         <mat-option  value={{data.item_number}} (click)="BindItemname(data.item_name , data.id)">
@@ -112,22 +112,46 @@
                        </mat-option>
                      </div>
                      </div>
-                     </mat-select>   
-                     <!-- <mat-autocomplete #auto="matAutocomplete">
-                        <mat-optgroup *ngFor="data of quantitys | async" [label]="data.item_name">
-                          <mat-option *ngFor="let option of data.options" [value]="option">
-                            {{option.item_name}}
+                     </mat-select>    -->
+                     <input
+                          type="text"
+                          placeholder="Pick one"
+                          matInput
+                          [formControl]="myControl"
+                          [matAutocomplete]="auto"
+                        />
+                     
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let option of (filteredNumbers | async)" [value]="option">
+                            {{ option }}
                           </mat-option>
-                        </mat-optgroup>
-                      </mat-autocomplete> -->
+                        </mat-autocomplete>
                   </mat-form-field>
                   </div>
+
+                  <!-- <div fxFlex.gt-sm="45" fxFlex.gt-xs="100" fxFlex="45" fxFlex.gt-md="45">
+                     <mat-form-field>
+                        <input
+                          type="text"
+                          placeholder="Pick one"
+                          matInput
+                          [formControl]="myControl"
+                          [matAutocomplete]="auto"
+                        />
+                     
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let option of (filteredOptions | async)" [value]="option">
+                            {{ option }}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                  </div> -->
 
                   <div fxFlex.gt-sm="45" fxFlex.gt-xs="100" fxFlex="45" fxFlex.gt-md="45" style="margin-right: 2%;">
                      <mat-form-field class="full-wid mrgn-b-lg ">
                           
                         <mat-label>{{'Item Name'|translate}}</mat-label>
-                        <mat-select name="item_name" [(ngModel)]="item_name">
+                        <!-- <mat-select name="item_name" [(ngModel)]="item_name">
                               <div *ngFor="let data of quantitys">
                                     <div *ngIf="data.main_section_id == typename">  
                                      <mat-option  value={{data.item_name}} (click)="BindItemnumber(data.item_number , data.id )">
@@ -135,7 +159,20 @@
                                   </mat-option>
                     </div>
                     </div>
-                     </mat-select>   
+                     </mat-select>    -->
+                     <input
+                          type="text"
+                          placeholder="Pick one"
+                          matInput
+                          [formControl]="myControl1"
+                          [matAutocomplete]="auto1"
+                        />
+                     
+                        <mat-autocomplete #auto1="matAutocomplete">
+                          <mat-option *ngFor="let option of (filteredNames | async)" [value]="option">
+                            {{ option }}
+                          </mat-option>
+                        </mat-autocomplete>
                      </mat-form-field>
                   </div>
                      

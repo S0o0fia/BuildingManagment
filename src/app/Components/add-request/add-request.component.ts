@@ -8,9 +8,12 @@ import { NewItemRFI } from 'app/Models/Items/new-item-rfi';
 import { CoreService } from 'app/Service/core/core.service';
 import { formatDate } from '@angular/common';
 import { InspctionId } from 'app/Models/inspction_id/inspction-id';
+import {map, startWith} from 'rxjs/operators';
 import { FileUploader , FileSelectDirective } from 'ng2-file-upload';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'app/Service/custompipe/format-datepicker';
 import { AnimationQueryOptions } from '@angular/animations';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 const URL = 'http://nqraait.ddns.net:8070/api/test?db=nqproject&token='+localStorage.getItem('token');
 @Component({
   selector: 'ms-add-request',
@@ -71,6 +74,15 @@ base64string:any;
   image: any;
   imageSrc: any;
   filename: any;
+
+  myControl = new FormControl();
+  myControl1 = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredNumbers: Observable<string[]>;
+  filteredNames: Observable<string[]>;
+
+  itemName: string[]=[];
+  itemNumber: string[]=[];
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -280,10 +292,25 @@ base64string:any;
   onNoClick(): void {
     this.dialogRef.close();
   }
- 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    this.quantitys.forEach(element=>
+      {
+       this.itemNumber.push(element.item_number);
+      });
+    return this.itemNumber.filter(option => option.toLowerCase().includes(filterValue));
+  }
   
-  
-  ngOnInit() {
+  private _filter1(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    this.quantitys.forEach(element=>
+      {
+       this.itemName.push(element.item_name);
+      });
+    return this.itemName.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  ngOnInit() {  
 
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
@@ -301,7 +328,17 @@ base64string:any;
     //to get the item fro Qty-tble based on id of work type 
     this.services.getQty_tbl().subscribe(
       data=> {this.quantitys = data ;
-        
+        this.filteredNumbers = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+
+      this.filteredNames = this.myControl1.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter1(value))
+      );
       }, 
       err => console.log(err)
     );
