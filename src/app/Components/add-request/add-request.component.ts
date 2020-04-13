@@ -408,6 +408,7 @@ base64string:any;
                         let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
                         if(msg)
                         {
+                          this.onUpload();
                           location.reload();
                         }
                       },
