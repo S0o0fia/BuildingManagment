@@ -67,20 +67,20 @@ export class QuantitytableComponent implements OnInit {
     if(value.checked){
       this.Qty_tbl=this.Qty_tbls.filter(x=>x.excuted > x.item_qty);
       this.Qty_tbl.forEach(element => {
-        element.item_qty = this.formatPipe.transform(element.item_qty);
-        element.price_unit = this.formatPipe.transform(element.price_unit);
-        element.price_total = this.formatPipe.transform(element.price_total);
-        element.excuted = this.formatPipe.transform(element.excuted);
-        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+        element.item_qty = this.transformAmount(element.item_qty);
+        element.price_unit = this.transformAmount(element.price_unit);
+        element.price_total = this.transformAmount(element.price_total);
+        element.excuted = this.transformAmount(element.excuted);
+        element.total_excuted = this.transformAmount(element.total_excuted);   
       }); 
     }else{
       this.Qty_tbl=this.Qty_tbls;
       this.Qty_tbl.forEach(element => {
-        element.item_qty = this.formatPipe.transform(element.item_qty);
-        element.price_unit = this.formatPipe.transform(element.price_unit);
-        element.price_total = this.formatPipe.transform(element.price_total);
-        element.excuted = this.formatPipe.transform(element.excuted);
-        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+        element.item_qty = this.transformAmount(element.item_qty);
+        element.price_unit = this.transformAmount(element.price_unit);
+        element.price_total = this.transformAmount(element.price_total);
+        element.excuted = this.transformAmount(element.excuted);
+        element.total_excuted = this.transformAmount(element.total_excuted);   
       }); 
     }
     
@@ -104,7 +104,7 @@ export class QuantitytableComponent implements OnInit {
 }
   bindItemType(name,type)
   {
-    alert(this.item_type);
+    debugger;
 
     if(name == 'all')
     {
@@ -116,9 +116,9 @@ export class QuantitytableComponent implements OnInit {
                  this.totaldis = this.total_budget - this.dis;
                  this.total_budget_vat = ((this.total_budget)+(this.total_budget*0.05));
   
-                 this.total_budget = this.formatPipe.transform(this.total_budget);
-                 this.totaldis = this.formatPipe.transform(this.totaldis);
-                 this.total_budget_vat = this.formatPipe.transform(this.total_budget_vat);
+                 this.total_budget = this.transformAmount(this.total_budget);
+                 this.totaldis = this.transformAmount(this.totaldis);
+                 this.total_budget_vat = this.transformAmount(this.total_budget_vat);
        }, 
         err=>console.log(err)
       )
@@ -135,9 +135,9 @@ export class QuantitytableComponent implements OnInit {
                  this.totaldis = this.total_budget - this.dis;
                  this.total_budget_vat = ((this.total_budget)+(this.total_budget*0.05));
   
-                 this.total_budget = this.formatPipe.transform(this.total_budget);
-                 this.totaldis = this.formatPipe.transform(this.totaldis);
-                 this.total_budget_vat = this.formatPipe.transform(this.total_budget_vat);
+                 this.total_budget = this.transformAmount(this.total_budget);
+                 this.totaldis = this.transformAmount(this.totaldis);
+                 this.total_budget_vat = this.transformAmount(this.total_budget_vat);
        }, 
         err=>console.log(err)
       )
@@ -148,41 +148,41 @@ export class QuantitytableComponent implements OnInit {
     if(this.item_type ==0 && this.proj_item ==0){
       this.Qty_tbl=this.Qty_tbls;
       this.Qty_tbl.forEach(element => {
-        element.item_qty = this.formatPipe.transform(element.item_qty);
-        element.price_unit = this.formatPipe.transform(element.price_unit);
-        element.price_total = this.formatPipe.transform(element.price_total);
-        element.excuted = this.formatPipe.transform(element.excuted);
-        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+        element.item_qty = this.transformAmount(element.item_qty);
+        element.price_unit = this.transformAmount(element.price_unit);
+        element.price_total = this.transformAmount(element.price_total);
+        element.excuted = this.transformAmount(element.excuted);
+        element.total_excuted = this.transformAmount(element.total_excuted);   
       }); 
     }
     if(this.item_type !=0 && this.proj_item !=0){
       this.Qty_tbl=this.Qty_tbls.filter(x=>x.first_subsection_id== this.proj_item && x.main_section_id== this.item_type);
       this.Qty_tbl.forEach(element => {
-        element.item_qty = this.formatPipe.transform(element.item_qty);
-        element.price_unit = this.formatPipe.transform(element.price_unit);
-        element.price_total = this.formatPipe.transform(element.price_total);
-        element.excuted = this.formatPipe.transform(element.excuted);
-        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+        element.item_qty = this.transformAmount(element.item_qty);
+        element.price_unit = this.transformAmount(element.price_unit);
+        element.price_total = this.transformAmount(element.price_total);
+        element.excuted = this.transformAmount(element.excuted);
+        element.total_excuted = this.transformAmount(element.total_excuted);   
       }); 
     }
     if(this.proj_item !=0 && this.item_type ==0){
       this.Qty_tbl=this.Qty_tbls.filter(x=>x.first_subsection_id== this.proj_item);
       this.Qty_tbl.forEach(element => {
-        element.item_qty = this.formatPipe.transform(element.item_qty);
-        element.price_unit = this.formatPipe.transform(element.price_unit);
-        element.price_total = this.formatPipe.transform(element.price_total);
-        element.excuted = this.formatPipe.transform(element.excuted);
-        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+        element.item_qty = this.transformAmount(element.item_qty);
+        element.price_unit = this.transformAmount(element.price_unit);
+        element.price_total = this.transformAmount(element.price_total);
+        element.excuted = this.transformAmount(element.excuted);
+        element.total_excuted = this.transformAmount(element.total_excuted);   
       }); 
     }
     if(this.item_type !=0 && this.proj_item ==0){
       this.Qty_tbl=this.Qty_tbls.filter(x=>x.main_section_id== this.item_type);
       this.Qty_tbl.forEach(element => {
-        element.item_qty = this.formatPipe.transform(element.item_qty);
-        element.price_unit = this.formatPipe.transform(element.price_unit);
-        element.price_total = this.formatPipe.transform(element.price_total);
-        element.excuted = this.formatPipe.transform(element.excuted);
-        element.total_excuted = this.formatPipe.transform(element.total_excuted);   
+        element.item_qty = this.transformAmount(element.item_qty);
+        element.price_unit = this.transformAmount(element.price_unit);
+        element.price_total = this.transformAmount(element.price_total);
+        element.excuted = this.transformAmount(element.excuted);
+        element.total_excuted = this.transformAmount(element.total_excuted);   
       }); 
     }
         
