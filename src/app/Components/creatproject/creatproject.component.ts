@@ -44,6 +44,7 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
 
 // this.markers.push({ latitude: lat, longitude: lng });}
   model: NgbDateStruct;
+  model2 : NgbDateStruct;
   selectedIndex: number = 0;
   ProjectList   : any;
   newProject : NewProject;
@@ -87,26 +88,25 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
   with_vat : boolean = false;
   containfirst : boolean = false;
   today = this.calendar.getToday();
-
+  today2 = this.calendar2.getToday();
     formattedAmount: string = '';
-     /**
-      *fileOverBase fires during 'over' and 'out' events for Drop Area.
-      */
-     fileOverBase(e: any): void {
-      this.hasBaseDropZoneOver = e;
-  }
-
-  /**
-    *fileOverAnother fires after a file has been dropped on a Drop Area.
-    */
-  fileOverAnother(e: any): void {
-      this.hasAnotherDropZoneOver = e;
-  }
+    base64 : any ;
+    filename :string ;
+    files : FileList;
+  
+    onSelectFiles(evt) {
+  
+    this.files = evt.target.files;
+   
+   
+     }
+   
+    
 
   constructor( private pageTitleService: PageTitleService, private formatPipe: NumberFormatPipe,
                private _snackBar: MatSnackBar ,
                private translate : TranslateService , public service : CoreService ,
-               private calendar: NgbCalendar ,
+               private calendar: NgbCalendar ,     private calendar2: NgbCalendar ,
                  public fb: FormBuilder , private dialog: MatDialog,private currencyPipe:CurrencyPipe) {
                  super();
                   this.minDate = new Date(1900,1,1);
@@ -193,20 +193,23 @@ caldurationm(value)
    let Month = this.startdate.getMonth();
    let Year = this.startdate.getFullYear();
 
- 
-
-
-  
-   
-    
+   let daysh = this.model.day;
+   let Monthh = this.model.month;
+   let Yearh = this.model.year
    if(this.duration == 2){
-    this.project_duration_days = Math.round(value*29.5);
-    Month += Math.round(this.project_duration_days/30.4);
-    days += Math.round(this.project_duration_days%30.4);
+     
+    this.project_duration_days = Math.round(value*29.5)-1;
+    Monthh += Math.round(this.project_duration_days/29.5);
+    daysh += Math.round(this.project_duration_days%29.5);
+ 
+    Month = Month+Math.round(this.project_duration_days/29.5);
+    days = days+Math.round(this.project_duration_days%29.5);
+
     this.deliverdate = new Date(Year , Month , days);
-
-   }
-
+    this.model2 = {day : daysh , month : Monthh , year : Yearh};
+  
+    
+  }
     
    if(this.duration == 3){
     
@@ -237,15 +240,22 @@ caldurationd(value)
    let days = this.startdate.getDay();
    let Month = this.startdate.getMonth();
    let Year = this.startdate.getFullYear();
-  
+    let formattedDate ;
    
-   days += Math.round( value %30.4 );    
-   Month += Math.round(value/30.4);
+   days = days+Math.round( value %30.4 )-3;    
+   Month = Month+Math.round(value/30.4)-1;
 
-   this.deliverdate = new Date(Year , Month , days);
-  this.project_duration_h_months =  Math.round(value/29.5);
+  this.deliverdate = new Date();
+
+  this.deliverdate.setMonth(this.startdate.getMonth()+ Math.round(value/30.4));
+  this.deliverdate = new Date(this.deliverdate.toISOString().slice(0,10));
+
+
+  this.model2.day =  Math.round(value%29.5);
+  this.model2.month =  Math.round(value/29.5);
+ 
   this.project_duration_months = Math.round(value/30.4);
-  
+  this.project_duration_h_months = Math.round(value/29.5);
 
 }
   nextStep() {
@@ -324,7 +334,24 @@ caldurationd(value)
    debugger;
      console.log(this.newProject);
       this.service.createProject(this.newProject).subscribe(
-         (data)=>{ console.log(data) ; 
+         (data)=>{ 
+           console.log(data) ; 
+           for (let index = 0; index < this.files.length; index++) {
+         
+            let me =this;
+            let reader = new FileReader();
+            reader.readAsDataURL(this.files[index]);
+            reader.onload = function () {
+             me.service.UploadFile2(me.files[index].name , reader.result.toString() , data['project_is']).subscribe(
+               data=> console.log(data) ,
+               err=>console.log(err) )
+             }
+               reader.onerror = function (error) {
+              console.log('Error: ', error);
+            };
+          
+            
+          } 
          
           this.selectedIndex +=1;
         } ,

@@ -39,11 +39,13 @@ export class CountitemdetailsComponent implements OnInit {
   users: any=[];
   user_id: number;
   dimension:number;
-  uom: any;
-  approved_length: any;
-  approved_width: any;
-  approved_height: any;
-  approved_pers: any;
+  uom: string = "";
+  approved_length: number = 0;
+  approved_width: number = 0;
+  approved_height: number = 0;
+  approved_pers: number = 0;
+  approve : number = 0;
+  items : any []=[];
  
   
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
@@ -99,7 +101,7 @@ export class CountitemdetailsComponent implements OnInit {
    this.service.getCount().subscribe(
     data => {
    
-    
+      
       data.forEach(element => {
            if(element.id == this.id)
           {this.count.push(element);
@@ -122,15 +124,16 @@ export class CountitemdetailsComponent implements OnInit {
     },
      err=>console.log(err)
    );
-   debugger;
-   //Get The RFI's Items based in Rfi id 
+  
+
    this.service.getCountItem( this.id).subscribe(
      data =>
      {
+
       console.log(data);
        data.forEach(element => {
        
-             console.log(element);
+            
              this.Items.push(element);
            
           
@@ -144,23 +147,29 @@ export class CountitemdetailsComponent implements OnInit {
 
  ApproveConsultant()
  {
-     this.service.setCountState("accepted" , this.id).subscribe(
-       data=> {
-        this.Items.forEach(element => {
-          this.service.approveCountQty(element.id, element.approved_qty, this.uom, this.approved_length, this.approved_width, this.approved_height, this.approved_pers).subscribe(
-            data=>{
-              this.openSnackBar("تم اعتماد حاسب الكميات المختص ","إغلاق"); 
-              location.reload();
-            }, 
-            err=> console.log(err)
     
+
+     this.items.forEach(element => {
+      this.service.approveCountQty(element.id, element.approved_qty, this.uom, 
+        element.approved_length, element.approved_width, element.approved_height, element.approved_pers ,
+         element.approved_unit).subscribe(
+        data=>{
+          this.openSnackBar("تم اعتماد حاسب الكميات المختص ","إغلاق"); 
+          this.service.setCountState("accepted" , this.id).subscribe(
+            data=> {
+            
+             console.log(data)
+               // location.reload();
+           } ,
+            err=> console.log(err)
           )
-          
-        });
-        console.log(data)
-      } ,
-       err=> console.log(err)
-     )
+       
+        }, 
+        err=> console.log(err)
+
+      )
+      
+    });
  }
 
  ApproveDraft()
@@ -168,7 +177,7 @@ export class CountitemdetailsComponent implements OnInit {
   this.service.setCountState("waiting" , this.id).subscribe(
     data=> {
       this.openSnackBar("تم اعتماد المسودة","إغلاق");
-      location.reload();
+     // location.reload();
       console.log(data) },
     err=> console.log(err)
   )
@@ -210,5 +219,31 @@ export class CountitemdetailsComponent implements OnInit {
   Typeids ( val )
   {
     this.user_id = val;
+  }
+
+
+  calQty(i)
+  {
+    
+    console.log(this.dimension);
+    i.approved_qty=0;
+    if(this.dimension ==1 ){
+      i.approved_qty = (i.approved_length*i.approved_unit)*i.approved_pers/100;
+     
+    }
+    else if(this.dimension== 2){
+      i.approved_qty = (i.approved_length*i.approved_width*i.approved_unit)*i.approved_pers/100;
+    
+
+    }
+    else{
+      i.approved_qty = (i.approved_height*i.approved_length*i.approved_width*i.approved_unit)*i.approved_pers/100;
+    }
+
+     this.items.push(i);
+    
+    
+    
+    //this.calpercentage(i);
   }
 }

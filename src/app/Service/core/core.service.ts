@@ -21,6 +21,7 @@ import { Count } from 'app/Models/Count/count';
 import { Countitem } from 'app/Models/Count/countitem';
 import { Extractitem } from 'app/Models/Extract/extractitem';
 import { InvoiceDiscount } from 'app/Models/Extract/invoice-discount';
+import { User } from 'app/Models/User/user';
 @Injectable({
 	providedIn: 'root'
 })
@@ -77,6 +78,17 @@ export class CoreService {
 		return this.http.get(this.apiURL+userUrl);
 	}
 
+	createUser (value : User)
+	{
+		let userUrl2='/users/create?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
+		'"name":"'+value.name+
+		'","password":"'+value.password+
+		'","login":"'+value.login+
+		'","user_job":"'+value.user_job+'"}';
+        console.log(userUrl2);
+		return this.http.post(this.apiURL+userUrl2 , null);
+	}
+
 	createProject (value:NewProject)
 	{
 		let projecturl = "/api_test/api_test?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"name":"'+
@@ -119,7 +131,7 @@ export class CoreService {
 	getQty_tbl()
 	{
 		let QtyUrl= "/table-qty/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("projectid");
-		return this.http.get(this.apiURL+QtyUrl);
+		return this.http.get<any[]>(this.apiURL+QtyUrl);
 	}
 	getType_forRFI ()
 	{
@@ -424,6 +436,8 @@ export class CoreService {
 	   ',"project_id":'+values.project_id+
 	   '}';
 
+	   console.log(extracturl);
+
 	   return this.http.post(this.apiURL+extracturl , null);
 
 
@@ -473,15 +487,35 @@ export class CoreService {
 		// let url= "/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values='+
 		// '{"project_id":'+localStorage.getItem('projectid')+
 		// ',"name":"filename"}';
-	  debugger;
+
 		let url="/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
 	  '"name":"'+filename+
 	  '","base64":"'+base64+
 	  '","project_id":'+localStorage.getItem('projectid')+
 	  ',"rfi_id":'+rfi_id+'}';
 
-		return this.http.post(this.apiURL+url, null)
-		;
+	  return this.http.post(this.apiURL+url, null);
+	
+	}
+
+
+	
+	UploadFile2(filename: string, base64: string, project_id: number)
+	{  
+		// let headers = new HttpHeaders({ 'Content-Type': '"multipart/form-data;'});
+		// const formData: FormData = new FormData();
+		// formData.append('fileKey', fd, fd.name);
+		// let url= "/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values='+
+		// '{"project_id":'+localStorage.getItem('projectid')+
+		// ',"name":"filename"}';
+
+		let url="/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
+	  '"name":"'+filename+
+	  '","base64":"'+base64+
+	  '","project_id":'+project_id+
+	   '}';
+      console.log(url);
+	  return this.http.post(this.apiURL+url, null);
 	
 	}
 
@@ -592,18 +626,20 @@ export class CoreService {
 		return this.http.post(this.apiURL+counturl ,null);
 	}
 
-	approveCountQty(id : number, approve : number, uom: any, app_len: any, app_wid: any, app_hei: any, app_per: any)
+	approveCountQty(id : number, approve : number, uom: string, app_len: number,
+		 app_wid: number = 0, app_hei: number = 0, app_per: number , approved_unit : number)
 	{
-		debugger;
+	
       let countQtydd = '/count/items/approved_qty?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
-	  '"approved_qty":"'+approve+
-	  '", "id":'+id +
-	  '", "approved_unit":'+uom +
-	  '", "approved_length":'+app_len +
-	  '", "approved_width":'+app_wid +
-	  '", "approved_height":'+app_hei +
-	  '", "approved_pers":'+app_per +
+	  '"approved_qty":'+approve+
+	  ' , "id":'+id +
+	  ' , "approved_length":'+app_len +
+	  ' , "approved_unit":'+approved_unit+
+	  ' , "approved_width":'+app_wid +
+	  ' , "approved_height":'+app_hei +
+	  ', "approved_pers":'+app_per +
 	  '}';	 
+      console.log(countQtydd);
 	  return this.http.post(this.apiURL+countQtydd ,null);
 	}
 

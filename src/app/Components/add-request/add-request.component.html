@@ -29,7 +29,7 @@
                                    <mat-label>{{'Specify Works'|translate}}</mat-label>
                                    <mat-select name="typename" [(ngModel)]="typename">
                                       <div *ngFor="let type of types">
-                                         <mat-option  (click)="request(type.sequence , type.id)" value={{type.id}} >
+                                         <mat-option  (click)="request(type.sequence , type.type)" value={{type.id}} >
                                             {{type.type}}
                                          </mat-option>
                                       </div>
@@ -57,17 +57,23 @@
                            <mat-datepicker #insepctiondate></mat-datepicker>                         
                         </mat-form-field>
                     </div>
+                    
+                    
+                    <mat-card  class="full-wid mrgn-b-lg ">
+                     <mat-label class="title">{{'Attachments'|translate}}</mat-label>
+                     <div class="gene-card-content">
                        <!--Attachment-->
-                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100"
-                    fxLayoutAlign="center"
+                    <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49"
+                    fxLayoutAlign="space-between start" style="margin-bottom: 2%;"
                     >
+                   
                      <input type="file" mat-input
-                     id="file" ng2FileSelect
+                     id="file" 
                      (change)="onSelectFiles($event)">
-                     <button mat-raised-button color="accent"><!-- (click)="onUpload()"  -->  {{'Upload'|translate}}
-                        <mat-icon>cloud_upload</mat-icon> 
-                     </button>
+                    
                     </div>
+                     </div>
+                    </mat-card>
 
                  </div>
 
@@ -101,7 +107,7 @@
                        </div>
 
                    </div> -->
-                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center"  fxLayout.xs="column">
 
                      
                  <div fxFlex.gt-sm="45" fxFlex.gt-xs="100" fxFlex="45" fxFlex.gt-md="45">
@@ -119,7 +125,7 @@
                      </mat-select>    -->
                      <input
                           type="text"
-                          placeholder="Pick one"
+                          placeholder="{{'Pick one'|translate}}"
                           matInput
                           [formControl]="myControl"
                           [matAutocomplete]="auto"
@@ -167,7 +173,7 @@
                      </mat-select>    -->
                      <input
                           type="text"
-                          placeholder="Pick one"
+                          placeholder="{{'Pick one'|translate}}"
                           matInput
                           [formControl]="myControl1"
                           [matAutocomplete]="auto1"
@@ -205,7 +211,7 @@
                         <div class="gene-card-content">
              
                    <div fxLayout="column">
-                     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                     <div fxLayout="row wrap" fxLayoutAlign="space-between center"  fxLayout.xs="column">
                      <div fxFlex.gt-sm="32" fxFlex.gt-xs="100" fxFlex="32" fxFlex.gt-md="32" style=" margin-top:0.5%;">
                         <mat-form-field class="full-wid mrgn-b-lg ">
                              

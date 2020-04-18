@@ -40,7 +40,7 @@
                            
                            <td style="padding-bottom:1%;;">{{'Item Name'|translate}}</td>
 
-                           <td style="padding-bottom:1%;;">{{'Unit of Measure'}}</td>
+                           <td style="padding-bottom:1%;;">{{'Unit of Measure'|translate}}</td>
                           
                         </tr>
                      </thead>
@@ -125,12 +125,18 @@
                         <td style="text-align: center;" *ngIf="dimension>2">{{item.qty_height}}</td>
                         <td style="text-align: center;">{{item.qty_pers}}</td>
                         <td style="text-align: center;">{{item.qty}}</td>
-                        <td class="sm-wid" style="text-align: center;"><input matInput name="approved_number" [value]="item.qty_unit" placeholder="{{'Enter'|translate}}"/></td>
-                        <td class="sm-wid"  style="text-align: center;"><input matInput name="approved_length" [value]="item.approved_length" placeholder="{{'Enter'|translate}}" [(ngModel)]="approved_length"/></td>
-                        <td class="sm-wid" style="text-align: center;" *ngIf="dimension>1"><input matInput name="approved_width" placeholder="{{'Enter'|translate}}" [value]="item.approved_width" [(ngModel)]="approved_width" placeholder="{{'Enter'|translate}}"/></td>
-                        <td class="sm-wid" style="text-align: center;" *ngIf="dimension>2"><input matInput name="approved_height" [value]="item.approved_height" [(ngModel)]="approved_height"/></td>
-                        <td class="sm-wid" style="text-align: center;"><input matInput name="approved_percentage" [value]="item.qty_pers" [(ngModel)]="approved_pers" placeholder="{{'Enter'|translate}}"/></td>
-                        <td class="sm-wid" style="text-align: center;"><input matInput name="approve" [value]="item.approved_qty" placeholder="{{'Enter'|translate}}" /></td>
+                        <!--Number-->
+                        <td class="sm-wid"  style="text-align: center;"><input (change)="calQty(item)"   matInput name="approved_unit" [value]="item.approved_unit" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.approved_unit"/></td>
+                      <!--Length-->
+                      <td class="sm-wid"  style="text-align: center;"><input (change)="calQty(item)"   matInput name="approved_length" [value]="item.approved_length" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.approved_length"/></td>
+                        <!--Width-->
+                        <td class="sm-wid" style="text-align: center;" *ngIf="dimension>1"><input (change)="calQty(item)"   matInput name="approved_width" placeholder="{{'Enter'|translate}}" [value]="item.approved_width" [(ngModel)]="item.approved_width" placeholder="{{'Enter'|translate}}"/></td>
+                       <!--Height-->
+                        <td class="sm-wid" style="text-align: center;" *ngIf="dimension>2"><input (change)="calQty(item)"   matInput name="approved_height" [value]="item.approved_height" [(ngModel)]="item.approved_height"/></td>
+                       <!--Approve Precentage-->
+                        <td class="sm-wid" style="text-align: center;"><input matInput  (change)="calQty(item)"  name="approved_percentage" [value]="item.qty_pers" [(ngModel)]="item.approved_pers" placeholder="{{'Enter'|translate}}"/></td>
+                        <!--Approve Quantity -->
+                        <td class="sm-wid" style="text-align: center;"><input matInput  (change)="calQty(item)"  name="approved_qty" [value]="item.approved_qty" placeholder="{{'Enter'|translate}}"  [(ngModel)]="item.approved_qty" disabled/></td>
                        
                     </tr>
                  </tbody>

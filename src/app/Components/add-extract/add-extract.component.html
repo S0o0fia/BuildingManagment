@@ -24,9 +24,9 @@
                            <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49" style="margin-right: 3%;">
                               <mat-form-field class="full-wid mrgn-b-lg">
                                   <mat-label>{{'Extract Type'|translate}}</mat-label>   
-                                 <mat-select name="invoice_type" [(ngModel)]="invoice_type">
-                                    <mat-option value="current">{{'Current'|translate}} </mat-option>
-                                    <mat-option value="final">{{'Final'|translate}}</mat-option>
+                                 <mat-select name="invoice_type" >
+                                    <mat-option value="current" (click)="type('current')">{{'Current'|translate}} </mat-option>
+                                    <mat-option value="final" (click)="type('final')">{{'Final'|translate}}</mat-option>
                                </mat-select>
                               </mat-form-field>
                             </div>
@@ -43,7 +43,7 @@
                                     <input matInput 
                                     name="from_extract_date"  [(ngModel)]="from_extract_date"
                                     [min]="minDate" [max]="maxDate" [matDatepicker]="picker1"
-                                     placeholder="{{'From'|translate}}" disabled>
+                                     placeholder="{{'From'|translate}}" >
                                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                     <mat-datepicker #picker1></mat-datepicker>  
                             </mat-form-field>
@@ -173,20 +173,20 @@
                                  <th class="text-center">{{'To Duration'|translate}}</th>
                               </tr>
                            </thead>
-                           <tbody>
-                              <tr *ngFor="let item of approved ; let i = index;">
+                           <tbody *ngFor="let data of approved">
+                              <tr *ngFor="let item of data.details">
                                  <td style="text-align: center;">
-                                    <mat-checkbox (change)="getCountItem($event , item.item_number ,item.count_id)"></mat-checkbox>
+                                  <mat-checkbox (change)="getCountItem($event , data.item_number ,item.request_name)"></mat-checkbox>
                                  </td>
                                  <td style="text-align: center;">
-                                  {{item.count_id}}
+                                  {{item.request_name}}
                                  </td>
                                  <td style="text-align: center;">
-                                    {{item.count_from}}
+                                    {{item.date_from}}
                                    </td>
                                 
                                    <td style="text-align: center;">
-                                    {{item.count_to}}
+                                    {{item.date_to}}
                                    </td>
                                   
                                 
@@ -256,7 +256,7 @@
                                           </div>
                                            <div>
                                           <span style="text-align: center; margin: 7%;">
-                                           {{ item.p_approved_qty  - item.approved_qty }}
+                                           {{ item.p_approved_qty }}
                                           </span>
                                           
                                            <span  style="text-align: center; margin: 7%;">
@@ -264,7 +264,7 @@
                                           </span>
                                           
                                            <span  style="text-align: center; margin: 7%;">
-                                           {{item.p_approved_qty}}
+                                           {{item.p_approved_qty+item.approved_qty}}
                                           </span>
                                         
                                        </div>
@@ -287,12 +287,12 @@
                                            </div>
                                            <div>
                                               
-                                           <span style="text-align: center ; margin: 7%;">{{item.price * (item.p_approved_qty  - item.approved_qty)}}</span>
+                                           <span style="text-align: center ; margin: 7%;">{{item.price * item.p_approved_qty }}</span>
                                            
                                            <span style="text-align: center; margin: 7%;">{{item.price * item.approved_qty}}</span> 
                                           
                                            <span style="text-align: center; margin: 7%;">
-                                           {{item.price * item.approved_qty + item.price * (item.p_approved_qty  - item.approved_qty)}}
+                                                {{item.price * item.approved_qty + item.price * item.p_approved_qty}}
                                           </span>
                                            </div>
                                           </td>

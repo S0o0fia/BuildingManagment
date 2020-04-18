@@ -46,6 +46,7 @@ export class CollectTableComponent implements OnInit {
   editRowIndex: number = -1;
   approves : any = [];
   request_number : number;
+  
   constructor(public dialogRef: MatDialogRef<CountdetailsComponent> ,
     public service : CoreService , public router : Router) 
   {
@@ -227,16 +228,16 @@ export class CollectTableComponent implements OnInit {
   } 
   calQty(i)
   {
-    debugger;
-    i.qty=0;
+   
+    i.approved_qty=0;
     if(this.dimension==1){
-      i.qty = (i.qty_length*i.Number)*i.percentage/100;
+      i.approved_qty = (i.approved_length*i.Number)*i.percentage/100;
     }
     else if(this.dimension==2){
-      i.qty = (i.qty_length*i.qty_width*i.Number)*i.percentage/100;
+      i.approved_qty = (i.qty_length*i.qty_width*i.Number)*i.percentage/100;
     }
     else{
-      i.qty = (i.qty_height*i.qty_length*i.qty_width*i.Number)*i.percentage/100;
+      i.approved_qty = (i.qty_height*i.qty_length*i.qty_width*i.Number)*i.percentage/100;
     }
     
     //this.calpercentage(i);

@@ -27,6 +27,7 @@ import { CountdetailsComponent } from './Components/countdetails/countdetails.co
 import { CountitemdetailsComponent } from './Components/countitemdetails/countitemdetails.component';
 import { ExtractdetailsComponent } from './Components/extractdetails/extractdetails.component';
 import {  NgbCalendarIslamicUmalqura, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import { UserslistComponent } from './Components/userslist/userslist.component';
 
 
 
@@ -54,6 +55,10 @@ const appRoutes: Routes = [
             path:"attendece",
             component:AttendeceComponent
          } ,
+         {
+           path:"userlist" , 
+           component : UserslistComponent 
+         },
          {
             path : "approvedqty" , 
             component : ApproveQuantitiesComponent

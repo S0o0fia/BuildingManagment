@@ -54,6 +54,12 @@ const MENUITEMS = [
 
     },
     {
+      state:'userlist' , 
+      name : 'USERS LIST',
+      type : 'link' , 
+      icon : 'account_box'
+    },
+    {
       state: 'settings',
       name: 'Global Setting',
       type: 'sub',

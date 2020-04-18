@@ -1,0 +1,68 @@
+<mat-card dir="rtl">
+    <div class="gene-card-title">
+       <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="column" fxLayoutAlign="start center">
+             <h3 >{{projectname}} / {{'Add User'|translate}} </h3>
+          </div>
+          <span fxFlex></span>
+       </div>
+       <mat-divider></mat-divider>
+    </div>
+    <div class="gene-card-content">
+          <form #form="ngForm">
+                <div fxLayout="column">
+                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                     
+                      <!--username-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                             <mat-form-field class="full-wid mrgn-b-lg ">
+                             <input matInput name="username" [(ngModel)]="username" 
+                             placeholder="{{'username'|translate}}" type="text" required>    
+                          </mat-form-field> 
+                          
+                     </div>    
+                     
+                     <!--Password-->
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                        <input matInput name="password" [(ngModel)]="password" 
+                        placeholder="{{'Password'|translate}}" type="text" required>    
+                     </mat-form-field> 
+                     
+                </div>    
+                
+                
+                <!--Email-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                  <mat-form-field class="full-wid mrgn-b-lg ">
+                  <input matInput name="email" [(ngModel)]="email" 
+                  placeholder="{{'Email'|translate}}" type="email" required>    
+               </mat-form-field> 
+               
+          </div> 
+
+             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+              <mat-form-field class="full-wid mrgn-b-lg " >
+                   
+                 <mat-label class="title">{{'Job Title'|translate}}</mat-label>                
+              
+                 <mat-select  [(ngModel)]="userjob" name="userjob" [(value)]="userjob">
+                    <div *ngFor="let data of jobtitle">
+                      <mat-option (click)="choose(data)" value={{data}}>
+                        {{ data | translate }}
+                      </mat-option>
+                     </div>
+                 </mat-select>
+              </mat-form-field>
+              </div>
+ 
+                   </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                  <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}  <mat-icon>cancel</mat-icon></button>
+                  <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Submited'|translate }}  <mat-icon>done_outline</mat-icon></button>
+                  
+            </div>
+             </form>
+    </div>
+ </mat-card>

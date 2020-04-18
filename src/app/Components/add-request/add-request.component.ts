@@ -14,6 +14,7 @@ import { AppDateAdapter, APP_DATE_FORMATS } from 'app/Service/custompipe/format-
 import { AnimationQueryOptions } from '@angular/animations';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
+//import { threadId } from 'worker_threads';
 const URL = 'http://nqraait.ddns.net:8070/api/test?db=nqproject&token='+localStorage.getItem('token');
 @Component({
   selector: 'ms-add-request',
@@ -83,7 +84,9 @@ base64string:any;
 
   itemName: any[]=[];
   itemNumber: any[]=[];
-
+Project_list : any[] = [];
+multi : boolean = false ;
+ 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
 }
@@ -150,86 +153,23 @@ base64string:any;
 
   }
 
-  _handleReaderLoaded(e) {
-    debugger
-    let reader = e.target;
-    this.imageSrc = reader.result;
-    var base64Index = this.imageSrc.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
-    this.base64 = this.imageSrc.substring(base64Index);
-    console.log(this.imageSrc);
-    alert(this.base64);
-  }
-
   onSelectFiles(evt) {
-    debugger;
-  //   var file = evt.target.files[0];
-  //   var reader = new FileReader();
-  //   this.fileExtension = '.' + file.name.split('.').pop();
-   
-  //       reader.onloadend = (e) => {
-  //         this.image = reader.result;
-  //         var base64Index = this.image.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
-  //         this.base64 = this.image.substring(base64Index);
-  //       }
-  //       reader.readAsDataURL(file);
-  // };
-
-  var file = evt.dataTransfer ? evt.dataTransfer.files[0] : evt.target.files[0];
-  this.filename=file.name;
-    //var pattern = /image-*/;
-    var reader = new FileReader();
-    // if (!file.type.match(pattern)) {
-    //   alert("invalid format");
-    //   return;
-    // }
-    reader.onload = this._handleReaderLoaded.bind(this);
-    var str=reader.readAsDataURL(file);
+    let me = this;
+  let file = evt.target.files[0];
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function () {
+     me.base64 = reader.result;
+    console.log(reader.result);
+  };
+  reader.onerror = function (error) {
+    console.log('Error: ', error);
+  };
+     this.filename = evt.target.files[0].name;
   }
-  // changeListener($event) : void {
-  //   debugger;
-  //   this.readThis($event.target);
-  // }
+ 
   
-  // readThis(inputValue: any): void {
-  //   debugger;
-  //   var file:File = inputValue.files[0];
-  //   var myReader:FileReader = new FileReader();
-  
-  //   myReader.onloadend = (e) => {
-  //     this.base64 = myReader.result.toString();
-  //     //var base64Index = e.target.result.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
-  //     this.base64string = e.target;
-  //   }
-  //   this.base64 = myReader.readAsDataURL(file);
-  // }
-  
-  onFileSelected(event)
-  {
-    this.selectedfile =<File> event.target.files[0];
-  }
-  onUpload()
-  {
-     
-    var lastRFI= Number(localStorage.getItem("lastRFI"));
-     var rfi_id=lastRFI+1;
-     this.services.UploadFile(this.filename, this.base64, rfi_id).subscribe(
-       res=>console.log(res),
-       err=>console.log(err)
-     );
-  }
-     /**
-      *fileOverBase fires during 'over' and 'out' events for Drop Area.
-      */
-     fileOverBase(e: any): void {
-      this.hasBaseDropZoneOver = e;
-  }
-
-  /**
-    *fileOverAnother fires after a file has been dropped on a Drop Area.
-    */
-  fileOverAnother(e: any): void {
-      this.hasAnotherDropZoneOver = e;
-  }
+ 
   
   constructor(   public dialogRef: MatDialogRef<RequestForInspectionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Rfi,private _snackBar: MatSnackBar
@@ -278,10 +218,73 @@ base64string:any;
     }
 
     //this to get the request number from the from 
-    request(value)
+    request(value , type)
     {
       this.req_number = value;
-     
+
+      this.Project_list.forEach(element => {
+        if(element.project_type == "multi")
+        {
+           this.multi = true;
+        }
+        else 
+        {
+          this.multi = false;
+        }
+      });
+      
+      if(this.multi == true)
+      {
+           //to get the item fro Qty-tble based on id of work type 
+           this.services.getQty_tbl().subscribe(
+            data=> {
+
+              this.quantitys = [];
+              data.forEach(element => {
+
+                if(element.main_section_name  == type)
+                {
+                  this.quantitys.push(element)
+                }
+              });
+              this.filteredNumbers = this.myControl.valueChanges
+            .pipe(
+              startWith(''),
+              map(value => this._filter(value))
+            );
+      
+            this.filteredNames = this.myControl1.valueChanges
+            .pipe(
+              startWith(''),
+              map(value => this._filter1(value))
+            );
+            }, 
+            err => console.log(err)
+          );
+      }
+
+      else 
+      
+      {
+        this.services.getQty_tbl().subscribe(
+          data=> {
+            this.quantitys = [];
+              this.quantitys = data ;
+            this.filteredNumbers = this.myControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter(value))
+          );
+    
+          this.filteredNames = this.myControl1.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter1(value))
+          );
+          }, 
+          err => console.log(err)
+        );
+              }
 
 
     }
@@ -318,6 +321,15 @@ base64string:any;
          console.log('File uploaded successfully');
     };
 
+    this.services.getProject().subscribe(
+      data=>{ this.Project_list = data as any[] ;
+      
+      console.log(this.Project_list);
+      }, 
+      err=>console.log(err)
+    )
+
+    
 
     //to het the type of work
     this.services.getType_forRFI().subscribe(
@@ -325,31 +337,21 @@ base64string:any;
       err=>console.log(err)
     );
    
-    //to get the item fro Qty-tble based on id of work type 
-    this.services.getQty_tbl().subscribe(
-      data=> {this.quantitys = data ;
-        this.filteredNumbers = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
-
-      this.filteredNames = this.myControl1.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter1(value))
-      );
-      }, 
-      err => console.log(err)
-    );
+  
 
     this.services.getProjectitem().subscribe(
       data=> this.buildings = data as any, 
       err=> console.log(err)
     );
 
+
+    
+
+
     
   }
+
+  
   
   //to get the selected item name  binding with its number
   BindItemname(value , id)
@@ -408,8 +410,11 @@ base64string:any;
                         let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
                         if(msg)
                         {
-                          this.onUpload();
-                          location.reload();
+                        this.services.UploadFile(this.filename , this.base64 , this.inspectionIDs.inspection_id).subscribe(
+                          data=>console.log(data) , 
+                          err=> console.log(err)
+                        );
+                         // location.reload();
                         }
                       },
                       err=>console.log(err)

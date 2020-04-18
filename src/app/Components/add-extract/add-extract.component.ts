@@ -38,7 +38,7 @@ export class AddExtractComponent implements OnInit {
   discount : any = [];
   from_extract_date :string ;
   to_extract_date : Date =  new Date()  ;
-  invoice_type : string ;
+  invoice_type : string = 'current';
  
   openCloseRow(id): void
  {
@@ -84,7 +84,10 @@ export class AddExtractComponent implements OnInit {
       
     });
   }
-
+  type(val)
+  {
+    this.invoice_type = val;
+  }
   AddExtract()
   {
     const format = 'MM/dd/yyyy';
@@ -167,11 +170,8 @@ export class AddExtractComponent implements OnInit {
         this.total_Vat = (this.Net_amout)+(this.Net_amout*0.05);
       }
 
-    });
-
-
-
-   
+    });   
+    console.log(this.approved);
 
  }
 
@@ -242,6 +242,7 @@ export class AddExtractComponent implements OnInit {
         }
       });
     }
+    console.log(this.ApprovedCountItem);
   }
   AddDiscount()
   {
@@ -262,15 +263,15 @@ export class AddExtractComponent implements OnInit {
   this.discount.splice(index , 1);
   
 }
-
+to_exDate : string;
 showItems()
 {
-    const format = 'MM/dd/yyyy';
+    const format = 'yyyy-MM-dd';
     const locale = 'en-US';
     let from_exDate = formatDate(this.from_extract_date, format, locale);
-    let to_exDate = formatDate(this.to_extract_date, format, locale);
+    this.to_exDate = formatDate(this.to_extract_date, format, locale);
     let projectid = localStorage.getItem('projectid');
-    this.service.getApprovedQty(projectid , from_exDate , to_exDate).subscribe(
+    this.service.getApprovedQty(projectid , from_exDate , this.to_exDate).subscribe(
       data =>{ 
      this.approve = data as any ;
      console.log(data);
