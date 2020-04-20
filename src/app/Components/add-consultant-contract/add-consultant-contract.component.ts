@@ -65,7 +65,7 @@ export class AddConsultantContractComponent implements OnInit {
 
          this.service.createConsultantContract(this.newContract).subscribe(
            data=>{
-             this._sanbar.open('تم إنشاء العقد بنجاح' , 'إلغاء');
+             this._snackBar.open('تم إنشاء العقد بنجاح' , 'إلغاء');
              location.reload();
            } , 
            err=> console.log(err)
