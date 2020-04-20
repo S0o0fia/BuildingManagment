@@ -1,0 +1,112 @@
+
+<mat-card dir="rtl">
+    <div class="gene-card-title">
+       <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="column" fxLayoutAlign="start center">
+             <h3>{{'Add Consultant Quantity'|translate}}</h3>
+          </div>
+          <span fxFlex></span>
+       </div>
+       <mat-divider></mat-divider>
+    </div>
+    <div class="gene-card-content">
+          <form #form="ngForm">
+                <div fxLayout="column">
+                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                     <!--Specialzation-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                            <mat-form-field class="full-wid mrgn-b-lg">
+                                  <mat-label>{{'Specialization'|translate}}</mat-label>
+                                  <mat-select  name="special"  [(ngModel)]="special">
+                                              <div *ngFor="let item of specialization">
+                                                  
+                                               <mat-option  value={{item.id}}>
+                                                 {{item.name}}
+                                            
+                                            </mat-option>
+                                              
+                                              </div>
+                                          </mat-select>
+                                          
+                            </mat-form-field>
+                         </div>
+                      <!--qualification-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                         <mat-form-field class="full-wid mrgn-b-lg">
+                               <mat-label>{{'Qualifications according to the contract'|translate}}</mat-label>
+                               <mat-select  matNativeControl required name="qualify" [(ngModel)]="qualify">
+                                <div *ngFor="let item of qualification">
+                                 <mat-option value={{item.id}}>
+                                   {{item.name}}
+                                 </mat-option>
+                            </div> 
+                        </mat-select>
+                         </mat-form-field>
+                      </div>
+                  
+                      <!--Description-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                              <mat-label>{{'Description'|translate}}</mat-label>
+                              <textarea matInput name="description"  
+                                        cdkTextareaAutosize
+                                        name="description"
+                                        [(ngModel)]="description"
+                                         #autosize="cdkTextareaAutosize"
+                                          cdkAutosizeMinRows="1"
+                                           cdkAutosizeMaxRows="5"></textarea>                        
+                        </mat-form-field>
+                 </div>
+                     
+                            <!--Item Number-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                            <mat-form-field class="full-wid mrgn-b-lg">
+                                        <input matInput name="mduration"  [(ngModel)]="mduration"
+                                        placeholder="{{'Duration of the month'|translate}}" type="number"  required> 
+                            </mat-form-field>
+                         </div>
+                               <!--Item Name-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                            <mat-form-field class="full-wid mrgn-b-lg">
+                                        <input matInput name="qty" [(ngModel)]="qty"
+                                        placeholder="{{'Number'|translate}}" type="number"  required> 
+                            </mat-form-field>
+                         </div>
+                      
+
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                      <mat-form-field class="full-wid mrgn-b-lg ">
+                           
+                            <input matInput name="unit_price" [(ngModel)]="unit_price"
+                            [disabled]="qty==null" (change)="calTotal()"
+                            placeholder="{{'Unit Price'|translate}}" type="number" required>       
+                      </mat-form-field>
+               </div>
+
+               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                   <mat-form-field class="full-wid mrgn-b-lg ">
+                        
+                         <input matInput name="total_price"  [(ngModel)]="total_price"
+                        disabled
+                         placeholder="{{'Total Price'|translate}}" type="number"  required>       
+                   </mat-form-field>
+            </div>
+
+
+                 
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()" type="button" dir="ltr">{{'Cancel'|translate }}
+                          <mat-icon>cancel</mat-icon>
+                    </button>
+                    <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add'|translate }}
+                          <mat-icon>done_outline</mat-icon>
+                    </button>
+                    
+              </div>
+            </div>
+             </form>
+    </div>
+ </mat-card>
+
+

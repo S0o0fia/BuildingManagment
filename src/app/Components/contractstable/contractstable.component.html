@@ -1,0 +1,73 @@
+<div fxLayout="row wrap" fxLayoutAlign="start">
+    <div fxFlex.gt-sm="100" fxFlex="100">
+       <div class="trade-list table-list-wrap coins-list-table">
+          <mat-card>
+             <div class="gene-card-title">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                   <div fxLayout="column">
+                      <h4 class="mrgn-b-none">{{'ConsultantContracts' | translate}}</h4>
+                   </div>
+                   <span fxFlex></span>
+                   <div class="buttongroup mrgn-b-md" fxLayout="row"  fxLayoutAlign="end">
+                    <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()" >{{'Add New Contract'|translate}}</button>
+                  </div>
+  
+              </div>
+                <mat-divider></mat-divider>
+             </div>
+
+             <div class="gene-card-content pad-b-none">
+             
+                <div class="table-responsive">
+                     <table class="table table-hover table-middle th-fw-light mb-0">
+                           <thead>
+                              <tr>
+                                 <th>{{'Contract Number'|translate}}</th>
+                                 <th>{{'Consultant Name'|translate}}</th>
+                                 <th>{{'From'|translate}}</th>
+                                 <th>{{'To'|translate}}</th>
+                                 <th>{{'Description'|translate}}</th>
+                                 <th>{{'Controls'|translate}}</th>
+                               
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr *ngFor="let data of contract | paginate: { id: 'listing_pagination',
+                              itemsPerPage: 10,
+                              currentPage: page,
+                              totalItems: totalRec }">
+                              
+                                <td>{{data.name}}</td>
+                                <td>{{data.consultant_name}}</td>
+                                <td>{{data.from_date}}</td>
+                                <td>{{data.to_date}}</td>
+                                <td>{{data.description}}</td>
+                                 <td>
+                                    <button mat-icon-button color="primary" matTooltip="{{'Extracts'|translate}}">
+                                 <mat-icon>receipt</mat-icon>
+                                 </button>
+                                  
+                                   
+                                 <button mat-icon-button  color="primary"  (click)="ConsultantQty(data.id)" matTooltip="{{'Consulant Qunatity Table'|translate}}" >
+                                          <mat-icon>view_module</mat-icon>
+                                 </button>
+                                 <button color="primary"  mat-icon-button matTooltip="{{'Time Sheet'|translate}}" >
+                                    <mat-icon>watch_later</mat-icon>
+                                 </button>
+
+                                </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <!-- <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
+                        previousLabel="{{'Previous'|translate}}"
+                        nextLabel="{{'Next'|translate}}"
+                         (pageChange)="page = $event"></pagination-controls> -->
+                </div>  
+               
+ 
+             </div>
+          </mat-card>
+       </div>   
+    </div>
+ </div>

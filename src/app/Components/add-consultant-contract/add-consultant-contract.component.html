@@ -1,0 +1,115 @@
+
+<mat-card dir="rtl">
+    <div class="gene-card-title">
+       <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="column" fxLayoutAlign="start center">
+             <h3>{{'Add Consultant Contract'|translate}}</h3>
+          </div>
+          <span fxFlex></span>
+       </div>
+       <mat-divider></mat-divider>
+    </div>
+    <div class="gene-card-content">
+          <form #form="ngForm">
+                <div fxLayout="column">
+                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                     <!--Consultant-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                            <mat-form-field class="full-wid mrgn-b-lg">
+                                  <mat-label>{{'Consultant Name'|translate}}</mat-label>
+                                  <mat-select  name="consultant"  [(ngModel)]="consultant">
+                                              <div *ngFor="let item of users">
+                                               <div>   
+                                               <mat-option  value={{item.id}}>
+                                                 {{item.name}}
+                                            
+                                            </mat-option>
+                                             </div>
+                                              </div>
+                                          </mat-select>
+                                          
+                            </mat-form-field>
+                         </div>
+                      
+                         <!--Contract Number-->
+                         
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                    <mat-form-field class="full-wid mrgn-b-lg ">
+                         
+                          <input matInput name="contract_number" [(ngModel)]="contract_number"
+                        
+                          placeholder="{{'Contract Number'|translate}}" type="number" required>       
+                    </mat-form-field>
+             </div>
+                              <!--Contract Value-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg">
+                                    <input matInput name="contract_value"  [(ngModel)]="contract_value"
+                                    placeholder="{{'Contract Value'|translate}}" type="number"  required> 
+                        </mat-form-field>
+                     </div>
+
+                      <!--Description-->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                              <mat-label>{{'Description'|translate}}</mat-label>
+                              <textarea matInput name="description"  
+                                        cdkTextareaAutosize
+                                        name="description"
+                                        [(ngModel)]="description"
+                                         #autosize="cdkTextareaAutosize"
+                                          cdkAutosizeMinRows="1"
+                                           cdkAutosizeMaxRows="5"></textarea>                        
+                        </mat-form-field>
+                 </div>
+                     
+                 <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                   
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                  
+                    <div fxFlex.gt-sm="48" fxFlex.gt-xs="48" fxFlex="100" fxFlex.gt-md="48">
+                       
+ 
+                          <mat-form-field class="full-wid mrgn-b-lg"> 
+                             <input matInput  name="fromd" [(ngModel)]="fromd"
+                            [min]="minDate" [max]="maxDate" [matDatepicker]="from"
+                             placeholder="{{'From'|translate}}">
+                            <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                            <mat-datepicker #from></mat-datepicker>   
+                          </mat-form-field>
+                     </div>
+           
+                    <div fxFlex.gt-sm="51" fxFlex.gt-xs="51" fxFlex="100" fxFlex.gt-md="51" style="margin-right:5%;">
+                       
+                    
+                     
+                       <mat-form-field class="full-wid mrgn-b-lg"> 
+                          <input matInput name="tod" [(ngModel)]="tod"
+                         [min]="minDate" [max]="maxDate" [matDatepicker]="to"
+                          placeholder="{{'To'|translate}}">
+                         <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                         <mat-datepicker #to></mat-datepicker>   
+                       </mat-form-field>
+                    </div>
+                    </div>
+           
+                  </div>
+                            
+
+                 
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()" type="button" dir="ltr">{{'Cancel'|translate }}
+                          <mat-icon>cancel</mat-icon>
+                    </button>
+                    <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add'|translate }}
+                          <mat-icon>done_outline</mat-icon>
+                    </button>
+                    
+              </div>
+            </div>
+             </form>
+    </div>
+ </mat-card>
+
+

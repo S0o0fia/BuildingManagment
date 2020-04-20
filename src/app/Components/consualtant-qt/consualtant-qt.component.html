@@ -1,0 +1,59 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+       <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+             <div fxLayout="column">
+                <h4>{{'Consulant Qunatity Table'|translate}}</h4>
+ 
+             </div> <span fxFlex></span>
+             
+             <div fxLayout="column">
+                <div class="row">
+                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">
+                   {{'Add'|translate}}
+                   <mat-icon>queue</mat-icon>
+                </button>
+                </div>
+             </div> 
+          </div>
+          <mat-divider></mat-divider>
+       </div>
+          <div class="gene-card-content pad-t-none">
+          <div class="table-responsive" id="dvPdf">
+            
+             <table class="table table-hover table-middle th-fw-light mb-0 ">
+                <thead>
+                   <tr>
+                   <th>{{'Specialization'|translate}}</th>
+                   <th>{{'Qualifications according to the contract'|translate}}</th>
+                   <th >{{'Number'|translate}}</th> 
+                   <th>{{'Duration of the month'|translate}}</th>                
+                   <th>{{'Unit Price'|translate}}</th>
+                   <th>{{'Total Price'|translate}}</th>
+                   </tr>
+                </thead>
+                <tbody *ngFor="let data of consultant_qty" >
+                  
+                     <tr *ngIf="data.contract_id == Contract_id" >
+                       <td>{{data.specialty_name}}</td>
+                       <td>{{data.qualification_name}}</td>
+                       <td>{{data.qty}}</td>
+                       <td>{{data.duartion}}</td>
+                       <td>{{data.price}}</td>
+                       <td>{{data.price_total}}</td>
+                     </tr>                      
+                   
+ 
+                     
+                 </tbody>
+              <!-- </table>
+             <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
+             previousLabel="{{'Previous'|translate}}"
+              nextLabel="{{'Next'|translate}}"
+             (pageChange)="page = $event"></pagination-controls> -->
+       
+             </table>
+          </div>
+       </div>
+    </mat-card>
+ </div>

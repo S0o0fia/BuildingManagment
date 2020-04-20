@@ -22,6 +22,8 @@ import { Countitem } from 'app/Models/Count/countitem';
 import { Extractitem } from 'app/Models/Extract/extractitem';
 import { InvoiceDiscount } from 'app/Models/Extract/invoice-discount';
 import { User } from 'app/Models/User/user';
+import { Consultantqty } from 'app/Models/Consqty/consultantqty';
+import { Consulantcontract } from 'app/Models/consutlantcontract/consulantcontract';
 @Injectable({
 	providedIn: 'root'
 })
@@ -75,7 +77,7 @@ export class CoreService {
 	getUsers ()
 	{
 		let userUrl='/users/get?db='+this.db+'&token='+localStorage.getItem("token");
-		return this.http.get(this.apiURL+userUrl);
+		return this.http.get<any[]>(this.apiURL+userUrl);
 	}
 
 	createUser (value : User)
@@ -644,8 +646,66 @@ export class CoreService {
 	}
 
 
+   getSpeclization()
+   {
+	   let url = '/consultant/specialty/get?db=nqproject&token='+localStorage.getItem('token');
+		return this.http.get(this.apiURL+url);
+  }
 
 
+  getQualifications()
+   {
+	   let url = '/consultant/qualifications/get?db=nqproject&token='+localStorage.getItem('token');
+	  
+		return this.http.get(this.apiURL+url);
+  }
 
+  getConsultantContract()
+  {
+
+	let url = '/consultant/contract/get?db=nqproject&token='+localStorage.getItem('token');
+	
+	 return this.http.get(this.apiURL+url);
+  }
+
+
+  
+  getConsultantqty()
+  {
+
+	let url = '/consultant/qty/get?db=nqproject&token='+localStorage.getItem('token');
+	
+	 return this.http.get(this.apiURL+url);
+  }
+
+  createConsultantqty(value : Consultantqty)
+  {
+	let url = '/consultant/qty/create?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
+	'"contract_id":'+value.contract_id+
+	',"description":"'+value.description+
+	'","duartion":'+value.duartion+
+	',"price":'+value.price+
+	',"price_total":'+value.price_total+
+	',"qty" :'+value.qty+
+	',"qualification_id":'+value.qualification_id+
+	',"specialty_id":'+value.specialty_id+'}';
+	return this.http.post(this.apiURL+url, null);
+
+  }
+
+  createConsultantContract(value : Consulantcontract)
+  {
+	let url = '/consultant/contract/create?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
+	'"consultant_id":'+value.consultant_id+
+	',"description":"'+value.description+
+	'","contract_value":'+value.contract_value+
+	',"from_date":"'+value.from_date+
+	'","to_date":"'+value.to_date+
+	'","name" :"'+value.name+
+	'"}';
+    console.log(url);
+	return this.http.post(this.apiURL+url, null);
+
+  }
 }
 
