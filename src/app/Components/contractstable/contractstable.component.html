@@ -32,10 +32,7 @@
                               </tr>
                            </thead>
                            <tbody>
-                              <tr *ngFor="let data of contract | paginate: { id: 'listing_pagination',
-                              itemsPerPage: 10,
-                              currentPage: page,
-                              totalItems: totalRec }">
+                              <tr *ngFor="let data of contract">
                               
                                 <td>{{data.name}}</td>
                                 <td>{{data.consultant_name}}</td>

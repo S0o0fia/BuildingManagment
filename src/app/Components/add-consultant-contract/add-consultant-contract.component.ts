@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CoreService } from 'app/Service/core/core.service';
 import { Consulantcontract } from 'app/Models/consutlantcontract/consulantcontract';
 import { formatDate } from '@angular/common';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialogRef } from '@angular/material';
+import { ContractstableComponent } from '../contractstable/contractstable.component';
 
 @Component({
   selector: 'ms-add-consultant-contract',
@@ -23,7 +24,9 @@ export class AddConsultantContractComponent implements OnInit {
   maxDate : Date ;
   //new contract 
   newContract : Consulantcontract;
-  constructor(public service : CoreService ,  private _sanbar : MatSnackBar) { 
+  constructor(public service : CoreService , public dialogRef: MatDialogRef<ContractstableComponent> , 
+    private _snackBar: MatSnackBar) {
+    dialogRef.disableClose = true;
     this.minDate = new Date(1900,1,1);
     this.maxDate = new Date(2050,1,1);
   }
