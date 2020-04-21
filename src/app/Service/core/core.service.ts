@@ -78,6 +78,18 @@ export class CoreService {
 		return this.http.get(this.apiURL+userUrl);
 	}
 
+	getRoles ()
+	{
+		let userUrl='/usersrole/get?db='+this.db+'&token='+localStorage.getItem("token");
+		return this.http.get(this.apiURL+userUrl);
+	}
+
+	getActivityRights()
+	{
+		let userUrl='/activities/get?db='+this.db+'&token='+localStorage.getItem("token");
+		return this.http.get(this.apiURL+userUrl);
+	}
+
 	createUser (value : User)
 	{
 		let userUrl2='/users/create?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+

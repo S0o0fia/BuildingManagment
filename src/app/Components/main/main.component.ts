@@ -216,6 +216,7 @@ export class MainComponent implements OnInit, OnDestroy{
 		breadcrumbService.addFriendlyNameForRoute('/users', 'Users');
 		breadcrumbService.addFriendlyNameForRoute('/users/userprofile', 'User Profile');
 		breadcrumbService.addFriendlyNameForRoute('/users/userlist', 'User List');
+		breadcrumbService.addFriendlyNameForRoute('/roles', 'Role Management');
 		breadcrumbService.addFriendlyNameForRoute('/session', 'Session');
 		breadcrumbService.addFriendlyNameForRoute('/session/login', 'Login');
 		breadcrumbService.addFriendlyNameForRoute('/session/register', 'Register');

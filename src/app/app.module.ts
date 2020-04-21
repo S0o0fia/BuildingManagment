@@ -97,6 +97,8 @@ import { ExtractdetailsComponent } from './Components/extractdetails/extractdeta
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserslistComponent } from './Components/userslist/userslist.component';
 import { CreateuserComponent } from './Components/createuser/createuser.component';
+import { RoleManagementComponent } from './Components/role-management/role-management.component';
+import { ModifyroleComponent } from './Components/modifyrole/modifyrole.component';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyCE0po6Q8jGuBEds-A903KEU4U6Cerojzo",
@@ -316,7 +318,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		CountitemdetailsComponent,
 		ExtractdetailsComponent,
 		UserslistComponent,
-		CreateuserComponent
+		CreateuserComponent,
+		RoleManagementComponent,
+		ModifyroleComponent
 
 	
 		

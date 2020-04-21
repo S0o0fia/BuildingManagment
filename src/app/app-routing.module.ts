@@ -28,6 +28,7 @@ import { CountitemdetailsComponent } from './Components/countitemdetails/countit
 import { ExtractdetailsComponent } from './Components/extractdetails/extractdetails.component';
 import {  NgbCalendarIslamicUmalqura, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { UserslistComponent } from './Components/userslist/userslist.component';
+import { RoleManagementComponent } from './Components/role-management/role-management.component';
 
 
 
@@ -59,6 +60,10 @@ const appRoutes: Routes = [
            path:"userlist" , 
            component : UserslistComponent 
          },
+         {
+            path:"role-management" , 
+            component : RoleManagementComponent 
+          },
          {
             path : "approvedqty" , 
             component : ApproveQuantitiesComponent

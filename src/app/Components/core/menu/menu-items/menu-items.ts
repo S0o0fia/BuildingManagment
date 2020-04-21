@@ -60,6 +60,12 @@ const MENUITEMS = [
       icon : 'account_box'
     },
     {
+      state:'role-management' , 
+      name : 'Role Management',
+      type : 'link' , 
+      icon : 'people'
+    },
+    {
       state: 'settings',
       name: 'Global Setting',
       type: 'sub',
