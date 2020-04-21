@@ -28,6 +28,8 @@ import { CountitemdetailsComponent } from './Components/countitemdetails/countit
 import { ExtractdetailsComponent } from './Components/extractdetails/extractdetails.component';
 import {  NgbCalendarIslamicUmalqura, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { UserslistComponent } from './Components/userslist/userslist.component';
+import { ContractstableComponent } from './Components/contractstable/contractstable.component';
+import { ConsualtantQTComponent } from './Components/consualtant-qt/consualtant-qt.component';
 import { RoleManagementComponent } from './Components/role-management/role-management.component';
 
 
@@ -76,6 +78,14 @@ const appRoutes: Routes = [
             path:"activestage",
             component:ActivestageComponent
          } ,
+         {
+            path : "ConsultantContracts" , 
+            component : ContractstableComponent
+         },
+         {
+            path : "ConsultantQty/:id" , 
+            component : ConsualtantQTComponent
+         },
          {
             path : 'under' ,
             component : UnderdevelopmentComponent

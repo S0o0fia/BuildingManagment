@@ -98,7 +98,7 @@ export class QuantitytableComponent implements OnInit {
 
   }
   transformAmount(value){
-    this.formattedAmount = this.currencyPipe.transform( value , " ر.س ");
+    this.formattedAmount = this.currencyPipe.transform( value , " ");
     // Remove or comment this line if you dont want to show the formatted amount in the textbox.
     return this.formattedAmount;
 }

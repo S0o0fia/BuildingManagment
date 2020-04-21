@@ -215,7 +215,7 @@
    "Audience" : "جمهور",
    "Quantity Sold" : "الكمية المباعة",
    "Contracted Quantities" : "الكمية التعاقدية",
-   "Total Excuted":"قيمة المنفذ",
+   "Total Excuted":" إجمالي قيمة المنفذ",
    "Quantity" : "الكمية" ,
    "Grow Sales" : "تنمو المبيعات",
    "Browser Stack" : "متصفح المكدس",
@@ -435,7 +435,7 @@
    "Size Varients"   :  "المتغيرات الحجم",
    "Total Products"  :  "إجمالي المنتجات",
    "Add Price" :  "أضف السعر",
-   "Total Quantities Price" : "قيمة التعاقدي" ,
+   "Total Quantities Price" : "إجمالي قيمة التعاقدي" ,
    "Share Now" :  "شارك الآن",
    "Create" :  "خلق",
    "Discard"   :  "تجاهل",
@@ -552,6 +552,7 @@
       "Item Description" : "وصف البند"  ,
       "Project Description" : "وصف المشروع",
       "Project Amount" : "قيمة العقد الأساسية",
+      "Contract Value" : "قيمة العقد",
       "With Vat":"شاملة الضريبة ",
       "Without Vat":"غير شاملة الضريبة",
       "Active Stage" : "المنصة التفاعلية",
@@ -580,13 +581,13 @@
        "Phase Description" : "وصف المرحلة",
        "Duration with Higiri Months" : "المدة بالشهور الهجرية" ,
        "Duration with Gorgiean Months" : "المدة بالشهور الميلادية" ,
-       "Exceed Qunatiyu with Contracted Qunatity" :"الكميات المتجاوز للكمية التعاقدية " , 
+       "Exceed Qunatiyu with Contracted Qunatity" :"عرض الكميات المتجاوزة فقط" , 
        "Session To":"التاريخ المقرر للتسليم الإبتدائي",
        "Session To Hijri" :  "تاريخ التسليم الهجري" ,
        "Session To Grogorian" : "تاريخ التسليم الميلادي" ,
       "Contract Quantity" :"الكمية التعاقدية" ,
       "Unit" : "الوحدة",
-      "Unit Price" :"سعر الوحدة",
+      "Unit Price" :"سعر الإفرادي",
       "Total Price": "السعر الإجمالي",
       "Item Qunatity" : "الكمية التعاقدية",
       "Cancel" : "إلغاء" ,
@@ -811,7 +812,22 @@
            "consultant_pm":"مدير مشاريع الاستشاري",
            "consultant_eng" :"مهندس الاستشاري" ,
            "consultant_res_eng" :"مهندس استشاري مقيم" ,
-           "contractor_res_eng" :"مهندس مقاول مقيم"
+           "contractor_res_eng" :"مهندس مقاول مقيم" , 
+           "File Size" : "حجم الملف كيلوبايت"  ,
+           "Consulant Qunatity Table": "جدول كميات الاستشاري" , 
+           "Contracts Table" : "جدول عقود الاستشاريين" ,
+           "ConsultantContracts" : "عقود الاستشاريين" , 
+           "Add New Contract" : "إضافة عقد جديد" , 
+           "Specialization" : "التخصص" ,
+           "Qualifications according to the contract" : "المؤهلات حسب العقد" , 
+           "Duration of the month" : "المدة بالشهر" ,
+           "Add Consultant Quantity" : "إضافة كمية استشاري" ,
+           "Add Consultant Contract" : "إضافة عقد استشاري" 
+           
+          
+           
+          
+          
           
   
          

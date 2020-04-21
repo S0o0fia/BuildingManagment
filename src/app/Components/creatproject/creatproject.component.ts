@@ -93,10 +93,12 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
     base64 : any ;
     filename :string ;
     files : FileList;
+    
   
     onSelectFiles(evt) {
   
     this.files = evt.target.files;
+    //console.log(this.files);
    
    
      }

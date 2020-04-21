@@ -30,6 +30,12 @@ const MENUITEMS = [
      
     },
     {
+      state : 'ConsultantContracts',
+      name : 'ConsultantContracts' , 
+      type : 'link' , 
+      icon : 'supervised_user_circle'
+    },
+    {
       state: 'attendance',
       name: 'Attendance',
       type: 'link',

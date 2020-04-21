@@ -76,8 +76,9 @@
                   <th >{{'Item Name'|translate}}</th> 
                   <th>{{'Item Number'|translate}}</th>                
                   <th>{{'Description'|translate}}</th>
-                  <th>{{'Total Quantities Price'|translate}}</th>
-                  <th>{{'Total Excuted'|translate}}</th>
+                  <th>{{'Contracted Quantities'|translate}}</th>
+                  <th>{{'Extecuted Quantities'|translate}}</th>
+                 
                   </tr>
                </thead>
                <tbody>
@@ -131,11 +132,13 @@
                            <span>{{data.description}}</span>
                         </td> 
                         <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                           <span>{{data.price_total}}</span>
-                        </td>   
-                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                           <span>{{data.total_excuted}}</span>
+                           <span>{{data.item_qty}}</span>
                         </td>
+                      
+                        <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                           <span>{{data.excuted}}</span>
+                        </td>
+                      
                       
                      </tr>
 
@@ -146,10 +149,9 @@
                                <table class="table table-striped">
                                  <th>{{'Items Type'|translate}}</th>
                                  <th>{{'Unit'|translate}}</th>
-                                 <th>{{'Contracted Quantities'|translate}}</th>
-                                 <th>{{'Unit Price'|translate}}</th>
-                                 <th>{{'Extecuted Quantities'|translate}}</th>
-                                
+                                <th>{{'Unit Price'|translate}}</th>
+                                 <th>{{'Total Quantities Price'|translate}}</th>
+                                 <th>{{'Total Excuted'|translate}}</th>
                                    <tbody>
                                        <tr>  
                                           <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
@@ -159,15 +161,14 @@
                                              <span>{{data.product_uom_name}}</span>
                                           </td>
                                           <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                                             <span>{{data.item_qty}}</span>
-                                          </td>
-                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                                              <span>{{data.price_unit}}</span>
                                           </td>
-                                                         
                                           <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
-                                             <span>{{data.excuted}}</span>
-                                          </td>
+                                             <span>{{data.price_total}}</span>
+                                          </td>   
+                                          <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
+                                             <span>{{data.total_excuted}}</span>
+                                          </td>         
                                               
                                      </tr>
                                    </tbody>
