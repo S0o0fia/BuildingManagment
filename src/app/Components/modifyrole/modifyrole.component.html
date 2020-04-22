@@ -16,45 +16,11 @@
                       <!--username-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                              <mat-form-field class="full-wid mrgn-b-lg ">
-                             <input matInput name="username" [(ngModel)]="username" 
-                             placeholder="{{'username'|translate}}" type="text" required>    
+                             <input matInput name="rolename" [(ngModel)]="rolename" 
+                             placeholder="{{'rolename'}}" type="text" required>    
                           </mat-form-field> 
                           
-                     </div>    
-                     
-                     <!--Password-->
-                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                        <mat-form-field class="full-wid mrgn-b-lg ">
-                        <input matInput name="password" [(ngModel)]="password" 
-                        placeholder="{{'Password'|translate}}" type="text" required>    
-                     </mat-form-field> 
-                     
-                </div>    
-                
-                
-                <!--Email-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                  <mat-form-field class="full-wid mrgn-b-lg ">
-                  <input matInput name="email" [(ngModel)]="email" 
-                  placeholder="{{'Email'|translate}}" type="email" required>    
-               </mat-form-field> 
-               
-          </div> 
-
-             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-              <mat-form-field class="full-wid mrgn-b-lg " >
-                   
-                 <mat-label class="title">{{'Job Title'|translate}}</mat-label>                
-              
-                 <mat-select  [(ngModel)]="userjob" name="userjob" [(value)]="userjob">
-                    <div *ngFor="let data of jobtitle">
-                      <mat-option (click)="choose(data)" value={{data}}>
-                        {{ data | translate }}
-                      </mat-option>
-                     </div>
-                 </mat-select>
-              </mat-form-field>
-              </div>
+                     </div>  
  
                    </div>
                 </div>

@@ -86,6 +86,12 @@ export class CoreService {
 		return this.http.get(this.apiURL+userUrl);
 	}
 
+	getRole ()
+	{
+		let userUrl='/usersrole/get?db='+this.db+'&token='+localStorage.getItem("token")+'&role_id=2';
+		return this.http.get(this.apiURL+userUrl);
+	}
+
 	getActivityRights()
 	{
 		let userUrl='/activities/get?db='+this.db+'&token='+localStorage.getItem("token");

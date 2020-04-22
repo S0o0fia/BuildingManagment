@@ -11,63 +11,63 @@ import { CoreService } from 'app/Service/core/core.service';
 })
 export class ModifyroleComponent implements OnInit {
 
-  projectname : string;
-  username : string ;
-  password : string;
-  email : string;
-  newUser : any;
-  userjob : string;
-  jobtitle : string [] = [
-     'system_admin' , 
-    'amana_pm' , 
- 'amana_eng' , 
-    'consultant_pm' ,
-    'consultant_res_eng',
- 'consultant_eng',
-    'consultant_count',
-  'contractor_pm' , 
-    'contractor_res_eng' ,
-    'contractor_eng',
-    'contractor_count'
-  ]
+  role: any;
+  rolename : string;
+  roleid : number ;
+  activityrights: any []=[];
+  activities : any [] = []
   constructor(public dialogRef: MatDialogRef<RoleManagementComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private _snackBar: MatSnackBar
     ,private translate : TranslateService , public  services :CoreService){
-
-      this.projectname = localStorage.getItem('projectname');
-
       dialogRef.disableClose = true;
     }
 
   ngOnInit() {
+    this.services.getRole().subscribe(
+      data=>{
+        this.role = data as any ;
+        console.log(this.role) ;
+        this.roleid=this.role.id;
+        this.rolename=this.role.name;
+      },
+     err=>console.log(err)
+    );
+
+    this.services.getActivityRights().subscribe(
+      data=>{
+        this.activityrights = data as any[] ;
+        console.log(this.activityrights) ;
+      },
+     err=>console.log(err)
+    );
   }
 
   choose(val)
   {
-    this.userjob = val;
+    //this.userjob = val;
   }
 
   Save()
   {
-    this.newUser = {
-      name : this.username , 
-      login : this.email , 
-      password : this.password , 
-      user_job : this.userjob
-    }
+    // this.newUser = {
+    //   name : this.username , 
+    //   login : this.email , 
+    //   password : this.password , 
+    //   user_job : this.userjob
+    // }
 
    
 
-    this.services.createUser(this.newUser).subscribe(
-      data=>{
-        let msg = this._snackBar.open('تم إنشاء المستخدم بنجاح' , 'إالغاء')
-        if(msg)
-        {
-          location.reload();
-        }
-      },
-      err=>console.log(err)
-    );
+    // this.services.createUser(this.newUser).subscribe(
+    //   data=>{
+    //     let msg = this._snackBar.open('تم إنشاء المستخدم بنجاح' , 'إالغاء')
+    //     if(msg)
+    //     {
+    //       location.reload();
+    //     }
+    //   },
+    //   err=>console.log(err)
+    // );
   }
 
 }
