@@ -30,15 +30,12 @@ import {  NgbCalendarIslamicUmalqura, NgbDatepickerI18n } from '@ng-bootstrap/ng
 import { UserslistComponent } from './Components/userslist/userslist.component';
 import { ContractstableComponent } from './Components/contractstable/contractstable.component';
 import { ConsualtantQTComponent } from './Components/consualtant-qt/consualtant-qt.component';
-<<<<<<< HEAD
 import { RequestfortimesheetComponent } from './Components/requestfortimesheet/requestfortimesheet.component';
 import { ConsultantExtractComponent } from './Components/consultant-extract/consultant-extract.component';
 import { AddConsultantExtractComponent } from './Components/add-consultant-extract/add-consultant-extract.component';
 import { ProjectReportComponent } from './Components/project-report/project-report.component';
 import { ConsultantExtractDetailComponent } from './Components/consultant-extract-detail/consultant-extract-detail.component';
-=======
 import { RoleManagementComponent } from './Components/role-management/role-management.component';
->>>>>>> aac02b10a0f26bc645a992b60135453884444cec
 
 
 
