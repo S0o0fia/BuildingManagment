@@ -43,7 +43,7 @@
                                     <input matInput 
                                     name="from_extract_date"  [(ngModel)]="from_extract_date"
                                     [min]="minDate" [max]="maxDate" [matDatepicker]="picker1"
-                                     placeholder="{{'From'|translate}}" >
+                                     placeholder="{{'From'|translate}}"  disabled> 
                                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                     <mat-datepicker #picker1></mat-datepicker>  
                             </mat-form-field>
