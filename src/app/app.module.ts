@@ -97,6 +97,10 @@ import { ExtractdetailsComponent } from './Components/extractdetails/extractdeta
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserslistComponent } from './Components/userslist/userslist.component';
 import { CreateuserComponent } from './Components/createuser/createuser.component';
+
+import { RoleManagementComponent } from './Components/role-management/role-management.component';
+import { ModifyroleComponent } from './Components/modifyrole/modifyrole.component';
+
 import { ConsualtantQTComponent } from './Components/consualtant-qt/consualtant-qt.component';
 import { AddconsualtantQTComponent } from './Components/addconsualtant-qt/addconsualtant-qt.component';
 import { ContractstableComponent } from './Components/contractstable/contractstable.component';
@@ -107,6 +111,7 @@ import { ConsultantExtractComponent } from './Components/consultant-extract/cons
 import { AddConsultantExtractComponent } from './Components/add-consultant-extract/add-consultant-extract.component';
 import { ConsultantExtractDetailComponent } from './Components/consultant-extract-detail/consultant-extract-detail.component';
 import { ProjectReportComponent } from './Components/project-report/project-report.component';
+
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyCE0po6Q8jGuBEds-A903KEU4U6Cerojzo",
@@ -327,6 +332,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		ExtractdetailsComponent,
 		UserslistComponent,
 		CreateuserComponent,
+
+		RoleManagementComponent,
+		ModifyroleComponent,
+
 		ConsualtantQTComponent,
 		AddconsualtantQTComponent,
 		ContractstableComponent,

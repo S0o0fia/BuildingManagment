@@ -1,0 +1,54 @@
+<mat-card>
+   
+    <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="space-between"  fxLayout.xs="column">
+            <div fxLayout="column">
+               <h4>{{'ROLES LIST'|translate}}</h4>
+
+            </div> <span fxFlex></span>
+            
+            <!-- <div fxLayout="column">
+               <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">
+                  <mat-icon>queue</mat-icon> {{'Add User'|translate}}</button>
+            </div>  -->
+         </div>
+    </div>
+
+        
+             <div class="gene-card-content pad-b-none">
+                
+                <div class="table-responsive">
+                     <table class="table table-hover table-middle th-fw-light mb-0">
+                           <thead>
+                              <tr>
+                                 <th>{{'RoleName'|translate}}</th>
+                                 <th>{{'Activities'|translate}}</th>
+                                 <th>{{'Controls'|translate}}</th>
+                               
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr *ngFor="let data of rolelist">
+                                 <td>{{data.name}}</td>
+                                 <td>
+                                     <span *ngIf="data.activity_ids.length>0">
+                                         {{data.activity_ids[0].name}}
+                                     </span>
+                                 </td>
+                                 <td>
+                                    <button mat-icon-button color="primary" matTooltip="{{'Delete'|translate}}">
+                                 <mat-icon>delete</mat-icon>
+                                 </button>
+                                   <button mat-icon-button color="primary" matTooltip="{{'Edit'|translate}}" (click)="openDialog(data)">
+                                    <mat-icon>edit</mat-icon>
+                                    </button>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                      
+                </div>  
+               
+ 
+             </div>
+          </mat-card>
