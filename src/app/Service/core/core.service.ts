@@ -86,9 +86,10 @@ export class CoreService {
 		return this.http.get(this.apiURL+userUrl);
 	}
 
-	getRole ()
+	getRole (id: number)
 	{
-		let userUrl='/usersrole/get?db='+this.db+'&token='+localStorage.getItem("token")+'&role_id=2';
+		debugger
+		let userUrl='/usersrole/get?db='+this.db+'&token='+localStorage.getItem("token")+'&role_id='+id;
 		return this.http.get(this.apiURL+userUrl);
 	}
 

@@ -13,6 +13,7 @@ export class ModifyroleComponent implements OnInit {
 
   role: any;
   rolename : string;
+  description : string;
   roleid : number ;
   activityrights: any []=[];
   activities : any [] = []
@@ -23,12 +24,13 @@ export class ModifyroleComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.services.getRole().subscribe(
+    this.services.getRole(this.data).subscribe(
       data=>{
         this.role = data as any ;
         console.log(this.role) ;
-        this.roleid=this.role.id;
-        this.rolename=this.role.name;
+        this.roleid=this.role[0].id;
+        this.rolename=this.role[0].name;
+        this.description=this.role[0].description;
       },
      err=>console.log(err)
     );
