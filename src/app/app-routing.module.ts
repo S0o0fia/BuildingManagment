@@ -30,6 +30,11 @@ import {  NgbCalendarIslamicUmalqura, NgbDatepickerI18n } from '@ng-bootstrap/ng
 import { UserslistComponent } from './Components/userslist/userslist.component';
 import { ContractstableComponent } from './Components/contractstable/contractstable.component';
 import { ConsualtantQTComponent } from './Components/consualtant-qt/consualtant-qt.component';
+import { RequestfortimesheetComponent } from './Components/requestfortimesheet/requestfortimesheet.component';
+import { ConsultantExtractComponent } from './Components/consultant-extract/consultant-extract.component';
+import { AddConsultantExtractComponent } from './Components/add-consultant-extract/add-consultant-extract.component';
+import { ProjectReportComponent } from './Components/project-report/project-report.component';
+import { ConsultantExtractDetailComponent } from './Components/consultant-extract-detail/consultant-extract-detail.component';
 import { RoleManagementComponent } from './Components/role-management/role-management.component';
 
 
@@ -81,6 +86,26 @@ const appRoutes: Routes = [
          {
             path : "ConsultantContracts" , 
             component : ContractstableComponent
+         },
+         {
+            path: "timesheet/:id" , 
+            component : RequestfortimesheetComponent
+         },
+         {
+            path: "ExtractConsultant/:id" , 
+            component : ConsultantExtractComponent
+         },
+         {
+            path: "ExtractConsultantDetails/:id" , 
+            component : ConsultantExtractDetailComponent
+         },
+         {
+            path: "projectreport" , 
+            component : ProjectReportComponent
+         },
+            {
+            path: "AddExtractConsultant" , 
+            component : AddConsultantExtractComponent
          },
          {
             path : "ConsultantQty/:id" , 

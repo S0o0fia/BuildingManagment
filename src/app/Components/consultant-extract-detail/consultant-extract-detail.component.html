@@ -1,0 +1,187 @@
+<div>
+    <mat-card dir="rtl"  fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="70" style="margin:auto;">
+            <div class="gene-card-title">
+               <div fxLayout="row" fxLayoutAlign="center">
+                  <div fxLayout="column" fxLayoutAlign="center">
+                     <h3>{{'Extract Details'|translate}}</h3>
+                  </div>
+                  <span fxFlex></span>
+               </div>
+               <mat-divider></mat-divider>
+            </div>
+            <div class="gene-card-content" >
+                  <form #form="ngForm">
+                        <div fxLayout="column" *ngFor="let item of Invoices">
+                           <div fxLayout="row wrap" fxLayoutAlign="space-between center" *ngIf="item.id == id" >
+                              <!--Extract Number-->
+                              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                               <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45" style="margin-top: 0.75%;">
+                                 <mat-form-field class="full-wid mrgn-b-lg">
+                                        <input matInput name="name" [(ngModel)]="item.name"
+                                        placeholder="{{'Extract Number'|translate}}" type="text" disabled>       
+                                 </mat-form-field>
+                               </div>
+                               <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49" style="margin-right: 3%;">
+                                  <mat-form-field class="full-wid mrgn-b-lg">
+                                      <mat-label>{{item.invoice_type|translate}}</mat-label>  
+                                      <input matInput name="extract_number" 
+                                      placeholder="{{'Extract Type'|translate}}" type="text" disabled>    
+                                     
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                           
+                            
+                            
+                              <br>
+                              <!--Extract Number-->
+                              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                             
+                               <div fxFlex.gt-sm="45" fxFlex.gt-xs="45" fxFlex="100" fxFlex.gt-md="45">
+                                     <mat-form-field class="full-wid mrgn-b-lg">
+                                        <input matInput 
+                                        name="from_extract_date"  [(ngModel)]="item.date_from"
+                                        [min]="minDate" [max]="maxDate" [matDatepicker]="picker1"
+                                         placeholder="{{'From'|translate}}" disabled>
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>  
+                                </mat-form-field>
+                                   </div>
+                                   &nbsp;  &nbsp;  &nbsp;
+                                   <div  fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                                     <mat-form-field class="full-wid mrgn-b-lg">
+                                        <input matInput 
+                                        name="to_extract_date"  [(ngModel)]="item.date_to"
+                                        [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
+                                         placeholder="{{'To'|translate}}" disabled>
+                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker2></mat-datepicker>  
+                                </mat-form-field>
+                                   </div>
+                              </div>
+                               <!--Total work performed in the abstract-->
+                               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                    <mat-form-field class="full-wid mrgn-b-lg">
+                                           <input matInput name="total_work" [(ngModel)]="item.total_excuted"
+                                           placeholder="{{'Total work performed in the abstract'|translate}}" type="number" 
+                                           required disabled>       
+                                    </mat-form-field>
+                                 </div>
+                                  <!--Total Discounts-->
+                               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                    <mat-form-field class="full-wid mrgn-b-lg">
+                                           <input matInput name="total_discount" [(ngModel)]="item.total_discount"
+                                           placeholder="{{'Total Discounts'|translate}}" type="number" 
+                                           required disabled>       
+                                    </mat-form-field>
+                                 </div>
+                                        <!--Net amount due-->
+                               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                    <mat-form-field class="full-wid mrgn-b-lg">
+                                           <input matInput name="Net_amout" [(ngModel)]="item.total_price"
+                                           placeholder="{{'Net amount due'|translate}}" type="number" 
+                                           required disabled>       
+                                    </mat-form-field>
+                                 </div>    
+                                          <!--Total after tax-->
+                               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                    <mat-form-field class="full-wid mrgn-b-lg">
+                                           <input matInput name="total_Vat" [(ngModel)]="item.Total_vat"
+                                           placeholder="{{'Total after tax'|translate}}" type="number" 
+                                           required disabled>       
+                                    </mat-form-field>
+                                 </div>   
+                                              <!--The amount paid-->
+                               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                                    <mat-form-field class="full-wid mrgn-b-lg">
+                                           <input matInput name="item.paid" [(ngModel)]="item.paid" 
+                                           placeholder="{{'The amount paid'|translate}}" type="number" 
+                                           disabled >       
+                                    </mat-form-field>
+                                 </div>                
+                    </div>
+      
+      
+                           
+                        </div>
+                     </form>
+            </div>
+         </mat-card>
+
+       </div>
+    
+      <div>
+         <mat-card>
+            <div class="gene-card-title">
+               <div fxLayout="row" fxLayoutAlign="center">
+                  <div fxLayout="column" fxLayoutAlign="center">
+                     <h3>{{'Executed Business Items'|translate}}</h3>
+                  </div>
+                  <span fxFlex></span>
+               </div>
+               <mat-divider></mat-divider>
+            </div>
+           
+            <div class="table-responsive gene-card-content">
+               <table class="table table-hover table-middle th-fw-light mb-0">
+                  <thead>
+                     <tr>
+                        <th style="text-align: center;">{{'ID'|translate}}</th>
+                        <th  style="text-align: center;">{{'Name'|translate}}</th>
+                        <th  style="text-align: center;">{{'Quantity'|translate}}</th>
+                        <th  style="text-align: center;">{{'Price'|translate}}</th>
+                        <th  style="text-align: center;">{{'Total Price'|translate}}</th>
+                     </tr>
+                  </thead>
+                  <tbody>                  
+                   <tr   *ngFor="let item of Items ; let i = index"  style="text-align: center;">
+                 
+                   <td>{{item.item_number}}</td>
+                   <td>{{item.item_name}}</td>
+                   <td>{{item.qty}}</td>
+                   <td>{{item.price}}</td>
+                   <td>{{item.qty * item.price}}</td>
+                 </tr>            
+                  </tbody>
+               </table>
+            </div>
+         </mat-card>
+      </div>
+
+      <div>
+      <mat-card>
+         <div class="gene-card-title">
+            <div fxLayout="row" fxLayoutAlign="center">
+               <div fxLayout="column" fxLayoutAlign="center">
+                  <h3>{{'Discounts Type'|translate}}</h3>
+               </div>
+               <span fxFlex></span>
+               </div>
+         </div>
+
+         <div class="gene-card-content pad-t-none">
+            <div class="table-responsive">
+               <table class="table table-hover table-middle th-fw-light mb-0">
+                  <thead>
+                     <tr style="text-align: center;">
+                        <th  style="text-align: center;">#</th>
+                        <th  style="text-align: center;">{{'Discounts Type'|translate}}</th>
+                        <th  style="text-align: center;">{{'Total Discounts'|translate}}</th>
+                       
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let item of Discount ; let i = index;"  style="text-align: center;">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.total}}</td>
+                       
+              </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </mat-card>
+    </div>
+       
+       

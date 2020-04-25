@@ -105,6 +105,12 @@ import { ConsualtantQTComponent } from './Components/consualtant-qt/consualtant-
 import { AddconsualtantQTComponent } from './Components/addconsualtant-qt/addconsualtant-qt.component';
 import { ContractstableComponent } from './Components/contractstable/contractstable.component';
 import { AddConsultantContractComponent } from './Components/add-consultant-contract/add-consultant-contract.component';
+import { RequestfortimesheetComponent } from './Components/requestfortimesheet/requestfortimesheet.component';
+import { AddtimesheetComponent } from './Components/addtimesheet/addtimesheet.component';
+import { ConsultantExtractComponent } from './Components/consultant-extract/consultant-extract.component';
+import { AddConsultantExtractComponent } from './Components/add-consultant-extract/add-consultant-extract.component';
+import { ConsultantExtractDetailComponent } from './Components/consultant-extract-detail/consultant-extract-detail.component';
+import { ProjectReportComponent } from './Components/project-report/project-report.component';
 
 
 export const firebaseConfig = {
@@ -333,13 +339,20 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		ConsualtantQTComponent,
 		AddconsualtantQTComponent,
 		ContractstableComponent,
-		AddConsultantContractComponent
+		AddConsultantContractComponent,
+		RequestfortimesheetComponent,
+		AddtimesheetComponent,
+		ConsultantExtractComponent,
+		AddConsultantExtractComponent,
+		ConsultantExtractDetailComponent,
+		ProjectReportComponent
 
 	
 		
 		
 	],
 	entryComponents:[
+		AddtimesheetComponent ,
 		AddConsultantContractComponent , 
 		AddconsualtantQTComponent,
 		DiscountComponent,

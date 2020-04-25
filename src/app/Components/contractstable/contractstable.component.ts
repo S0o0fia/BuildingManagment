@@ -31,6 +31,18 @@ export class ContractstableComponent implements OnInit {
   ConsultantQty(id)
   {
     this.router.navigate(['/home/ConsultantQty' , id]);
+    localStorage.setItem('contract_id' , id);
+  }
+
+  TimeSheet(id)
+  {
+    this.router.navigate(['/home/timesheet' , id]); 
+    localStorage.setItem('contract_id' , id);
+  }
+  Extract(id)
+  {
+    this.router.navigate(['/home/ExtractConsultant' , id]);
+    localStorage.setItem('contract_id' , id);
   }
 
   openDialog(): void {

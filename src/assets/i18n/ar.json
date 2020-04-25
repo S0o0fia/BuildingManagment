@@ -453,6 +453,7 @@
     "Location of Works"  :"مواقع العمل" ,
      "Added Items" : "البنود المضافة" ,
      "Draft Approve" : "اعتماد مسودة" ,
+    
      "Executed Quantity":"الكمية المنفذة",
      "draft" : "مسودة" , 
      "Build" : "مبنى" ,
@@ -597,6 +598,7 @@
       "Project Number" :  "رقم المشروع",
       "Request Number" : "رقم الطلب" ,
       "Request Name" : "اسم الطلب" ,
+      "Name":"الاسم",
       "Price" : "السعر" ,
       "Collect Duration" : "فترة الحصر",
       "Collect Request Number":"رقم طلب الحصر",
@@ -819,30 +821,17 @@
            "ConsultantContracts" : "عقود الاستشاريين" , 
            "Add New Contract" : "إضافة عقد جديد" , 
            "Specialization" : "التخصص" ,
+           "Qualifications" : "المؤهلات" ,
            "Qualifications according to the contract" : "المؤهلات حسب العقد" , 
            "Duration of the month" : "المدة بالشهر" ,
            "Add Consultant Quantity" : "إضافة كمية استشاري" ,
-           "Add Consultant Contract" : "إضافة عقد استشاري" 
-           
-          
-           
-          
-          
-          
-  
-         
-
-           
-
-
-  
-          
-         
-
-
-       
-
-
-
+           "Add Consultant Contract" : "إضافة عقد استشاري" ,
+           "Time Sheet" : "تعيينات المهندسين " , 
+           "Engineer Name": "اسم المهندس ",
+           "Status of Appointment":"حالة التعيين "  , 
+           "Job based on Contract" : "الوظيفه حسب العقد" , 
+           "Consultant Extracts" : "مستخلصات الاستشاري" ,
+           "Add Consultant Extract" : "إضافة مستخلصات الاستشاري" , 
+           "Show Time Sheet" : "إظهار تعيينات المهندسين"
 
 }

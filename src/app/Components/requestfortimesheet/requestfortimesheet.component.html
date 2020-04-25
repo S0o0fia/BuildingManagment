@@ -1,0 +1,80 @@
+
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+       <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="space-around center"  fxLayout.xs="column">
+             <div fxLayout="column">
+                <h4>{{'Time Sheet'|translate}}</h4>
+ 
+             </div> <span fxFlex></span>
+             
+             <div fxLayout="column">
+                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">
+                  <mat-icon>queue</mat-icon>  
+                  {{'Add'|translate}}</button>
+             </div> 
+          </div>
+         
+          <br/>
+          <div fxLayout="row" fxLayoutAlign="center center"  fxLayout.xs="column">
+           <button class="mrgn-b-xs" mat-raised-button color="primary"  style=" color: white; padding: 1%; padding-left: 3%; padding-right: 3%; font-size: medium; font-weight: bold;" (click)="state('draft')">{{'draft'|translate}}
+                       </button>
+
+           <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')" style=" padding: 1%;  padding-left: 3%; padding-right: 3%; font-size: medium; font-weight: bold;">{{'accepted'|translate}}</button>
+           <button class="mrgn-b-xs" mat-raised-button color="warn" (click)="statereject('rejected')" style=" padding: 1%;  padding-left: 3%; padding-right: 3%; font-size: medium; font-weight: bold;">{{'rejected'|translate}}</button>
+            
+         </div>
+          <br/>
+          
+          <mat-divider></mat-divider>
+       </div>
+       <div class="gene-card-content pad-t-none">
+          <div class="table-responsive">
+             <table class="table table-hover table-middle th-fw-light mb-0">
+                <thead>
+                   <tr>
+                      <th>{{'Engineer Name'|translate}}</th>
+                        <th>{{'Job Title'|translate}}</th>
+                        <th>{{'Project Name'|translate}}</th>
+                        <th>{{'From'|translate}}</th>
+                        <th>{{'From'|translate}}</th>
+                        <th>{{'Status of Appointment'|translate}}</th>
+                        <th>{{'Approvment'|translate}}</th>
+                   </tr>
+                </thead>
+                <tbody *ngFor="let data of timesheet | paginate: { id: 'listing_pagination',
+                     itemsPerPage: 10,
+                     currentPage: page,
+                     totalItems: totalRec };">
+                   <tr *ngIf="data.state == statename && data.contract_id == contract_id">
+                       <td>{{data.user_name}}</td>
+                       <td>{{data.specialty_name}}</td>
+                       <td>{{data.project_name}}</td>
+                       <td>{{data.from_date}}</td>
+                       <td>{{data.to_date}}</td>
+                       <td>{{data.state |translate }}</td>
+                       <td>
+                        <div class="row">
+                           <button mat-raised-button color='accent' [disabled]="data.state != 'draft'"
+                           (click)="approve(data.id)" >
+                            <mat-icon >check_circle </mat-icon>
+                            {{'Approve'|translate}}
+                         </button>
+                         <button mat-raised-button color='warn' [disabled]="data.state != 'draft'"
+                         (click)="reject(data.id)" >
+                          <mat-icon >highlight_off</mat-icon>
+                          {{'Rejected'|translate}}
+                       </button>
+                        </div>
+                    </td>
+                   </tr>
+                </tbody>
+             </table>
+             <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
+              previousLabel="{{'Previous'|translate}}"
+               nextLabel="{{'Next'|translate}}"
+              (pageChange)="page = $event"></pagination-controls>
+          </div>
+       </div>
+    </mat-card>
+ </div>

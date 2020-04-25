@@ -1,0 +1,139 @@
+<mat-card dir="rtl">
+    <div class="gene-card-title">
+       <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="column" fxLayoutAlign="start center">
+             <h3 >{{'Time Sheet'|translate}} </h3>
+          </div>
+          <span fxFlex></span>
+       </div>
+       <mat-divider></mat-divider>
+    </div>
+    <div class="gene-card-content">
+          <form #form="ngForm">
+                <div fxLayout="column">
+                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                      <!--Engineer Name'-->
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                    <mat-form-field class="full-wid mrgn-b-lg">
+                          <mat-label class="title">{{'Engineer Name'|translate}}</mat-label>
+                          <mat-select name="user" [(ngModel)]="user">
+                          <div *ngFor="let data of users" >
+                             <mat-option value={{data.id}}>{{data.name}}</mat-option>
+                          </div>  
+                          </mat-select>
+                    </mat-form-field>
+                 </div>
+              <!--Project List   -->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                         <mat-form-field class="full-wid mrgn-b-lg">
+                               <mat-label  class="title">{{'Project Name'|translate}}</mat-label>
+                               <mat-select name="project_id" [(ngModel)]="project_id">
+                                  <div *ngFor="let item of project">
+                                     <mat-option   value={{item.id}} >
+                                        {{item.name}}
+                                     </mat-option>
+                                  </div>
+                               </mat-select>
+                         </mat-form-field>
+                      </div>
+                       <!--Project List-->
+                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg">
+                              <mat-label  class="title">{{'Specialization'|translate}}</mat-label>
+                              <mat-select name="jobtitle" [(ngModel)]="jobtitle">
+                                 <div *ngFor="let item of jobtitles">
+                                    <mat-option   value={{item.id}} >
+                                       {{item.name}}
+                                    </mat-option>
+                                 </div>
+                              </mat-select>
+                        </mat-form-field>
+                     </div>
+                     <!--Qulification-->
+                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg">
+                              <mat-label  class="title">{{'Qualifications'|translate}}</mat-label>
+                              <mat-select name="qualification" [(ngModel)]="qualification">
+                                 <div *ngFor="let item of qulification">
+                                    <mat-option   value={{item.id}} >
+                                       {{item.name}}
+                                    </mat-option>
+                                 </div>
+                              </mat-select>
+                        </mat-form-field>
+                     </div>
+              <!--Project List-->
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                   <mat-form-field class="full-wid mrgn-b-lg">
+                   <mat-label  class="title">{{'Job based on Contract'|translate}}</mat-label>
+                    <mat-select name="qty" [(ngModel)]="qty">
+                  <div *ngFor="let item of qunatity">
+                  <div *ngIf= "item.contract_id == contract_id">
+               <mat-option   value={{item.id}} >
+                   {{item.description}}
+               </mat-option>
+            </div>
+                       </div>
+                      </mat-select>
+                 </mat-form-field>
+                    </div>
+                     <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-label  class="title">{{'Due do'|translate}}</mat-label>
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                      
+                        <div fxFlex.gt-sm="48" fxFlex.gt-xs="48" fxFlex="100" fxFlex.gt-md="48">
+                           
+                           
+                              <mat-form-field class="full-wid mrgn-b-lg"> 
+                                 <input matInput  name="fromd" [(ngModel)]="fromd"
+                                [min]="minDate" [max]="maxDate" [matDatepicker]="from"
+                                 placeholder="{{'From'|translate}}">
+                                <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                                <mat-datepicker #from></mat-datepicker>   
+                              </mat-form-field>
+                         </div>
+               
+                        <div fxFlex.gt-sm="51" fxFlex.gt-xs="51" fxFlex="100" fxFlex.gt-md="51" style="margin-right:5%;">
+                         
+                         
+                           <mat-form-field class="full-wid mrgn-b-lg"> 
+                              <input matInput name="tod" [(ngModel)]="tod"
+                             [min]="minDate" [max]="maxDate" [matDatepicker]="to"
+                              placeholder="{{'To'|translate}}">
+                             <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                             <mat-datepicker #to></mat-datepicker>   
+                           </mat-form-field>
+                        </div>
+                        </div>
+               
+                      </div>       
+            
+                  
+                <!--Description-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                    <mat-form-field class="full-wid mrgn-b-lg ">
+                          <mat-label  class="title">{{'Description'|translate}}</mat-label>
+                          <textarea matInput name="description"  
+                                    cdkTextareaAutosize
+                                    name="description"
+                                    [(ngModel)]="description"
+                                     #autosize="cdkTextareaAutosize"
+                                      cdkAutosizeMinRows="1"
+                                       cdkAutosizeMaxRows="5"></textarea>                        
+                    </mat-form-field>
+             </div>
+            </div>
+        </div>
+
+
+                
+                   <div fxLayout="row" fxLayoutAlign="space-between">
+                         <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}  <mat-icon>cancel</mat-icon></button>
+                         <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Submited'|translate }}  <mat-icon>done_outline</mat-icon></button>
+                         
+                   </div>
+                   
+                
+             </form>
+    </div>
+ </mat-card>

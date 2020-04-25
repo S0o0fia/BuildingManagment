@@ -50,6 +50,13 @@ const MENUITEMS = [
      
     },
     
+    {
+      state: 'projectreport',
+      name: 'Project Report',
+      type: 'link',
+      icon: 'note',
+     
+    },
   
    
     {

@@ -24,6 +24,8 @@ import { InvoiceDiscount } from 'app/Models/Extract/invoice-discount';
 import { User } from 'app/Models/User/user';
 import { Consultantqty } from 'app/Models/Consqty/consultantqty';
 import { Consulantcontract } from 'app/Models/consutlantcontract/consulantcontract';
+import { Timesheet } from 'app/Models/Timesheet/timesheet';
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -694,7 +696,7 @@ export class CoreService {
 
 	let url = '/consultant/qty/get?db=nqproject&token='+localStorage.getItem('token');
 	
-	 return this.http.get(this.apiURL+url);
+	 return this.http.get<any[]>(this.apiURL+url);
   }
 
   createConsultantqty(value : Consultantqty)
@@ -722,9 +724,139 @@ export class CoreService {
 	'","to_date":"'+value.to_date+
 	'","name" :"'+value.name+
 	'"}';
-    console.log(url);
+  
 	return this.http.post(this.apiURL+url, null);
 
+  }
+
+  getTimesheet()
+  {
+	  let url = '/consultant/timesheet/get?db=nqproject&token='+localStorage.getItem('token');
+	
+	 return this.http.get<any[]>(this.apiURL+url);
+
+  }
+
+  createTimesheet(value:Timesheet)
+  {
+	let url = '/consultant/timesheet/create?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
+	'"contract_id":'+value.contract_id+
+	',"description":"'+value.description+
+	'","from_date":"'+value.from_date+
+	'","to_date":"'+value.to_date+
+	'","position_id":'+value.position_id+
+	',"user_id":'+value.user_name+
+	',"qualification_id":'+value.qualification_id+
+	',"project_id":'+value.project_id+
+	',"specialty_id":'+value.specialty_id+
+	'}';
+	console.log(url);
+   
+	return this.http.post(this.apiURL+url, null);
+
+  }
+
+  setConsultantState(id : number , state : string )
+  {
+	
+	let url = '/consultant/timesheet/set_state?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
+	'"id":'+id+
+	',"state":"'+state+'"}';
+ 
+	return this.http.post(this.apiURL+url, null);
+
+  }
+
+  getConsultantInvoices()
+  {
+	  let url = '/consultant/invoice/get?db=nqproject&token='+localStorage.getItem('token');
+	  return this.http.get<any[]>(this.apiURL+url);
+  }
+
+  getConsultantInvoicesName(contract_id : number)
+  {
+	  let url = '/consultant/invoice/get_name?db=nqproject&token='+localStorage.getItem('token')+'&contract_id='+contract_id;
+	  return this.http.get<any[]>(this.apiURL+url);
+  }
+
+
+  getApprovedTimesheet(fromdate : string , todate:string , contract_id:number)
+  {
+
+    
+	  let url = '/approved_ts/get?db=nqproject&token='+localStorage.getItem('token')+'&contract_id='+contract_id+
+	  '&from_date='+fromdate+'&to='+todate;
+	  return this.http.get<any[]>(this.apiURL+url);
+
+  }
+
+
+  createConsultantInvoices(values:Extract)
+  {
+	let extracturl = "/consultant/invoice/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
+	'"name":"'+values.name+
+	'","date_from":"'+values.date_from+
+	'","date_to":"'+values.date_to+
+	'","invoice_type":"'+values.invoice_type+
+	'","paid":'+values.paid+	   
+	',"Total_vat":'+values.Total_vat+
+	',"total_discount":'+values.total_discount+
+	',"total_excuted":'+values.total_excuted+
+	',"total_price":'+values.total_price+
+	',"contract_id":'+values.project_id+
+	'}';
+   console.log(extracturl);
+	return this.http.post(this.apiURL+extracturl, null);
+  }
+
+  createConsultantDiscount(value : InvoiceDiscount)
+  {
+	let invoicediscount="/consultant/invoice/discount/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
+	'"name":"'+value.name+
+	'","total":'+value.total+
+	',"consultant_invoice_id":'+value.project_invoice_id+'}';
+	console.log(invoicediscount);
+	return this.http.post(this.apiURL+invoicediscount , null);
+  }
+  createConsultantInvoiceitem (values : Extractitem  , timeshhet: number)
+  {
+	 let extracturl = "/consultant/invoice/items/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
+	 '"item_number":"'+values.item_number+
+	 '","item_name":"'+values.item_name+
+	 '","qty":'+values.qty+
+	 ',"approved_qty":'+values.approved_qty+
+	 ',"p_approved_qty":'+values.p_approved_qty+
+	 ',"price":'+values.price+
+	 ',"contract_invoice_id":'+values.extract_id+
+	 ',"timesheet_id":'+timeshhet+
+	 '}';
+
+	  console.log(extracturl);
+	 return this.http.post(this.apiURL+extracturl , null);
+
+
+  }
+
+  getConsultantInvoice()
+  {
+	let extracturl = "/consultant/invoice/get?db=nqproject&token="+localStorage.getItem('token');
+    return this.http.get(this.apiURL+extracturl);
+  }
+
+  getConsultantInvoiceDiscount(id)
+  {
+	let getinvoicedisciunt = "/consultant/invoice/discount/get?db=nqproject&token="+localStorage.getItem('token')+
+	'&consultant_invoice_id='+id;
+	console.log(getinvoicedisciunt);
+	return this.http.get(this.apiURL+getinvoicedisciunt);
+  }
+
+  getConsultantInvoiceitems(id)
+  {
+	let getinvoicedisciunt = "/consultant/invoice/items/get?db=nqproject&token="+localStorage.getItem('token')+
+	'&contract_invoice_id='+id;
+	console.log(getinvoicedisciunt);
+	return this.http.get(this.apiURL+getinvoicedisciunt);
   }
 }
 

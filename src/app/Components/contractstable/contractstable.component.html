@@ -40,7 +40,9 @@
                                 <td>{{data.to_date}}</td>
                                 <td>{{data.description}}</td>
                                  <td>
-                                    <button mat-icon-button color="primary" matTooltip="{{'Extracts'|translate}}">
+                                    <button mat-icon-button 
+                                    (click)="Extract(data.id)" 
+                                    color="primary" matTooltip="{{'Extracts'|translate}}">
                                  <mat-icon>receipt</mat-icon>
                                  </button>
                                   
@@ -48,7 +50,7 @@
                                  <button mat-icon-button  color="primary"  (click)="ConsultantQty(data.id)" matTooltip="{{'Consulant Qunatity Table'|translate}}" >
                                           <mat-icon>view_module</mat-icon>
                                  </button>
-                                 <button color="primary"  mat-icon-button matTooltip="{{'Time Sheet'|translate}}" >
+                                 <button color="primary"  (click)="TimeSheet(data.id)"  mat-icon-button matTooltip="{{'Time Sheet'|translate}}" >
                                     <mat-icon>watch_later</mat-icon>
                                  </button>
 
