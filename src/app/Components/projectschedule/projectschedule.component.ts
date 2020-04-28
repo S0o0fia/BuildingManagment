@@ -13,6 +13,8 @@ export class ProjectscheduleComponent implements OnInit {
   schedulelist: any[]=[];
   rolelist : any[]=[];
   projectname : string;
+  page : number = 0;
+  totalRec : number;
   constructor(private services : CoreService , private dialog: MatDialog) { 
 
     const dialogConfig = new MatDialogConfig();
@@ -32,6 +34,8 @@ export class ProjectscheduleComponent implements OnInit {
       },
      err=>console.log(err)
     );
+
+    this.totalRec = this.schedulelist.length;
   }
 
   openDialog(data: any)

@@ -28,7 +28,10 @@
                               </tr>
                            </thead>
                            <tbody>
-                              <tr *ngFor="let data of schedulelist">
+                              <tr *ngFor="let data of schedulelist| paginate: { id: 'listing_pagination',
+                              itemsPerPage: 10,
+                              currentPage: page,
+                              totalItems: totalRec };">
                                  <td>{{data.name}}</td>
                                  <td>{{data.percentage | number:'1.2-2'}}</td>
                                  <td>
