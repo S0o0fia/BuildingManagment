@@ -28,6 +28,7 @@ export class MirapproveComponent implements OnInit {
     state : string;
   consultant_approve : string;
   consultant_btn : string;
+  detail : string = "";
   role : number ;
   boolconsultant : boolean = false ; 
   boolcontractor : boolean = false;

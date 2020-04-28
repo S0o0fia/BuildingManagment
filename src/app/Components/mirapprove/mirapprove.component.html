@@ -126,9 +126,9 @@
                         <mat-form-field class="full-wid mrgn-b-lg">
                               <mat-label>{{'Department'|translate}}</mat-label>
                               <mat-select name="department">      
-                                   <div *ngFor="let item of users"> 
-                                    <mat-option (click)="Typeids(item.id)" value={{item.id}}>
-                                       {{item.name}}
+                                   <div> 
+                                    <mat-option >
+                                     
                                     </mat-option>
                                    </div>
                             </mat-select>
@@ -139,9 +139,9 @@
                       <mat-form-field class="full-wid mrgn-b-lg">
                             <mat-label>{{'Name'|translate}}</mat-label>
                             <mat-select name="department">      
-                                 <div *ngFor="let item of users"> 
-                                  <mat-option (click)="Typeids(item.id)" value={{item.id}}>
-                                     {{item.name}}
+                                 <div> 
+                                  <mat-option >
+                                    
                                   </mat-option>
                                  </div>
                           </mat-select>
@@ -161,7 +161,7 @@
                   </div>
                          <div fxLayout="row" fxLayoutAlign="center">
                                 <button mat-button mat-raised-button color="accent" type="button" dir="ltr"
-                                (click)="Save()" [disabled]="boolcontractor == true">
+                                 [disabled]="boolcontractor == true">
                                   <mat-icon>save</mat-icon>
                                 {{'Send'|translate }}</button>
                          </div>
@@ -169,14 +169,14 @@
                 </form>
 
                 <div style="overflow-y:scroll; height:45%;">
-                  <div *ngFor="let comment of Comments ; let  i = index"  >
+                  <!-- <div *ngFor="let comment of Comments ; let  i = index"  >
                    <mat-card style="text-align: center;border-style: solid;" [ngStyle]="{ 'border-color': ( i%2 == 0 ?  '#1565c0' :  '#00acac' ) }"> 
                        <h5>{{comment.user_name}}</h5>
                        <h5>{{comment.comments}}</h5>
-                       <!-- <h6>بواسطة</h6> -->
+                      
                        <h6>{{comment.name}}</h6>
                   </mat-card>
-                  </div>
+                  </div> -->
                    </div>
               </mat-card>
       
