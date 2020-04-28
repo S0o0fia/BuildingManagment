@@ -101,6 +101,14 @@ export class CoreService {
 		return this.http.get(this.apiURL+userUrl);
 	}
 
+	modifyRole (value : any)
+	{
+		let roleUrl='/usersrole/modify?db='+this.db+'&token='+localStorage.getItem("token")+'&activity_id=['+value.activity_id+']&role_id='+value.role_id;
+		debugger;
+        console.log(roleUrl);
+		return this.http.post(this.apiURL+roleUrl , null);
+	}
+
 	createUser (value : User)
 	{
 		let userUrl2='/users/create?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
