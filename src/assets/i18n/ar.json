@@ -526,7 +526,8 @@
       "Permission to start a business" : "إذن لبدء الأعمال" ,
      "Request for Recieves Items" :"طلبات تسليم المواد",
      "Project Obstacles" : "عوائق المشروع",
-     "Monthly Report" : "التفرير الشهري" , 
+     "Monthly Report" : "التفرير الشهري" ,
+     "Month" : "الشهر", 
      "Financial Flow" :  "التدفق المالي",
      "Current Extracts" : "المستخلصات الحالية" ,
      "Abstracts" : "المستخلصات" ,
@@ -853,7 +854,8 @@
            "Create Quantity":"تقديم كمية",
            "Delete project" :"حذف مشروع" ,
            "ROLES LIST" : "قائمة الصلاحيات",
-           "Role Activity":"نشاط الصلاحية"
+           "Role Activity":"نشاط الصلاحية" , 
+           "Project Schedule" : "الجدول الزمني "
 
 
 }

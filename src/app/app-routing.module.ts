@@ -89,6 +89,10 @@ const appRoutes: Routes = [
             component : ContractstableComponent
          },
          {
+            path:'projectschedule',
+            component:ProjectscheduleComponent
+         },
+         {
             path: "timesheet/:id" , 
             component : RequestfortimesheetComponent
          },
@@ -188,10 +192,7 @@ const appRoutes: Routes = [
             component:AddExtractComponent
          },
 
-         {
-            path:'projectschedule',
-            component:ProjectscheduleComponent
-         }
+        
         
       ]
    },
