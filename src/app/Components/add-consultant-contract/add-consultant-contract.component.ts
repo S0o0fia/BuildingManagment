@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreService } from 'app/Service/core/core.service';
 import { Consulantcontract } from 'app/Models/consutlantcontract/consulantcontract';
-import { formatDate } from '@angular/common';
+import { formatDate, CurrencyPipe } from '@angular/common';
 import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { ContractstableComponent } from '../contractstable/contractstable.component';
 
@@ -28,8 +28,9 @@ export class AddConsultantContractComponent implements OnInit {
   duration_type : number = 0;
   //new contract 
   newContract : Consulantcontract;
+  formattedAmount: string;
   constructor(public service : CoreService , public dialogRef: MatDialogRef<ContractstableComponent> , 
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar,private currencyPipe:CurrencyPipe) {
     dialogRef.disableClose = true;
     this.minDate = new Date(1900,1,1);
     this.maxDate = new Date(2050,1,1);
@@ -51,6 +52,12 @@ export class AddConsultantContractComponent implements OnInit {
       err=> console.log(err)
     );
   }
+
+  transformAmount(element){
+    this.formattedAmount = this.currencyPipe.transform(this.contract_value , "   ر.س");
+    // Remove or comment this line if you dont want to show the formatted amount in the textbox.
+    element.target.value = this.formattedAmount;
+}
 
   Save()
   {

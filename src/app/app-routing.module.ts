@@ -36,6 +36,7 @@ import { AddConsultantExtractComponent } from './Components/add-consultant-extra
 import { ProjectReportComponent } from './Components/project-report/project-report.component';
 import { ConsultantExtractDetailComponent } from './Components/consultant-extract-detail/consultant-extract-detail.component';
 import { RoleManagementComponent } from './Components/role-management/role-management.component';
+import { ProjectscheduleComponent } from './Components/projectschedule/projectschedule.component';
 
 
 
@@ -185,6 +186,11 @@ const appRoutes: Routes = [
          , {
             path:'addextract',
             component:AddExtractComponent
+         },
+
+         {
+            path:'projectschedule',
+            component:ProjectscheduleComponent
          }
         
       ]

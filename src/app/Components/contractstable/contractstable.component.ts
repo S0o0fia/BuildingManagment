@@ -5,6 +5,7 @@ import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { MatDialog } from '@angular/material';
 import { AddConsultantContractComponent } from '../add-consultant-contract/add-consultant-contract.component';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'ms-contractstable',
@@ -13,20 +14,36 @@ import { AddConsultantContractComponent } from '../add-consultant-contract/add-c
 })
 export class ContractstableComponent implements OnInit {
 
-  contract : any[] = [];
+  contract : any = [];
+  formattedAmount: any;
   constructor(public service : CoreService,  private router : Router, private formatPipe: NumberFormatPipe , 
-    private pageTitleService: PageTitleService , private dialog: MatDialog , private discount : MatDialog)
+    private pageTitleService: PageTitleService , private dialog: MatDialog , private discount : MatDialog,private currencyPipe:CurrencyPipe)
     {
       
     }
 
   ngOnInit() {
     this.service.getConsultantContract().subscribe(
-      data=> this.contract = data as any[] , 
+      data=> {
+        console.log(data);
+        this.contract = data;
+              
+       //for number formatting 
+   this.contract.forEach(element => {
+     element.contract_value = this.transformAmount(element.contract_value);
+   
+     
+   });  
+   
+             }, 
       err => console.log(err)
     )
   }
-
+  transformAmount(value){
+    this.formattedAmount = this.currencyPipe.transform( value , " ");
+    // Remove or comment this line if you dont want to show the formatted amount in the textbox.
+    return this.formattedAmount;
+}
 
   ConsultantQty(id)
   {

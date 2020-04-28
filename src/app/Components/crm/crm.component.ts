@@ -96,7 +96,8 @@ export class CrmComponent implements OnInit, OnDestroy {
          "Current Extracts",
          "Abstracts" ,
          "History Formats",
-         "Add Request"
+         "Add Request",
+         "Project Schedule"
 
                ];
       
@@ -137,7 +138,11 @@ export class CrmComponent implements OnInit, OnDestroy {
             case "Request for Recieves Items": 
                     {this.router.navigate(['/home/table/receiveitem']);}
                break;
-                   
+            
+            case "Project Schedule": 
+                     {this.router.navigate(['/home/projectschedule']);}
+                break;
+               
             case "Project Obstacles":  break;
                        case "Monthly Report":  break;
                           case  "Financial Flow" :  break;
