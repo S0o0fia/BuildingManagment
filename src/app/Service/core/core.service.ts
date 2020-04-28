@@ -109,6 +109,13 @@ export class CoreService {
 		return this.http.post(this.apiURL+roleUrl , null);
 	}
 
+	getSchedule (id: any)
+	{
+		debugger
+		let userUrl='/project/schedule/get?db='+this.db+'&token='+localStorage.getItem("token")+'&project_id='+id;
+		return this.http.get(this.apiURL+userUrl);
+	}
+
 	createUser (value : User)
 	{
 		let userUrl2='/users/create?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+

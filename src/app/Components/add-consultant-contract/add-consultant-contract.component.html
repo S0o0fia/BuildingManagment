@@ -44,8 +44,8 @@
                               <!--Contract Value-->
                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                         <mat-form-field class="full-wid mrgn-b-lg">
-                                    <input matInput name="contract_value"  [(ngModel)]="contract_value"
-                                    placeholder="{{'Contract Value'|translate}}" type="number"  required> 
+                                    <input matInput name="contract_value" (blur)="transformAmount($event)" [(ngModel)]="contract_value" [(value)]="formattedAmount"
+                                    placeholder="{{'Contract Value'|translate}}" required> 
                         </mat-form-field>
                      </div>
 

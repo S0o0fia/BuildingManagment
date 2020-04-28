@@ -111,6 +111,7 @@ import { ConsultantExtractComponent } from './Components/consultant-extract/cons
 import { AddConsultantExtractComponent } from './Components/add-consultant-extract/add-consultant-extract.component';
 import { ConsultantExtractDetailComponent } from './Components/consultant-extract-detail/consultant-extract-detail.component';
 import { ProjectReportComponent } from './Components/project-report/project-report.component';
+import { ProjectscheduleComponent } from './Components/projectschedule/projectschedule.component';
 
 
 export const firebaseConfig = {
@@ -345,7 +346,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		ConsultantExtractComponent,
 		AddConsultantExtractComponent,
 		ConsultantExtractDetailComponent,
-		ProjectReportComponent
+		ProjectReportComponent,
+		ProjectscheduleComponent
 
 	
 		

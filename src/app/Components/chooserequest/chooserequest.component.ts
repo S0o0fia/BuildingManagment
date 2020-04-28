@@ -26,6 +26,7 @@ export class ChooserequestComponent implements OnInit {
     "Request for Recieves Items",
     "Permission for concrete casting",
     "Permission to start a business",
+    "Project Schedule"
      ];
   ngOnInit() {
   }
@@ -124,6 +125,13 @@ export class ChooserequestComponent implements OnInit {
     case "Request for Recieves Items" :
       {
         this.router.navigate(['/home/table/receiveitem']);
+        this.dialog.closeAll();
+      }
+      break;
+
+    case "Project Schedule" :
+      {
+        this.router.navigate(['/home/projectschedule']);
         this.dialog.closeAll();
       }
       break;
