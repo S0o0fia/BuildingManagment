@@ -13,6 +13,26 @@
           <form #form="ngForm">
                 <div fxLayout="column">
                    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                      <!--Contract Name -->
+                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-form-field class="full-wid mrgn-b-lg ">
+                             
+                              <input matInput name="contract_name" [(ngModel)]="contract_name"
+                            
+                              placeholder="{{'Contract Name'|translate}}" type="text" required>       
+                        </mat-form-field>
+                 </div>
+                         <!--Contract Number-->
+                         
+                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                           <mat-form-field class="full-wid mrgn-b-lg ">
+                                
+                                 <input matInput name="contract_number" [(ngModel)]="contract_number"
+                               
+                                 placeholder="{{'Contract Number'|translate}}" type="number" required>       
+                           </mat-form-field>
+                    </div>
+                                
                      <!--Consultant-->
                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                             <mat-form-field class="full-wid mrgn-b-lg">
@@ -31,17 +51,7 @@
                             </mat-form-field>
                          </div>
                       
-                         <!--Contract Number-->
-                         
-                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                    <mat-form-field class="full-wid mrgn-b-lg ">
-                         
-                          <input matInput name="contract_number" [(ngModel)]="contract_number"
-                        
-                          placeholder="{{'Contract Number'|translate}}" type="number" required>       
-                    </mat-form-field>
-             </div>
-                              <!--Contract Value-->
+                      <!--Contract Value-->
                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                         <mat-form-field class="full-wid mrgn-b-lg">
                                     <input matInput name="contract_value"  [(ngModel)]="contract_value"
@@ -63,13 +73,14 @@
                         </mat-form-field>
                  </div>
                      
+                 <!--Contract Duration-->
                  <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                   
-                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                  
-                    <div fxFlex.gt-sm="48" fxFlex.gt-xs="48" fxFlex="100" fxFlex.gt-md="48">
-                       
- 
+                  <mat-lable class="title" >{{'Contract Duration'|translate}}</mat-lable>
+               
+               
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <!--From-->
+                    <div fxFlex.gt-sm="48" fxFlex.gt-xs="48" fxFlex="100" fxFlex.gt-md="48" style="margin-top:2%;">
                           <mat-form-field class="full-wid mrgn-b-lg"> 
                              <input matInput  name="fromd" [(ngModel)]="fromd"
                             [min]="minDate" [max]="maxDate" [matDatepicker]="from"
@@ -79,25 +90,46 @@
                           </mat-form-field>
                      </div>
            
-                    <div fxFlex.gt-sm="51" fxFlex.gt-xs="51" fxFlex="100" fxFlex.gt-md="51" style="margin-right:5%;">
-                       
-                    
-                     
-                       <mat-form-field class="full-wid mrgn-b-lg"> 
-                          <input matInput name="tod" [(ngModel)]="tod"
-                         [min]="minDate" [max]="maxDate" [matDatepicker]="to"
-                          placeholder="{{'To'|translate}}">
-                         <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
-                         <mat-datepicker #to></mat-datepicker>   
-                       </mat-form-field>
+                     <!--Type Duration-->
+                     <div fxFlex.gt-sm="48" fxFlex.gt-xs="48" fxFlex="100" fxFlex.gt-md="48" style="margin-right: 5%;">
+                        <!--By Days-->
+                        <div fxFlex.gt-sm="48" fxFlex.gt-xs="48" fxFlex="100" fxFlex.gt-md="48">
+                           <mat-radio-button value="1" (change)="duration(1)">{{'Duration with Days'|translate}}</mat-radio-button>
+                           <mat-form-field class="full-wid mrgn-b-lg " style="margin-left: 5%;">
+                             
+                              <input matInput name="days" [(ngModel)]="days"
+                              (change)="durationd()"  [disabled]="duration_type != 1"
+                              placeholder="{{'Duration with Days'|translate}}" type="number">       
+                        </mat-form-field>
+                        </div>
+                        <!--By Months-->
+                        <div fxFlex.gt-sm="48" fxFlex.gt-xs="48" fxFlex="100" fxFlex.gt-md="48">
+                           <mat-radio-button value="2" (change)="duration(2)">{{'Duration with Months'|translate}}</mat-radio-button>
+                           <mat-form-field class="full-wid mrgn-b-lg " style="margin-right: 5%;">
+                          
+                              <input matInput name="monthes" [(ngModel)]="monthes"
+                              (change)="durationd()"   [disabled]="duration_type != 2"                         
+                              placeholder="{{'Duration with Months'|translate}}" type="number">       
+                        </mat-form-field>
+                        </div>
+                     </div>
                     </div>
-                    </div>
-           
                   </div>
-                            
 
-                 
+                 <!--To-->
+                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                  <mat-form-field class="full-wid mrgn-b-lg"> 
+                     <input matInput name="tod" [(ngModel)]="tod"
+                    [min]="minDate" [max]="maxDate" [matDatepicker]="to"
+                     placeholder="{{'To'|translate}}" disabled>
+                    <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                    <mat-datepicker #to></mat-datepicker>   
+                  </mat-form-field>
+               </div>
+
+
                 </div>
+               
                 <div fxLayout="row" fxLayoutAlign="space-between">
                     <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()" type="button" dir="ltr">{{'Cancel'|translate }}
                           <mat-icon>cancel</mat-icon>

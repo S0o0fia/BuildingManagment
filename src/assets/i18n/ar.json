@@ -1,5 +1,6 @@
 {  
    "Menus (dropdowns)" : "القوائم (القوائم المنسدلة)",
+   "Degree":"الدرجة العلمية",
    "Enter": "مدخل" ,
    "Cart" : "عربة التسوق",
    "Options" : "خيارات",
@@ -543,6 +544,8 @@
       "Step 4" : "الخطوة الاخيرة" ,
       "Proejct Name" : "اسم المشروع" ,
       "Contract Number" : "رقم العقد" ,
+      "Contract Name":"اسم العقد",
+      "Contract Duration" : "مدة العقد",
       "First Payment" : "الدفعة المقدمة" ,
       "Contract contain first pay" : "العقد ينص على دفعه مقدمة",
       "Date of Project Start" : "تاريخ بدء التنفيذ",
@@ -550,6 +553,8 @@
       "Project Duration With Days" : "مدة المشروع بالأيام" ,
       "Project Duration With Months" : "مدة المشروع بالشهور" ,
       "Budget Year":"سنة الميزانية",
+  
+      "Graduate Year":"سنة التخرج",
       "Within Project":"ضمن المشروع" ,
       "Item Description" : "وصف البند"  ,
       "Project Description" : "وصف المشروع",
@@ -712,7 +717,8 @@
          "Request Status" : "حالة الطلب" ,
          "Progress Date" : "تاريخ الإجراء",
          "Progress Owner" : "متخذ الأجراء" ,
-      
+          "Modify Role" : "تعديل الصلاحيات",
+          "rolename" : "اسم الصلاحية",
          "Special schema" : "محطط خاص"    ,
          "Supervision" : "إشراف" ,
          "Under offering" : "قيد الطرح",
@@ -733,6 +739,7 @@
           "Extract Date" : "تاريخ المستخلص",
           "Extracts Attachment" : "مرفقات المستخلصات",
           "Upload" : "إرفاق" ,
+          "Upload Your CV"  :"إرفاق السيرة الذاتية",
           "Upload All" : "إرفاق الكل" ,
           "Cancel All" :"إلغاء الإرفاق للكل" ,
           "Remove" : "حذف"  ,
@@ -837,6 +844,16 @@
            "Show Time Sheet" : "إظهار تعيينات المهندسين" ,
            "User is Company":"المستخدم عبارة عن شركة" , 
            "User is Empolyee" : "المستخدم عبارة عن موظف في شركة",
-           "Company Type" : "نوع الشركة"
+           "Company Type" : "نوع الشركة" , 
+           "Excueted Project Name" :"اسم مشروع التنفيذ",
+           "The job that candidate to" : "اسم الوظيفة المرشح لها",
+           "Appointment period" : "فترة التعيين" , 
+           "create ptoject" : "إنشاء مشروع",
+           "Create RFI" :"تقديم طلب فحص الأعمال",
+           "Create Quantity":"تقديم كمية",
+           "Delete project" :"حذف مشروع" ,
+           "ROLES LIST" : "قائمة الصلاحيات",
+           "Role Activity":"نشاط الصلاحية"
+
 
 }

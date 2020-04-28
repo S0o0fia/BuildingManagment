@@ -36,7 +36,7 @@ export class RoleManagementComponent implements OnInit {
   {
     const dialogRef = this.dialog.open(ModifyroleComponent, {
       width: '80%',
-      height: '85%',
+      height: '75%',
       data: data.id
     });
   

@@ -2,7 +2,7 @@
     <div class="gene-card-title">
        <div fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="column" fxLayoutAlign="start center">
-            <h3 >{{'Role'}} / {{'Modify Role'}} </h3>
+            <h3 >{{'Modify Role'|translate}} </h3>
           </div>
           <span fxFlex></span>
        </div>
@@ -17,7 +17,7 @@
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                              <mat-form-field class="full-wid mrgn-b-lg ">
                              <input matInput name="rolename" [(ngModel)]="rolename" 
-                             placeholder="{{'rolename'}}" type="text" required>    
+                             placeholder="{{'rolename'|translate}}" type="text" required>    
                           </mat-form-field> 
                           
                      </div>  
@@ -31,7 +31,7 @@
                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                             <mat-form-field class="full-wid mrgn-b-lg ">
                             <input matInput name="description" [(ngModel)]="description" 
-                            placeholder="{{'description' | translate}}" type="text" required>    
+                            placeholder="{{'Note' | translate}}" type="text" required>    
                          </mat-form-field> 
                          
                     </div>  
@@ -47,7 +47,7 @@
                             <mat-list>  
                               <mat-list-item *ngFor="let item of activityrights">
                                  <!-- <mat-form-field class="full-wid mrgn-b-lg "> -->
-                                 <mat-checkbox matInput [name]="item" [(ngModel)]="item.Checked" (change)="getCheckboxValues($event,item)">{{ item.name }}</mat-checkbox>
+                                 <mat-checkbox matInput [name]="item" [(ngModel)]="item.Checked" (change)="getCheckboxValues($event,item)">{{ item.name |translate }}</mat-checkbox>
                               <!-- </mat-form-field> -->
                                </mat-list-item>
                            </mat-list> 
@@ -56,7 +56,7 @@
 
                   </div>
                </div>
-                <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 5%;">
                   <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}  <mat-icon>cancel</mat-icon></button>
                   <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Submited'|translate }}  <mat-icon>done_outline</mat-icon></button>
                   

@@ -109,13 +109,24 @@ export class CoreService {
 		return this.http.post(this.apiURL+roleUrl , null);
 	}
 
-	createUser (value : User)
+	createUser1 (value : User)
 	{
 		let userUrl2='/users/create?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
 		'"name":"'+value.name+
 		'","password":"'+value.password+
 		'","login":"'+value.login+
 		'","user_job":"'+value.user_job+'"}';
+        console.log(userUrl2);
+		return this.http.post(this.apiURL+userUrl2 , null);
+	}
+
+	createUser2 (value : User , Companyid : number)
+	{
+		let userUrl2='/users/create?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
+		'"name":"'+value.name+
+		'","password":"'+value.password+
+		'","login":"'+value.login+
+		'","role_id":'+value.user_job+'}'+'&company_id='+Companyid;
         console.log(userUrl2);
 		return this.http.post(this.apiURL+userUrl2 , null);
 	}

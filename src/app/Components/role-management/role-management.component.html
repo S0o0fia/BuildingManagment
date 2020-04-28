@@ -21,22 +21,22 @@
                      <table class="table table-hover table-middle th-fw-light mb-0">
                            <thead>
                               <tr>
-                                 <th>{{'RoleName'|translate}}</th>
-                                 <th>{{'Description' | translate}}</th>
-                                 <th>{{'Activities'|translate}}</th>
+                                 <th>{{'rolename'|translate}}</th>
+                                 <th>{{'Role Activity'|translate}}</th>
+                                 <th>{{'Note' | translate}}</th>
                                  <th>{{'Controls'|translate}}</th>
                                
                               </tr>
                            </thead>
                            <tbody>
                               <tr *ngFor="let data of rolelist">
-                                 <td>{{data.name}}</td>
-                                 <td>{{data.description}}</td>
-                                 <td>
+                                 <td>{{data.name | translate}}</td>
+                                <td>
                                      <span *ngIf="data.activity_ids.length>0">
-                                         {{data.activity_ids[0].name}}
+                                         {{data.activity_ids[0].name | translate}}
                                      </span>
                                  </td>
+                                 <td>{{data.description}}</td>
                                  <td>
                                     <button mat-icon-button color="primary" matTooltip="{{'Delete'|translate}}">
                                  <mat-icon>delete</mat-icon>

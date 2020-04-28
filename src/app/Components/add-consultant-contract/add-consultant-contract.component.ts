@@ -22,6 +22,10 @@ export class AddConsultantContractComponent implements OnInit {
   description : string;
   minDate : Date;
   maxDate : Date ;
+  contract_name : string;
+  days : number;
+  monthes : number;
+  duration_type : number = 0;
   //new contract 
   newContract : Consulantcontract;
   constructor(public service : CoreService , public dialogRef: MatDialogRef<ContractstableComponent> , 
@@ -29,6 +33,7 @@ export class AddConsultantContractComponent implements OnInit {
     dialogRef.disableClose = true;
     this.minDate = new Date(1900,1,1);
     this.maxDate = new Date(2050,1,1);
+ 
   }
 
   ngOnInit() {
@@ -71,4 +76,33 @@ export class AddConsultantContractComponent implements OnInit {
            err=> console.log(err)
          );
   }
+
+  duration(val)
+  {
+    this.duration_type = val;
+  
+  }
+  durationd()
+  {
+    let day = this.fromd.getDay();
+    let months = this.fromd.getMonth();
+    let year = this.fromd.getFullYear();
+    
+    if(this.duration_type == 1)
+    {
+     day += Math.round( this.days %30)-2;    
+     months += Math.round(this.days/30);
+  
+    }
+    else if( this.duration_type == 2)
+    {
+      day -= 2;
+      months += this.monthes;
+    
+     
+    }
+ 
+    this.tod = new Date(year , months, day)
+  }
+
 }

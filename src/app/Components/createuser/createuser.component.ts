@@ -18,8 +18,8 @@ export class CreateuserComponent implements OnInit {
   email : string;
   newUser : User;
   userjob : string;
-  company : string = "";
-  Role : string = "";
+  company : number;
+  Role :number;
   companies : any []=[];
   userRole : any []=[];
   jobtitle : string [] = [
@@ -37,6 +37,7 @@ export class CreateuserComponent implements OnInit {
   ]
   isCompany : boolean = false ;
   isEmpolyee : boolean = false ;
+  roleid : number;
   constructor(public dialogRef: MatDialogRef<UserslistComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private _snackBar: MatSnackBar
     ,private translate : TranslateService , public  services :CoreService){
@@ -89,25 +90,51 @@ export class CreateuserComponent implements OnInit {
 
   Save()
   {
-    this.newUser = {
-      name : this.username , 
-      login : this.email , 
-      password : this.password , 
-      user_job : this.userjob
+    
+
+    if(this.isCompany == true)
+    {
+      this.newUser = {
+        name : this.username , 
+        login : this.email , 
+        password : this.password , 
+        user_job : this.userjob
+      }
+      this.services.createUser1(this.newUser).subscribe(
+        data=>{
+          let msg = this._snackBar.open('تم إنشاء المستخدم بنجاح' , 'إالغاء')
+          if(msg)
+          {
+           location.reload();
+          }
+        },
+        err=>console.log(err)
+      );
+    
+    }
+    else if(this.isEmpolyee == true)
+    {
+      this.newUser = {
+        name : this.username , 
+        login : this.email , 
+        password : this.password , 
+        user_job : this.Role
+      }
+      this.services.createUser2(this.newUser , this.company).subscribe(
+        data=>{
+          let msg = this._snackBar.open('تم إنشاء المستخدم بنجاح' , 'إالغاء')
+          if(msg)
+          {
+           location.reload();
+          }
+        },
+        err=>console.log(err)
+      );
+  
     }
 
    
 
-    this.services.createUser(this.newUser).subscribe(
-      data=>{
-        let msg = this._snackBar.open('تم إنشاء المستخدم بنجاح' , 'إالغاء')
-        if(msg)
-        {
-          location.reload();
-        }
-      },
-      err=>console.log(err)
-    );
   }
 
 }

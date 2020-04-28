@@ -26,7 +26,7 @@
               <!--Project List   -->
                       <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                          <mat-form-field class="full-wid mrgn-b-lg">
-                               <mat-label  class="title">{{'Project Name'|translate}}</mat-label>
+                               <mat-label  class="title">{{'Excueted Project Name'|translate}}</mat-label>
                                <mat-select name="project_id" [(ngModel)]="project_id">
                                   <div *ngFor="let item of project">
                                      <mat-option   value={{item.id}} >
@@ -36,7 +36,24 @@
                                </mat-select>
                          </mat-form-field>
                       </div>
-                       <!--Project List-->
+
+                   <!--Job List-->
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                     <mat-form-field class="full-wid mrgn-b-lg">
+                     <mat-label  class="title">{{'The job that candidate to'|translate}}</mat-label>
+                      <mat-select name="qty" [(ngModel)]="qty">
+                    <div *ngFor="let item of qunatity">
+                    <div *ngIf= "item.contract_id == contract_id">
+                 <mat-option   value={{item.id}} >
+                     {{item.description}}
+                 </mat-option>
+                   </div>
+                  </div>
+                  </mat-select>
+                  </mat-form-field>
+                  </div>
+                 
+                  <!--Project List-->
                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                         <mat-form-field class="full-wid mrgn-b-lg">
                               <mat-label  class="title">{{'Specialization'|translate}}</mat-label>
@@ -49,10 +66,14 @@
                               </mat-select>
                         </mat-form-field>
                      </div>
+
                      <!--Qulification-->
                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                        <mat-label  class="title">{{'Qualifications'|translate}}</mat-label>
+
+                        <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32" style="margin-left: 3%; margin-top:2%;">
                         <mat-form-field class="full-wid mrgn-b-lg">
-                              <mat-label  class="title">{{'Qualifications'|translate}}</mat-label>
+                           <mat-label  class="title">{{'Degree'|translate}}</mat-label>
                               <mat-select name="qualification" [(ngModel)]="qualification">
                                  <div *ngFor="let item of qulification">
                                     <mat-option   value={{item.id}} >
@@ -62,28 +83,28 @@
                               </mat-select>
                         </mat-form-field>
                      </div>
-              <!--Project List-->
-                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                   <mat-form-field class="full-wid mrgn-b-lg">
-                   <mat-label  class="title">{{'Job based on Contract'|translate}}</mat-label>
-                    <mat-select name="qty" [(ngModel)]="qty">
-                  <div *ngFor="let item of qunatity">
-                  <div *ngIf= "item.contract_id == contract_id">
-               <mat-option   value={{item.id}} >
-                   {{item.description}}
-               </mat-option>
-            </div>
-                       </div>
-                      </mat-select>
-                 </mat-form-field>
-                    </div>
+                     <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32" style="margin-left: 3%; margin-top:2.5%;">
+
+                        <mat-form-field class="full-wid mrgn-b-lg">
+                           <mat-label  class="title">{{'Graduate Year'|translate}}</mat-label>
+                           <input matInput name="year" [(ngModel)]="year" type="number" placeholder="{{'Graduate Year'|translate}}" />
+                        </mat-form-field>
+                     </div>
+
+                     <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32" style="margin-top: 2%;">
+                         <mat-label>{{'Upload Your CV'|translate}}</mat-label>
+                        <input type="file" mat-input
+                        id="file"  style="margin-top: 2%;"
+                        (change)="onSelectFiles($event)">
+                      </div>  
+                     </div>
+              
                      <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                        <mat-label  class="title">{{'Due do'|translate}}</mat-label>
+                        <mat-label  class="title">{{'Appointment period'|translate}}</mat-label>
                         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                       
                         <div fxFlex.gt-sm="48" fxFlex.gt-xs="48" fxFlex="100" fxFlex.gt-md="48">
-                           
-                           
+                                                     
                               <mat-form-field class="full-wid mrgn-b-lg"> 
                                  <input matInput  name="fromd" [(ngModel)]="fromd"
                                 [min]="minDate" [max]="maxDate" [matDatepicker]="from"
@@ -112,7 +133,7 @@
                 <!--Description-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                     <mat-form-field class="full-wid mrgn-b-lg ">
-                          <mat-label  class="title">{{'Description'|translate}}</mat-label>
+                          <mat-label  class="title">{{'Note'|translate}}</mat-label>
                           <textarea matInput name="description"  
                                     cdkTextareaAutosize
                                     name="description"

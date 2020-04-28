@@ -27,7 +27,10 @@ export class AddtimesheetComponent implements OnInit {
    description : string;
    qty : number;
    contract_id : number;
+   filename: string;
    qualification : number;
+   year : number;
+   base64 : any ;
  
   constructor(public services : CoreService , public _snackbar : MatSnackBar , 
     public dialogRef: MatDialogRef<RequestfortimesheetComponent> ) {
@@ -101,5 +104,21 @@ export class AddtimesheetComponent implements OnInit {
     
   }
 
+  
+  onSelectFiles(evt) {
+    let me = this;
+  let file = evt.target.files[0];
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function () {
+     me.base64 = reader.result;
+    console.log(reader.result);
+  };
+  reader.onerror = function (error) {
+    console.log('Error: ', error);
+  };
+     this.filename = evt.target.files[0].name;
+  }
+ 
 
 }

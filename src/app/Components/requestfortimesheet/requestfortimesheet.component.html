@@ -37,13 +37,24 @@
              <table class="table table-hover table-middle th-fw-light mb-0">
                 <thead>
                    <tr>
+                     <th></th>
+                     <th></th>
+                     <th></th>
+                     <th></th>
+                     <th colspan="2" style="text-align: center;">{{'Appointment period'|translate}}</th>
+                     <th></th>
+                     <th></th>
+                     <th></th>
+                   </tr>
+                   <tr>
                       <th>{{'Engineer Name'|translate}}</th>
-                        <th>{{'Job Title'|translate}}</th>
-                        <th>{{'Project Name'|translate}}</th>
+                        <th>{{'The job that candidate to'|translate}}</th>
+                        <th>{{'Specialization'|translate}}</th>
+                        <th>{{'Excueted Project Name'|translate}}</th>
                         <th>{{'From'|translate}}</th>
-                        <th>{{'From'|translate}}</th>
-                        <th>{{'Status of Appointment'|translate}}</th>
-                        <th>{{'Approvment'|translate}}</th>
+                        <th>{{'To'|translate}}</th>
+                        <th>{{'Request Status'|translate}}</th>
+                        <th>{{'Details'|translate}}</th>
                    </tr>
                 </thead>
                 <tbody *ngFor="let data of timesheet | paginate: { id: 'listing_pagination',
@@ -52,6 +63,7 @@
                      totalItems: totalRec };">
                    <tr *ngIf="data.state == statename && data.contract_id == contract_id">
                        <td>{{data.user_name}}</td>
+                       <td>{{data.position_description}}</td>
                        <td>{{data.specialty_name}}</td>
                        <td>{{data.project_name}}</td>
                        <td>{{data.from_date}}</td>
@@ -59,18 +71,11 @@
                        <td>{{data.state |translate }}</td>
                        <td>
                         <div class="row">
-                           <button mat-raised-button color='accent' [disabled]="data.state != 'draft'"
-                           (click)="approve(data.id)" >
-                            <mat-icon >check_circle </mat-icon>
-                            {{'Approve'|translate}}
+                           <button mat-button color='primary' >
+                            <mat-icon >arrow_left </mat-icon>                           
                          </button>
-                         <button mat-raised-button color='warn' [disabled]="data.state != 'draft'"
-                         (click)="reject(data.id)" >
-                          <mat-icon >highlight_off</mat-icon>
-                          {{'Rejected'|translate}}
-                       </button>
                         </div>
-                    </td>
+                      </td>
                    </tr>
                 </tbody>
              </table>

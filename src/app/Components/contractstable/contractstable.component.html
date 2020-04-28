@@ -22,10 +22,12 @@
                      <table class="table table-hover table-middle th-fw-light mb-0">
                            <thead>
                               <tr>
+                                 <td>{{'Contract Name'|translate}}</td>
                                  <th>{{'Contract Number'|translate}}</th>
                                  <th>{{'Consultant Name'|translate}}</th>
                                  <th>{{'From'|translate}}</th>
                                  <th>{{'To'|translate}}</th>
+                                 <td>{{'Contract Value' | translate}}</td>
                                  <th>{{'Description'|translate}}</th>
                                  <th>{{'Controls'|translate}}</th>
                                
@@ -35,9 +37,11 @@
                               <tr *ngFor="let data of contract">
                               
                                 <td>{{data.name}}</td>
+                                <td>{{data.name}}</td>
                                 <td>{{data.consultant_name}}</td>
                                 <td>{{data.from_date}}</td>
                                 <td>{{data.to_date}}</td>
+                                <td>{{data.contract_value}}</td>
                                 <td>{{data.description}}</td>
                                  <td>
                                     <button mat-icon-button 
