@@ -14,7 +14,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 })
 export class CountdetailsComponent implements OnInit {
 
- 
+  boolrole : boolean = false ; 
+  role : number;
  
   counttable : any[] = [];
   
@@ -34,6 +35,7 @@ export class CountdetailsComponent implements OnInit {
       dialogConfig.autoFocus = true;
       this.projectname = localStorage.getItem('projectname');
       this.statename = "draft";
+      this.role = +localStorage.getItem('Role');
 
     }
 
@@ -44,6 +46,12 @@ export class CountdetailsComponent implements OnInit {
       
     }
 ngOnInit() {
+  
+  if(this.role == 2)
+  {
+    this.boolrole = true;
+  }
+
 this.pageTitleService.setTitle('قائمة طلبات الحصر ' +' / '+this.projectname);
 
  this.service.getCount().subscribe(
@@ -52,8 +60,6 @@ this.pageTitleService.setTitle('قائمة طلبات الحصر ' +' / '+this.p
   },
    err=> console.log(err)
  );
-
-
 
 this.totalRec = this.counttable.length;
 }

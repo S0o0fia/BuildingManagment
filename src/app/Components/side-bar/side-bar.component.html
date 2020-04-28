@@ -17,15 +17,17 @@
          <div class="sidenav-scrollbar-container" fxLayout="column">
             <ng-container *ngIf="verticalMenuStatus; else horizontalMenuStatus">
                <mat-nav-list fxLayout="column" menuToggleDirective class="navigation">
-                  <mat-list-item menuToggleLink *ngFor="let menuitem of menuList.getAll()">
-                     <a menuToggle class="gene-relative" mat-ripple *ngIf="menuitem.type === 'button'" routerLinkActive="active-link"      [routerLink]="['home/',menuitem.state]">
+                  <mat-list-item menuToggleLink *ngFor="let menuitem of menuList.getAll()" >
+                     <a menuToggle class="gene-relative" mat-ripple *ngIf="menuitem.type === 'button'" routerLinkActive="active-link"      [routerLink]="['home/',menuitem.state]"
+                     [ngStyle]="{ 'display': ( menuitem.code != 1 ? 'none' :  'block' ) }">
                      <mat-icon>{{ menuitem.icon }}</mat-icon>
                      <span>{{ menuitem.name | translate }}</span>
                      <ng-container *ngIf="menuitem.label">
                         <span class="sidebar-label">{{ menuitem.label}}</span>
                      </ng-container>
                      </a>
-                     <a menuToggle class="gene-relative" mat-ripple [routerLink]="['/home/', menuitem.state]" routerLinkActive="active-link" *ngIf="menuitem.type === 'link'">
+                     <a menuToggle class="gene-relative" mat-ripple [routerLink]="['/home/', menuitem.state]" routerLinkActive="active-link"
+                     *ngIf="menuitem.type === 'link'">
                      <mat-icon>{{ menuitem.icon }}</mat-icon>
                      <span>{{ menuitem.name | translate }}</span>
                      <ng-container *ngIf="menuitem.label">

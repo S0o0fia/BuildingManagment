@@ -16,6 +16,7 @@ import { DiscountComponent } from '../discount/discount.component';
 import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
 import { CurrencyPipe } from '@angular/common';
 
+
 @Component({
   selector: 'ms-quantitytable',
   templateUrl: './quantitytable.component.html',
@@ -24,6 +25,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 
 export class QuantitytableComponent implements OnInit {
+ 
   collapseSidebarStatus: any;
   mySubscription : any;
   browserRefresh = false;
@@ -47,6 +49,8 @@ export class QuantitytableComponent implements OnInit {
   projectname : string;
   formattedAmount: string = '';
   public rowSelected : any = -1;
+  boolrole : boolean = false;
+  role : number;
   
 
   HideDiscount()
@@ -196,13 +200,18 @@ export class QuantitytableComponent implements OnInit {
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         this.projectname = localStorage.getItem('projectname');
+        this.role = +localStorage.getItem('Role');
       }
   
  Qty_tbl : any =[] ;
  Qty_tbls:any[]=[];
 ngOnInit() {
 
-
+if(this.role == 2)
+{
+  this.boolrole = true;
+  
+}
 
 this.pageTitleService.setTitle(this.projectname +' / '+"جدول الكميات");
 

@@ -40,16 +40,55 @@
                </mat-form-field> 
                
           </div> 
-
+          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" class="title">
+               <mat-checkbox  class="title" (change)="Company($event)" [disabled]="isEmpolyee == true">{{'User is Company'|translate}}</mat-checkbox>
+             </div>
+             <br>
+             <!--company Type-->
              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+               <mat-form-field class="full-wid mrgn-b-lg " >
+                    
+                  <mat-label class="title" >{{'Company Type'|translate}}</mat-label>                
+               
+                  <mat-select  [(ngModel)]="userjob" name="userjob" [(value)]="userjob"
+                  [disabled]="isCompany == false">
+                     
+                       <mat-option value="consultant">
+                         {{ 'consultant' | translate }}
+                       </mat-option>
+                       <mat-option value="contractor">
+                          {{'contractor'|translate}}
+                       </mat-option>
+                  </mat-select>
+               </mat-form-field>
+               </div>
+             <!--Emplyee Type-->
+             <mat-checkbox class="title"  (change)="Empolyee($event)" [disabled]="isCompany == true">{{'User is Empolyee'|translate}}</mat-checkbox >  
+               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                  <mat-form-field class="full-wid mrgn-b-lg " >
+                       
+                     <mat-label class="title">{{'Company Name'|translate}}</mat-label>                
+                  
+                     <mat-select  [(ngModel)]="company" name="company" [(value)]="company"  [disabled]="isEmpolyee == false">
+                        <div *ngFor="let data of companies">
+                          <mat-option (click)="choose(data)" value={{data.id}}>
+                            {{ data.name}}
+                          </mat-option>
+                         </div>
+                     </mat-select>
+                  </mat-form-field>
+                  </div> 
+             
+             
+              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
               <mat-form-field class="full-wid mrgn-b-lg " >
                    
                  <mat-label class="title">{{'Job Title'|translate}}</mat-label>                
               
-                 <mat-select  [(ngModel)]="userjob" name="userjob" [(value)]="userjob">
-                    <div *ngFor="let data of jobtitle">
-                      <mat-option (click)="choose(data)" value={{data}}>
-                        {{ data | translate }}
+                 <mat-select  [(ngModel)]="Role" name="Role" [(value)]="Role"  [disabled]="isEmpolyee == false">
+                    <div *ngFor="let data of userRole">
+                      <mat-option (click)="choose(data)" value={{data.id}}>
+                        {{ data.name | translate }}
                       </mat-option>
                      </div>
                  </mat-select>

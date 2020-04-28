@@ -14,11 +14,14 @@
                            <mat-icon>exit_to_app</mat-icon> 
                            {{'Back'|translate}}</button>
                          <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
-                          (click)="ApproveDraft()">
+                          (click)="ApproveDraft()"
+                          [ngStyle]="{ 'display': (boolconsultant ? 'none' :  'block' ) }">
                           
                          
                           {{'Draft Approve'|translate}}</button>
-                          <button *ngIf="consultant_approve!='draft'" class="mrgn-b-xs" [disabled]="consultant_approve == 'accepted'" mat-raised-button color="warn" (click)="ApproveConsultant()">{{'Collector Specialist'|translate}}</button>
+                          <button *ngIf="consultant_approve!='draft'" class="mrgn-b-xs" [disabled]="consultant_approve == 'accepted'" mat-raised-button color="warn" (click)="ApproveConsultant()"
+                          [ngStyle]="{ 'display': (boolcontractor ? 'none' :  'block' ) }"
+                          >{{'Collector Specialist'|translate}}</button>
                
                        </div>
                       </div> 
@@ -29,33 +32,30 @@
         <div class="gene-card-content pad-t-none" style="overflow-x:auto;">
                <div class="table-responsive "  id="dvPdf" >
                  
-                  <table class=" table-responsive table" fxLayout="row">
-                     <thead  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column">
-                        <tr  fxLayout="column"   fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" fxLayout="column" >
-                           <td>{{'Request Number'|translate}}</td>
-                           <td>{{'From Duration'|translate}}</td>
-                           <td>{{'To Duration'|translate}}</td>
+                  <table class=" table-responsive table flexbox"  fxLayout="row">
+                     <thead  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" >
+                        <tr  fxLayout="column"   fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" >
+                           <td class="col">{{'Request Number'|translate}}</td>
+                           <td class="col">{{'From Duration'|translate}}</td>
+                           <td class="col">{{'To Duration'|translate}}</td>
                          
-                           <td>{{'Request Status'|translate}}</td>
-                           
-                           <td style="padding-bottom:1%;;">{{'Item Name'|translate}}</td>
-
-                           <td style="padding-bottom:1%;;">{{'Unit of Measure'|translate}}</td>
+                           <td class="col">{{'Request Status'|translate}}</td>
+                           <td class="col">{{'Unit of Measure'|translate}}</td>
+                           <td class="col">{{'Item Name'|translate}}</td>
                           
                         </tr>
                      </thead>
                      <tbody  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
                         <tr  *ngFor="let item of count"   fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
                          
-                          <td>{{item.name}}</td>
-                          <td>{{item.date_from}}</td>
-                          <td>{{item.date_to}}</td>
+                          <td class="col">{{item.name}}</td>
+                          <td class="col">{{item.date_from}}</td>
+                          <td class="col">{{item.date_to}}</td>
                       
-                          <td>{{state | translate}}</td>
+                          <td class="col">{{state | translate}}</td>
                          
-                          <td>{{item.quantity_name}}</td>
-
-                          <td>{{item.product_uom_name}}</td>
+                         <td class="col">{{item.product_uom_name}}</td>
+                         <td class="col">{{item.quantity_name}}</td> 
                         
                         </tr>
                      </tbody>
@@ -126,17 +126,24 @@
                         <td style="text-align: center;">{{item.qty_pers}}</td>
                         <td style="text-align: center;">{{item.qty}}</td>
                         <!--Number-->
-                        <td class="sm-wid"  style="text-align: center;"><input (change)="calQty(item)"   matInput name="approved_unit" [value]="item.approved_unit" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.approved_unit"/></td>
+                        <td class="sm-wid"  style="text-align: center;">
+                           <input (change)="calQty(item)"  [disabled]="boolcontractor == true"
+                            matInput name="approved_unit" [value]="item.approved_unit" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.approved_unit"/></td>
                       <!--Length-->
-                      <td class="sm-wid"  style="text-align: center;"><input (change)="calQty(item)"   matInput name="approved_length" [value]="item.approved_length" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.approved_length"/></td>
+                      <td class="sm-wid"  style="text-align: center;"><input (change)="calQty(item)" [disabled]="boolcontractor == true"
+                          matInput name="approved_length" [value]="item.approved_length" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.approved_length"/></td>
                         <!--Width-->
-                        <td class="sm-wid" style="text-align: center;" *ngIf="dimension>1"><input (change)="calQty(item)"   matInput name="approved_width" placeholder="{{'Enter'|translate}}" [value]="item.approved_width" [(ngModel)]="item.approved_width" placeholder="{{'Enter'|translate}}"/></td>
+                        <td class="sm-wid" style="text-align: center;" *ngIf="dimension>1"><input (change)="calQty(item)"  [disabled]="boolcontractor == true"
+                            matInput name="approved_width" placeholder="{{'Enter'|translate}}" [value]="item.approved_width" [(ngModel)]="item.approved_width" placeholder="{{'Enter'|translate}}"/></td>
                        <!--Height-->
-                        <td class="sm-wid" style="text-align: center;" *ngIf="dimension>2"><input (change)="calQty(item)"   matInput name="approved_height" [value]="item.approved_height" [(ngModel)]="item.approved_height"/></td>
+                        <td class="sm-wid" style="text-align: center;" *ngIf="dimension>2"><input (change)="calQty(item)"  [disabled]="boolcontractor == true"
+                            matInput name="approved_height" [value]="item.approved_height" [(ngModel)]="item.approved_height"/></td>
                        <!--Approve Precentage-->
-                        <td class="sm-wid" style="text-align: center;"><input matInput  (change)="calQty(item)"  name="approved_percentage" [value]="item.qty_pers" [(ngModel)]="item.approved_pers" placeholder="{{'Enter'|translate}}"/></td>
+                        <td class="sm-wid" style="text-align: center;"><input matInput [disabled]="boolcontractor == true"
+                            (change)="calQty(item)"  name="approved_percentage" [value]="item.qty_pers" [(ngModel)]="item.approved_pers" placeholder="{{'Enter'|translate}}"/></td>
                         <!--Approve Quantity -->
-                        <td class="sm-wid" style="text-align: center;"><input matInput  (change)="calQty(item)"  name="approved_qty" [value]="item.approved_qty" placeholder="{{'Enter'|translate}}"  [(ngModel)]="item.approved_qty" disabled/></td>
+                        <td class="sm-wid" style="text-align: center;"><input matInput [disabled]="boolcontractor == true" 
+                            (change)="calQty(item)"  name="approved_qty" [value]="item.approved_qty" placeholder="{{'Enter'|translate}}"  [(ngModel)]="item.approved_qty" disabled/></td>
                        
                     </tr>
                  </tbody>
@@ -165,7 +172,7 @@
          <mat-card>
            
             <form>
-              <div fxLayout="column">
+              <div fxLayout="column" style="height:100%;">
               <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                 <!--Department-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
@@ -180,10 +187,23 @@
                         </mat-select>
                     </mat-form-field>
                  </div>
+                   <!--Department-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                  <mat-form-field class="full-wid mrgn-b-lg">
+                        <mat-label>{{'Name'|translate}}</mat-label>
+                        <mat-select name="department">      
+                             <div *ngFor="let item of users"> 
+                              <mat-option (click)="Typeids(item.id)" value={{item.id}}>
+                                 {{item.name}}
+                              </mat-option>
+                             </div>
+                      </mat-select>
+                  </mat-form-field>
+               </div>
                    <!--Note-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
                         <mat-form-field class="full-wid mrgn-b-lg">
-                              <mat-label>{{'Details'|translate}}</mat-label>
+                              <mat-label>{{'Note'|translate}}</mat-label>
                               <textarea matInput name="detail"  
                               cdkTextareaAutosize [(ngModel)]="detail"
                                #autosize="cdkTextareaAutosize"
@@ -194,17 +214,17 @@
               </div>
                      <div fxLayout="row" fxLayoutAlign="center">
                             <button mat-button mat-raised-button color="accent" type="button" dir="ltr"
-                            (click)="Save()">
+                            (click)="Save()" [disabled]="boolcontractor == true">
                               <mat-icon>save</mat-icon>
-                            {{'Save'|translate }}</button>
+                            {{'Send'|translate }}</button>
                      </div>
               </div>
             </form>
           </mat-card>
       </div>
-      <div style="overflow-y:scroll; height:200px;">
-         <div *ngFor="let comment of Comments"  >
-          <mat-card style="text-align: center;"> 
+      <div style="overflow-y:scroll; height:45%;">
+         <div *ngFor="let comment of Comments ; let  i = index"  >
+          <mat-card style="text-align: center;border-style: solid;" [ngStyle]="{ 'border-color': ( i%2 == 0 ?  '#1565c0' :  '#00acac' ) }"> 
               <h5>{{comment.user_name}}</h5>
               <h5>{{comment.comments}}</h5>
               <!-- <h6>بواسطة</h6> -->

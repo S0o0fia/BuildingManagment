@@ -33,8 +33,9 @@ export class LoginComponent {
            
              localStorage.setItem("token" , data["token"]);
              localStorage.setItem("loginUser" , data["name"]);
+             localStorage.setItem("Role" , data["role_detail"].code )
              localStorage.setItem("roledetails", data["role_detail"]);
-
+             console.log(data);
              this.router.navigate(['/home/crm']);
          },
          (err)=>

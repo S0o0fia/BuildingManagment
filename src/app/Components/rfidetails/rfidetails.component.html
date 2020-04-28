@@ -12,7 +12,8 @@
                           <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()"><mat-icon>exit_to_app</mat-icon>
                              {{'Back'|translate}} </button>
                           <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
-                           (click)="ApproveDraft()">{{'Draft Approve'|translate}} </button>
+                           (click)="ApproveDraft()"
+                           [ngStyle]="{ 'display': (boolconsultant ? 'none' :  'block' ) }">{{'Draft Approve'|translate}} </button>
                         </div>
                        </div> 
                    
@@ -71,16 +72,14 @@
                      <tr style="text-align: center;">
                          <th style="text-align: center;">{{'Location'|translate}}</th>
                         <th style="text-align: center;">{{'Executed Quantity'|translate}}</th>
-                        <th style="text-align: center;">{{'Controls'|translate}}</th>
+                        
                      </tr>
                   </thead>
                   <tbody>
                      <tr *ngFor="let item of Items" style="text-align: center;">
                          <td>{{item.name}}</td>
                          <td>{{item.qty}}</td>
-                         <td>
-                            <mat-icon matTooltip="{{'Delete'|translate}}" >delete</mat-icon>
-                       </td>
+                         
                      </tr>
                   </tbody>
                </table>
@@ -102,8 +101,10 @@
                
                <div fxLayout="wrap row" fxLayout.xs="column">
                  
-                  <button class="mrgn-b-xs" [disabled]="consultant_approve != 'waiting'" mat-raised-button color="accent" (click)="openDialogApprove()">{{consultant_btn|translate}}</button>
-                  <button class="mrgn-b-xs" mat-raised-button color="warn">{{'Result Approve'|translate}}</button>
+                  <button class="mrgn-b-xs" [disabled]="consultant_approve != 'waiting'" mat-raised-button color="accent" (click)="openDialogApprove()"
+                  [ngStyle]="{ 'display': (boolcontractor ? 'none' :  'block' ) }">{{consultant_btn|translate}}</button>
+                  <button class="mrgn-b-xs" mat-raised-button color="warn"
+                  [ngStyle]="{ 'display': (boolcontractor ? 'none' :  'block' ) }">{{'Result Approve'|translate}}</button>
                   <button class="mrgn-b-xs" mat-raised-button color="primary"><mat-icon>print</mat-icon> {{'Print'|translate}}</button>
             
                </div> 
@@ -120,28 +121,41 @@
               </mat-card>
 
               <mat-card>
-                <form>
-                  <div fxLayout="column">
+               <form>
+                  <div fxLayout="column" style="height:100%;">
                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                     <!--Department-->
                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
                         <mat-form-field class="full-wid mrgn-b-lg">
                               <mat-label>{{'Department'|translate}}</mat-label>
                               <mat-select name="department">      
-                                   <div *ngFor="let item of type"> 
-                                    <mat-option (click)="Typeid(item.id)" value={{item.id}}>
-                                       {{item.type}}
+                                   <div *ngFor="let item of users"> 
+                                    <mat-option (click)="Typeids(item.id)" value={{item.id}}>
+                                       {{item.name}}
                                     </mat-option>
                                    </div>
                             </mat-select>
                         </mat-form-field>
                      </div>
+                       <!--Department-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                      <mat-form-field class="full-wid mrgn-b-lg">
+                            <mat-label>{{'Name'|translate}}</mat-label>
+                            <mat-select name="department">      
+                                 <div *ngFor="let item of users"> 
+                                  <mat-option (click)="Typeids(item.id)" value={{item.id}}>
+                                     {{item.name}}
+                                  </mat-option>
+                                 </div>
+                          </mat-select>
+                      </mat-form-field>
+                   </div>
                        <!--Note-->
                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
                             <mat-form-field class="full-wid mrgn-b-lg">
-                                  <mat-label>{{'Details'|translate}}</mat-label>
-                                  <textarea matInput name="details"  
-                                  cdkTextareaAutosize [(ngModel)]="details"
+                                  <mat-label>{{'Note'|translate}}</mat-label>
+                                  <textarea matInput name="detail"  
+                                  cdkTextareaAutosize [(ngModel)]="detail"
                                    #autosize="cdkTextareaAutosize"
                                     cdkAutosizeMinRows="1"
                                      cdkAutosizeMaxRows="5"></textarea> 
@@ -150,22 +164,25 @@
                   </div>
                          <div fxLayout="row" fxLayoutAlign="center">
                                 <button mat-button mat-raised-button color="accent" type="button" dir="ltr"
-                                (click)="Save()"
-                                > <mat-icon>save</mat-icon> {{'Save'|translate }}</button>
+                                (click)="Save()" [disabled]="boolcontractor == true">
+                                  <mat-icon>save</mat-icon>
+                                {{'Send'|translate }}</button>
                          </div>
                   </div>
                 </form>
+
+                 <div style="overflow-y:scroll; height:45%;">
+         <div *ngFor="let comment of Comments ; let  i = index"  >
+          <mat-card style="text-align: center;border-style: solid;" [ngStyle]="{ 'border-color': ( i%2 == 0 ?  '#1565c0' :  '#00acac' ) }"> 
+              <h5>{{comment.user_name}}</h5>
+              <h5>{{comment.comments}}</h5>
+              <!-- <h6>بواسطة</h6> -->
+              <h6>{{comment.name}}</h6>
+         </mat-card>
+         </div>
+          </div>
               </mat-card>
-           <div style="overflow-y:scroll; height:200px;">
-             <div *ngFor="let comment of Comments"  >
-              <mat-card style="text-align: center;"> 
-                  <h5>{{comment.section_name}}</h5>
-                  <h5>{{comment.comments}}</h5>
-                  <h6>بواسطة</h6>
-                  <h6>{{comment.name}}</h6>
-             </mat-card>
-             </div>
-              </div>
+         
             </div>
          </div>
     </mat-card>

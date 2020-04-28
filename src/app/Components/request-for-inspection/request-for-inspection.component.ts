@@ -23,6 +23,8 @@ export class RequestForInspectionComponent implements OnInit {
   page: number = 1;
   statename : string;
   projectname : string;
+  role : number;
+  boolrole : boolean = false ;
  
   constructor(public service : CoreService,
     private pageTitleService: PageTitleService ,private router:Router, private dialog: MatDialog) { 
@@ -32,6 +34,7 @@ export class RequestForInspectionComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       this.projectname = localStorage.getItem('projectname');
+      this.role = +localStorage.getItem('Role');
       //this.statename = "draft";
 
     }
@@ -59,6 +62,12 @@ this.pageTitleService.setTitle(this.projectname +' / '+"طلبات فحص الأ
 
 this.totalRec = this.RFI_tbl.length;
 //this.statename=null;
+
+ if(this.role == 2)
+ {
+   this.boolrole = true;
+ }
+ console.log(this.boolrole);
 }
 
 openDialog(): void {

@@ -28,13 +28,16 @@ export class MirapproveComponent implements OnInit {
     state : string;
   consultant_approve : string;
   consultant_btn : string;
-
+  role : number ;
+  boolconsultant : boolean = false ; 
+  boolcontractor : boolean = false;
 
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
    ,private _snackBar: MatSnackBar ,public dialog: MatDialog) { 
    this.user = localStorage.getItem('loginUser');
     this.id = +( this.route.snapshot.paramMap.get('id') );
     this.approve_draft = false;
+    this.role = +localStorage.getItem('Role');
 
  
  }
@@ -114,7 +117,20 @@ export class MirapproveComponent implements OnInit {
   this.openSnackBar("تم اعتماد المسودة","إغلاق");
  }
  ngOnInit() {
-   //getting R0FI Data 
+  if(this.role == 2)
+  {
+    this.boolconsultant = true;
+  }
+  else if (this.role == 3)
+  {
+     this.boolcontractor = true;
+  }
+  else 
+  {
+    this.boolconsultant = false ;
+    this.boolcontractor = false;
+  }
+   //getting MIR Data 
    this.service.getMIR().subscribe(
     data => {
    

@@ -2,13 +2,26 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap');
 
+  .flexbox {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+  }
+
+
 tr , td  , th
 {
     text-align: center !important;
+    flex: 1;   
+    height: 100%;
 }
-
+tbody , thead , table {
+    display: flex;
+}
 th , button , thead{
    
+    
     font-size: medium;
     font-family: 'Cairo', sans-serif;
 }

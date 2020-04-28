@@ -324,6 +324,7 @@ export class CoreService {
 		debugger
 		let mirequest  ="/mir/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
 		+'","request_date":"'+value.request_date +'"}';
+		console.log(mirequest)
         return this.http.post(this.apiURL+mirequest ,null);
 	}
 
@@ -333,8 +334,9 @@ export class CoreService {
 		+'","material_id":'+value.material_id
 		+',"factory_id":'+value.factory_id
 		+',"mir_id":'+value.mir_id
-		+',"qty":'+value.qty
+		+',"qty":'+value.qty+
 		'}';
+		console.log(miritem)
         return this.http.post(this.apiURL+miritem ,null);
 	}
 
@@ -873,5 +875,14 @@ export class CoreService {
 	console.log(getinvoicedisciunt);
 	return this.http.get(this.apiURL+getinvoicedisciunt);
   }
+
+
+  getCompanies ()
+  {
+	  let url = '/companies/get?db=nqproject&token='+localStorage.getItem('token');
+	  return this.http.get(this.apiURL+url);
+
+  }
+  
 }
 

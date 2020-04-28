@@ -11,6 +11,8 @@ import { CoreService } from 'app/Service/core/core.service';
   styleUrls: ['./exracts.component.scss']
 })
 export class ExractsComponent implements OnInit {
+  boolrole : boolean = false ;
+  role : number;
   uploader: FileUploader = new FileUploader({url: ''});
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
@@ -21,6 +23,7 @@ export class ExractsComponent implements OnInit {
   public rowSelected : any = -1;
   constructor(private router : Router , public service : CoreService) {
     this.projectname = localStorage.getItem('projectname');
+    this.role = +localStorage.getItem('Role');
    }
     
 
@@ -41,10 +44,14 @@ export class ExractsComponent implements OnInit {
       this.service.getInvoice().subscribe(
         data=> this.Invoices = data as any ,
         err=> console.log(err));  
-        
-        console.log(this.Invoices.length);
+      
        this.totalRec = this.Invoices.length;
 
+
+    if(this.role == 2)
+    {
+      this.boolrole = true;
+    }
 
   }
    

@@ -14,6 +14,8 @@ export class RquestforRecieveItemsComponent implements OnInit {
   getMIR : any = [];
    projectname : string;
   statename: string;
+  role : number;
+  boolrole : boolean = false;
   constructor(public service : CoreService, public router : Router,
     private pageTitleService: PageTitleService , private dialog: MatDialog) { 
 
@@ -22,6 +24,7 @@ export class RquestforRecieveItemsComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       this.projectname = localStorage.getItem('projectname');
+      this.role = +localStorage.getItem('Role');
    
 
     }
@@ -36,10 +39,16 @@ ngOnInit() {
   debugger;
 this.pageTitleService.setTitle(this.projectname +' / '+"طلبات تسليم المواد");
 this.service.getMIR().subscribe(
-  data=>this.getMIR=data,
+  data=>{
+    this.getMIR=data ; 
+    console.log(data);
+  },
   err=>console.log(err) 
 );
-
+   if(this.role == 2)
+   {
+     this.boolrole  = true;
+   }
 }
 
 openDialog(): void {

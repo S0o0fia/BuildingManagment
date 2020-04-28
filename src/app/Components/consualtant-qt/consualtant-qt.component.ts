@@ -26,6 +26,11 @@ export class ConsualtantQTComponent implements OnInit {
 
 
     }
+
+    back()
+  {
+    this.router.navigate(['/home/ConsultantContracts']);
+  }
     
   ngOnInit(): void {
    this.service.getConsultantqty().subscribe(

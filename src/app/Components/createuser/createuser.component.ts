@@ -18,6 +18,10 @@ export class CreateuserComponent implements OnInit {
   email : string;
   newUser : User;
   userjob : string;
+  company : string = "";
+  Role : string = "";
+  companies : any []=[];
+  userRole : any []=[];
   jobtitle : string [] = [
      'system_admin' , 
     'amana_pm' , 
@@ -31,6 +35,8 @@ export class CreateuserComponent implements OnInit {
     'contractor_eng',
     'contractor_count'
   ]
+  isCompany : boolean = false ;
+  isEmpolyee : boolean = false ;
   constructor(public dialogRef: MatDialogRef<UserslistComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private _snackBar: MatSnackBar
     ,private translate : TranslateService , public  services :CoreService){
@@ -41,8 +47,41 @@ export class CreateuserComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.services.getCompanies().subscribe(
+      data=>{ this.companies = data as any[]} ,
+      err=> console.log(err)
+    )
+
+    this.services.getRoles().subscribe(
+      data=> {this.userRole = data as any[]}, 
+      err=> console.log(err)
+    )
   }
 
+  Empolyee(event)
+  {
+    if(event.checked == true)
+    {
+      this.isEmpolyee = true;
+    }
+    else if(event.checked == false)
+    {
+      this.isEmpolyee = false;
+
+    }
+
+  }
+  Company(event)
+  {
+     if(event.checked == true)
+     {
+       this.isCompany = true;
+     }
+    else if(event.checked == false)
+    {
+      this.isCompany = false;
+    }
+  }
   choose(val)
   {
     this.userjob = val;

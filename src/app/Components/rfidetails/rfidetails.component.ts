@@ -8,6 +8,7 @@ import { EditContractedQunatityComponent } from '../edit-contracted-qunatity/edi
 import { SelectApproveComponent } from '../select-approve/select-approve.component';
 import { Approvedqty } from 'app/Models/Quantity/approvedqty';
 import {Comment } from '../../Models/Comment/comment'
+import { timeThursdays } from 'd3';
 
 @Component({
   selector: 'ms-rfidetails',
@@ -35,11 +36,16 @@ export class RfidetailsComponent implements OnInit {
    Comment : Comment;
    download : string = "http://nqraait.ddns.net:8070/api/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id=";
    Comments : any = [];
+   role : number ;
+   boolconsultant : boolean = false ; 
+   boolcontractor : boolean = false;
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
     ,private _snackBar: MatSnackBar ,public dialog: MatDialog) { 
     this.user = localStorage.getItem('loginUser');
      this.id = +( this.route.snapshot.paramMap.get('id') );
      this.approve_draft = false;
+     this.role = +localStorage.getItem('Role');
+
 
   
   }
@@ -84,6 +90,20 @@ export class RfidetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if(this.role == 2)
+    {
+      this.boolconsultant = true;
+    }
+    else if (this.role == 3)
+    {
+       this.boolcontractor = true;
+    }
+    else 
+    {
+      this.boolconsultant = false ;
+      this.boolcontractor = false;
+    }
   
     //get Comments
     this.service.getComment(this.id    
