@@ -13,7 +13,7 @@
                           <mat-icon>exit_to_app</mat-icon>                             
                            {{'Back'|translate}}</button>
                           <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
-                           (click)="ApproveDraft()">{{'Draft Approve'|translate}}</button>
+                           (click)="ApproveDraft()"  [ngStyle]="{ 'display': (boolconsultant ? 'none' :  'inline' ) }">{{'Draft Approve'|translate}}</button>
                         </div>
                        </div> 
                     </div>
@@ -95,8 +95,11 @@
                
                <div fxLayout="row"  fxLayout.xs="column"  >
                  
-                  <button class="mrgn-b-xs" [disabled]="consultant_approve != 'waiting'" mat-raised-button color="accent" (click)="openDialogApprove()">{{consultant_btn|translate}}</button>
-                  <button class="mrgn-b-xs" mat-raised-button color="warn">{{'Result Approve'|translate}}</button>
+                  <button class="mrgn-b-xs" 
+                  [ngStyle]="{ 'display': (boolcontractor ? 'none' :  'block' ) }"
+                  [disabled]="consultant_approve != 'waiting'" mat-raised-button color="accent" (click)="openDialogApprove()">{{consultant_btn|translate}}</button>
+                  <button class="mrgn-b-xs"   [ngStyle]="{ 'display': (boolcontractor ? 'none' :  'block' ) }"                  
+                  mat-raised-button color="warn">{{'Result Approve'|translate}}</button>
                   <button class="mrgn-b-xs" mat-raised-button color="primary">{{'Print'|translate}}
                      <mat-icon>print</mat-icon>
                   </button>
@@ -115,25 +118,41 @@
               </mat-card>
 
               <mat-card>
-                <form>
-                  <div fxLayout="column">
+               <form>
+                  <div fxLayout="column" style="height:100%;">
                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                     <!--Department-->
                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
                         <mat-form-field class="full-wid mrgn-b-lg">
                               <mat-label>{{'Department'|translate}}</mat-label>
                               <mat-select name="department">      
-                                   <mat-option>
-                                      </mat-option>
+                                   <div *ngFor="let item of users"> 
+                                    <mat-option (click)="Typeids(item.id)" value={{item.id}}>
+                                       {{item.name}}
+                                    </mat-option>
+                                   </div>
                             </mat-select>
                         </mat-form-field>
                      </div>
+                       <!--Department-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                      <mat-form-field class="full-wid mrgn-b-lg">
+                            <mat-label>{{'Name'|translate}}</mat-label>
+                            <mat-select name="department">      
+                                 <div *ngFor="let item of users"> 
+                                  <mat-option (click)="Typeids(item.id)" value={{item.id}}>
+                                     {{item.name}}
+                                  </mat-option>
+                                 </div>
+                          </mat-select>
+                      </mat-form-field>
+                   </div>
                        <!--Note-->
                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
                             <mat-form-field class="full-wid mrgn-b-lg">
-                                  <mat-label>{{'Details'|translate}}</mat-label>
-                                  <textarea matInput name="details"  
-                                  cdkTextareaAutosize
+                                  <mat-label>{{'Note'|translate}}</mat-label>
+                                  <textarea matInput name="detail"  
+                                  cdkTextareaAutosize [(ngModel)]="detail"
                                    #autosize="cdkTextareaAutosize"
                                     cdkAutosizeMinRows="1"
                                      cdkAutosizeMaxRows="5"></textarea> 
@@ -141,24 +160,24 @@
                          </div>
                   </div>
                          <div fxLayout="row" fxLayoutAlign="center">
-                                <button mat-button mat-raised-button color="accent" type="button" dir="ltr">
-                                 <mat-icon>save</mat-icon>  
-                                 {{'Save'|translate }}
-                                </button>
+                                <button mat-button mat-raised-button color="accent" type="button" dir="ltr"
+                                (click)="Save()" [disabled]="boolcontractor == true">
+                                  <mat-icon>save</mat-icon>
+                                {{'Send'|translate }}</button>
                          </div>
                   </div>
                 </form>
-              </mat-card>
 
-              <mat-card style="text-align: center;"> 
-                  <h5>أعمال الكهرباء</h5>
-                  <h6>بواسطة</h6>
-                  <div fxLayout="row"  fxLayoutAlign="center">
-                      <mat-icon>edit</mat-icon>
-                      <mat-icon>delete</mat-icon>
+                <div style="overflow-y:scroll; height:45%;">
+                  <div *ngFor="let comment of Comments ; let  i = index"  >
+                   <mat-card style="text-align: center;border-style: solid;" [ngStyle]="{ 'border-color': ( i%2 == 0 ?  '#1565c0' :  '#00acac' ) }"> 
+                       <h5>{{comment.user_name}}</h5>
+                       <h5>{{comment.comments}}</h5>
+                       <!-- <h6>بواسطة</h6> -->
+                       <h6>{{comment.name}}</h6>
+                  </mat-card>
                   </div>
-             </mat-card>
-            </div>
-         </div>
-    </mat-card>
+                   </div>
+              </mat-card>
+      
 </div>

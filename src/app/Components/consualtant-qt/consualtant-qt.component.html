@@ -8,7 +8,9 @@
              </div> <span fxFlex></span>
              
              <div fxLayout="column">
-                <div class="row">
+               <div fxLayout="row">
+                  <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="back()"><mat-icon>exit_to_app</mat-icon></button>
+      
                 <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">
                    {{'Add'|translate}}
                    <mat-icon>queue</mat-icon>

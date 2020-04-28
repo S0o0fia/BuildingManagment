@@ -7,7 +7,9 @@
                  </div>
                  <span fxFlex></span>
                  <div fxLayout="column">
-                  <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Add'|translate}}
+                  <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()"
+                  [ngStyle]="{ 'display': (boolrole ? 'none' :  'block' ) }">{{'Add'|translate}}
+
                      <mat-icon>queue</mat-icon>
                   </button>
                </div> 

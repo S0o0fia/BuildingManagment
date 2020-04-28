@@ -64,11 +64,11 @@ const appRoutes: Routes = [
             component:AttendeceComponent
          } ,
          {
-           path:"userlist" , 
+           path:"settings/userlist" , 
            component : UserslistComponent 
          },
          {
-            path:"role-management" , 
+            path:"settings/role-management" , 
             component : RoleManagementComponent 
           },
          {

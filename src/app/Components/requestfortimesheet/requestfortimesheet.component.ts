@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreService } from 'app/Service/core/core.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddtimesheetComponent } from '../addtimesheet/addtimesheet.component';
 
@@ -15,7 +15,7 @@ export class RequestfortimesheetComponent implements OnInit {
   timesheet : any[] = [];
   statename : string = 'draft';
   contract_id : number;
-  constructor(public services : CoreService , private route : ActivatedRoute , 
+  constructor(public services : CoreService , private route : ActivatedRoute ,   public router : Router,
     public dialog : MatDialog , public _snackbar : MatSnackBar) {
     this.contract_id = +( this.route.snapshot.paramMap.get('id') )
    }
@@ -47,6 +47,10 @@ export class RequestfortimesheetComponent implements OnInit {
       height: '80%'
      
     });
+  }
+  back()
+  {
+    this.router.navigate(['/home/ConsultantContracts']);
   }
 
   approve(id)

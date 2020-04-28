@@ -9,7 +9,8 @@
              </div> <span fxFlex></span>
              
              <div fxLayout="column">
-                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">
+                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()"
+                [ngStyle]="{ 'display': (boolrole ? 'none' :  'block' ) }">
                   <mat-icon>queue</mat-icon>  
                   {{'Apply Collect Request'|translate}}</button>
              </div> 

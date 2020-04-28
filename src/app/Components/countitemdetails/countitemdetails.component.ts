@@ -46,6 +46,9 @@ export class CountitemdetailsComponent implements OnInit {
   approved_pers: number = 0;
   approve : number = 0;
   items : any []=[];
+  role : number ; 
+  boolconsultant : boolean = false ; 
+  boolcontractor : boolean = false ;
  
   
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
@@ -53,7 +56,7 @@ export class CountitemdetailsComponent implements OnInit {
    this.user = localStorage.getItem('loginUser');
     this.id = +( this.route.snapshot.paramMap.get('id') );
     this.approve_draft = false;
-
+    this.role = +localStorage.getItem('Role');
  
  }
 
@@ -142,7 +145,21 @@ export class CountitemdetailsComponent implements OnInit {
      }
    );
 
-  
+   if(this.role == 2)
+   {
+     this.boolconsultant = true ;
+   }
+   else if(this.role == 3)
+   {
+      this.boolcontractor = true;
+   }
+   else 
+   {
+     this.boolcontractor = false;
+     this.boolconsultant = false;
+   }
+
+   
  }
 
  ApproveConsultant()

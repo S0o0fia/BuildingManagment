@@ -48,4 +48,8 @@ export class ConsultantExtractComponent implements OnInit {
   {
     this.router.navigate(['/home/ExtractConsultantDetails' , id]);
   }
+  back()
+  {
+    this.router.navigate(['/home/ConsultantContracts']);
+  }
 }
