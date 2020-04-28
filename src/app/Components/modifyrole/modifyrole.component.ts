@@ -18,6 +18,7 @@ export class ModifyroleComponent implements OnInit {
   activityrights: any []=[];
   activities : any [] = []
   newArray: any[]=[];
+  assignedRights: any[]=[];
   constructor(public dialogRef: MatDialogRef<RoleManagementComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private _snackBar: MatSnackBar
     ,private translate : TranslateService , public  services :CoreService){
@@ -25,6 +26,7 @@ export class ModifyroleComponent implements OnInit {
     }
 
   ngOnInit() {
+
     this.services.getRole(this.data).subscribe(
       data=>{
         this.role = data as any ;
@@ -32,6 +34,9 @@ export class ModifyroleComponent implements OnInit {
         this.roleid=this.role[0].id;
         this.rolename=this.role[0].name;
         this.description=this.role[0].description;
+        this.role[0].activity_ids.forEach(element => {
+          this.assignedRights.push(element.id);
+        });
       },
      err=>console.log(err)
     );
@@ -39,6 +44,17 @@ export class ModifyroleComponent implements OnInit {
     this.services.getActivityRights().subscribe(
       data=>{
         this.activityrights = data as any[] ;
+        debugger;
+        this.assignedRights.forEach(e=>{
+        this.activityrights.forEach(element=>{
+            if(element.id==e){
+              element.Checked=true;
+            }
+            else{
+              element.Checked=false;
+            }
+          });
+        });
         console.log(this.activityrights) ;
       },
      err=>console.log(err)
@@ -54,7 +70,6 @@ export class ModifyroleComponent implements OnInit {
     let obj = {
       "order" : data
     }
-debugger;
     if(data.Checked){
       // Pushing the object into array
       this.newArray.push(obj);

@@ -33,6 +33,7 @@ export class LoginComponent {
            
              localStorage.setItem("token" , data["token"]);
              localStorage.setItem("loginUser" , data["name"]);
+             localStorage.setItem("roledetails", data["role_detail"]);
 
              this.router.navigate(['/home/crm']);
          },
