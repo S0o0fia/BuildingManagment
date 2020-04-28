@@ -88,9 +88,10 @@ export class CoreService {
 		return this.http.get(this.apiURL+userUrl);
 	}
 
-	getRole (role_id : number = 2)
+	getRole (id: number)
 	{
-		let userUrl='/usersrole/get?db='+this.db+'&token='+localStorage.getItem("token")+'&role_id='+role_id;
+		debugger
+		let userUrl='/usersrole/get?db='+this.db+'&token='+localStorage.getItem("token")+'&role_id='+id;
 		return this.http.get(this.apiURL+userUrl);
 	}
 
@@ -98,6 +99,14 @@ export class CoreService {
 	{
 		let userUrl='/activities/get?db='+this.db+'&token='+localStorage.getItem("token");
 		return this.http.get(this.apiURL+userUrl);
+	}
+
+	modifyRole (value : any)
+	{
+		let roleUrl='/usersrole/modify?db='+this.db+'&token='+localStorage.getItem("token")+'&activity_id=['+value.activity_id+']&role_id='+value.role_id;
+		debugger;
+        console.log(roleUrl);
+		return this.http.post(this.apiURL+roleUrl , null);
 	}
 
 	createUser (value : User)

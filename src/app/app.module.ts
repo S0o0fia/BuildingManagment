@@ -371,8 +371,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		ExtractsComponent,
 		AddItemComponent,
 		AddDiscountComponent,
-		AddBuildingComponent
-		
+		AddBuildingComponent,
+		ModifyroleComponent
 	],
 	exports:[
 		MatDatepickerModule ,
