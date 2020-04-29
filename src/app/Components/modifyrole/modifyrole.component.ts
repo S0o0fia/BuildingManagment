@@ -35,6 +35,7 @@ export class ModifyroleComponent implements OnInit {
         this.rolename=this.role[0].name;
         this.description=this.role[0].description;
         this.role[0].activity_ids.forEach(element => {
+          element.Checked=true;
           this.assignedRights.push(element.id);
         });
       },
@@ -44,18 +45,11 @@ export class ModifyroleComponent implements OnInit {
     this.services.getActivityRights().subscribe(
       data=>{
         this.activityrights = data as any[] ;
-        debugger;
         this.assignedRights.forEach(e=>{
-        this.activityrights.forEach(element=>{
-            if(element.id==e){
-              element.Checked=true;
-            }
-            else{
-              element.Checked=false;
-            }
-          });
+            this.activityrights[e-1].Checked=true;
         });
         console.log(this.activityrights) ;
+        alert(JSON.stringify(this.activityrights));
       },
      err=>console.log(err)
     );
@@ -67,10 +61,11 @@ export class ModifyroleComponent implements OnInit {
   }
 
   getCheckboxValues(ev, data) {
+    debugger;
     let obj = {
       "order" : data
     }
-    if(data.Checked){
+    if(ev.checked){
       // Pushing the object into array
       this.newArray.push(obj);
       this.activities.push(data.id);

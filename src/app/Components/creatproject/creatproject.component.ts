@@ -215,10 +215,12 @@ caldurationm(value)
     
    if(this.duration == 3){
     
-    this.project_duration_days = Math.round(value*30.4);
-    Month += Math.round(this.project_duration_days/30.4);
-    days += Math.round(this.project_duration_days%30.4);
-    this.deliverdate = new Date(Year , Month , days);
+    // this.project_duration_days = Math.round(value*30.4);
+    // Month += Math.round(this.project_duration_days/30.4);
+    // days += Math.round(this.project_duration_days%30.4);
+    let dd=value*30;
+    this.deliverdate = new Date();
+    this.deliverdate.setDate(this.startdate.getDate()+dd);
    }
 
 }
@@ -239,25 +241,27 @@ openDialog(): void {
 
 caldurationd(value)
 {
-   let days = this.startdate.getDay();
-   let Month = this.startdate.getMonth();
-   let Year = this.startdate.getFullYear();
-    let formattedDate ;
+  debugger;
+  //  let days = this.startdate.getDay();
+  //  let Month = this.startdate.getMonth();
+  //  let Year = this.startdate.getFullYear();
+  //   let formattedDate ;
    
-   days = days+Math.round( value %30.4 )-3;    
-   Month = Month+Math.round(value/30.4)-1;
+  //  days = days+Math.round( value %30.4 )-3;    
+  //  Month = Month+Math.round(value/30.4)-1;
 
   this.deliverdate = new Date();
 
-  this.deliverdate.setMonth(this.startdate.getMonth()+ Math.round(value/30.4));
-  this.deliverdate = new Date(this.deliverdate.toISOString().slice(0,10));
+  // this.deliverdate.setMonth(this.startdate.getMonth()+ Math.round(value/30.4));
+  // this.deliverdate = new Date(this.deliverdate.toISOString().slice(0,10));
 
 
-  this.model2.day =  Math.round(value%29.5);
-  this.model2.month =  Math.round(value/29.5);
+  // this.model2.day =  Math.round(value%29.5);
+  // this.model2.month =  Math.round(value/29.5);
  
-  this.project_duration_months = Math.round(value/30.4);
-  this.project_duration_h_months = Math.round(value/29.5);
+  // this.project_duration_months = Math.round(value/30.4);
+  // this.project_duration_h_months = Math.round(value/29.5);
+  this.deliverdate.setDate(this.startdate.getDate()+value);
 
 }
   nextStep() {
