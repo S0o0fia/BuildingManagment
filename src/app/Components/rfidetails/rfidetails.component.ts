@@ -43,6 +43,7 @@ export class RfidetailsComponent implements OnInit {
    boolcontractor : boolean = false;
   preparedby: any;
   preparedon: any;
+  activity_log: any[]=[];
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
     ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
     this.user = localStorage.getItem('loginUser');
@@ -126,8 +127,19 @@ export class RfidetailsComponent implements OnInit {
              this.RFI_tbl.push(element);
              this.state = element.state;
              this.consultant_approve = element.consultant_approval;
-             this.preparedby=element.activity_log[0].action.split(':')[1];
-             this.preparedon=this.datePipe.transform(element.activity_log[0].date, 'dd-MM-yyyy');
+             //alert(element.activity_log.length);
+             //element.activity_log.forEach(e=>{
+              // this.preparedby=element.activity_log[0].action.split(':')[1];
+              // this.preparedon=this.datePipe.transform(element.activity_log[0].date, 'dd-MM-yyyy');
+            //   this.preparedby=e.action;
+            //  this.preparedon=this.datePipe.transform(e.date, 'dd-MM-yyyy');            
+             //});
+             this.activity_log=element.activity_log;
+
+             this.activity_log.forEach(e=>{
+               e.date=this.datePipe.transform(e.date, 'dd-MM-yyyy');   
+             });
+             
              if(this.consultant_approve == "waiting")
              {
               this.consultant_btn = "Consultant Approve";
