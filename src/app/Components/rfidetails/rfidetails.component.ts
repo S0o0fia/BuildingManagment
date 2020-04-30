@@ -9,11 +9,13 @@ import { SelectApproveComponent } from '../select-approve/select-approve.compone
 import { Approvedqty } from 'app/Models/Quantity/approvedqty';
 import {Comment } from '../../Models/Comment/comment'
 import { timeThursdays } from 'd3';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'ms-rfidetails',
   templateUrl: './rfidetails.component.html',
-  styleUrls: ['./rfidetails.component.scss']
+  styleUrls: ['./rfidetails.component.scss'],
+  providers: [DatePipe]
 })
 
 export class RfidetailsComponent implements OnInit {
@@ -39,8 +41,10 @@ export class RfidetailsComponent implements OnInit {
    role : number ;
    boolconsultant : boolean = false ; 
    boolcontractor : boolean = false;
+  preparedby: any;
+  preparedon: any;
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
-    ,private _snackBar: MatSnackBar ,public dialog: MatDialog) { 
+    ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
     this.user = localStorage.getItem('loginUser');
      this.id = +( this.route.snapshot.paramMap.get('id') );
      this.approve_draft = false;
@@ -114,13 +118,16 @@ export class RfidetailsComponent implements OnInit {
     //getting R0FI Data 
     this.service.getRFI_tbl().subscribe(
      data => {
-    
       console.log(data);
+      //alert(JSON.stringify(data));
        data.forEach(element => {
             if(element.id == this.id)
-           {this.RFI_tbl.push(element);
+           {
+             this.RFI_tbl.push(element);
              this.state = element.state;
              this.consultant_approve = element.consultant_approval;
+             this.preparedby=element.activity_log[0].action.split(':')[1];
+             this.preparedon=this.datePipe.transform(element.activity_log[0].date, 'dd-MM-yyyy');
              if(this.consultant_approve == "waiting")
              {
               this.consultant_btn = "Consultant Approve";
