@@ -30,11 +30,11 @@ export class ModifyroleComponent implements OnInit {
     this.services.getRole(this.data).subscribe(
       data=>{
         this.role = data as any ;
-        console.log(this.role) ;
         this.roleid=this.role[0].id;
         this.rolename=this.role[0].name;
         this.description=this.role[0].description;
         this.role[0].activity_ids.forEach(element => {
+          element.Checked=true;
           this.assignedRights.push(element.id);
         });
       },
@@ -44,18 +44,10 @@ export class ModifyroleComponent implements OnInit {
     this.services.getActivityRights().subscribe(
       data=>{
         this.activityrights = data as any[] ;
-        debugger;
         this.assignedRights.forEach(e=>{
-        this.activityrights.forEach(element=>{
-            if(element.id==e){
-              element.Checked=true;
-            }
-            else{
-              element.Checked=false;
-            }
-          });
+            this.activityrights[e-1].Checked=true;
         });
-        console.log(this.activityrights) ;
+        this.activities=this.assignedRights;
       },
      err=>console.log(err)
     );
@@ -67,24 +59,22 @@ export class ModifyroleComponent implements OnInit {
   }
 
   getCheckboxValues(ev, data) {
+    debugger;
     let obj = {
       "order" : data
     }
-    if(data.Checked){
+    //alert(ev.source.id);
+    if(ev.checked){
       // Pushing the object into array
       this.newArray.push(obj);
-      this.activities.push(data.id);
+      this.activities.push(ev.source.id);
     }else {
       let removeIndex = this.newArray.findIndex(itm => itm.order===data);
-
+      let rIndex=this.activities.findIndex(i=>i==ev.source.id);
       if(removeIndex !== -1)
         this.newArray.splice(removeIndex,1);
-        this.activities.splice(removeIndex,1);
+        this.activities.splice(rIndex,1);
     }
-
-    //Duplicates the obj if we uncheck it
-    //How to remove the value from array if we uncheck it
-    console.log(this.newArray);
   }
 
   Save()
@@ -97,14 +87,19 @@ export class ModifyroleComponent implements OnInit {
    
 
     this.services.modifyRole(this.role).subscribe(
-      data=>{
-        let msg = this._snackBar.open('تم إنشاء المستخدم بنجاح' , 'إالغاء')
+      (data)=>{
+        //console.log(data);
+        let msg = this._snackBar.open('تم منح الصلاحية بنجاح' , 'إالغاء');
         if(msg)
         {
           location.reload();
         }
       },
-      err=>console.log(err)
+      err=>{
+        console.log(err);
+        let msg = this._snackBar.open('تم منح الصلاحية بنجاح' , 'إالغاء');
+        location.reload();
+      }
     );
   }
 

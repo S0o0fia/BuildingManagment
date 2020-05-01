@@ -88,7 +88,13 @@
             </div>
           
          </div>
-         <td>{{'By Contractor'|translate}} : {{user}}</td>
+         <div></div>
+         <!-- <tr><td>{{'Prepared By'|translate}} : {{preparedby}}</td></tr>
+         <tr><td>{{'Prepared On'|translate}} : {{preparedon}}</td></tr> -->
+         <tr *ngFor="let a of activity_log">
+            <td>{{a.action}}</td>
+            <td>{{'Prepared On'|translate}} : {{a.date}}</td>
+         </tr>
     </mat-card>
 
     <mat-card>
