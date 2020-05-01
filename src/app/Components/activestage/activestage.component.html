@@ -1,18 +1,77 @@
-<!-- <div style=" width: 100%;" #reportContainer></div>  -->
+<mat-card >
+   <div class="gene-card-title">
+      <div fxLayout="row" fxLayoutAlign="start center">
+         <div fxLayout="column" fxLayoutAlign="start center">
+            <h3>{{'Completion Rate'|translate}}</h3>
+         </div>
+         <span fxFlex></span>
+      </div>
+      <mat-divider></mat-divider>
+   </div>
+<div fxLayout="row wrap" fxLayoutAlign="center stretch">
+   <!--Request For Inspection-->
+   <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+       <mat-card class="card-full-width row">
+         <h3>{{'Request for Inspection'|translate}}</h3>
+           <ms-pie-chart [data]="pieChartDemoData" title="Completion Rate" textColor="#222328"></ms-pie-chart>           
+       </mat-card>
+   </div>
 
-<!--Project Report-->
-<mat-card dir="rtl">
-    <div class="gene-card-title">
+    <!--Request For Inspection-->
+   <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+      <mat-card class="card-full-width row">
+        <h3>{{'Request of Count'|translate}}</h3>
+          <ms-pie-chart [data]="pieChartDemoDataC" title="Completion Rate" textColor="#222328"></ms-pie-chart>           
+      </mat-card>
+  </div>
+ 
+  
+
+</div>
+</mat-card>
+
+
+<!--Third Part-->
+<mat-card>
+ <div class="gene-card-title">
        <div fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="column" fxLayoutAlign="start center">
-             <h3>{{'Project Report'|translate}}</h3>
+             <h3>{{'Contructor Extracts'|translate}}</h3>
           </div>
           <span fxFlex></span>
        </div>
        <mat-divider></mat-divider>
     </div>
-    <div class="gene-card-content">
-      <iframe width="1300" height="800" 
-     src="https://app.powerbi.com/view?r=eyJrIjoiNmVhMWVlZWMtYTg0MS00NzdjLWJhMzUtNDhlNWJmZWRkNjkwIiwidCI6ImVkNzMwNTczLTE1ODAtNDAxYi1hMWJjLWQ0NTQxN2VlODBmMyIsImMiOjl9"
-frameborder="0" allowFullScreen="true"></iframe> </div>
+<div fxLayout="row wrap" fxLayoutAlign="center stretch">
+    <div fxFlex="100%" fxFlex.md="40%" fxFlex.sm="100%" fxFlex.gt-md>
+        <mat-card class="card-full-width row">
+             <ms-extracts></ms-extracts>
+       </mat-card>
+    </div>
+</div>
+
 </mat-card>
+
+<!--Fourth Part-->
+<mat-card>
+ <div class="gene-card-title">
+       <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="column" fxLayoutAlign="start center">
+             <h3>{{'Chart'|translate}}</h3>
+          </div>
+          <span fxFlex></span>
+       </div>
+       <mat-divider></mat-divider>
+    </div>
+<div fxLayout="row wrap" fxLayoutAlign="center stretch">
+    <div fxFlex="100%" fxFlex.md="40" fxFlex.sm="100%" fxFlex.gt-md>
+        <mat-card class="card-full-width card-full-height row">
+             <ms-full-width-graph [lineChartData]="lineChartData" [lineChartLabels]="lineChartLabels" [lineChartOptions]="lineChartOptions" [lineChartColors]="lineChartColors" [lineChartLegend]="lineChartLegend" [lineChartType]="lineChartType"></ms-full-width-graph>
+
+       </mat-card>
+    </div>
+</div>
+
+</mat-card>
+
+

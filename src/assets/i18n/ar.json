@@ -802,6 +802,7 @@
            "Search by" : "بحث بـ"  ,
            "Request for Inventroy Qunatities" :"طلب حصر مواد",
            "List of Count":"قائمة طلبات الحصر" ,
+           "Request of Count":"طلبات الحصر",
            "Height":"الارتفاع",
            "Width":"العرض" ,
            "Length":"الطول" ,
@@ -855,7 +856,7 @@
            "Delete project" :"حذف مشروع" ,
            "ROLES LIST" : "قائمة الصلاحيات",
            "Role Activity":"نشاط الصلاحية" , 
-           "Project Schedule" : "الجدول الزمني "
+           "Project Schedule" : "الجدول الزمني " 
 
 
 }

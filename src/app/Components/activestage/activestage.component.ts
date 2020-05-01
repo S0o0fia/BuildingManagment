@@ -3,6 +3,7 @@ import { PageTitleService } from '../core/page-title/page-title.service';
 import {pieChartDemoData} from 'app/Models/chart-data'
 import { stackedAreaChartData } from "app/Models/stackedAreaChart.data";
 import * as pbi from 'powerbi-client';  
+import { CoreService } from 'app/Service/core/core.service';
 @Component({
   selector: 'ms-activestage',
   templateUrl: './activestage.component.html',
@@ -10,9 +11,26 @@ import * as pbi from 'powerbi-client';
 })
 export class ActivestageComponent implements OnInit {
   
-  constructor(       private pageTitleService: PageTitleService) { }
+  data : any [] = [];
+  //rfi 
+  accepted : number = 0; 
+  aceeptedwithcomment : number = 0; 
+  waiting : number = 0; 
+  draft : number = 0;
+  rejected : number = 0;
+  //Count
+  dataCount : any[]=[] ;
+  acceptedc : number = 0;
+  aceeptedwithcommentc : number =0 ;
+  waitingc : number = 0;
+  draftc : number =0;
+  rejectedc : number = 0;
+  //
+  
+  constructor(private pageTitleService: PageTitleService , public service : CoreService) { }
 
   pieChartDemoData :any[];
+  pieChartDemoDataC : any[];
   stackedAreaChartOptions;
   public simpleBarChartLabels:string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
   public simpleBarChartLegend:boolean = true;
@@ -69,27 +87,73 @@ public lineChartLegend:boolean = false;
 public lineChartType:string = 'line';
 
   ngOnInit() {
+
+   this.service.getRFIChart().subscribe(
+      data=> {
+         this.data = data[0] as any[]
+          this.accepted = this.data['aceepted'];
+          this.aceeptedwithcomment  = this.data['accepted2'];
+          this.rejected = this.data['rejected'];
+          this.waiting = this.data['waiting'];
+          this.draft = this.data['draft'];
+          
+          //the Chart 
+          this.pieChartDemoData =[
+           {
+              "label" : "بانتظار الفحص",
+              "value" : this.waiting
+            } , 
+            {
+               "label" : "مرفوض",
+               "value" : this.rejected
+             }
+             ,
+            {
+              "label" : "المقبول",
+              "value" : this.accepted
+            }
+          ];
+      
+      } , 
+      err=> console.log (err)
+   )
+
+   //Count
+   this.service.getCountChart().subscribe(
+      data=> {
+          this.dataCount = data[0] as any[]
+          this.acceptedc = this.dataCount['aceepted'];
+          this.rejectedc = this.dataCount['rejected'];
+          this.waitingc = this.dataCount['waiting'];
+          this.draftc = this.dataCount['draft'];
+      
+          this.pieChartDemoDataC =[
+           {
+              "label" : "بانتظار الفحص",
+              "value" : this.waitingc
+            } , 
+            {
+               "label" : "مرفوض",
+               "value" : this.rejectedc
+             }
+             ,
+            {
+              "label" : "المقبول",
+              "value" : this.acceptedc
+            }
+          ];
+      
+      } , 
+      err=> console.log (err)
+   )
     
     this.stackedAreaChartOptions = {
       name: 'Sample Full Width Graph',
     };
 
      this.pageTitleService.setTitle("المنصة التفاعلية");
-     this.pieChartDemoData =[
-      {
-        "label" : "المتوقع",
-        "value" : 60
-      },
-      {
-        "label" : "الفعلي",
-        "value" : 30
-      },
-      {
-        "label" : "الفرق",
-        "value" : 16
-      }
-    ];// pieChartDemoData;
-    
+     
+
 
 }}
 

@@ -893,5 +893,20 @@ export class CoreService {
 
   }
   
+  getRFIChart()
+  {
+	  let url = '/project/dashboard/rfi-count?db=nqproject&token='+localStorage.getItem('token');
+	  return this.http.get(this.apiURL+url);
+  }
+
+
+  getCountChart()
+  {
+	  let url = '/project/dashboard/qr-count?db=nqproject&token='+localStorage.getItem('token');
+	  return this.http.get(this.apiURL+url);
+  }
+  
+  
+
 }
 
