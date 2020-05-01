@@ -93,7 +93,7 @@
          <tr><td>{{'Prepared On'|translate}} : {{preparedon}}</td></tr> -->
          <tr *ngFor="let a of activity_log">
             <td>{{a.action}}</td>
-            <td>{{'Prepared On'|translate}} : {{a.date}}</td>
+            <td>On {{a.date}}</td>
          </tr>
     </mat-card>
 

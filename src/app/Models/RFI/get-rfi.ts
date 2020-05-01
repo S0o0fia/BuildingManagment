@@ -12,4 +12,5 @@ export interface GetRFI {
     item_qty: number;
     state : string;
     consultant_approval : string;
+    activity_log : any[];
 }

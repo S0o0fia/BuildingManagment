@@ -137,6 +137,7 @@ export class RfidetailsComponent implements OnInit {
              this.activity_log=element.activity_log;
 
              this.activity_log.forEach(e=>{
+               e.action=e.action.replace(':','');
                e.date=this.datePipe.transform(e.date, 'dd-MM-yyyy');   
              });
              
