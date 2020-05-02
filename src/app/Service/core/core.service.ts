@@ -107,6 +107,17 @@ export class CoreService {
 		let res= this.http.post(this.apiURL+roleUrl , null);
 		return res;
 	}
+
+	modifySchedule (value : any)
+	{
+		let scheduleUrl='/project/schedule/modify?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
+		'"id":"'+value.id+
+		',"name":"'+value.name+
+		'","percentage":'+value.percentage+'"}';
+		let res= this.http.post(this.apiURL+scheduleUrl , null);
+		return res;
+	}
+
 	getSchedule (id: any)
 	{
 		debugger
@@ -307,7 +318,6 @@ export class CoreService {
 	 
 	getMIR ()
 	{
- debugger;
 		let mirget = "/mir/get?db="+this.db+"&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get<any[]>(this.apiURL+mirget);
 	}

@@ -2,7 +2,7 @@
     <div class="gene-card-title">
        <div fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="column" fxLayoutAlign="start center">
-            <h3 >{{'Modify Role'|translate}} </h3>
+            <h3 >{{'Modify Project Schedule'|translate}} </h3>
           </div>
           <span fxFlex></span>
        </div>
@@ -13,11 +13,11 @@
                 <div fxLayout="column">
                    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                      
-                      <!--rolename-->
+                      <!--name-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                              <mat-form-field class="full-wid mrgn-b-lg ">
-                             <input matInput name="rolename" [(ngModel)]="rolename" 
-                             placeholder="{{'rolename'|translate}}" type="text" required>    
+                             <input matInput name="name" [(ngModel)]="name" 
+                             placeholder="{{'name'|translate}}" type="text" required>    
                           </mat-form-field> 
                           
                      </div>  
@@ -27,37 +27,18 @@
                 <div fxLayout="column">
                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                     
-                     <!--description-->
+                     <!--percentage-->
                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                             <mat-form-field class="full-wid mrgn-b-lg ">
-                            <input matInput name="description" [(ngModel)]="description" 
-                            placeholder="{{'Note' | translate}}" type="text">    
+                            <input matInput name="percentage" [(ngModel)]="percentage" 
+                            placeholder="{{'Percentage' | translate}}" type="text">    
                          </mat-form-field> 
                          
                     </div>  
 
                   </div>
                </div>
-               <div fxLayout="column">
-                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                    
-                    
-               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                            
-                            <mat-list>  
-                              <mat-list-item *ngFor="let item of activityrights">
-                                 <!-- <mat-form-field class="full-wid mrgn-b-lg "> -->
-                                 <mat-checkbox matInput [id]="item.id" [name]="item" [checked]="item.Checked" (change)="getCheckboxValues($event,item)">
-                                    <label [for]="item.id">{{ item.name |translate }}</label>
-                                 </mat-checkbox>
-                              <!-- </mat-form-field> -->
-                               </mat-list-item>
-                           </mat-list> 
-                         
-                    </div>  
-
-                  </div>
-               </div>
+               
                 <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 5%;">
                   <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}  <mat-icon>cancel</mat-icon></button>
                   <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Submited'|translate }}  <mat-icon>done_outline</mat-icon></button>
