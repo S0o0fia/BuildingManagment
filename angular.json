@@ -36,7 +36,7 @@
               "node_modules/cryptocoins-icons/webfont/cryptocoins.css",
               "src/assets/fonts/data-table/icons.css",
               "node_modules/dragula/dist/dragula.css",
-				      "node_modules/angular-tree-component/dist/angular-tree-component.css",
+              "node_modules/angular-tree-component/dist/angular-tree-component.css",
               "node_modules/nouislider/distribute/nouislider.min.css",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss",
@@ -120,7 +120,7 @@
               "node_modules/cryptocoins-icons/webfont/cryptocoins.css",
               "src/assets/fonts/data-table/icons.css",
               "node_modules/dragula/dist/dragula.css",
-				      "node_modules/angular-tree-component/dist/angular-tree-component.css",
+              "node_modules/angular-tree-component/dist/angular-tree-component.css",
               "node_modules/nouislider/distribute/nouislider.min.css",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss",
@@ -176,5 +176,8 @@
     "@schematics/angular:directive": {
       "prefix": "ms"
     }
+  },
+  "cli": {
+    "analytics": "72124f0f-b6fb-46b1-9316-9ade27cc66ea"
   }
 }

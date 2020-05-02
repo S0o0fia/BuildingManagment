@@ -4,6 +4,8 @@ import {pieChartDemoData} from 'app/Models/chart-data'
 import { stackedAreaChartData } from "app/Models/stackedAreaChart.data";
 import * as pbi from 'powerbi-client';  
 import { CoreService } from 'app/Service/core/core.service';
+import { ChartType, ChartOptions } from 'chart.js';
+import { Label, SingleDataSet, monkeyPatchChartJsTooltip, monkeyPatchChartJsLegend } from 'ng2-charts';
 @Component({
   selector: 'ms-activestage',
   templateUrl: './activestage.component.html',
@@ -25,10 +27,34 @@ export class ActivestageComponent implements OnInit {
   waitingc : number = 0;
   draftc : number =0;
   rejectedc : number = 0;
-  //
-  
-  constructor(private pageTitleService: PageTitleService , public service : CoreService) { }
+  //for pie ؤCOUNT
+  public pieChartData1  :SingleDataSet;
+  public pieChartType1:string
+  pieChartColors1: any[] ;
+  PieChartOptions1: any;
+  public pieChartOptions: ChartOptions = {
+   responsive: true,
+ };
+ public pieChartLabels1: Label[] = [['Accepted', 'مقبول'], ['Draft', 'مسودة'], ['Waiting', 'بانتظار الاعتماد'] , ['Rejected', 'مرفوض'] ];
+ public pieChartType: ChartType = 'pie';
+ public pieChartLegend = true;
+ public pieChartPlugins = [];
+ //FOR PIE RFI
+ public pieChartData2  :SingleDataSet;
+ public pieChartType2:string
+ pieChartColors2: any[] ;
 
+public pieChartLabels2: Label[] = [['Accepted', 'مقبول'], ['Accepted with', 'comments', 'مقبول بملاحظات'], ['Draft', 'مسودة'], ['Waiting', 'بانتظار الاعتماد'] , ['Rejected', 'مرفوض'] ];
+
+  constructor(private pageTitleService: PageTitleService , public service : CoreService) { 
+   monkeyPatchChartJsTooltip();
+   monkeyPatchChartJsLegend();
+
+  }
+
+   // Pie
+  
+  
   pieChartDemoData :any[];
   pieChartDemoDataC : any[];
   stackedAreaChartOptions;
@@ -96,23 +122,25 @@ public lineChartType:string = 'line';
           this.rejected = this.data['rejected'];
           this.waiting = this.data['waiting'];
           this.draft = this.data['draft'];
+          this.pieChartData2 = 
+           [   
+              this.accepted , this.aceeptedwithcomment , this.draft , this.waiting , this.rejected
+           ];
+           this.pieChartType2 = 'pie';
+          this.pieChartColors2 = [{
+         backgroundColor: ['#10988c', '#8bbb47' ,'#1565c0', '#f9fc2f', '#ff4747']
+     
+  
+        }];
+   this.PieChartOptions1 = {
+      elements: {
+         arc: {
+            borderWidth: 0
+         }
+      }
+   }
+
           
-          //the Chart 
-          this.pieChartDemoData =[
-           {
-              "label" : "بانتظار الفحص",
-              "value" : this.waiting
-            } , 
-            {
-               "label" : "مرفوض",
-               "value" : this.rejected
-             }
-             ,
-            {
-              "label" : "المقبول",
-              "value" : this.accepted
-            }
-          ];
       
       } , 
       err=> console.log (err)
@@ -126,23 +154,25 @@ public lineChartType:string = 'line';
           this.rejectedc = this.dataCount['rejected'];
           this.waitingc = this.dataCount['waiting'];
           this.draftc = this.dataCount['draft'];
-      
-          this.pieChartDemoDataC =[
-           {
-              "label" : "بانتظار الفحص",
-              "value" : this.waitingc
-            } , 
-            {
-               "label" : "مرفوض",
-               "value" : this.rejectedc
-             }
-             ,
-            {
-              "label" : "المقبول",
-              "value" : this.acceptedc
-            }
-          ];
-      
+          this.pieChartData1 = 
+           [   
+              this.acceptedc , this.draftc , this.waitingc , this.rejectedc
+           ];
+           this.pieChartType1 = 'pie';
+          this.pieChartColors1 = [{
+         backgroundColor: ['#10988c', '#1565c0', '#f9fc2f', '#ff4747']
+     
+  
+   }];
+   this.PieChartOptions1 = {
+      elements: {
+         arc: {
+            borderWidth: 0
+         }
+      }
+   }
+
+   
       } , 
       err=> console.log (err)
    )
@@ -155,6 +185,10 @@ public lineChartType:string = 'line';
      
 
 
-}}
+}
+
+
+
+}
 
 

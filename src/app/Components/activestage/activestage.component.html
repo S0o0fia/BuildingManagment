@@ -13,15 +13,36 @@
    <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
        <mat-card class="card-full-width row">
          <h3>{{'Request for Inspection'|translate}}</h3>
-           <ms-pie-chart [data]="pieChartDemoData" title="Completion Rate" textColor="#222328"></ms-pie-chart>           
-       </mat-card>
+           
+         <canvas baseChart
+         height="150" 
+         [data]="pieChartData2"
+           [options]="PieChartOptions1" 
+           [colors]="pieChartColors2"
+           [labels]="pieChartLabels2"
+           [plugins]="pieChartPlugins"
+           [legend]="pieChartLegend" 
+           [chartType]="pieChartType1"></canvas> 
+      
+      
+        </mat-card>
    </div>
 
     <!--Request For Inspection-->
    <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
       <mat-card class="card-full-width row">
         <h3>{{'Request of Count'|translate}}</h3>
-          <ms-pie-chart [data]="pieChartDemoDataC" title="Completion Rate" textColor="#222328"></ms-pie-chart>           
+          
+        <canvas baseChart
+             height="150" 
+             [data]="pieChartData1"
+               [options]="PieChartOptions1" 
+               [colors]="pieChartColors1"
+               [labels]="pieChartLabels1"
+               [plugins]="pieChartPlugins"
+               [legend]="pieChartLegend" 
+               [chartType]="pieChartType1"></canvas>
+            
       </mat-card>
   </div>
  
@@ -30,48 +51,4 @@
 </div>
 </mat-card>
 
-
-<!--Third Part-->
-<mat-card>
- <div class="gene-card-title">
-       <div fxLayout="row" fxLayoutAlign="start center">
-          <div fxLayout="column" fxLayoutAlign="start center">
-             <h3>{{'Contructor Extracts'|translate}}</h3>
-          </div>
-          <span fxFlex></span>
-       </div>
-       <mat-divider></mat-divider>
-    </div>
-<div fxLayout="row wrap" fxLayoutAlign="center stretch">
-    <div fxFlex="100%" fxFlex.md="40%" fxFlex.sm="100%" fxFlex.gt-md>
-        <mat-card class="card-full-width row">
-             <ms-extracts></ms-extracts>
-       </mat-card>
-    </div>
-</div>
-
-</mat-card>
-
-<!--Fourth Part-->
-<mat-card>
- <div class="gene-card-title">
-       <div fxLayout="row" fxLayoutAlign="start center">
-          <div fxLayout="column" fxLayoutAlign="start center">
-             <h3>{{'Chart'|translate}}</h3>
-          </div>
-          <span fxFlex></span>
-       </div>
-       <mat-divider></mat-divider>
-    </div>
-<div fxLayout="row wrap" fxLayoutAlign="center stretch">
-    <div fxFlex="100%" fxFlex.md="40" fxFlex.sm="100%" fxFlex.gt-md>
-        <mat-card class="card-full-width card-full-height row">
-             <ms-full-width-graph [lineChartData]="lineChartData" [lineChartLabels]="lineChartLabels" [lineChartOptions]="lineChartOptions" [lineChartColors]="lineChartColors" [lineChartLegend]="lineChartLegend" [lineChartType]="lineChartType"></ms-full-width-graph>
-
-       </mat-card>
-    </div>
-</div>
-
-</mat-card>
-
-
+ 
