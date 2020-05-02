@@ -371,6 +371,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		AddAttendeceComponent,
 		AddrecieveditemComponent,
 		ProjectdetailsComponent,
+		ModifyprojectscheduleComponent,
 		RFIStatusComponent,
 		ExtractsComponent,
 		AddItemComponent,

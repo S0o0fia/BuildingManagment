@@ -110,10 +110,11 @@ export class CoreService {
 
 	modifySchedule (value : any)
 	{
+		debugger
 		let scheduleUrl='/project/schedule/modify?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
-		'"id":"'+value.id+
+		'"id":'+value.id+
 		',"name":"'+value.name+
-		'","percentage":'+value.percentage+'"}';
+		'","percentage":'+value.percentage+'}';
 		let res= this.http.post(this.apiURL+scheduleUrl , null);
 		return res;
 	}
@@ -121,9 +122,17 @@ export class CoreService {
 	getSchedule (id: any)
 	{
 		debugger
-		let userUrl='/project/schedule/get?db='+this.db+'&token='+localStorage.getItem("token")+'&project_id='+id;
-		return this.http.get(this.apiURL+userUrl);
+		let scheduleUrl='/project/schedule/get?db='+this.db+'&token='+localStorage.getItem("token")+'&project_id='+id;
+		return this.http.get(this.apiURL+scheduleUrl);
 	}
+
+	getPSchedule (id: any)
+	{
+		debugger;
+		let pscheduleUrl='/project/schedule/get?db='+this.db+'&token='+localStorage.getItem("token")+'&schedule_id='+id;
+		return this.http.get(this.apiURL+pscheduleUrl);
+	}
+
 	createUser1 (value : User)
 	{
 		let userUrl2='/users/create?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
