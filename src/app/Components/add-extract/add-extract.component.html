@@ -143,7 +143,7 @@
                                     <mat-select name="item_id" [(ngModel)]="item_id">
                                                 <div *ngFor="let item of approve">
                                                   
-                                                 <mat-option value={{item.id}} (click)="Add(item.id)" >
+                                                 <mat-option value={{item.number}} (click)="Add(item.quantity_id)" >
                                                    {{item.number}}   ,    {{item.name}} 
                                               </mat-option>
                                              </div>
@@ -216,11 +216,11 @@
                                    <tr>
                                        <td  style="text-align: center;">
                                           <span (click)="openCloseRow(item.id = 0 )">
-                                                <button *ngIf="rowSelected!=item.id; else close" color="primary"  mat-icon-button matTooltip="{{'More Options'|translate}}" [matMenuTriggerFor]="menu"   >
+                                                <button *ngIf="rowSelected!=item.id; else close" color="primary"  mat-icon-button matTooltip="{{'More Options'|translate}}">
                                                    <mat-icon>arrow_drop_down</mat-icon>
                                                 </button>
                                                 <ng-template #close>
-                                                      <button color="primary"   mat-icon-button matTooltip="{{'Hide'|translate}}" [matMenuTriggerFor]="menu"   >
+                                                      <button color="primary"   mat-icon-button matTooltip="{{'Hide'|translate}}">
                                                          <mat-icon>arrow_drop_up</mat-icon>
                                                       </button>
                                                   </ng-template>

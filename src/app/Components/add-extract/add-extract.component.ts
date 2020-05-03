@@ -160,9 +160,10 @@ export class AddExtractComponent implements OnInit {
 
  Add(id)
  {
+   alert(id);
     this.approve.forEach(element=>
     {
-      if(element.id == id)
+      if(element.quantity_id == id)
       {
         this.approved.push(element);
         this.total_work += (element.price * element.approved_qty);

@@ -452,6 +452,7 @@ export class CoreService {
 
 	getApprovedQty (projectid , fromdate , todate)
 	{
+		debugger
 	   let approve = "/approved_qty/get?db=nqproject&token="+localStorage.getItem('token')+"&project_id="+projectid+
 	   "&from_date="+fromdate+"&to="+todate;
 	   console.log(approve);
