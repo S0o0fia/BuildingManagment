@@ -51,4 +51,16 @@
 </div>
 </mat-card>
 
- 
+ <!--Bar-->
+ <mat-card>
+   <canvas baseChart
+   [datasets]="barChartData"
+   [labels]="mbarChartLabels1"
+   [options]="barChartOptions"
+   [colors]="barChartColors"
+   [legend]="barChartLegend"
+   [chartType]="barChartType"
+   (chartHover)="chartHovered($event)"
+   (chartClick)="chartClicked($event)"></canvas>
+
+ </mat-card>

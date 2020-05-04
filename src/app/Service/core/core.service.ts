@@ -905,6 +905,11 @@ export class CoreService {
 	  return this.http.get(this.apiURL+url);
   }
   
+  getDoneContract()
+  {
+	let url = '/project/dashboard/done-pers?db=nqproject&token='+localStorage.getItem('token');
+	return this.http.get<any[]>(this.apiURL+url)
+  }
   
 
 }

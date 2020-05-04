@@ -4,7 +4,7 @@ import {pieChartDemoData} from 'app/Models/chart-data'
 import { stackedAreaChartData } from "app/Models/stackedAreaChart.data";
 import * as pbi from 'powerbi-client';  
 import { CoreService } from 'app/Service/core/core.service';
-import { ChartType, ChartOptions } from 'chart.js';
+import { ChartType, ChartOptions, ChartDataSets } from 'chart.js';
 import { Label, SingleDataSet, monkeyPatchChartJsTooltip, monkeyPatchChartJsLegend } from 'ng2-charts';
 @Component({
   selector: 'ms-activestage',
@@ -46,6 +46,76 @@ export class ActivestageComponent implements OnInit {
 
 public pieChartLabels2: Label[] = [['Accepted', 'مقبول'], ['Accepted with', 'comments', 'مقبول بملاحظات'], ['Draft', 'مسودة'], ['Waiting', 'بانتظار الاعتماد'] , ['Rejected', 'مرفوض'] ];
 
+
+//Bar Chart 
+public barChartOptions:any = {
+   scaleShowVerticalLines: false,
+   responsive: true
+ };
+
+   public mbarChartLabels1 :string[] =[];
+   public barChartType:string = 'bar';
+    public percentage : number[]=[];
+   public planned_pers : number []=[];
+   public total_excuted : number []=[]; 
+   public barChartLegend:boolean = true;
+ 
+   public barChartColors:Array<any> = [
+   {
+     backgroundColor: 'rgb(21, 101, 192)',
+     borderColor: 'rgb(21, 101, 192)',
+     pointBackgroundColor: 'rgba(105,159,177,1)',
+     pointBorderColor: '#fafafa',
+     pointHoverBackgroundColor: '#fafafa',
+     pointHoverBorderColor: 'rgba(105,159,177)'
+   },
+   { 
+     backgroundColor: 'rgb(255, 71, 71)',
+     borderColor: 'rgb(255, 71, 71)',
+     pointBackgroundColor: 'rgba(77,20,96,1)',
+     pointBorderColor: '#fff',
+     pointHoverBackgroundColor: '#fff',
+     pointHoverBorderColor: 'rgba(77,20,96,1)'
+   },
+   { 
+      backgroundColor: 'rgb(0, 172, 172)',
+      borderColor: 'rgb(0, 172, 172)',
+      pointBackgroundColor: 'rgba(77,20,96,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,20,96,1)'
+    }
+ ];
+   public barChartData:any[] = [
+   
+   ];
+
+   public barChartData1:any[]=[];
+   public dara :any[] = [];
+ 
+   // events
+   public chartClicked(e:any):void {
+     console.log(e);
+   }
+ 
+   public chartHovered(e:any):void {
+     console.log(e);
+   }
+ 
+   public randomize():void {
+     let data = [
+       Math.round(Math.random() * 100),
+       Math.round(Math.random() * 100),
+       Math.round(Math.random() * 100),
+       (Math.random() * 100),
+       Math.round(Math.random() * 100),
+       (Math.random() * 100),
+       Math.round(Math.random() * 100)];
+     let clone = JSON.parse(JSON.stringify(this.barChartData));
+     clone[0].data = data;
+     this.barChartData = clone;
+   }
+
   constructor(private pageTitleService: PageTitleService , public service : CoreService) { 
    monkeyPatchChartJsTooltip();
    monkeyPatchChartJsLegend();
@@ -54,65 +124,7 @@ public pieChartLabels2: Label[] = [['Accepted', 'مقبول'], ['Accepted with',
 
    // Pie
   
-  
-  pieChartDemoData :any[];
-  pieChartDemoDataC : any[];
-  stackedAreaChartOptions;
-  public simpleBarChartLabels:string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
-  public simpleBarChartLegend:boolean = true;
-  public simpleBarChartData:any[] = [
-     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Purchase'},
-     {data: [28, 48, 40, 19, 86, 27, 90], label: 'Plans'},
-     {data: [18, 38, 20, 9, 66, 37, 70], label: 'Services'}
-  ];
-  public simpleBarStackChartOptions:any = {
-     scaleShowVerticalLines: false,
-     responsive: true,
-     scales: {
-        xAxes: [{
-           stacked: true,
-        }],
-        yAxes: [{
-           stacked: true,
-        }]
-     }
-  };
-   // lineChart
-   public lineChartData:Array<any> = [
-    {data: [90, 150, 80, 300, 90, 290, 350,200,80,100,220,230,310,230,150,180,120,150], label: 'Series A'},
-    {data: [110, 90, 150, 130, 290, 210, 200,80,80,110,320,310,50,170,210,310,150,80,450], label: 'Series B'},
- ];
- public lineChartLabels:Array<any> = ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18'];
- public lineChartOptions:any = {
-    responsive: true,
-    scales: {
-       xAxes: [{
-          ticks: {
-             beginAtZero: true,
-             suggestedMax: 450
-          }
-       }]
-    }
- };
- lineChartColors: Array <any> = [{
-    backgroundColor: 'rgba(235, 78, 54, 0.2)',
-    borderColor: 'rgba(235, 78, 54, 1)',
-    pointBackgroundColor: 'rgba(235, 78, 54, 1)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(235, 78, 54, 0.8)'
- }, {
-    backgroundColor: 'rgba(0, 151, 167, 0.2)',
-    borderColor: 'rgba(0, 151, 167, 1)',
-    pointBackgroundColor: 'rgba(0, 151, 167, 1)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(0, 151, 167, 0.8)'
- }];
-public lineChartLegend:boolean = false;
-public lineChartType:string = 'line';
-
-  ngOnInit() {
+    ngOnInit() {
 
    this.service.getRFIChart().subscribe(
       data=> {
@@ -177,9 +189,28 @@ public lineChartType:string = 'line';
       err=> console.log (err)
    )
     
-    this.stackedAreaChartOptions = {
-      name: 'Sample Full Width Graph',
-    };
+
+   //Done Contarct 
+   this.service.getDoneContract().subscribe(
+      data=> {
+        data.forEach(element => {
+           this.mbarChartLabels1.push(element.contract_no);
+           this.percentage.push(element.percentage);
+           this.planned_pers.push(element.planned_pers);
+           this.total_excuted.push(element.total_excuted); 
+            
+        });
+
+        this.barChartData = [ {data : this.percentage , label : "Precentage" } ,
+        {data : this.planned_pers , label : "Planned Precentage"} ,
+        {data : this.total_excuted , label : "Total Excuted" }];
+      
+      },
+
+      err=>console.log(err)
+   )
+   
+    
 
      this.pageTitleService.setTitle("المنصة التفاعلية");
      

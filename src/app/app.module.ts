@@ -141,6 +141,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		AgmCoreModule.forRoot({
 			apiKey: 'AIzaSyARLJcKPev4Ot6baTkjNKjczRDHYlFhgzo'
 		  }),
+		  
+	    ChartsModule,
 		BrowserAnimationsModule, 
 		FileUploadModule ,
 		FormsModule,
