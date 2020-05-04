@@ -107,12 +107,32 @@ export class CoreService {
 		let res= this.http.post(this.apiURL+roleUrl , null);
 		return res;
 	}
+
+	modifySchedule (value : any)
+	{
+		debugger
+		let scheduleUrl='/project/schedule/modify?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
+		'"id":'+value.id+
+		',"name":"'+value.name+
+		'","percentage":'+value.percentage+'}';
+		let res= this.http.post(this.apiURL+scheduleUrl , null);
+		return res;
+	}
+
 	getSchedule (id: any)
 	{
 		debugger
-		let userUrl='/project/schedule/get?db='+this.db+'&token='+localStorage.getItem("token")+'&project_id='+id;
-		return this.http.get(this.apiURL+userUrl);
+		let scheduleUrl='/project/schedule/get?db='+this.db+'&token='+localStorage.getItem("token")+'&project_id='+id;
+		return this.http.get(this.apiURL+scheduleUrl);
 	}
+
+	getPSchedule (id: any)
+	{
+		debugger;
+		let pscheduleUrl='/project/schedule/get?db='+this.db+'&token='+localStorage.getItem("token")+'&schedule_id='+id;
+		return this.http.get(this.apiURL+pscheduleUrl);
+	}
+
 	createUser1 (value : User)
 	{
 		let userUrl2='/users/create?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
@@ -307,7 +327,6 @@ export class CoreService {
 	 
 	getMIR ()
 	{
- debugger;
 		let mirget = "/mir/get?db="+this.db+"&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem("projectid");
 		return this.http.get<any[]>(this.apiURL+mirget);
 	}
@@ -433,6 +452,7 @@ export class CoreService {
 
 	getApprovedQty (projectid , fromdate , todate)
 	{
+		debugger
 	   let approve = "/approved_qty/get?db=nqproject&token="+localStorage.getItem('token')+"&project_id="+projectid+
 	   "&from_date="+fromdate+"&to="+todate;
 	   console.log(approve);

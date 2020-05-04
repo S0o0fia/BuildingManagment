@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreService } from 'app/Service/core/core.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { ModifyroleComponent } from '../modifyrole/modifyrole.component';
+import { ModifyprojectscheduleComponent } from '../modifyprojectschedule/modifyprojectschedule.component';
 
 @Component({
   selector: 'ms-projectschedule',
@@ -40,7 +40,7 @@ export class ProjectscheduleComponent implements OnInit {
 
   openDialog(data: any)
   {
-    const dialogRef = this.dialog.open(ModifyroleComponent, {
+    const dialogRef = this.dialog.open(ModifyprojectscheduleComponent, {
       width: '80%',
       height: '85%',
       data: data.id

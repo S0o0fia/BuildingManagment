@@ -160,9 +160,11 @@ export class AddExtractComponent implements OnInit {
 
  Add(id)
  {
+  this.approved=[];
+  this.ApprovedCountItem=[];
     this.approve.forEach(element=>
     {
-      if(element.id == id)
+      if(element.quantity_id == id)
       {
         this.approved.push(element);
         this.total_work += (element.price * element.approved_qty);
@@ -221,6 +223,7 @@ export class AddExtractComponent implements OnInit {
 
   getCountItem(event , item_number , count_id)
   {
+    debugger
     if(event.checked)
     {
       this.approved.forEach(element => {
@@ -241,6 +244,9 @@ export class AddExtractComponent implements OnInit {
           }
         }
       });
+    }
+    else{
+      this.ApprovedCountItem=[];
     }
     console.log(this.ApprovedCountItem);
   }
