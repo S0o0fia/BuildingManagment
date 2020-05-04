@@ -51,9 +51,23 @@
 </div>
 </mat-card>
 
+<mat-card >
+   <div class="gene-card-title">
+      <div fxLayout="row" fxLayoutAlign="start center">
+         <div fxLayout="column" fxLayoutAlign="start center">
+            <h3>{{'Bar'|translate}}</h3>
+         </div>
+         <span fxFlex></span>
+      </div>
+      <mat-divider></mat-divider>
+   </div>
+<div fxLayout="row wrap" fxLayoutAlign="center stretch">
+   <!--Request For Inspection-->
+   <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
  <!--Bar-->
  <mat-card>
    <canvas baseChart
+    height="150" 
    [datasets]="barChartData"
    [labels]="mbarChartLabels1"
    [options]="barChartOptions"
@@ -64,3 +78,52 @@
    (chartClick)="chartClicked($event)"></canvas>
 
  </mat-card>
+   </div>
+
+   <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+ <!--SPI Bar-->
+ <mat-card>
+   <canvas baseChart
+   height="150" 
+   [datasets]="barChartData1"
+   [labels]="mbarChartLabels2"
+   [options]="barChartOptions"
+   [colors]="barChartColors1"
+   [legend]="barChartLegend"
+   [chartType]="barChartType"
+   (chartHover)="chartHovered($event)"
+   (chartClick)="chartClicked($event)"></canvas>
+
+ </mat-card>
+</div>
+</div>
+</mat-card>
+
+
+<mat-card >
+   <div class="gene-card-title">
+      <div fxLayout="row" fxLayoutAlign="start center">
+         <div fxLayout="column" fxLayoutAlign="start center">
+            <h3>{{'Bar'|translate}}</h3>
+         </div>
+         <span fxFlex></span>
+      </div>
+      <mat-divider></mat-divider>
+   </div>
+<div fxLayout="row wrap" fxLayoutAlign="center stretch">
+
+</div>
+</mat-card>
+
+
+<mat-card>
+   <canvas height="150"
+    baseChart [datasets]="barChartData2" 
+    [labels]="mbarChartLabels2" 
+    [options]="barHorizontalChartOptions" 
+    [colors]="barChartColors"
+     [legend]="barHorizontalChartLegend" 
+     [chartType]="barHorizontalChartType"></canvas>
+         
+</mat-card>
+

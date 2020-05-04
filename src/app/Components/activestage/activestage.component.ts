@@ -54,6 +54,7 @@ public barChartOptions:any = {
  };
 
    public mbarChartLabels1 :string[] =[];
+   public mbarChartLabels2 :string[] =[];
    public barChartType:string = 'bar';
     public percentage : number[]=[];
    public planned_pers : number []=[];
@@ -70,14 +71,6 @@ public barChartOptions:any = {
      pointHoverBorderColor: 'rgba(105,159,177)'
    },
    { 
-     backgroundColor: 'rgb(255, 71, 71)',
-     borderColor: 'rgb(255, 71, 71)',
-     pointBackgroundColor: 'rgba(77,20,96,1)',
-     pointBorderColor: '#fff',
-     pointHoverBackgroundColor: '#fff',
-     pointHoverBorderColor: 'rgba(77,20,96,1)'
-   },
-   { 
       backgroundColor: 'rgb(0, 172, 172)',
       borderColor: 'rgb(0, 172, 172)',
       pointBackgroundColor: 'rgba(77,20,96,1)',
@@ -86,13 +79,47 @@ public barChartOptions:any = {
       pointHoverBorderColor: 'rgba(77,20,96,1)'
     }
  ];
-   public barChartData:any[] = [
-   
-   ];
+
+   public barChartData:any[] = [];
 
    public barChartData1:any[]=[];
-   public dara :any[] = [];
+
+   public barChartData2:any[]=[];
+
+   //for Spi
+   public SPI : any[]=[]; 
+   public barChartColors1:Array<any> = [
+       { 
+         backgroundColor: 'rgb(0, 172, 172)',
+         borderColor: 'rgb(0, 172, 172)',
+         pointBackgroundColor: 'rgba(77,20,96,1)',
+         pointBorderColor: '#fff',
+         pointHoverBackgroundColor: '#fff',
+         pointHoverBorderColor: 'rgba(77,20,96,1)'
+       }
+    ];
+
+   //Horizontal Bar
+   public barHorizontalChartType:string = 'horizontalBar';
+   public barHorizontalChartLegend:boolean = false;
+
+   public barHorizontalChartOptions:any = {
+      scaleShowVerticalLines: false,
+      responsive: true
+   };
+   public barChartColors2:Array<any> = [
+      { 
+        backgroundColor: 'rgb(21, 101, 192)',
+        borderColor: 'rgb(21, 101, 192)',
+        pointBackgroundColor: 'rgba(77,20,96,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(77,20,96,1)'
+      }
+   ];
  
+   //Fiance 
+   financePrecentage : any[] =[];
    // events
    public chartClicked(e:any):void {
      console.log(e);
@@ -202,16 +229,37 @@ public barChartOptions:any = {
         });
 
         this.barChartData = [ {data : this.percentage , label : "Precentage" } ,
-        {data : this.planned_pers , label : "Planned Precentage"} ,
-        {data : this.total_excuted , label : "Total Excuted" }];
+        {data : this.planned_pers , label : "Planned Precentage"} ];
       
       },
 
       err=>console.log(err)
    )
-   
-    
+   //SPI
+    this.service.getSPI().subscribe(
+       data=>{
+          data.forEach(element => {
+             this.mbarChartLabels2.push(element.contract_no);
+             this.SPI.push(element.SPI);
+          },
+           this.barChartData1 = [{data: this.SPI , label:"SPI"}]
 
+          );
+       },
+       err=>console.log(err)         
+    );
+
+    //Finance
+    this.service.getfianace().subscribe(
+       data=>{   
+         data.forEach(element => {
+           this.mbarChartLabels2.push(element.contract_no);
+            this.financePrecentage.push(element.percentage);
+         })
+         this.barChartData2 = [{data:this.financePrecentage , label:"Precentage"}]
+       },
+       err=>console.log(err)
+    )
      this.pageTitleService.setTitle("المنصة التفاعلية");
      
 

@@ -930,7 +930,17 @@ export class CoreService {
 	let url = '/project/dashboard/done-pers?db=nqproject&token='+localStorage.getItem('token');
 	return this.http.get<any[]>(this.apiURL+url)
   }
-  
 
+  getSPI()
+  {
+	let url = '/project/dashboard/spi?db=nqproject&token='+localStorage.getItem('token');
+	return this.http.get<any[]>(this.apiURL+url)
+  }
+  
+  getfianace()
+  {
+	let url = '/project/dashboard/finance?db=nqproject&token='+localStorage.getItem('token');
+	return this.http.get<any[]>(this.apiURL+url)
+  }
 }
 
