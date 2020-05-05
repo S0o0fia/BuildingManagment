@@ -82,7 +82,7 @@
       </div>
       <mat-divider></mat-divider>
    </div>
-   <canvas height="150"
+   <canvas height="250"
    baseChart [datasets]="barChartData2" 
    [labels]="mbarChartLabels2" 
    [options]="barHorizontalChartOptions" 
@@ -99,14 +99,14 @@
          <div class="gene-card-title">
             <div fxLayout="row" fxLayoutAlign="start center">
                <div fxLayout="column" fxLayoutAlign="start center">
-                  <h5>{{'Financial completion rate'|translate}}</h5>
+                  <h5>{{'Technical completion rate'|translate}}</h5>
                </div>
                <span fxFlex></span>
             </div>
             <mat-divider></mat-divider>
          </div>
    <canvas baseChart
-   height="150" 
+   height="250" 
   [datasets]="barChartData"
   [labels]="mbarChartLabels1"
   [options]="barChartOptions"
@@ -132,7 +132,7 @@
       <mat-divider></mat-divider>
    </div>
    <canvas baseChart
-   height="150" 
+   height="250" 
    [datasets]="barChartData1"
    [labels]="mbarChartLabels2"
    [options]="barChartOptions"
@@ -159,7 +159,7 @@
         <mat-divider></mat-divider>
      </div>
      <canvas baseChart
-     height="150" 
+     height="250" 
      [datasets]="barChartData1"
      [labels]="mbarChartLabels2"
      [options]="barChartOptions"
@@ -195,19 +195,14 @@
          </div>
          <mat-divider></mat-divider>
       </div>
+      <div fxLayoutAlign="center">
+         <h3>{{percent3}} %</h3>
+      </div>
+      <easy-pie-chart [percent]="percent3"  height="150" fxLayoutAlign="center"
+       [options]="options3"></easy-pie-chart>
     
-      <canvas baseChart
-      height="150" 
-     [datasets]="barChartData"
-     [labels]="mbarChartLabels1"
-     [options]="barChartOptions"
-     [colors]="barChartColors"
-     [legend]="barChartLegend"
-     [chartType]="barChartType"
-     (chartHover)="chartHovered($event)"
-     (chartClick)="chartClicked($event)">
-   </canvas>
-    </mat-card>
+      
+     </mat-card>
       </div>
    
       <!--Percentage of completion according to the extracts-->
@@ -222,7 +217,7 @@
                </div>
                <mat-divider></mat-divider>
             </div>
-            <canvas height="150"
+            <canvas height="240"
             baseChart [datasets]="barChartData2" 
             [labels]="mbarChartLabels2" 
             [options]="barHorizontalChartOptions" 
@@ -247,7 +242,7 @@
          <mat-divider></mat-divider>
       </div>
       <canvas baseChart
-      height="150" 
+      height="240" 
       [datasets]="barChartData1"
       [labels]="mbarChartLabels2"
       [options]="barChartOptions"

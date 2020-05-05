@@ -76,48 +76,54 @@ public barChartOptions:any = {
    public total_excuted : number []=[]; 
    public SPI : any[]=[]; 
    public financePrecentage : any[] =[];
+    
+  public percent3: number;
+ 
+  public options3: any;
+
  
    //Color
    public barChartColors:Array<any> = [
-   {
-     backgroundColor: 'rgb(21, 101, 192)',
-     borderColor: 'rgb(21, 101, 192)',
-     pointBackgroundColor: 'rgba(105,159,177,1)',
-     pointBorderColor: '#fafafa',
-     pointHoverBackgroundColor: '#fafafa',
-     pointHoverBorderColor: 'rgba(105,159,177)'
-   },
-   { 
-      backgroundColor: 'rgb(0, 172, 172)',
-      borderColor: 'rgb(0, 172, 172)',
-      pointBackgroundColor: 'rgba(77,20,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,20,96,1)'
-    }
- ];
-
-   public barChartColors1:Array<any> = [
-       { 
-         backgroundColor: 'rgb(0, 172, 172)',
-         borderColor: 'rgb(0, 172, 172)',
+      {
+        backgroundColor: 'rgb(66, 104, 113)',
+        borderColor: 'rgb(66, 104, 113)',
+        pointBackgroundColor: 'rgba(105,159,177,1)',
+        pointBorderColor: '#fafafa',
+        pointHoverBackgroundColor: '#fafafa',
+        pointHoverBorderColor: 'rgb(66, 104, 113)'
+      },
+      { 
+         backgroundColor: 'rgb(208, 174, 74)',
+         borderColor: 'rgb(208, 174, 74)',
          pointBackgroundColor: 'rgba(77,20,96,1)',
          pointBorderColor: '#fff',
          pointHoverBackgroundColor: '#fff',
-         pointHoverBorderColor: 'rgba(77,20,96,1)'
+         pointHoverBorderColor: 'rgb(208, 174, 74)'
        }
     ];
-
-    public barChartColors2:Array<any> = [
-      { 
-        backgroundColor: 'rgb(21, 101, 192)',
-        borderColor: 'rgb(21, 101, 192)',
-        pointBackgroundColor: 'rgba(77,20,96,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(77,20,96,1)'
-      }
-   ];
+   
+      public barChartColors1:Array<any> = [
+          { 
+            backgroundColor: 'rgb(66, 104, 113)',
+            borderColor: 'rgb(66, 104, 113)',
+            pointBackgroundColor: 'rgba(77,20,96,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgb(208, 174, 74)'
+          }
+       ];
+   
+       public barChartColors2:Array<any> = [
+         { 
+           backgroundColor: 'rgb(162, 98, 60)',
+           borderColor: 'rgb(162, 98, 60)',
+           pointBackgroundColor: 'rgba(77,20,96,1)',
+           pointBorderColor: '#fff',
+           pointHoverBackgroundColor: '#fff',
+           pointHoverBorderColor: 'rgb(162, 98, 60)'
+         }
+      ];
+    
  
   
    // events
@@ -147,6 +153,22 @@ public barChartOptions:any = {
    monkeyPatchChartJsTooltip();
    monkeyPatchChartJsLegend();
 
+   this.percent3 = 75;
+   this.options3 = {
+        barColor: '#426871',
+        trackColor: '#f9f9f9',
+        scaleColor: '#dfe0e0',
+        scaleLength: 5,
+        lineCap: 'round',
+        lineWidth: 10,
+        size: 300,
+        rotate: 0,
+        animate: {
+            duration: 3000,
+            enabled: true
+        }
+   };
+
   }
 
    // Pie
@@ -167,7 +189,8 @@ public barChartOptions:any = {
            ];
            this.pieChartType2 = 'pie';
           this.pieChartColors2 = [{
-         backgroundColor: ['#10988c', '#8bbb47' ,'#1565c0', '#f9fc2f', '#ff4747']
+          backgroundColor: ['#426871', '#478a99' ,'#197bd1', '#d0ae4a', '#a2623c']
+
      
   
         }];
@@ -198,11 +221,8 @@ public barChartOptions:any = {
               this.acceptedc , this.draftc , this.waitingc , this.rejectedc
            ];
            this.pieChartType1 = 'pie';
-          this.pieChartColors1 = [{
-         backgroundColor: ['#10988c', '#1565c0', '#f9fc2f', '#ff4747']
-     
-  
-   }];
+          this.pieChartColors1 = [{    
+                  backgroundColor: ['#426871','#197bd1', '#d0ae4a', '#a2623c'] }];
    this.PieChartOptions1 = {
       elements: {
          arc: {
