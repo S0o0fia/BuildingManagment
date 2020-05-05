@@ -856,7 +856,13 @@
            "Delete project" :"حذف مشروع" ,
            "ROLES LIST" : "قائمة الصلاحيات",
            "Role Activity":"نشاط الصلاحية" , 
-           "Project Schedule" : "الجدول الزمني " 
-
+           "Project Schedule" : "الجدول الزمني " ,
+           "Financial completion rate":"نسبة الإنجاز المالية",
+           "Technical completion rate" : "نسبة الإنجاز الفنية" ,
+           "Earned value ratio":"نسبة القيمة المكتسبة",
+           "Planned completion rate":"نسبة الإنجاز الفنية / نسبة الإنجاز المخطط لها" ,
+           "Overall evaluation of the contractor":"التقييم الإجمالي للمقاول",
+           "Percentage of completion according to the extracts":"نسبة الإنجاز حسب المستخلصات  /النسبة المخططة أو التدفق المالي" ,
+           "Actual Achievement Ratio":"نسبة الأنجاز الفعلية / نسبة الإنجاز المخطط لها"
 
 }

@@ -52,15 +52,34 @@ public barChartOptions:any = {
    scaleShowVerticalLines: false,
    responsive: true
  };
-
+   //lables
    public mbarChartLabels1 :string[] =[];
    public mbarChartLabels2 :string[] =[];
+   //Data
+   
+   public barChartData:any[] = [];
+   public barChartData1:any[]=[];
+   public barChartData2:any[]=[];
+//options  for type
    public barChartType:string = 'bar';
-    public percentage : number[]=[];
+   public barHorizontalChartType:string = 'horizontalBar';
+   public barHorizontalChartLegend:boolean = true;
+
+   public barHorizontalChartOptions:any = {
+      scaleShowVerticalLines: false,
+      responsive: true
+   };
+   
+   public barChartLegend:boolean = true;
+
+   //For More Data
+   public percentage : number[]=[];
    public planned_pers : number []=[];
    public total_excuted : number []=[]; 
-   public barChartLegend:boolean = true;
+   public SPI : any[]=[]; 
+   public financePrecentage : any[] =[];
  
+   //Color
    public barChartColors:Array<any> = [
    {
      backgroundColor: 'rgb(21, 101, 192)',
@@ -80,14 +99,6 @@ public barChartOptions:any = {
     }
  ];
 
-   public barChartData:any[] = [];
-
-   public barChartData1:any[]=[];
-
-   public barChartData2:any[]=[];
-
-   //for Spi
-   public SPI : any[]=[]; 
    public barChartColors1:Array<any> = [
        { 
          backgroundColor: 'rgb(0, 172, 172)',
@@ -99,15 +110,7 @@ public barChartOptions:any = {
        }
     ];
 
-   //Horizontal Bar
-   public barHorizontalChartType:string = 'horizontalBar';
-   public barHorizontalChartLegend:boolean = false;
-
-   public barHorizontalChartOptions:any = {
-      scaleShowVerticalLines: false,
-      responsive: true
-   };
-   public barChartColors2:Array<any> = [
+    public barChartColors2:Array<any> = [
       { 
         backgroundColor: 'rgb(21, 101, 192)',
         borderColor: 'rgb(21, 101, 192)',
@@ -118,8 +121,7 @@ public barChartOptions:any = {
       }
    ];
  
-   //Fiance 
-   financePrecentage : any[] =[];
+  
    // events
    public chartClicked(e:any):void {
      console.log(e);
