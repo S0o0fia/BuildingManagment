@@ -221,7 +221,9 @@ export class CoreService {
 		'","sation_from":"'+value.start_date+
 		'","sation_to":"'+value.end_date+
 		'","appled_to":"'+value.end_date+
-		'","appled_from":"'+value.start_date+'"}';
+		'","appled_from":"'+value.start_date+
+		',"description":"'+value.description+
+		'"}';
 		console.log(createRFi);
 		return this.http.post(this.apiURL+createRFi , null);
 	}

@@ -86,6 +86,7 @@ base64string:any;
   itemNumber: any[]=[];
 Project_list : any[] = [];
 multi : boolean = false ;
+  description: string;
  
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -465,8 +466,8 @@ multi : boolean = false ;
               start_date : inspectiondate ,
               work_location : this.work_id,
              item_id : this.item_id , 
-             pitem : this.pitem
-             
+             pitem : this.pitem,
+             description : this.description
      }
 
      this.itemDate.forEach(element=>

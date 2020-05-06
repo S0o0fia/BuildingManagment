@@ -44,7 +44,14 @@
                               </mat-form-field> 
                               
                          </div>                   
-                
+                <!--Description-->
+                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                  <mat-form-field class="full-wid mrgn-b-lg">
+                        <mat-label>{{'Description'|translate}}</mat-label>
+                        <input matInput name="description" [(ngModel)]="description"
+                                  placeholder="{{'Description'|translate}}" type="text" required>
+                  </mat-form-field>
+               </div>
                  
                      <!--Inspection Date-->
                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
