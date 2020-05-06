@@ -942,5 +942,13 @@ export class CoreService {
 	let url = '/project/dashboard/finance?db=nqproject&token='+localStorage.getItem('token');
 	return this.http.get<any[]>(this.apiURL+url)
   }
+
+  getDliverDate(date : string , num : number , type : string)
+  {
+	  let url = '/delivery_date?db=nqproject&token='+localStorage.getItem('token')+'&start='+date+
+	  '&num='+num+'&typee='+type;
+       console.log(url);
+	  return this.http.get<any[]>(this.apiURL+url);
+  }
 }
 

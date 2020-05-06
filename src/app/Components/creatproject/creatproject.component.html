@@ -254,7 +254,7 @@
                            <input matInput 
                            name="deliverdate" [(ngModel)]="deliverdate" 
                            [min]="minDate" [max]="maxDate" [matDatepicker]="picker2"
-                            placeholder="{{'Session To Grogorian'|translate}}">
+                            placeholder="{{'Session To Grogorian'|translate}}" disabled>
                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                            <mat-datepicker #picker2></mat-datepicker>                         
                                            
@@ -266,7 +266,7 @@
                      <input matInput placeholder="{{'Session From Hijri'|translate}}" 
                      class="rtl" [firstDayOfWeek]="7"
                      placement="bottom" [positionTarget]="buttonE2" [footerTemplate]="footerTemplate1"
-                     name="dp1" [(ngModel)]="model2" ngbDatepicker #d1="ngbDatepicker">
+                     name="dp1" [(ngModel)]="model2" ngbDatepicker #d1="ngbDatepicker" disabled>
                      <mat-datepicker-toggle #buttonE2 matSuffix [for]="d1"  (click)="d1.toggle()"></mat-datepicker-toggle>
                        
                      
@@ -383,8 +383,6 @@
             
                 <div fxLayout="column">
                    <div class="custom-pad text-center">
-                      <h1>Thank You                         
-                      </h1>
                       <mat-icon style="width:100%;">{{'Create Project' | translate}}</mat-icon>
                    </div>
                 </div>
