@@ -113,7 +113,7 @@ import { ConsultantExtractDetailComponent } from './Components/consultant-extrac
 import { ProjectReportComponent } from './Components/project-report/project-report.component';
 import { ProjectscheduleComponent } from './Components/projectschedule/projectschedule.component';
 import { ModifyprojectscheduleComponent } from './Components/modifyprojectschedule/modifyprojectschedule.component';
-
+import { EasyPieChartModule } from 'ng2modules-easypiechart';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyCE0po6Q8jGuBEds-A903KEU4U6Cerojzo",
@@ -142,6 +142,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		AgmCoreModule.forRoot({
 			apiKey: 'AIzaSyARLJcKPev4Ot6baTkjNKjczRDHYlFhgzo'
 		  }),
+		  
+	    ChartsModule,
 		BrowserAnimationsModule, 
 		FileUploadModule ,
 		FormsModule,
@@ -281,7 +283,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		MatChipsModule,
 		MatListModule,
 	    PerfectScrollbarModule,
-		MatTableModule
+		MatTableModule,
+		EasyPieChartModule
+
 	],
 	declarations: [
 		GeneAppComponent, 
