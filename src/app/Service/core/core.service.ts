@@ -468,6 +468,14 @@ export class CoreService {
 
 	}
 
+	getFiles ()
+	{
+	   let filesurl = "/attachment/list?db=nqproject&token="+localStorage.getItem('token')+"&project_id="+localStorage.getItem('projectid');
+	
+	   return this.http.get(this.apiURL+filesurl );
+
+	}
+
 
 	getInvoice()
 	{

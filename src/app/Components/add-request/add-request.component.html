@@ -18,7 +18,7 @@
                               <mat-label>{{'Project Items'|translate}}</mat-label>
                               <mat-select name="work_id" [(ngModel)]="work_id">
                               <div *ngFor="let build of buildings" >
-                                 <mat-option value={{build.id}}>{{build.name}}</mat-option>
+                                 <mat-option (click)="request_main(build.id , build.name)" value={{build.id}}>{{build.name}}</mat-option>
                               </div>  
                               </mat-select>
                         </mat-form-field>

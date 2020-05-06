@@ -5,7 +5,10 @@ import { Count } from 'app/Models/Count/count';
 import { Countitem } from 'app/Models/Count/countitem';
 import { Router } from '@angular/router';
 import { CountdetailsComponent } from '../countdetails/countdetails.component';
+import {map, startWith} from 'rxjs/operators';
 import { MatDialogRef } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ms-collect-table',
@@ -46,6 +49,12 @@ export class CollectTableComponent implements OnInit {
   editRowIndex: number = -1;
   approves : any = [];
   request_number : number;
+  myControl = new FormControl();
+  myControl1 = new FormControl();
+  filteredNumbers: Observable<string[]>;
+  filteredNames: Observable<string[]>;
+  itemName: any[]=[];
+  itemNumber: any[]=[];
   
   constructor(public dialogRef: MatDialogRef<CountdetailsComponent> ,
     public service : CoreService , public router : Router) 
@@ -56,16 +65,54 @@ export class CollectTableComponent implements OnInit {
     this.project_id = +localStorage.getItem('projectid');
     this.projectname = localStorage.getItem('projectname');
    }
+   
 
   ngOnInit() {
     this.service.getQty_tbl().subscribe(
-      data=> this.items = data,
+      data=> {
+        this.items = data;
+        console.log("data: "+ JSON.stringify(this.items));
+        this.filteredNumbers = this.myControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
+  
+        this.filteredNames = this.myControl1.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filter1(value))
+        );
+      },
       err=>console.log(err)
     )
     
   
     
   }
+
+
+  private _filter(value: string): string[] {
+    this.itemNumber=[];
+    const filterValue = value.toLowerCase();
+    this.items.forEach(element=>
+      {
+       this.itemNumber.push({"id":element.id,"item_number":element.item_number,"item_name":element.item_name});
+      });
+    return this.itemNumber.filter(option => option.item_number.toLowerCase().includes(filterValue));
+  }
+  
+  private _filter1(value: string): string[] {
+    this.itemName=[];
+    const filterValue = value.toLowerCase();
+    this.items.forEach(element=>
+      {
+       this.itemName.push({"id":element.id,"item_name":element.item_name,"item_number":element.item_number});
+      });
+    return this.itemName.filter(option => option.item_name.toLowerCase().includes(filterValue));
+  }
+
+
   BindItemnumber( item_number, id, unit, dimension)
   {
     debugger;
