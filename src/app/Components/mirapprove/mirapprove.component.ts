@@ -8,11 +8,13 @@ import { EditContractedQunatityComponent } from '../edit-contracted-qunatity/edi
 import { SelectApproveComponent } from '../select-approve/select-approve.component';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Miritems } from 'app/Models/MIR Request/miritems';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'ms-mirapprove',
   templateUrl: './mirapprove.component.html',
-  styleUrls: ['./mirapprove.component.scss']
+  styleUrls: ['./mirapprove.component.scss'],
+  providers: [DatePipe]
 })
 export class MirapproveComponent implements OnInit {
 
@@ -32,9 +34,10 @@ export class MirapproveComponent implements OnInit {
   role : number ;
   boolconsultant : boolean = false ; 
   boolcontractor : boolean = false;
+  activity_log: any[]=[];
 
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
-   ,private _snackBar: MatSnackBar ,public dialog: MatDialog) { 
+   ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
    this.user = localStorage.getItem('loginUser');
     this.id = +( this.route.snapshot.paramMap.get('id') );
     this.approve_draft = false;
@@ -134,12 +137,18 @@ export class MirapproveComponent implements OnInit {
    //getting MIR Data 
    this.service.getMIR().subscribe(
     data => {
-   
       data.forEach(element => {
            if(element.id == this.id)
-          {this.getMIR.push(element);
+          {
+            this.getMIR.push(element);
             this.state = element.state;
             this.consultant_approve = element.consultant_approval;
+            this.activity_log=element.avtivities;
+
+            this.activity_log.forEach(e=>{
+              e.action=e.action.replace(':','');
+              e.date=this.datePipe.transform(e.date, 'dd-MM-yyyy');   
+            });
             if(this.consultant_approve == "waiting")
             {
              this.consultant_btn = "Consultant Approve";

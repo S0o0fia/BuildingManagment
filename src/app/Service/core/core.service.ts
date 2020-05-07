@@ -352,7 +352,7 @@ export class CoreService {
 	{
 		debugger
 		let mirequest  ="/mir/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
-		+'","request_date":"'+value.request_date +'"}';
+		+'","request_date":"'+value.request_date +'","project_id":'+localStorage.get("projectid")+'}';
 		console.log(mirequest)
         return this.http.post(this.apiURL+mirequest ,null);
 	}
