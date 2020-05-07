@@ -221,7 +221,9 @@ export class CoreService {
 		'","sation_from":"'+value.start_date+
 		'","sation_to":"'+value.end_date+
 		'","appled_to":"'+value.end_date+
-		'","appled_from":"'+value.start_date+'"}';
+		'","appled_from":"'+value.start_date+
+		',"description":"'+value.description+
+		'"}';
 		console.log(createRFi);
 		return this.http.post(this.apiURL+createRFi , null);
 	}
@@ -350,7 +352,7 @@ export class CoreService {
 	{
 		debugger
 		let mirequest  ="/mir/create?db="+this.db+"&token="+localStorage.getItem('token')+'&values={"name":"'+value.name
-		+'","request_date":"'+value.request_date +'"}';
+		+'","request_date":"'+value.request_date +'","project_id":'+localStorage.get("projectid")+'}';
 		console.log(mirequest)
         return this.http.post(this.apiURL+mirequest ,null);
 	}
@@ -465,6 +467,22 @@ export class CoreService {
 	   let approveurl = "/approved_qty/get?db=nqproject&token="+localStorage.getItem('token')+"&project_id="+localStorage.getItem('projectid');
 	
 	   return this.http.get(this.apiURL+approveurl );
+
+	}
+
+	getFiles ()
+	{
+	   let filesurl = "/attachment/list?db=nqproject&token="+localStorage.getItem('token')+"&project_id="+localStorage.getItem('projectid');
+	
+	   return this.http.get(this.apiURL+filesurl );
+
+	}
+
+	getAttachment(id)
+	{
+	   let filesurl = "/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id="+id;
+	
+	   return this.http.get(this.apiURL+filesurl );
 
 	}
 

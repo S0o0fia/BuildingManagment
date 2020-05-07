@@ -83,6 +83,10 @@
                </table>
             </div>
          </div>
+         <tr *ngFor="let a of activity_log">
+            <td>{{a.action}}</td>
+            <td>On {{a.date}}</td>
+         </tr>
     </mat-card>
 
     <mat-card>

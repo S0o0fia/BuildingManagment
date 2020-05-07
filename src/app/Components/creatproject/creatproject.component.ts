@@ -94,6 +94,7 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
     base64 : any ;
     filename :string ;
     files : FileList;
+  createForm: FormGroup;
     
   
     onSelectFiles(evt) {
@@ -117,10 +118,27 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
                   this.deliverdate = null;
                   this.lng=46.6753;
                   this.lat=24.7136;
+<<<<<<< HEAD
                   this.qty_type = false;   
                                
                }
 
+=======
+                  this.qty_type = false;  
+                  this.addForm();               
+               }
+
+    addForm() 
+    {
+      this.createForm = this.fb.group({
+        Name: ['', Validators.compose([Validators.required])],
+        Contact: ['', Validators.compose([Validators.required])],
+        Consultant: ['', Validators.compose([Validators.required])],
+        Contractor: ['', Validators.compose([Validators.required])],
+        ProjectAmount: ['', Validators.compose([Validators.required])],
+      });
+    }
+>>>>>>> e53c1113aa97575616af945d239e917a171e29bd
 
   ngOnInit() {
      this.pageTitleService.setTitle("إنشاء مشروع جديد");     

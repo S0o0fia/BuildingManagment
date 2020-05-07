@@ -6,6 +6,11 @@ import { Extract } from '../../Models/Extract/extract';
 import { formatDate } from '@angular/common';
 import { CoreService } from 'app/Service/core/core.service';
 import { Router } from '@angular/router';
+import {map, startWith} from 'rxjs/operators';
+import { MatDialogRef } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'ms-add-extract',
@@ -39,6 +44,9 @@ export class AddExtractComponent implements OnInit {
   from_extract_date :string ;
   to_extract_date : Date =  new Date()  ;
   invoice_type : string = 'current';
+  itemIds: any[]=[];
+  myControl = new FormControl();
+  filteredIds: Observable<string[]>;
  
   openCloseRow(id): void
  {
@@ -69,6 +77,16 @@ export class AddExtractComponent implements OnInit {
     );
 
    
+  }
+
+  private _filter(value: string): string[] {
+    this.itemIds=[];
+    const filterValue = value.toLowerCase();
+    this.approve.forEach(element=>
+      {
+       this.itemIds.push({"number":element.number,"name":element.name});
+      });
+    return this.itemIds.filter(option => option.number.toLowerCase().includes(filterValue));
   }
 
   openDialogItem(): void {
@@ -281,7 +299,11 @@ showItems()
       data =>{ 
      this.approve = data as any ;
      console.log(data);
-
+     this.filteredIds = this.myControl.valueChanges
+     .pipe(
+       startWith(''),
+       map(value => this._filter(value))
+     );
      },
        err=> console.log(err)
 

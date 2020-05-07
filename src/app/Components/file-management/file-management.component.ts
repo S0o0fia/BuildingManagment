@@ -1,6 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { PageTitleService } from '../core/page-title/page-title.service';
-import { TranslateService } from '@ngx-translate/core';
+import { CoreService } from 'app/Service/core/core.service';
+import {FlatTreeControl} from '@angular/cdk/tree';
+import {Component, Injectable, OnInit, ViewChild} from '@angular/core';
+import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import {BehaviorSubject, Observable, of as observableOf} from 'rxjs';
+
+interface FoodNode {
+  name: string;
+  id:number;
+  children?: FoodNode[];
+  level:any;
+}
+
+// const TREE_DATA: FoodNode[] = [
+//   {
+//     name: 'Vegetables',
+//     children: [
+//       {
+//         name: 'Green',
+//         children: [
+//           {name: 'Broccoli'},
+//           {name: 'Brussels sprouts'},
+//         ]
+//       }, {
+//         name: 'Orange',
+//         children: [
+//           {name: 'Pumpkins'},
+//           {name: 'Carrots'},
+//         ]
+//       },
+//     ]
+//   },
+// ];
+
+/** Flat node with expandable and level information */
+interface ExampleFlatNode {
+  expandable: boolean;
+  name: string;
+  level: number;
+}
 
 @Component({
   selector: 'ms-file-management',
@@ -8,30 +45,102 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./file-management.component.scss']
 })
 export class FileManagementComponent implements OnInit {
-  // ng g
-    hasBaseDropZoneOver = false;
-    hasAnotherDropZoneOver = false;
+  attachments: any[]=[];
+  url: Object;
+  downloadUrl: string;
+  base64:any;
+  BASE64_MARKER: string = ';base64,';
+  filename: any;
 
-    constructor( private pageTitleService: PageTitleService,
-                 private translate : TranslateService) {}
+  ngOnInit() {
+    this.service.getFiles().subscribe(
+      data=> {
+        this.attachments = data as any[];
+        //this.dataSource.data=this.attachments;
+        const TREE_DATA: any[] = [
+          {
+            name: localStorage.getItem("projectname"),
+            children:this.attachments
+          }
+        ];
+        this.dataSource.data = TREE_DATA;
+        this.downloadUrl = "http://nqraait.ddns.net:8070/api/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id=";
+      }, 
+      err => console.log(err)          
+     );
+  }
+  
 
-    ngOnInit() {
-        this.pageTitleService.setTitle("Upload");
-    }
+  onSelectFiles(evt) {
+    let me = this;
+    let file = evt.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.base64 = reader.result;
+      console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+     this.filename = evt.target.files[0].name;
+  }
 
-    
-    /**
-      *fileOverBase fires during 'over' and 'out' events for Drop Area.
-      */
-    fileOverBase(e: any): void {
-        this.hasBaseDropZoneOver = e;
-    }
+  upload(){
+    this.service.UploadFile2(this.filename , this.base64 , Number(localStorage.getItem("projectid"))).subscribe(
+      data=>
+      {
+        console.log(data);
+        this.ngOnInit();
+      },
+      
+      err=> console.log(err)
+    );
+  }
 
-    /**
-      *fileOverAnother fires after a file has been dropped on a Drop Area.
-      */
-    fileOverAnother(e: any): void {
-        this.hasAnotherDropZoneOver = e;
-    }
+  private _transformer = (node: FoodNode, level: number) => {
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.name,
+      id:node.id,
+      level: level,
+    };
+  }
+
+  // private _getLevel = (node: FoodNode) => { return node.level; };
+
+  // private _isExpandable = (node: FoodNode) => { return node.expandable; };
+
+  // private _getChildren = (node: FoodNode): Observable<FoodNode[]> => {
+  //   return observableOf(node.children);
+  // }
+
+  treeControl = new FlatTreeControl<ExampleFlatNode>(
+      node => node.level, node => node.expandable);
+
+  treeFlattener = new MatTreeFlattener(
+      this._transformer, node => node.level, node => node.expandable, node => node.children);
+
+  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+  constructor(private service : CoreService) {
+    // this.dataSource.data = TREE_DATA;
+  }
+
+  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+
+  @ViewChild('tree',null) tree;
+
+  ngAfterViewInit() {
+    this.tree.treeControl.expandAll();
+  }
+
+  download(id){
+    this.service.getAttachment(id).subscribe(
+      data=> this.url=data, 
+      err => console.log(err)
+     );
+  }
+  
 }
 

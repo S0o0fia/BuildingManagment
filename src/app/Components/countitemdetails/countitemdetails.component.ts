@@ -7,11 +7,13 @@ import { CoreService } from 'app/Service/core/core.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { SelectApproveComponent } from '../select-approve/select-approve.component';
 import { Countitem } from 'app/Models/Count/countitem';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'ms-countitemdetails',
   templateUrl: './countitemdetails.component.html',
-  styleUrls: ['./countitemdetails.component.scss']
+  styleUrls: ['./countitemdetails.component.scss'],
+  providers: [DatePipe]
 })
 export class CountitemdetailsComponent implements OnInit {
 
@@ -49,10 +51,11 @@ export class CountitemdetailsComponent implements OnInit {
   role : number ; 
   boolconsultant : boolean = false ; 
   boolcontractor : boolean = false ;
+  activity_log: any[]=[];
  
   
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
-   ,private _snackBar: MatSnackBar ,public dialog: MatDialog) { 
+   ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
    this.user = localStorage.getItem('loginUser');
     this.id = +( this.route.snapshot.paramMap.get('id') );
     this.approve_draft = false;
@@ -107,7 +110,8 @@ export class CountitemdetailsComponent implements OnInit {
       
       data.forEach(element => {
            if(element.id == this.id)
-          {this.count.push(element);
+          {
+            this.count.push(element);
             this.state = element.state;
             this.consultant_approve = element.state;
             this.uom=element.uom;
@@ -120,7 +124,12 @@ export class CountitemdetailsComponent implements OnInit {
             {
              this.consultant_btn = "Consultant Approve Done";
             }
+            this.activity_log=element.activity_log;
 
+            this.activity_log.forEach(e=>{
+              e.action=e.action.replace(':','');
+              e.date=this.datePipe.transform(e.date, 'dd-MM-yyyy');   
+            });
           }
 
       });

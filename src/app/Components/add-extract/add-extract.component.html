@@ -140,7 +140,7 @@
                              
                               <mat-form-field class="full-wid mrgn-b-lg">
                                     <mat-label>{{'Item Number'|translate}} , {{'Item Name'|translate}}</mat-label>
-                                    <mat-select name="item_id" [(ngModel)]="item_id">
+                                    <!-- <mat-select name="item_id" [(ngModel)]="item_id">
                                                 <div *ngFor="let item of approve">
                                                   
                                                  <mat-option value={{item.number}} (click)="Add(item.quantity_id)" >
@@ -148,7 +148,21 @@
                                               </mat-option>
                                              </div>
                                          
-                                            </mat-select>                                            
+                                            </mat-select>-->
+
+                                       <input autofocus="false"
+                                       type="text"
+                                       placeholder="{{'Pick one'|translate}}"
+                                       matInput
+                                       [formControl]="myControl"
+                                       [matAutocomplete]="auto"
+                                       [(ngModel)]="item_id"
+                                    />
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                       <mat-option *ngFor="let option of (filteredIds | async)" [value]="option.number" (click)="Add(option.quantity_id)">
+                                          {{ option.number }}, {{ option.name }}
+                                       </mat-option>
+                                    </mat-autocomplete>
                               </mat-form-field>
                              
                           

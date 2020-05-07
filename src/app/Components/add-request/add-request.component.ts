@@ -86,6 +86,7 @@ base64string:any;
   itemNumber: any[]=[];
 Project_list : any[] = [];
 multi : boolean = false ;
+  description: string;
  
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -220,6 +221,7 @@ multi : boolean = false ;
     //this to get the request number from the from 
     request(value , type)
     {
+      //alert("value: "+value+", type: "+type);
       this.req_number = value;
 
       this.Project_list.forEach(element => {
@@ -270,6 +272,7 @@ multi : boolean = false ;
           data=> {
             this.quantitys = [];
               this.quantitys = data ;
+              console.log("qty_tbl "+JSON.stringify(this.quantitys));
             this.filteredNumbers = this.myControl.valueChanges
           .pipe(
             startWith(''),
@@ -291,11 +294,85 @@ multi : boolean = false ;
     //Method Action To remove item when click on delete icon on items Tables 
     
 
+    request_main(value , type)
+    {
+      //alert("value: "+value+", type: "+type);
+      this.req_number = value;
+
+      this.Project_list.forEach(element => {
+        if(element.project_type == "multi")
+        {
+           this.multi = true;
+        }
+        else 
+        {
+          this.multi = false;
+        }
+      });
+      
+      if(this.multi == true)
+      {
+           //to get the item fro Qty-tble based on id of work type 
+           this.services.getQty_tbl().subscribe(
+            data=> {
+
+              this.quantitys = [];
+              data.forEach(element => {
+
+                if(element.main_section_name  == type)
+                {
+                  this.quantitys.push(element)
+                }
+              });
+              this.filteredNumbers = this.myControl.valueChanges
+            .pipe(
+              startWith(''),
+              map(value => this._filter(value))
+            );
+      
+            this.filteredNames = this.myControl1.valueChanges
+            .pipe(
+              startWith(''),
+              map(value => this._filter1(value))
+            );
+            }, 
+            err => console.log(err)
+          );
+      }
+
+      else 
+      
+      {
+        this.services.getQty_tbl().subscribe(
+          data=> {
+            this.quantitys = [];
+              this.quantitys = data ;
+              console.log("qty_tbl "+JSON.stringify(this.quantitys));
+            this.filteredNumbers = this.myControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter(value))
+          );
+    
+          this.filteredNames = this.myControl1.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter1(value))
+          );
+          }, 
+          err => console.log(err)
+        );
+              }
+
+
+    }
+
     //Action Method when click Cancel button
   onNoClick(): void {
     this.dialogRef.close();
   }
   private _filter(value: string): string[] {
+    this.itemNumber=[];
     const filterValue = value.toLowerCase();
     this.quantitys.forEach(element=>
       {
@@ -305,6 +382,7 @@ multi : boolean = false ;
   }
   
   private _filter1(value: string): string[] {
+    this.itemName=[];
     const filterValue = value.toLowerCase();
     this.quantitys.forEach(element=>
       {
@@ -388,8 +466,8 @@ multi : boolean = false ;
               start_date : inspectiondate ,
               work_location : this.work_id,
              item_id : this.item_id , 
-             pitem : this.pitem
-             
+             pitem : this.pitem,
+             description : this.description
      }
 
      this.itemDate.forEach(element=>

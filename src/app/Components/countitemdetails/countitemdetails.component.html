@@ -146,7 +146,11 @@
          
            
         </div>
-        <td>{{'By Contractor'|translate}} : {{user}}  , {{'By Date'|translate}} :</td> 
+        <!-- <td>{{'By Contractor'|translate}} : {{user}}  , {{'By Date'|translate}} :</td>  -->
+        <tr *ngFor="let a of activity_log">
+         <td>{{a.action}}</td>
+         <td>On {{a.date}}</td>
+      </tr>
    </mat-card>
   
    <mat-card>

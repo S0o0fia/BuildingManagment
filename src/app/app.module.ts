@@ -17,7 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { MatSlideToggleModule,MatButtonModule, MatBadgeModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule,
-			MatTableModule, MatExpansionModule, MatSelectModule, MatSnackBarModule, MatTooltipModule, MatChipsModule, MatListModule, MatSidenavModule,  
+			MatTableModule, MatExpansionModule, MatSelectModule, MatSnackBarModule, MatTooltipModule, MatChipsModule, MatListModule, MatSidenavModule,  MatTreeModule,
 			MatTabsModule,  MatProgressBarModule,MatCheckboxModule, MatSliderModule,MatRadioModule,MatDialogModule,MatGridListModule, MatDividerModule, MatFormFieldModule
 } from '@angular/material';
 import { RoutingModule } from "./app-routing.module";
@@ -168,7 +168,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		VgBufferingModule,
 		VgStreamingModule,
         HttpClientModule,
-
+		MatTreeModule,
       MatSlideToggleModule,
 		TranslateModule.forRoot({
          loader: {
