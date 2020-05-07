@@ -5,7 +5,7 @@
         <mat-label  class="mrgn-b-md title" style="font-weight: bolder;">{{'Attachments List'|translate}}</mat-label>
         <br>
         <br>
-        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
           <!-- This is the tree node template for leaf nodes -->
           <!-- <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
             <button mat-icon-button disabled></button>
