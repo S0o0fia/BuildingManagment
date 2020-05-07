@@ -478,6 +478,14 @@ export class CoreService {
 
 	}
 
+	getAttachment(id)
+	{
+	   let filesurl = "/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id="+id;
+	
+	   return this.http.get(this.apiURL+filesurl );
+
+	}
+
 
 	getInvoice()
 	{
