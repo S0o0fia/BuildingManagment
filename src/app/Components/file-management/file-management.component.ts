@@ -1,6 +1,6 @@
 import { CoreService } from 'app/Service/core/core.service';
 import {FlatTreeControl} from '@angular/cdk/tree';
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit, ViewChild} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {BehaviorSubject, Observable, of as observableOf} from 'rxjs';
 
@@ -8,6 +8,7 @@ interface FoodNode {
   name: string;
   id:number;
   children?: FoodNode[];
+  level:any;
 }
 
 // const TREE_DATA: FoodNode[] = [
@@ -106,6 +107,14 @@ export class FileManagementComponent implements OnInit {
     };
   }
 
+  // private _getLevel = (node: FoodNode) => { return node.level; };
+
+  // private _isExpandable = (node: FoodNode) => { return node.expandable; };
+
+  // private _getChildren = (node: FoodNode): Observable<FoodNode[]> => {
+  //   return observableOf(node.children);
+  // }
+
   treeControl = new FlatTreeControl<ExampleFlatNode>(
       node => node.level, node => node.expandable);
 
@@ -120,6 +129,11 @@ export class FileManagementComponent implements OnInit {
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
+  @ViewChild('tree',null) tree;
+
+  ngAfterViewInit() {
+    this.tree.treeControl.expandAll();
+  }
 
   download(id){
     this.service.getAttachment(id).subscribe(
@@ -127,5 +141,6 @@ export class FileManagementComponent implements OnInit {
       err => console.log(err)
      );
   }
+  
 }
 

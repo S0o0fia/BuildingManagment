@@ -1,31 +1,46 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-  <!-- This is the tree node template for leaf nodes -->
-  <!-- <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-    <button mat-icon-button disabled></button>
-    {{node.name}}
-  </mat-tree-node> -->
-  <!-- This is the tree node template for expandable nodes -->
-  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-    <button mat-icon-button matTreeNodeToggle
-            [attr.aria-label]="'toggle ' + node.name">
-      <mat-icon class="mat-icon-rtl-mirror">
-        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-      </mat-icon>
-    </button>
-    <!-- <span (click)="download(node.id)">{{node.name}}</span> -->
-    <a href={{downloadUrl+node.id}} target="_blank">
-      <span color="primary" >{{node.name}}</span>
-    </a>
-  </mat-tree-node>
-</mat-tree>
-<div fxLayout="row wrap" fxLayoutAlign="space-between center"  fxLayout.xs="column"> 
-  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-    <mat-label  class="mrgn-b-md title" style="font-weight: bolder;">{{'Upload queue'|translate}}</mat-label>
-    <br>
-    <br>
-    <input type="file" mat-input
-    id="file" 
-    (change)="onSelectFiles($event)" multiple>
-   </div>
-   <button (click)="upload()">Upload</button>
+<div class="container" fxLayout="wrap row" fxLayout.xs="column" fxLayoutGap="1%" fxLayoutAlign="center">
+  <mat-card>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center"  fxLayout.xs="column"> 
+      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+        <mat-label  class="mrgn-b-md title" style="font-weight: bolder;">{{'Attachments List'|translate}}</mat-label>
+        <br>
+        <br>
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+          <!-- This is the tree node template for leaf nodes -->
+          <!-- <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+            <button mat-icon-button disabled></button>
+            {{node.name}}
+          </mat-tree-node> -->
+          <!-- This is the tree node template for expandable nodes -->
+          <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+            <button mat-icon-button matTreeNodeToggle
+                    [attr.aria-label]="'toggle ' + node.name">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button>
+            <!-- <span (click)="download(node.id)">{{node.name}}</span> -->
+            <a href={{downloadUrl+node.id}} target="_blank">
+              <span color="primary" >{{node.name}}</span>
+            </a>
+          </mat-tree-node>
+        </mat-tree>
+      </div>
+    </div>
+    
+  </mat-card>
+  <mat-card>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center"  fxLayout.xs="column"> 
+      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+        <mat-label  class="mrgn-b-md title" style="font-weight: bolder;">{{'Upload File'|translate}}</mat-label>
+        <br>
+        <br>
+        <input type="file" mat-input
+        id="file" 
+        (change)="onSelectFiles($event)" multiple>
+      </div>
+      <button (click)="upload()">Upload</button>
+    </div>
+  </mat-card>
+    
 </div>
