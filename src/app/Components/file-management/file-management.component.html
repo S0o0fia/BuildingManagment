@@ -20,7 +20,8 @@
               </mat-icon>
             </button>
             <!-- <span (click)="download(node.id)">{{node.name}}</span> -->
-            <a href={{downloadUrl+node.id}} target="_blank">
+            <span color="primary" *ngIf="node.level==0">{{node.name}}</span>
+            <a href={{downloadUrl+node.id}} target="_blank" *ngIf="node.level>0">
               <span color="primary" >{{node.name}}</span>
             </a>
           </mat-tree-node>

@@ -12,36 +12,22 @@
        <div class="gene-card-content">
           <mat-tab-group [selectedIndex]="selectedIndex">
              <mat-tab label="{{'Step 1'|translate}} " [disabled]="selectedIndex != 0" >   
-                <form #form="ngForm" [formGroup]="createForm">
+                <form #form="ngForm">
                    <div fxLayout="column">
                       <!--Proejct Name-->
                       <div fxLayout="row wrap" fxLayoutAlign="space-between center"  fxLayout.xs="column">
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg">
-                                 <input matInput formControlName="Name" name="name" [(ngModel)]="name"
+                                 <input matInput name="name" [(ngModel)]="name"
                                   placeholder="{{'Proejct Name'|translate}}" type="text" required>
-                                  <mat-error>
-                                    <span *ngIf="!createForm.get('Name').valid && createForm.get('Name').touched">
-                                      <span *ngIf="createForm.controls['Name'].hasError('required') ">
-                                        Please enter Project Name
-                                      </span>
-                                    </span>
-                                  </mat-error>
                             </mat-form-field>
                          </div>
                           <!--Contract Number-->
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                               <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg"> 
-                               <input matInput formControlName="Contact" name="contact_number"  [(ngModel)]="contact_number"
+                               <input matInput name="contact_number"  [(ngModel)]="contact_number"
                                 placeholder="{{'Contract Number'|translate}}" required type="number">
-                                <mat-error>
-                                 <span *ngIf="!createForm.get('Contact').valid && createForm.get('Contact').touched">
-                                   <span *ngIf="createForm.controls['Contact'].hasError('required') ">
-                                     Please enter Contact Number
-                                   </span>
-                                 </span>
-                               </mat-error>
                             </mat-form-field>
                             </div>
                              <!--Date of Contract-->
@@ -62,7 +48,7 @@
                          <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
                               <mat-label>{{'Consultant Name'|translate}}</mat-label>
-                               <mat-select matNativeControl formControlName="Consultant" required name="consultant_name"
+                               <mat-select matNativeControl required name="consultant_name"
                               [(ngModel)]="consultant_name">
                                  <div *ngFor="let user of users">
                                  <div *ngIf = "user.user_job == 'consultant'">                               
@@ -70,20 +56,13 @@
                               </div> 
                               </div>
                               </mat-select>
-                              <mat-error>
-                                 <span *ngIf="!createForm.get('Consultant').valid && createForm.get('Consultant').touched">
-                                   <span *ngIf="createForm.controls['Consultant'].hasError('required') ">
-                                     Please enter Consultant Name
-                                   </span>
-                                 </span>
-                               </mat-error>
                             </mat-form-field>
                          </div>
                              <!--Contructor Name-->
                         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                             <mat-form-field class="full-wid mrgn-b-lg ">
                                     <mat-label>{{'Contructor Name'|translate}}</mat-label>
-                                    <mat-select matNativeControl formControlName="Contractor" required name="contractor_name"
+                                    <mat-select matNativeControl required name="contractor_name"
                                     [(ngModel)]="contractor_name">
                                  
                                      <div *ngFor="let user of users">
@@ -92,13 +71,6 @@
                                     </div> 
                                     </div>
                                     </mat-select>
-                                    <mat-error>
-                                       <span *ngIf="!createForm.get('Contractor').valid && createForm.get('Contractor').touched">
-                                         <span *ngIf="createForm.controls['Contractor'].hasError('required') ">
-                                           Please enter Contractor Name
-                                         </span>
-                                       </span>
-                                     </mat-error>
                             </mat-form-field>
                          </div>
                       </div>
@@ -162,17 +134,10 @@
                          <div fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100" fxFlex.gt-md="40">
                            <mat-form-field class="full-wid mrgn-b-lg">
                               <br>
-                               <input matInput formControlName="ProjectAmount"
+                               <input matInput
                                name="project_amount"  [(ngModel)]="project_amount" (blur)="transformAmount($event)"
                                placeholder="{{'Project Amount'|translate}}" required [(value)]="formattedAmount"
                                (change)="raito()">
-                               <mat-error>
-                                 <span *ngIf="!createForm.get('ProjectAmount').valid && createForm.get('ProjectAmount').touched">
-                                   <span *ngIf="createForm.controls['ProjectAmount'].hasError('required') ">
-                                     Please enter Project Amount
-                                   </span>
-                                 </span>
-                               </mat-error>
                            </mat-form-field>
                        
                         </div>

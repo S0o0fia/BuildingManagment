@@ -11,6 +11,6 @@ export interface Rfi {
       inspect_date : string;
       item_id : number;
       pitem : string;
-      description : string;
+      //description : string;
    
 }

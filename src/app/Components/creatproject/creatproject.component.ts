@@ -117,20 +117,8 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
                   this.deliverdate = null;
                   this.lng=46.6753;
                   this.lat=24.7136;
-                  this.qty_type = false;  
-                  this.addForm();               
+                  this.qty_type = false;
                }
-
-    addForm() 
-    {
-      this.createForm = this.fb.group({
-        Name: ['', Validators.compose([Validators.required])],
-        Contact: ['', Validators.compose([Validators.required])],
-        Consultant: ['', Validators.compose([Validators.required])],
-        Contractor: ['', Validators.compose([Validators.required])],
-        ProjectAmount: ['', Validators.compose([Validators.required])],
-      });
-    }
 
   ngOnInit() {
      this.pageTitleService.setTitle("إنشاء مشروع جديد");     

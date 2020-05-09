@@ -467,7 +467,7 @@ multi : boolean = false ;
               work_location : this.work_id,
              item_id : this.item_id , 
              pitem : this.pitem,
-             description : this.description
+             //description : this.description
      }
 
      this.itemDate.forEach(element=>
