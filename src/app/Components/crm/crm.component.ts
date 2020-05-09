@@ -118,7 +118,7 @@ export class CrmComponent implements OnInit, OnDestroy {
                      this.router.navigate(['/home/table/countdetails']);
                   } break;
             case "Project Items":
-                     {this.router.navigate(['/home/items']); }
+                     {this.router.navigate(['/home/itemslist']); }
                         break;      
 
             case "Quantity Table" :

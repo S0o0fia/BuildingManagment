@@ -114,6 +114,7 @@ import { ProjectReportComponent } from './Components/project-report/project-repo
 import { ProjectscheduleComponent } from './Components/projectschedule/projectschedule.component';
 import { ModifyprojectscheduleComponent } from './Components/modifyprojectschedule/modifyprojectschedule.component';
 import { EasyPieChartModule } from 'ng2modules-easypiechart';
+import { ProjectitemslistComponent } from './Components/projectitemslist/projectitemslist.component';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyCE0po6Q8jGuBEds-A903KEU4U6Cerojzo",
@@ -353,7 +354,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		ConsultantExtractDetailComponent,
 		ProjectReportComponent,
 		ProjectscheduleComponent,
-		ModifyprojectscheduleComponent
+		ModifyprojectscheduleComponent,
+		ProjectitemslistComponent
 
 	
 		

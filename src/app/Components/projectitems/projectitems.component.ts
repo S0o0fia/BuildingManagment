@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Projectitem } from '../../Models/ProjectItem/projectitem'
 import { CoreService } from 'app/Service/core/core.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'ms-projectitems',
@@ -17,7 +18,7 @@ export class ProjectitemsComponent implements OnInit {
   projectid : number;
   projectname : string;
   
-  constructor(private services : CoreService)
+  constructor(private services : CoreService, private _snackBar : MatSnackBar)
  { 
 
   this.projectname = localStorage.getItem('projectname');
@@ -59,9 +60,25 @@ export class ProjectitemsComponent implements OnInit {
     this.itemsData.forEach(element=>
       {
         this.services.addprojectitem(element).subscribe(
-          data=>console.log(data),
+          data=>{
+            console.log(data);
+            let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
+            location.reload();
+          },
           err=>console.log(err)
         );
       })
+  }
+
+  //the Stack bar Method 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      verticalPosition: 'top',
+      horizontalPosition : 'center' ,
+      panelClass: ['my-snack-bar']
+    });
+    return true;
+    
   }
 }
