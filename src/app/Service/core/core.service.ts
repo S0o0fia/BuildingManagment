@@ -229,11 +229,6 @@ export class CoreService {
 		'","sation_to":"'+value.end_date+
 		'","appled_to":"'+value.end_date+
 		'","appled_from":"'+value.start_date+
-<<<<<<< HEAD
-		'","description":"'+value.description+
-=======
-		//',"description":"'+value.description+
->>>>>>> 151ac9b1ca8e5641a14b5c4e5226e8bf56fac414
 		'"}';
 		console.log(createRFi);
 		return this.http.post(this.apiURL+createRFi , null);
