@@ -23,6 +23,7 @@
    "Sidebar Filters" : "مرشحات الشريط الجانبي",
    "Header Filters" : "مرشحات الرأس", 
    "Languages": "اللغات",
+   "Copmany Name" : "اسم الشركة" ,
    "Popular Instructors": "المدربون الشعبيون",
    "What you'll learn" : "ما سوف تتعلم",
    "Description": "وصف",
@@ -375,6 +376,7 @@
    "Tax Rates" :  "معدلات الضريبة",
    "Add Tickets"  :  "إضافة التذاكر",
    "Trade"  :  "تجارة",
+   "Address":"العنوان" ,
    "Wallet Address"  :  "عنوان المحفظة",
    "Buy Cryptocurrency" :  "شراء Cryptocurrency",
    "Sell Cryptocurrency"   :  "بيع Cryptocurrency",
@@ -818,6 +820,8 @@
            "System Admin" : "مدير النظام " , 
            "Amana Project Manager" :"مدير مشاريع الامانة",
            "Amana ENG":"مهندس الامانة",
+           "amana_pm" : "مدير مشاريع الامانة" ,
+           "system_admin":"مدير النظام",
            "Contractor Project Manager":"مدير مشاريع المقاول",
            "contractor_eng" :"مهندس المقاول",
            "contractor_count" :"حاسب كميات المقاول",
@@ -864,6 +868,12 @@
            "Planned completion rate":"نسبة الإنجاز الفنية / نسبة الإنجاز المخطط لها" ,
            "Overall evaluation of the contractor":"التقييم الإجمالي للمقاول",
            "Percentage of completion according to the extracts":"نسبة الإنجاز حسب المستخلصات  /النسبة المخططة أو التدفق المالي" ,
-           "Actual Achievement Ratio":"نسبة الأنجاز الفعلية / نسبة الإنجاز المخطط لها"
+           "Actual Achievement Ratio":"نسبة الأنجاز الفعلية / نسبة الإنجاز المخطط لها" ,
+           "Type" : "نوع العنصر"  , 
+           "Zip Code" : "ص ب" ,
+           "Post Code":"رمز بريدي" , 
+           "owner":"مالك"
+          
+              
 
 }

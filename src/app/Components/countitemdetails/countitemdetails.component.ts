@@ -8,6 +8,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { SelectApproveComponent } from '../select-approve/select-approve.component';
 import { Countitem } from 'app/Models/Count/countitem';
 import { DatePipe } from '@angular/common';
+import { Comment } from 'app/Models/Comment/comment';
 
 @Component({
   selector: 'ms-countitemdetails',
@@ -31,12 +32,11 @@ export class CountitemdetailsComponent implements OnInit {
   consultant_approve : string;
   consultant_btn : string;
   type : any = [];
-  details : string;
   typeid : number;
   Comments : any = [];
   item:any;
   detail:any;
-  Commentt: { comments: string; create_uid: string; rfi_id: number; user_id: number };
+  Commentt:Comment;
   type_id: any;
   users: any=[];
   user_id: number;
@@ -52,8 +52,11 @@ export class CountitemdetailsComponent implements OnInit {
   boolconsultant : boolean = false ; 
   boolcontractor : boolean = false ;
   activity_log: any[]=[];
- 
-  
+  department : number;
+  userid : number;
+  details : string;
+  commentsection : any [] =[];
+  commentusers : any[] =[];
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
    ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
    this.user = localStorage.getItem('loginUser');
@@ -97,6 +100,18 @@ export class CountitemdetailsComponent implements OnInit {
    },
     err=> console.log(err)
   );
+
+  //get comment section
+    this.service.getCommentSection().subscribe(
+      data=>this.commentsection= data as any[] ,
+      err=>console.log(err)
+    )
+
+    //get comment users 
+    this.service.getCommentUsers().subscribe(
+      data=> this.commentusers = data as any[] , 
+      err=>console.log(err)
+    )
 
    //get Comments
    this.service.getCommentForCount(this.id    
@@ -221,14 +236,12 @@ export class CountitemdetailsComponent implements OnInit {
 
  Save()
   {
-    debugger;
-    this.Commentt = {
-      comments : this.detail , 
   
-      create_uid : this.user , 
+    this.Commentt = {
+      comments : this.details , 
+      section_id : this.department , 
       rfi_id : this.id , 
-      user_id : this.user_id
-
+      create_uid : this.userid
     }
 
     //Cretate Comment

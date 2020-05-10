@@ -2,12 +2,12 @@
     <mat-card > 
             <div class="gene-card-title">
                    
-                       <div fxLayout="row">
-                          <h4>{{'Request Status'|translate}}</h4>
+                       <div fxLayout="row" fxLayoutAlign="center">
+                          <h4>{{'Request for Inspection'|translate}}</h4>
            
                        </div>
                        
-                       <div fxLayout="row" fxLayoutAlign="center">
+                       <div fxLayout="row" fxLayoutAlign="end">
                           <div  fxLayout="row"  fxLayout.xs="column">
                           <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()"><mat-icon>exit_to_app</mat-icon>
                              {{'Back'|translate}} </button>
@@ -89,11 +89,10 @@
           
          </div>
          <div></div>
-         <!-- <tr><td>{{'Prepared By'|translate}} : {{preparedby}}</td></tr>
-         <tr><td>{{'Prepared On'|translate}} : {{preparedon}}</td></tr> -->
+         <mat-divider></mat-divider>
          <tr *ngFor="let a of activity_log">
-            <td>{{a.action}}</td>
-            <td>On {{a.date}}</td>
+            <td>{{a.action  | translate}}</td>
+            <td>On {{a.date | translate}}</td>
          </tr>
     </mat-card>
 
@@ -134,10 +133,10 @@
                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
                         <mat-form-field class="full-wid mrgn-b-lg">
                               <mat-label>{{'Department'|translate}}</mat-label>
-                              <mat-select name="department">      
-                                   <div> 
-                                    <mat-option>
-                                     
+                              <mat-select name="department"  [(ngModel)]="department">      
+                                   <div *ngFor="let data of commentsection"> 
+                                    <mat-option value={{data.id}}>
+                                       {{data.name}}
                                     </mat-option>
                                    </div>
                             </mat-select>
@@ -147,10 +146,10 @@
                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
                       <mat-form-field class="full-wid mrgn-b-lg">
                             <mat-label>{{'Name'|translate}}</mat-label>
-                            <mat-select name="department">      
-                                 <div > 
-                                  <mat-option >
-                                    
+                            <mat-select name="userid" [(ngModel)]="userid">      
+                                 <div *ngFor="let item of commentusers" > 
+                                  <mat-option value={{item.id}}>
+                                    {{item.name}}
                                   </mat-option>
                                  </div>
                           </mat-select>

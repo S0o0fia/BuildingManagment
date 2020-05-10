@@ -8,100 +8,211 @@
        </div>
        <mat-divider></mat-divider>
     </div>
-    <div class="gene-card-content">
-          <form #form="ngForm">
-                <div fxLayout="column">
-                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-                     
-                      <!--username-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                             <mat-form-field class="full-wid mrgn-b-lg ">
-                             <input matInput name="username" [(ngModel)]="username" 
-                             placeholder="{{'username'|translate}}" type="text" required>    
-                          </mat-form-field> 
-                          
-                     </div>    
-                     
-                     <!--Password-->
+    <div class="gene-card-content" fxLayout="column">
+      <span fxFlex></span>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" fxLayout="row">
+         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49" >
+            <mat-checkbox  class="title" (change)="Company($event)" [disabled]="isEmpolyee == true">{{'User is Company'|translate}}</mat-checkbox>
+        </div>
+
+         <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49" >
+            <mat-checkbox class="title"  (change)="Empolyee($event)" [disabled]="isCompany == true">{{'User is Empolyee'|translate}}</mat-checkbox >  
+         </div>
+         </div>
+      </div>
+      <span fxFlex></span>
+      <br> <br>
+      <!--forms-->
+      <div fxLayout="row wrap" fxLayoutAlign="center">
+      <div [style.display]="isCompany ? 'block' : 'none'">  
+       <!--company-->
+         <div id="company" >
+            <form #form="ngForm">
+               <div fxLayout="column">
+            <div fxLayout="row wrap" fxLayoutAlign="center">                
+                
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+              <mat-form-field class="full-wid mrgn-b-lg " >
+                   
+                 <mat-label class="title" >{{'Company Type'|translate}}</mat-label>                
+              
+                 <mat-select  [(ngModel)]="userjob" name="userjob" [(value)]="userjob">
+                    
+                      <mat-option value="consultant">
+                        {{ 'consultant' | translate }}
+                      </mat-option>
+                      <mat-option value="contractor">
+                         {{'contractor'|translate}}
+                      </mat-option>
+                      <mat-option value="contractor">
+                        {{'owner'|translate}}
+                     </mat-option>
+                 </mat-select>
+              </mat-form-field>
+              </div>
+              <!--Company Name-->
+              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+               <mat-form-field class="full-wid mrgn-b-lg ">
+               <input matInput name="cname" [(ngModel)]="cname" 
+               placeholder="{{'Copmany Name'|translate}}" type="text" required>    
+            </mat-form-field>
+          </div>
+   
+          <!--Address-->
+           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+             <mat-form-field class="full-wid mrgn-b-lg ">
+            <input matInput name="address" [(ngModel)]="address" 
+            placeholder="{{'Address'|translate}}" type="text" required>    
+            </mat-form-field>                   
+            </div>
+               
+                     <!--Zip Code-->
                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                         <mat-form-field class="full-wid mrgn-b-lg ">
-                        <input matInput name="password" [(ngModel)]="password" 
-                        placeholder="{{'Password'|translate}}" type="text" required>    
+                        <input matInput name="zipcode" [(ngModel)]="zipcode" 
+                        placeholder="{{'Zip Code'|translate}}" type="number" required>    
                      </mat-form-field> 
                      
-                </div>    
-                
-                
-                <!--Email-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                </div>  
+                  <!--Post Code-->
+                  <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                     <mat-form-field class="full-wid mrgn-b-lg ">
+                     <input matInput name="postcode" [(ngModel)]="postcode" 
+                     placeholder="{{'Post Code'|translate}}" type="number" required>    
+                  </mat-form-field> 
+                  
+             </div> 
+
+               <!--Email-->
+               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                   <mat-form-field class="full-wid mrgn-b-lg ">
                   <input matInput name="email" [(ngModel)]="email" 
                   placeholder="{{'Email'|translate}}" type="email" required>    
                </mat-form-field> 
                
           </div> 
-          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" class="title">
-               <mat-checkbox  class="title" (change)="Company($event)" [disabled]="isEmpolyee == true">{{'User is Company'|translate}}</mat-checkbox>
-             </div>
-             <br>
-             <!--company Type-->
-             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-               <mat-form-field class="full-wid mrgn-b-lg " >
+
+
+            <!--Phone-->
+            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+               <mat-form-field class="full-wid mrgn-b-lg ">
+               <input matInput name="phone" [(ngModel)]="phone" 
+               placeholder="{{'Phone'|translate}}" type="number" required>    
+            </mat-form-field> 
+            
+       </div> 
+            
+                  </div>
+               </div>
+               <div fxLayout="row" fxLayoutAlign="space-between">
+                 <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}  <mat-icon>cancel</mat-icon></button>
+                 <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add User'|translate }}  <mat-icon>done_outline</mat-icon></button>
+                 
+           </div>
+          </form>
+         </div>
+      </div> 
+
+      <div [style.display]="isEmpolyee ? 'block' : 'none'" fxLayout="row wrap" fxLayoutAlign="center">  
+          <!--Eompolyee-->
+          <div id="eompolyee">
+            <form #form="ngForm">
+               <div fxLayout="column">
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                     
-                  <mat-label class="title" >{{'Company Type'|translate}}</mat-label>                
+                     <!--username-->
+               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                            <mat-form-field class="full-wid mrgn-b-lg ">
+                            <input matInput name="username" [(ngModel)]="username" 
+                            placeholder="{{'username'|translate}}" type="text" required>    
+                         </mat-form-field> 
+                         
+                    </div>    
+                    
+                    <!--Password-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                       <mat-form-field class="full-wid mrgn-b-lg ">
+                       <input matInput name="password" [(ngModel)]="password" 
+                       placeholder="{{'Password'|translate}}" type="text" required>    
+                    </mat-form-field> 
+                    
+               </div>    
                
-                  <mat-select  [(ngModel)]="userjob" name="userjob" [(value)]="userjob"
-                  [disabled]="isCompany == false">
-                     
-                       <mat-option value="consultant">
-                         {{ 'consultant' | translate }}
+               
+               <!--Email-->
+               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                 <mat-form-field class="full-wid mrgn-b-lg ">
+                 <input matInput name="email" [(ngModel)]="email" 
+                 placeholder="{{'Email'|translate}}" type="email" required>    
+              </mat-form-field> 
+              
+         </div> 
+         
+           <!--Phone-->
+           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+            <mat-form-field class="full-wid mrgn-b-lg ">
+            <input matInput name="phone" [(ngModel)]="phone" 
+            placeholder="{{'Phone'|translate}}" type="number" required>    
+         </mat-form-field> 
+         
+    </div> 
+         
+            <!--Emplyee Type-->
+              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                 <mat-form-field class="full-wid mrgn-b-lg " >
+                      
+                    <mat-label class="title">{{'Company Name'|translate}}</mat-label>                
+                 
+                    <mat-select  [(ngModel)]="company" name="company" [(value)]="company">
+                       <div *ngFor="let data of companies">
+                         <mat-option (click)="choose(data.id)" value={{data.id}}>
+                           {{ data.name}}
+                         </mat-option>
+                        </div>
+                    </mat-select>
+                 </mat-form-field>
+                 </div> 
+            
+            
+             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+             <mat-form-field class="full-wid mrgn-b-lg " >
+                  
+                <mat-label class="title">{{'Job Title'|translate}}</mat-label>                
+             
+                <mat-select  [(ngModel)]="Role" name="Role" [(value)]="Role">
+                   <div *ngFor="let data of userRole">
+                     <mat-option (click)="choose(data.id)" value={{data.id}}>
+                       {{ data.name | translate }}
+                     </mat-option>
+                    </div>
+                </mat-select>
+             </mat-form-field>
+             </div>
+
+             <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+               <mat-form-field class="full-wid mrgn-b-lg ">
+                  <mat-label class="title">{{'Specialization'|translate}}</mat-label>                
+                  <mat-select  [(ngModel)]="section_id" name="section_id" [(value)]="section_id">
+                     <div *ngFor="let data of specialest">
+                       <mat-option (click)="special(data.id)" value={{data.id}}>
+                         {{ data.name | translate }}
                        </mat-option>
-                       <mat-option value="contractor">
-                          {{'contractor'|translate}}
-                       </mat-option>
+                      </div>
                   </mat-select>
                </mat-form-field>
                </div>
-             <!--Emplyee Type-->
-             <mat-checkbox class="title"  (change)="Empolyee($event)" [disabled]="isCompany == true">{{'User is Empolyee'|translate}}</mat-checkbox >  
-               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                  <mat-form-field class="full-wid mrgn-b-lg " >
-                       
-                     <mat-label class="title">{{'Company Name'|translate}}</mat-label>                
-                  
-                     <mat-select  [(ngModel)]="company" name="company" [(value)]="company"  [disabled]="isEmpolyee == false">
-                        <div *ngFor="let data of companies">
-                          <mat-option (click)="choose(data)" value={{data.id}}>
-                            {{ data.name}}
-                          </mat-option>
-                         </div>
-                     </mat-select>
-                  </mat-form-field>
-                  </div> 
-             
-             
-              <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-              <mat-form-field class="full-wid mrgn-b-lg " >
-                   
-                 <mat-label class="title">{{'Job Title'|translate}}</mat-label>                
-              
-                 <mat-select  [(ngModel)]="Role" name="Role" [(value)]="Role"  [disabled]="isEmpolyee == false">
-                    <div *ngFor="let data of userRole">
-                      <mat-option (click)="choose(data)" value={{data.id}}>
-                        {{ data.name | translate }}
-                      </mat-option>
-                     </div>
-                 </mat-select>
-              </mat-form-field>
-              </div>
- 
-                   </div>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="space-between">
-                  <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}  <mat-icon>cancel</mat-icon></button>
-                  <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Submited'|translate }}  <mat-icon>done_outline</mat-icon></button>
-                  
-            </div>
-             </form>
+
+                  </div>
+               </div>
+               <div fxLayout="row" fxLayoutAlign="space-between">
+                 <button mat-button mat-raised-button color="warn" (click)="dialogRef.close()"  type="button" dir="ltr">{{'Cancel'|translate }}  <mat-icon>cancel</mat-icon></button>
+                 <button mat-button mat-raised-button color="accent" (click)="Save()" type="submit">{{'Add User'|translate }}  <mat-icon>done_outline</mat-icon></button>
+                 
+          </div>
+          </form>
+         </div>
+      </div>
+      </div>
     </div>
  </mat-card>
