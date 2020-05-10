@@ -66,6 +66,8 @@ public barChartOptions:any = {
    public barChartData:any[] = [];
    public barChartData1:any[]=[];
    public barChartData2:any[]=[];
+   public barChartData3:any[]=[{data:[120] , label:"Planned completion"}];
+   public barChartData4:any[]=[{data:[120] , label:"Actual Achievement"}];
 //options  for type
    public barChartType:string = 'bar';
    public barHorizontalChartType:string = 'horizontalBar';

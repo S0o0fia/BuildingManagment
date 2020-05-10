@@ -13,24 +13,32 @@ import { ProjectitemsComponent } from '../projectitems/projectitems.component';
 })
 export class ProjectitemslistComponent implements OnInit {
   itemslist: any[]=[];
-
+   public projectname : string;
+   public page : number = 0 ;
+   public totalRec : number;
   constructor(private dialog: MatDialog,
     private _snackBar: MatSnackBar
-    ,private translate : TranslateService , private  services :CoreService) { }
+
+    ,private translate : TranslateService , private  services :CoreService) {
+
+       this.projectname = localStorage.getItem('projectname');
+     }
 
   ngOnInit() {
     this.services.getProjectitem().subscribe(
       data=> this.itemslist = data as any[], 
       err=> console.log(err)
     );
+
+    this.totalRec = this.itemslist.length;
   }
 
 
   openDialog()
   {
     const dialogRef = this.dialog.open(ProjectitemsComponent, {
-      width: '80%',
-      height: '85%'
+       width: '80%',
+       height: '85%'
     });
   
     dialogRef.afterClosed().subscribe(result => {

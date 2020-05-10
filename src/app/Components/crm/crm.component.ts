@@ -83,22 +83,16 @@ export class CrmComponent implements OnInit, OnDestroy {
       cryptoCompareColumns = ["id","name","consultant_name","contractor_name" , "Status" , "Controls"];
       dropList = [
          "Edit Project",
-         "List of Count" ,
          "Project Items" ,
          "Quantity Table",
-         "Files Managment",
-         "Lines Files Managment",
-         "Request for Inspection",
+         "Request for Inspection",         
          "Request for Recieves Items",
+         "List of Count" ,       
+         "Files Managment",
          "Project Obstacles",
-         "Monthly Report",
-         "Financial Flow" ,
-         "Current Extracts",
          "Abstracts" ,
-         "History Formats",
-         "Add Request",
+         "ٌRequests",
          "Project Schedule"
-
                ];
       
       /*
@@ -114,51 +108,46 @@ export class CrmComponent implements OnInit, OnDestroy {
             case "Edit Project":
                {this.router.navigate(['/home/edit']); }
                   break;
-                  case "List of Count" :{
+
+            case "Quantity Table" :
+            {this.router.navigate(['/home/table/quantity']);}
+             break;
+            
+          case "Project Schedule": 
+          {this.router.navigate(['/home/projectschedule']);}
+           break;    
+
+           case "Request for Inspection":  
+           {this.router.navigate(['/home/table/rfi']);}
+           break;
+           
+                  
+           case "Request for Recieves Items": 
+           {this.router.navigate(['/home/table/receiveitem']);}
+           break;
+         
+
+           case "List of Count" :{
                      this.router.navigate(['/home/table/countdetails']);
                   } break;
+
             case "Project Items":
                      {this.router.navigate(['/home/itemslist']); }
                         break;      
 
-            case "Quantity Table" :
-                  {this.router.navigate(['/home/table/quantity']);}
-                  break;
-                 
-            case"Files Managment": 
+              case"Files Managment": 
                {this.router.navigate(['/home/filemanagement']);}
                break;
-
-              case  "Lines Files Managment":  break;
-            
-           case "Request for Inspection":  
-                     {this.router.navigate(['/home/table/rfi']);}
-                break;
-                  
-            case "Request for Recieves Items": 
-                    {this.router.navigate(['/home/table/receiveitem']);}
-               break;
-            
-            case "Project Schedule": 
-                     {this.router.navigate(['/home/projectschedule']);}
-                break;
-               
-            case "Project Obstacles":  break;
-                       case "Monthly Report":  break;
-                          case  "Financial Flow" :  break;
-                             case "Current Extracts":  break;
+        
+                    
 
             case "Abstracts" :  
               {this.router.navigate(['/home/abstracts']);}
             break;
-            
-            case "History Formats":  break;
-
-            case "Show Location Map": break;
-
-            case "Add Request" :
+      
+            case "Requests" :
             {
-             
+           
              this.openDialog();
             }   
             break;
@@ -221,10 +210,10 @@ export class CrmComponent implements OnInit, OnDestroy {
          }
       ];
 
-      RFI(id)
+      Count(id)
       {
          localStorage.setItem('projectid' , id);
-         {this.router.navigate(['/home/table/rfi']);}
+         this.router.navigate(['/home/table/countdetails']);
 
       }
    

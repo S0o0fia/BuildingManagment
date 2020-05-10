@@ -16,3 +16,8 @@ th , button , thead{
 h4{
     font-family: 'Tajawal', sans-serif;
 }
+
+button:active {
+ 
+    transform: translateY(4px);
+}

@@ -23,15 +23,15 @@
                <mat-icon>account_circle</mat-icon>
             </div>
          </button>
-         <button (click)="end.toggle()" mat-icon-button class="overflow-visible">
+         <!-- <button (click)="end.toggle()" mat-icon-button class="overflow-visible">
             <mat-icon>notifications</mat-icon>
-         </button>
+         </button> -->
         
          <ms-language-drop-down></ms-language-drop-down>
        
       </div>
    </mat-toolbar>
-   <mat-sidenav #end position="end" class="chat-panel" mode="over" opened="false">
+   <!-- <mat-sidenav #end position="end" class="chat-panel" mode="over" opened="false">
       <div class="scroll">
          <mat-toolbar class="primary-bg">
             <h3>{{'Notifications'|translate}}</h3>
@@ -70,7 +70,7 @@
             </mat-list-item>
          </mat-nav-list>
       </div>
-   </mat-sidenav>
+   </mat-sidenav> -->
    <div class="gene-base-container" #scrollContainer>
       <div class="inner-container" fxLayout="row wrap">
          <div class="full-wid" fxFlex="100">
@@ -108,7 +108,7 @@
    </div>
 </mat-sidenav-container>
 <div class="gene-customizer">
-   <button class="customizer-toggle" (click)="customizerFunction()">
+   <button class="customizer-toggle" (click)="customizerFunction()" disabled>
       <mat-icon class="fa-spin">settings</mat-icon>
    </button>
    <div class="settings-panel">
@@ -119,10 +119,10 @@
          <h3>{{'Layout Options'| translate }}</h3>
          <mat-divider></mat-divider>
          <div class="collapse-option">
-            <mat-checkbox [(ngModel)]="coreService.collapseSidebar" (change)="collapseSidebar($event)" [align]="end">{{'Collapsed Sidebar'| translate }}</mat-checkbox>
+            <mat-checkbox [(ngModel)]="coreService.collapseSidebar" (change)="collapseSidebar($event)" >{{'Collapsed Sidebar'| translate }}</mat-checkbox>
          </div>
          <div>
-            <mat-checkbox [(ngModel)]="dark" (change) = "addClassOnBody($event)" [align]="end">{{'Dark Mode'| translate }}</mat-checkbox>
+            <mat-checkbox [(ngModel)]="dark" (change) = "addClassOnBody($event)" >{{'Dark Mode'| translate }}</mat-checkbox>
          </div>
          <div>
             <mat-checkbox (change)="changeRTL($event.checked)" checked="checked">{{'RTL'| translate }}</mat-checkbox>
@@ -172,16 +172,14 @@
       <mat-icon>settings</mat-icon>
       <span>{{'Settings'|translate}}</span>
    </button>
-   <button mat-menu-item>
-      <mat-icon>help</mat-icon>
-      <span>{{'Help'|translate}}</span>
-   </button>
+ 
    <mat-divider></mat-divider>
    <button (click)="logOut()" mat-menu-item>
       <mat-icon>exit_to_app</mat-icon>
       <span>{{'Logout'|translate}}</span>
    </button>
 </mat-menu>
+
 <mat-menu class="apps-menu" x-position="after" y-position="below" #appsmenu="matMenu">
    <button mat-menu-item>
       <mat-icon>storage</mat-icon>

@@ -41,9 +41,13 @@ export class RfidetailsComponent implements OnInit {
    role : number ;
    boolconsultant : boolean = false ; 
    boolcontractor : boolean = false;
+   commentsection : any [] =[];
+   commentusers : any[] =[];
   preparedby: any;
   preparedon: any;
   activity_log: any[]=[];
+  department : number;
+  userid : number;
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
     ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
     this.user = localStorage.getItem('loginUser');
@@ -109,6 +113,18 @@ export class RfidetailsComponent implements OnInit {
       this.boolconsultant = false ;
       this.boolcontractor = false;
     }
+
+    //get comment section
+    this.service.getCommentSection().subscribe(
+      data=>this.commentsection= data as any[] ,
+      err=>console.log(err)
+    )
+
+    //get comment users 
+    this.service.getCommentUsers().subscribe(
+      data=> this.commentusers = data as any[] , 
+      err=>console.log(err)
+    )
   
     //get Comments
     this.service.getComment(this.id    
@@ -188,11 +204,10 @@ export class RfidetailsComponent implements OnInit {
   {
     debugger;
     this.Comment = {
-      comments : this.details , 
-  
-      create_uid : this.user , 
+      comments : this.details ,   
+      create_uid : this.userid , 
       rfi_id : this.id , 
-      section_id : this.typeid
+      section_id : this.department
 
     }
 

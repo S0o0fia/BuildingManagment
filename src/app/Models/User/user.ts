@@ -3,4 +3,5 @@ export interface User {
     password:string;
     user_job : any ; 
     login : string;
+    section_id : number;
 }

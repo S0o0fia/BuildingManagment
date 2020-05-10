@@ -133,25 +133,32 @@ export class CoreService {
 		return this.http.get(this.apiURL+pscheduleUrl);
 	}
 
-	createUser1 (value : User)
+	createUser1 (value : User ,  email , postcode , zipcode , phone , address)
 	{
 		let userUrl2='/users/create?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
 		'"name":"'+value.name+
-		'","password":"'+value.password+
-		'","login":"'+value.login+
-		'","user_job":"'+value.user_job+'"}';
+	    '","login":"'+value.login+
+		'","user_job":"'+value.user_job+'"}'+
+		'&address='+address+
+		'&email='+email+
+		'&pobox='+zipcode+
+		'&phone='+phone+
+		'&postalcode='+postcode;
+
         console.log(userUrl2);
 		return this.http.post(this.apiURL+userUrl2 , null);
 	}
 
-	createUser2 (value : User , Companyid : number)
+	createUser2 (value : User , Companyid : number , phone:number)
 	{
 		let userUrl2='/users/create?db='+this.db+'&token='+localStorage.getItem("token")+'&values={'+
 		'"name":"'+value.name+
 		'","password":"'+value.password+
 		'","login":"'+value.login+
-		'","role_id":'+value.user_job+'}'+'&company_id='+Companyid;
-        console.log(userUrl2);
+		'","role_id":'+value.user_job+
+		',"section_id":'+value.section_id+
+		'}'+'&company_id='+Companyid+'&phone='+phone;
+        console.log(userUrl2)
 		return this.http.post(this.apiURL+userUrl2 , null);
 	}
 
@@ -222,7 +229,6 @@ export class CoreService {
 		'","sation_to":"'+value.end_date+
 		'","appled_to":"'+value.end_date+
 		'","appled_from":"'+value.start_date+
-		//',"description":"'+value.description+
 		'"}';
 		console.log(createRFi);
 		return this.http.post(this.apiURL+createRFi , null);
@@ -605,32 +611,44 @@ export class CoreService {
 	
 	}
 
+	getCommentSection ()
+	{
+	  let url = '/comment/section/get?db=nqproject&token='+localStorage.getItem('token')
+	  +'&project_id='+localStorage.getItem('projectid');
+	  return this.http.get(this.apiURL+url);
+	}
+
+	getCommentUsers ()
+	{
+	  let url = '/comment/users/get?db=nqproject&token='+localStorage.getItem('token')
+	  +'&project_id='+localStorage.getItem('projectid');
+	  return this.http.get(this.apiURL+url);
+	}
+
 	CreateComment ( comment : Comment )
 	{
-		debugger;
+	
 		let url = '/rfi/comments/create?db=nqproject&token='+localStorage.getItem('token')+
 		'&values={'+
 		'"section_id":'+comment.section_id+
 		',"comments":"'+comment.comments+
 		'","rfi_id":'+comment.rfi_id+
-		',"name":"'+comment.create_uid+
+		',"user_id":'+comment.create_uid+
 		
-		'"}';
-          console.log(url);
-		return this.http.post(this.apiURL+url , null);
+		'}';
+      return this.http.post(this.apiURL+url , null);
 	}
 
-	CreateCommentForCount ( comment : any )
+	CreateCommentForCount ( comment : Comment )
 	{
 		debugger;
 		let url = '/count/comments/create?db=nqproject&token='+localStorage.getItem('token')+
 		'&values={'+
-		'"user_id":'+comment.user_id+
+		'"section_id":'+comment.section_id+
 		',"comments":"'+comment.comments+
 		'","count_id":'+comment.rfi_id+
-		',"name":"'+comment.create_uid+
-		
-		'"}';
+		',"user_id":'+comment.create_uid+		
+		'}';
           console.log(url);
 		return this.http.post(this.apiURL+url , null);
 	}
@@ -642,6 +660,26 @@ export class CoreService {
 		return this.http.get(this.apiURL+url);
 	}
 
+	CreateCommentFoMir ( comment : Comment )
+	{
+		debugger;
+		let url = '/mir/comments/create?db=nqproject&token='+localStorage.getItem('token')+
+		'&values={'+
+		'"section_id":'+comment.section_id+
+		',"comments":"'+comment.comments+
+		'","mir_id":'+comment.rfi_id+
+		',"user_id":'+comment.create_uid+		
+		'}';
+          console.log(url);
+		return this.http.post(this.apiURL+url , null);
+	}
+
+	getCommentFormir ( id)
+	{
+		debugger;
+		let url = '/mir/comments/get?db=nqproject&token='+localStorage.getItem('token')+'&mir_id='+id;
+		return this.http.get(this.apiURL+url);
+	}
 	getComment ( id)
 	{
 		let url = '/rfi/comments/get?db=nqproject&token='+localStorage.getItem('token')+'&rfi_id='+id;
@@ -959,6 +997,14 @@ export class CoreService {
   {
 	let url = '/project/dashboard/finance?db=nqproject&token='+localStorage.getItem('token');
 	return this.http.get<any[]>(this.apiURL+url)
+  }
+
+  getDliverDate(date : string , num : number , type : string)
+  {
+	  let url = '/delivery_date?db=nqproject&token='+localStorage.getItem('token')+'&start='+date+
+	  '&num='+num+'&typee='+type;
+       console.log(url);
+	  return this.http.get<any[]>(this.apiURL+url);
   }
 }
 

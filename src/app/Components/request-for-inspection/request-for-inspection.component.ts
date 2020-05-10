@@ -25,6 +25,7 @@ export class RequestForInspectionComponent implements OnInit {
   projectname : string;
   role : number;
   boolrole : boolean = false ;
+  
  
   constructor(public service : CoreService,
     private pageTitleService: PageTitleService ,private router:Router, private dialog: MatDialog) { 

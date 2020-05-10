@@ -74,6 +74,7 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
   project_duration_days : number = 0;
   project_duration_months : number = 0;
   project_duration_h_months : number = 0;
+  deliverdate2 : string = "";
   deliverdate : Date;
   deliverdate_hijri : Date;
   type : string="";
@@ -192,36 +193,32 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
 
 caldurationm(value)
 {
-   let days = this.startdate.getDay();
-   let Month = this.startdate.getMonth();
-   let Year = this.startdate.getFullYear();
+  //  let days = this.startdate.getDay();
+  //  let Month = this.startdate.getMonth();
+  //  let Year = this.startdate.getFullYear();
 
-   let daysh = this.model.day;
-   let Monthh = this.model.month;
-   let Yearh = this.model.year
+  //  let daysh = this.model.day;
+  //  let Monthh = this.model.month;
+  //  let Yearh = this.model.year
+  const format = 'dd/MM/yyyy';
+  const locale = 'en-US';
+  let startDate = formatDate(this.startdate, format, locale);
    if(this.duration == 2){
-     
-    this.project_duration_days = Math.round(value*29.5)-1;
-    Monthh += Math.round(this.project_duration_days/29.5);
-    daysh += Math.round(this.project_duration_days%29.5);
- 
-    Month = Month+Math.round(this.project_duration_days/29.5);
-    days = days+Math.round(this.project_duration_days%29.5);
-
-    this.deliverdate = new Date(Year , Month , days);
-    this.model2 = {day : daysh , month : Monthh , year : Yearh};
+    
+    this.service.getDliverDate( startDate , value , 'hijri').subscribe(
+      data=>{this.deliverdate = new Date( data['delivery_date']);},
+      err=>console.log(err)
+    )
   
     
   }
     
    if(this.duration == 3){
     
-    // this.project_duration_days = Math.round(value*30.4);
-    // Month += Math.round(this.project_duration_days/30.4);
-    // days += Math.round(this.project_duration_days%30.4);
-    let dd=value*30;
-    this.deliverdate = new Date();
-    this.deliverdate.setDate(this.startdate.getDate()+dd);
+      this.service.getDliverDate( startDate , value , 'months').subscribe(
+      data=>{this.deliverdate = new Date( data['delivery_date']); },
+      err=>console.log(err)
+    )
    }
 
 }
@@ -242,27 +239,14 @@ openDialog(): void {
 
 caldurationd(value)
 {
-  debugger;
-  //  let days = this.startdate.getDay();
-  //  let Month = this.startdate.getMonth();
-  //  let Year = this.startdate.getFullYear();
-  //   let formattedDate ;
-   
-  //  days = days+Math.round( value %30.4 )-3;    
-  //  Month = Month+Math.round(value/30.4)-1;
+  const format = 'dd/MM/yyyy';
+  const locale = 'en-US';
+  let startDate = formatDate(this.startdate, format, locale);
 
-  this.deliverdate = new Date();
-
-  // this.deliverdate.setMonth(this.startdate.getMonth()+ Math.round(value/30.4));
-  // this.deliverdate = new Date(this.deliverdate.toISOString().slice(0,10));
-
-
-  // this.model2.day =  Math.round(value%29.5);
-  // this.model2.month =  Math.round(value/29.5);
- 
-  // this.project_duration_months = Math.round(value/30.4);
-  // this.project_duration_h_months = Math.round(value/29.5);
-  this.deliverdate.setDate(this.startdate.getDate()+value);
+ this.service.getDliverDate(startDate , value , 'days').subscribe(
+   data=>{this.deliverdate = new Date( data['delivery_date']); ; console.log(this.deliverdate) },
+   err=>console.log(err)
+ )
 
 }
   nextStep() {
@@ -273,7 +257,7 @@ caldurationd(value)
     this.startdate_hijri=this.startdate;
     let startDateHiri = formatDate(this.startdate_hijri, format, locale);
     let deliverDate = formatDate(this.deliverdate, format, locale);
-    this.deliverdate_hijri=this.deliverdate;
+    this.deliverdate_hijri=this.startdate;
     let deliverDateHihri = formatDate(this.deliverdate_hijri, format, locale); 
     let segDate = formatDate(this.sig_date, format, locale); 
     let sdate = formatDate(this.stiuationdate, format, locale); 

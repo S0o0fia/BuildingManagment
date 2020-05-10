@@ -9,6 +9,7 @@ import { SelectApproveComponent } from '../select-approve/select-approve.compone
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Miritems } from 'app/Models/MIR Request/miritems';
 import { DatePipe } from '@angular/common';
+import { Comment } from 'app/Models/Comment/comment';
 
 @Component({
   selector: 'ms-mirapprove',
@@ -35,6 +36,13 @@ export class MirapproveComponent implements OnInit {
   boolconsultant : boolean = false ; 
   boolcontractor : boolean = false;
   activity_log: any[]=[];
+  department : number;
+  userid : number;
+  details : string;
+  commentsection : any [] =[];
+  commentusers : any[] =[];
+  Commentt : Comment;
+  Comments : any []=[]; 
 
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
    ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
@@ -134,6 +142,25 @@ export class MirapproveComponent implements OnInit {
     this.boolconsultant = false ;
     this.boolcontractor = false;
   }
+
+    //comment Mir 
+    //get comment section
+    this.service.getCommentSection().subscribe(
+      data=>this.commentsection= data as any[] ,
+      err=>console.log(err)
+    )
+
+    //get comment users 
+    this.service.getCommentUsers().subscribe(
+      data=> this.commentusers = data as any[] , 
+      err=>console.log(err)
+    )
+
+     //get Comments
+   this.service.getCommentFormir(this.id    
+    ).subscribe( data=> this.Comments = data as any[], 
+    err=> console.log(err));
+
    //getting MIR Data 
    this.service.getMIR().subscribe(
     data => {
@@ -193,6 +220,25 @@ export class MirapproveComponent implements OnInit {
  backtorfi()
  {
    this.router.navigate(['home/table/receiveitem']);
+ }
+
+ Save()
+ {
+  this.Commentt = {
+    comments : this.details , 
+    section_id : this.department , 
+    rfi_id : this.id , 
+    create_uid : this.userid
+  }
+
+  //Cretate Comment
+  this.service.CreateCommentFoMir(this.Commentt).subscribe(
+    data=>{
+      console.log(data) ;
+      location.reload();
+    } , 
+    err=> console.log(err)
+  );
  }
  
 }

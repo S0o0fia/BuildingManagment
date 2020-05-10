@@ -20,8 +20,11 @@ export class CreateuserComponent implements OnInit {
   userjob : string;
   company : number;
   Role :number;
+  section_id : number;
   companies : any []=[];
   userRole : any []=[];
+  specialest : any[]=[];
+  cname : string;
   jobtitle : string [] = [
      'system_admin' , 
     'amana_pm' , 
@@ -38,6 +41,11 @@ export class CreateuserComponent implements OnInit {
   isCompany : boolean = false ;
   isEmpolyee : boolean = false ;
   roleid : number;
+  address : string ;
+  zipcode : number; 
+  postcode : number;
+  phone : number;
+
   constructor(public dialogRef: MatDialogRef<UserslistComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private _snackBar: MatSnackBar
     ,private translate : TranslateService , public  services :CoreService){
@@ -55,6 +63,11 @@ export class CreateuserComponent implements OnInit {
 
     this.services.getRoles().subscribe(
       data=> {this.userRole = data as any[]}, 
+      err=> console.log(err)
+    )
+
+    this.services.getSpeclization().subscribe(
+      data=>{ this.specialest = data as any[] ; console.log(this.specialest) }, 
       err=> console.log(err)
     )
   }
@@ -88,19 +101,26 @@ export class CreateuserComponent implements OnInit {
     this.userjob = val;
   }
 
+  special(val)
+  {
+    this.section_id = val;
+  }
   Save()
   {
     
 
     if(this.isCompany == true)
     {
-      this.newUser = {
-        name : this.username , 
+      this.newUser= {
         login : this.email , 
+        name : this.cname , 
         password : this.password , 
+        section_id : this.section_id , 
         user_job : this.userjob
+
       }
-      this.services.createUser1(this.newUser).subscribe(
+      
+      this.services.createUser1(this.newUser , this.email , this.postcode , this.zipcode , this.phone , this.address).subscribe(
         data=>{
           let msg = this._snackBar.open('تم إنشاء المستخدم بنجاح' , 'إالغاء')
           if(msg)
@@ -118,9 +138,10 @@ export class CreateuserComponent implements OnInit {
         name : this.username , 
         login : this.email , 
         password : this.password , 
-        user_job : this.Role
+        user_job : this.userjob , 
+        section_id : this.section_id
       }
-      this.services.createUser2(this.newUser , this.company).subscribe(
+      this.services.createUser2(this.newUser , this.company , this.phone).subscribe(
         data=>{
           let msg = this._snackBar.open('تم إنشاء المستخدم بنجاح' , 'إالغاء')
           if(msg)

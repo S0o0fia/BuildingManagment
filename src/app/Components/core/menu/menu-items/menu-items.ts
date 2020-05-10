@@ -33,13 +33,6 @@ const MENUITEMSAdmin = [
      
     },
     {
-      state : 'ConsultantContracts',
-      name : 'ConsultantContracts' , 
-      type : 'link' , 
-      icon : 'supervised_user_circle' ,
-    
-    },
-    {
       state: 'attendance',
       name: 'Attendance',
       type: 'link',
@@ -48,15 +41,6 @@ const MENUITEMSAdmin = [
      
     },
     {
-      state: 'projectsmap',
-      name: 'Project Maps',
-      type: 'link',
-      icon: 'location_on',
-  
-     
-    },
-    
-    {
       state: 'projectreport',
       name: 'Project Report',
       type: 'link',
@@ -64,8 +48,6 @@ const MENUITEMSAdmin = [
   
      
     },
-  
-   
     {
       state : 'approvedqty',
       name : 'Approved Quantities' ,
@@ -74,7 +56,16 @@ const MENUITEMSAdmin = [
   
 
     },
+  
+    {
+      state : 'ConsultantContracts',
+      name : 'ConsultantContracts' , 
+      type : 'link' , 
+      icon : 'supervised_user_circle' ,
     
+    },
+    
+   
     {
       state: 'settings',
       name: 'Global Setting',

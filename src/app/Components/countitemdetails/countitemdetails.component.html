@@ -3,7 +3,7 @@
            <div class="gene-card-title">
                    <div fxLayout="row" fxLayoutAlign="space-between center">
                       <div fxLayout="column">
-                         <h4>{{'Request Status'|translate}}</h4>
+                         <h4>{{'Request of Count'|translate}}</h4>
           
                       </div> <span fxFlex></span>
                       
@@ -174,41 +174,42 @@
               <div fxLayout="row wrap" fxLayoutAlign="space-between center">
                 <!--Department-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
-                    <mat-form-field class="full-wid mrgn-b-lg">
-                          <mat-label>{{'Department'|translate}}</mat-label>
-                          <mat-select name="department">      
-                               <div *ngFor="let item of users"> 
-                                <mat-option (click)="Typeids(item.id)" value={{item.id}}>
-                                   {{item.name}}
-                                </mat-option>
-                               </div>
-                        </mat-select>
-                    </mat-form-field>
-                 </div>
-                   <!--Department-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
                   <mat-form-field class="full-wid mrgn-b-lg">
-                        <mat-label>{{'Name'|translate}}</mat-label>
-                        <mat-select name="department">      
-                             <div *ngFor="let item of users"> 
-                              <mat-option (click)="Typeids(item.id)" value={{item.id}}>
-                                 {{item.name}}
+                        <mat-label>{{'Department'|translate}}</mat-label>
+                        <mat-select name="department"  [(ngModel)]="department">      
+                             <div *ngFor="let data of commentsection"> 
+                              <mat-option value={{data.id}}>
+                                 {{data.name}}
                               </mat-option>
                              </div>
                       </mat-select>
                   </mat-form-field>
                </div>
+                   <!--Department-->
+                   <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                     <mat-form-field class="full-wid mrgn-b-lg">
+                           <mat-label>{{'Name'|translate}}</mat-label>
+                           <mat-select name="userid" [(ngModel)]="userid">      
+                                <div *ngFor="let item of commentusers" > 
+                                 <mat-option value={{item.id}}>
+                                   {{item.name}}
+                                 </mat-option>
+                                </div>
+                         </mat-select>
+                     </mat-form-field>
+                  </div>
                    <!--Note-->
-                <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
-                        <mat-form-field class="full-wid mrgn-b-lg">
-                              <mat-label>{{'Note'|translate}}</mat-label>
-                              <textarea matInput name="detail"  
-                              cdkTextareaAutosize [(ngModel)]="detail"
-                               #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="1"
-                                 cdkAutosizeMaxRows="5"></textarea> 
-                        </mat-form-field>
-                     </div>
+                   <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" >
+                     <mat-form-field class="full-wid mrgn-b-lg">
+                           <mat-label>{{'Note'|translate}}</mat-label>
+                           <textarea matInput name="details"  
+                           cdkTextareaAutosize [(ngModel)]="details"
+                            #autosize="cdkTextareaAutosize"
+                             cdkAutosizeMinRows="1"
+                              cdkAutosizeMaxRows="5"></textarea> 
+                     </mat-form-field>
+                  </div>
+         
               </div>
                      <div fxLayout="row" fxLayoutAlign="center">
                             <button mat-button mat-raised-button color="accent" type="button" dir="ltr"
