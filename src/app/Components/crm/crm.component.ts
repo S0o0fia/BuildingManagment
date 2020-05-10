@@ -83,22 +83,16 @@ export class CrmComponent implements OnInit, OnDestroy {
       cryptoCompareColumns = ["id","name","consultant_name","contractor_name" , "Status" , "Controls"];
       dropList = [
          "Edit Project",
-         "List of Count" ,
          "Project Items" ,
          "Quantity Table",
-         "Files Managment",
-         "Lines Files Managment",
-         "Request for Inspection",
+         "Request for Inspection",         
          "Request for Recieves Items",
+         "List of Count" ,       
+         "Files Managment",
          "Project Obstacles",
-         "Monthly Report",
-         "Financial Flow" ,
-         "Current Extracts",
          "Abstracts" ,
-         "History Formats",
-         "Add Request",
+         "ٌRequests",
          "Project Schedule"
-
                ];
       
       /*
@@ -114,10 +108,6 @@ export class CrmComponent implements OnInit, OnDestroy {
             case "Edit Project":
                {this.router.navigate(['/home/edit']); }
                   break;
-
-             case "Project Items":
-             {this.router.navigate(['/home/items']); }
-            break;      
 
             case "Quantity Table" :
             {this.router.navigate(['/home/table/quantity']);}
@@ -141,9 +131,11 @@ export class CrmComponent implements OnInit, OnDestroy {
                      this.router.navigate(['/home/table/countdetails']);
                   } break;
 
-          
-                 
-            case"Files Managment": 
+            case "Project Items":
+                     {this.router.navigate(['/home/itemslist']); }
+                        break;      
+
+              case"Files Managment": 
                {this.router.navigate(['/home/filemanagement']);}
                break;
         
@@ -153,7 +145,7 @@ export class CrmComponent implements OnInit, OnDestroy {
               {this.router.navigate(['/home/abstracts']);}
             break;
       
-            case "ٌRequests" :
+            case "Requests" :
             {
            
              this.openDialog();
@@ -218,10 +210,10 @@ export class CrmComponent implements OnInit, OnDestroy {
          }
       ];
 
-      RFI(id)
+      Count(id)
       {
          localStorage.setItem('projectid' , id);
-         {this.router.navigate(['/home/table/rfi']);}
+         this.router.navigate(['/home/table/countdetails']);
 
       }
    

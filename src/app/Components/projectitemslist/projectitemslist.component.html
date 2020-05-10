@@ -1,0 +1,57 @@
+<mat-card>
+   
+    <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="space-between"  fxLayout.xs="column">
+            <div fxLayout="column">
+               <h4>{{projectname}}/{{'Project Items'|translate}}</h4>
+
+            </div> <span fxFlex></span>
+            
+            <div fxLayout="column">
+               <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">
+                  <mat-icon>queue</mat-icon> {{'Add Item'|translate}}</button>
+            </div> 
+         </div>
+    </div>
+
+        
+             <div class="gene-card-content pad-b-none">
+                
+                <div class="table-responsive">
+                     <table class="table table-hover table-middle th-fw-light mb-0">
+                           <thead>
+                              <tr>
+                                 <th>{{'Name'|translate}}</th>
+                                 <th>{{'Type' | translate}}</th>
+                                 <th>{{'Controls'|translate}}</th>
+                               
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr *ngFor="let data of itemslist| paginate: { id: 'listing_pagination',
+                              itemsPerPage: 10,
+                              currentPage: page,
+                              totalItems: totalRec };">
+                                 <td>{{data.name}}</td>
+                                 <td>{{data.type_name}}</td>
+                                 <td>
+                                    <button mat-icon-button color="primary" matTooltip="{{'Delete'|translate}}">
+                                 <mat-icon>delete</mat-icon>
+                                 </button>
+                                   <button mat-icon-button color="primary" matTooltip="{{'Edit'|translate}}">
+                                    <mat-icon>edit</mat-icon>
+                                    </button>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                      
+                        <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
+                        previousLabel="{{'Previous'|translate}}"
+                        nextLabel="{{'Next'|translate}}"
+                         (pageChange)="page = $event"></pagination-controls>
+                </div>  
+               
+ 
+             </div>
+          </mat-card>

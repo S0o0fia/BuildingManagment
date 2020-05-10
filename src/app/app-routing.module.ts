@@ -37,6 +37,7 @@ import { ProjectReportComponent } from './Components/project-report/project-repo
 import { ConsultantExtractDetailComponent } from './Components/consultant-extract-detail/consultant-extract-detail.component';
 import { RoleManagementComponent } from './Components/role-management/role-management.component';
 import { ProjectscheduleComponent } from './Components/projectschedule/projectschedule.component';
+import { ProjectitemslistComponent } from './Components/projectitemslist/projectitemslist.component';
 
 
 
@@ -79,6 +80,10 @@ const appRoutes: Routes = [
          {
             path:'items',
             component:ProjectitemsComponent
+         },
+         {
+            path:'itemslist',
+            component:ProjectitemslistComponent
          },
          {
             path:"activestage",
