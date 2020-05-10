@@ -66,7 +66,7 @@ export class AddRequestComponent implements OnInit {
   Visible : boolean = false;   
   price : number;
   total_price : number;             
-base64:any;
+base64:any[]=[];
 BASE64_MARKER: string = ';base64,';
 base64string:any;
   fileToUpload: File = null
@@ -74,7 +74,7 @@ base64string:any;
   fileExtension: string;
   image: any;
   imageSrc: any;
-  filename: any;
+  filename: any[]=[];
 
   myControl = new FormControl();
   myControl1 = new FormControl();
@@ -155,18 +155,19 @@ multi : boolean = false ;
   }
 
   onSelectFiles(evt) {
-    let me = this;
-  let file = evt.target.files[0];
-  let reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = function () {
-     me.base64 = reader.result;
-    console.log(reader.result);
-  };
-  reader.onerror = function (error) {
-    console.log('Error: ', error);
-  };
-     this.filename = evt.target.files[0].name;
+    for (var i = 0; i < evt.target.files.length; i++){
+      let me = this;
+      let file = evt.target.files[i];
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+         me.base64.push(reader.result);
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+         this.filename.push(file.name);
+    }    
   }
  
   
@@ -488,11 +489,14 @@ multi : boolean = false ;
                         let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
                         if(msg)
                         {
-                        this.services.UploadFile(this.filename , this.base64 , this.inspectionIDs.inspection_id).subscribe(
-                          data=>console.log(data) , 
-                          err=> console.log(err)
-                        );
-                         // location.reload();
+                          for (var i = 0; i < this.filename.length; i++){
+                            this.services.UploadFile(this.filename[i], this.base64[i], this.inspectionIDs.inspection_id).subscribe(
+                              data=>console.log(data) , 
+                              err=> console.log(err)
+                            );
+                          }
+                        
+                         location.reload();
                         }
                       },
                       err=>console.log(err)
