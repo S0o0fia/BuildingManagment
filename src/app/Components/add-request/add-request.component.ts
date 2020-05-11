@@ -87,6 +87,7 @@ base64string:any;
 Project_list : any[] = [];
 multi : boolean = false ;
   description: string;
+  files: FileList;
  
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -155,6 +156,7 @@ multi : boolean = false ;
   }
 
   onSelectFiles(evt) {
+    this.files = evt.target.files;
     for (var i = 0; i < evt.target.files.length; i++){
       let me = this;
       let file = evt.target.files[i];

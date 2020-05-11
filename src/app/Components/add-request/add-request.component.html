@@ -80,6 +80,31 @@
                     
                     </div>
                      </div>
+
+                     <div fxLayout="row wrap" fxLayoutAlign="space-between center"  fxLayout.xs="column"> 
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                            
+                           <table class="table table-hover table-middle th-fw-light mb-0 ">
+                              <thead>
+                                 <tr>
+                                 <th>{{'File Name'|translate}}</th>
+                                 <th>{{'File Size'|translate}}</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                 <tr *ngFor="let file of files">
+                                    <td>
+                                       {{file.name}}
+                                    </td>
+                                    <td>
+                                    {{file.size / 1024}}
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                 
+                       </div>
+                      </div>
                     </mat-card>
 
                  </div>
