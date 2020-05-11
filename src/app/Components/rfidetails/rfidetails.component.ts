@@ -8,7 +8,7 @@ import { EditContractedQunatityComponent } from '../edit-contracted-qunatity/edi
 import { SelectApproveComponent } from '../select-approve/select-approve.component';
 import { Approvedqty } from 'app/Models/Quantity/approvedqty';
 import {Comment } from '../../Models/Comment/comment'
-import { timeThursdays } from 'd3';
+import { timeThursdays, Numeric } from 'd3';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -48,6 +48,7 @@ export class RfidetailsComponent implements OnInit {
   activity_log: any[]=[];
   department : number;
   userid : number;
+  request_number : string;
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
     ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
     this.user = localStorage.getItem('loginUser');
@@ -82,7 +83,7 @@ export class RfidetailsComponent implements OnInit {
     const dialogRef = this.dialog.open( SelectApproveComponent , {
       width: '50%',
       height :'40%',
-      data : this.id
+      data :{  id : this.id , number : this.request_number }
      
     });
    }
@@ -140,9 +141,12 @@ export class RfidetailsComponent implements OnInit {
        data.forEach(element => {
             if(element.id == this.id)
            {
+             
              this.RFI_tbl.push(element);
              this.state = element.state;
              this.consultant_approve = element.consultant_approval;
+             this.request_number = element.request_num;
+             
              //alert(element.activity_log.length);
              //element.activity_log.forEach(e=>{
               // this.preparedby=element.activity_log[0].action.split(':')[1];
@@ -184,6 +188,7 @@ export class RfidetailsComponent implements OnInit {
               console.log(element);
               this.Items.push(element);
               this.contracted_qty[element['id'] ]=element.approved_qty;
+              
              
               console.log(this.contracted_qty);
             }

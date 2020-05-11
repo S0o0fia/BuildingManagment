@@ -58,6 +58,11 @@ export class AddBuildingComponent implements OnInit {
         filename : this.filename
      })
 
+     this.bLocation="";
+     this.btype = "";
+     this.municiple="";
+     this.neightborhood="";
+     this.filename="";
   }
    
  

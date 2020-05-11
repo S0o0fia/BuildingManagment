@@ -117,7 +117,7 @@ import { EasyPieChartModule } from 'ng2modules-easypiechart';
 import { ProjectitemslistComponent } from './Components/projectitemslist/projectitemslist.component';
 
 export const firebaseConfig = {
-	apiKey: "AIzaSyCE0po6Q8jGuBEds-A903KEU4U6Cerojzo",
+	apiKey: "AIzaSyAG-ezRaKAupLlvKAazxRPa9PFnMlRFiGA",
 	authDomain: "gene-eaeef.firebaseapp.com",
 	databaseURL: "https://gene-eaeef.firebaseio.com",
 	projectId: "gene-eaeef",
