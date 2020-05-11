@@ -87,7 +87,7 @@ base64string:any;
 Project_list : any[] = [];
 multi : boolean = false ;
   description: string;
-  files: FileList;
+  files: any[]=[];
  
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -151,13 +151,17 @@ multi : boolean = false ;
   change()
   {
     this.statepitem = true;
-     
+  }
 
+  removeAttachment(i){
+    this.files.splice(i,1);
+    this.filename.splice(i,1);
+    this.base64.splice(i,1);
   }
 
   onSelectFiles(evt) {
-    this.files = evt.target.files;
-    for (var i = 0; i < evt.target.files.length; i++){
+    for(var i=0; i<evt.target.files.length; i++){
+      this.files.push(evt.target.files[i]);
       let me = this;
       let file = evt.target.files[i];
       let reader = new FileReader();
@@ -169,7 +173,21 @@ multi : boolean = false ;
         console.log('Error: ', error);
       };
          this.filename.push(file.name);
-    }    
+    }
+    
+    // for (var i = 0; i < evt.target.files.length; i++){
+    //   let me = this;
+    //   let file = evt.target.files[i];
+    //   let reader = new FileReader();
+    //   reader.readAsDataURL(file);
+    //   reader.onload = function () {
+    //      me.base64.push(reader.result);
+    //   };
+    //   reader.onerror = function (error) {
+    //     console.log('Error: ', error);
+    //   };
+    //      this.filename.push(file.name);
+    // }    
   }
  
   
