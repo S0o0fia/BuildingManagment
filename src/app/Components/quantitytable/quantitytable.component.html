@@ -73,7 +73,8 @@
             <table class="table table-hover table-middle th-fw-light mb-0 ">
                <thead>
                   <tr>
-                     <th></th>
+                   <th></th>
+                  <th>{{'ID'|translate}}</th>   
                   <th>{{'Project Items'|translate}}</th>
                   <th>{{'Type Of Works'|translate}}</th>
                   <th >{{'Item Name'|translate}}</th> 
@@ -85,10 +86,10 @@
                   </tr>
                </thead>
                <tbody>
-                  <ng-container *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
+                  <ng-container *ngFor="let data of Qty_tbl| paginate: { id: 'listing_pagination',
                      itemsPerPage: 10,
                      currentPage: page,
-                     totalItems: totalRec };">
+                     totalItems: totalRec }; let i = index">
                      <tr [ngStyle]="{'background-color': (rowSelected==data.id ? '#C1C7C9' : 'white')}">
                                     
                         <!-- <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
@@ -103,6 +104,7 @@
                         <td  [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.item_name}}</span>
                         </td>     -->
+                        
                         <td>
                            <span (click)="openCloseRow(data.id)">
                                   <button *ngIf="rowSelected!=data.id; else close" color="primary"  mat-icon-button matTooltip="{{'More Options'|translate}}"  > 
@@ -117,6 +119,7 @@
                                    </ng-template>
                                  </span>
                         </td>
+                        <td>{{i+1}}</td>
                         <td [ngStyle]="{ 'color': (data.excuted > data.item_qty ? 'red' : 'black') }">
                            <span>{{data.first_subsection_name}}</span>
                         </td>

@@ -49,6 +49,7 @@ export class RfidetailsComponent implements OnInit {
   department : number;
   userid : number;
   request_number : string;
+  comment : string = "";
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
     ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
     this.user = localStorage.getItem('loginUser');
@@ -146,6 +147,7 @@ export class RfidetailsComponent implements OnInit {
              this.state = element.state;
              this.consultant_approve = element.consultant_approval;
              this.request_number = element.request_num;
+             this.comment = element.comment;
              
              //alert(element.activity_log.length);
              //element.activity_log.forEach(e=>{

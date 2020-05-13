@@ -21,6 +21,7 @@
                          <table class="table table-hover table-middle th-fw-light mb-0">
                                <thead>
                                   <tr>
+                                     <th>{{'ID'|translate}}</th>
                                      <th>{{'username'|translate}}</th>
                                      <th>{{'Email'|translate}}</th>
                                      <th>{{'Job Title'|translate}}</th>
@@ -29,7 +30,8 @@
                                   </tr>
                                </thead>
                                <tbody>
-                                  <tr *ngFor="let data of userlist">
+                                  <tr *ngFor="let data of userlist ; let i = index">
+                                     <td>{{i+1}}</td>
                                      <td>{{data.name}}</td>
                                      <td>{{data.login}}</td>
                                      <td>{{data.user_job | translate}}</td>

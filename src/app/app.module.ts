@@ -141,7 +141,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		NgxPaginationModule,
 		NgbDatepickerModule.forRoot() ,
 		AgmCoreModule.forRoot({
-			apiKey: 'AIzaSyARLJcKPev4Ot6baTkjNKjczRDHYlFhgzo'
+			apiKey: 'AIzaSyAG-ezRaKAupLlvKAazxRPa9PFnMlRFiGA'
 		  }),
 		  
 	    ChartsModule,

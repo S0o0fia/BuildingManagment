@@ -27,7 +27,7 @@
              <thead>
                 <tr>
                    <th  style="text-align: center;"></th>
-                
+                   <th  style="text-align: center;">{{'ID'|translate}}</th>
                    <th  style="text-align: center;">{{'Extract Number'|translate}}</th>
                    <th  style="text-align: center;">{{'Executed Business Amount'|translate}}</th>
                    <th  style="text-align: center;">{{'The amount paid'|translate}}</th>
@@ -40,7 +40,7 @@
                   <ng-container *ngFor="let invoice of invoices | paginate: { id: 'listing_pagination',
                   itemsPerPage: 10,
                   currentPage: page,
-                  totalItems: totalRec };">
+                  totalItems: totalRec }; let i =index">
                 <tr style="text-align: center;">
                   <td>
                      <span (click)="openCloseRow(invoice.id)">
@@ -56,6 +56,7 @@
                              </ng-template>
                            </span>
                   </td>
+                  <td style="text-align: center;">{{i+1}}</td>
                                        <td style="text-align: center;">{{invoice.id}}</td>
                                        <td  style="text-align: center;">{{invoice.total_excuted}}</td>
                                        <td  style="text-align: center;">{{invoice.paid}}</td>

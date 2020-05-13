@@ -21,6 +21,7 @@
                      <table class="table table-hover table-middle th-fw-light mb-0">
                            <thead>
                               <tr>
+                                 <th>{{'ID'|translate}}</th>
                                  <th>{{'Name'|translate}}</th>
                                  <th>{{'Type' | translate}}</th>
                                  <th>{{'Controls'|translate}}</th>
@@ -31,7 +32,8 @@
                               <tr *ngFor="let data of itemslist| paginate: { id: 'listing_pagination',
                               itemsPerPage: 10,
                               currentPage: page,
-                              totalItems: totalRec };">
+                              totalItems: totalRec };let i = index">
+                              <td>{{i+1}}</td>
                                  <td>{{data.name}}</td>
                                  <td>{{data.type_name}}</td>
                                  <td>

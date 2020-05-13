@@ -302,7 +302,7 @@ export class CoreService {
 	{
 		debugger;
 		let RFIUrl= "/rfi/get?db="+this.db+"&token="+localStorage.getItem("token")+'&project_id='+localStorage.getItem("projectid");
-		return this.http.get<GetRFI[]>(this.apiURL+RFIUrl);
+		return this.http.get<any[]>(this.apiURL+RFIUrl);
 
 	}
 
@@ -417,9 +417,10 @@ export class CoreService {
 	}
 
 	
-	getProjectitem()
+	getProjectitem(filter : boolean = false)
 	{
-		let projecttm ="/project/items/get?db="+this.db+"&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid');
+		let projecttm ="/project/items/get?db="+this.db+"&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid')+
+		'&filter='+filter;
 		return this.http.get(this.apiURL+projecttm);
 	}
 
@@ -581,7 +582,7 @@ export class CoreService {
 		// ',"name":"filename"}';
 
 		let url="/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
-	  '"name":"'+filename+
+	   '"name":"'+filename+
 	  '","base64":"'+base64+
 	  '","project_id":'+localStorage.getItem('projectid')+
 	  ',"rfi_id":'+rfi_id+'}';
@@ -601,11 +602,11 @@ export class CoreService {
 		// '{"project_id":'+localStorage.getItem('projectid')+
 		// ',"name":"filename"}';
 
-		let url="/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
+	  let url="/attachment/create?db=nqproject&token="+localStorage.getItem('token')+'&values={'+
 	  '"name":"'+filename+
-	  '","base64":"'+base64+
 	  '","project_id":'+project_id+
-	   '}';
+	  ',"base64":"'+base64+	 
+	   '"}';
       console.log(url);
 	  return this.http.post(this.apiURL+url, null);
 	
@@ -1005,6 +1006,14 @@ export class CoreService {
 	  '&num='+num+'&typee='+type;
        console.log(url);
 	  return this.http.get<any[]>(this.apiURL+url);
+  }
+
+  getStartHijriDate(date : string )
+  {
+	let url = '/delivery_date?db=nqproject&token='+localStorage.getItem('token')+'&start='+date+'&num=0&typee=days';
+    console.log(url);
+	return this.http.get<any[]>(this.apiURL+url);
+
   }
 }
 

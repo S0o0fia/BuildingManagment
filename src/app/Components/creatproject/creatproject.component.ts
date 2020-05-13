@@ -60,7 +60,7 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
   status  :string = ""; 
   stiuation : string = "";
   description  :string = ""; 
-  startdate_hijri : Date;
+  startdate_hijri : string;
   startdate:Date;
   minDate:Date;
   maxDate :Date;
@@ -76,7 +76,7 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
   project_duration_h_months : number = 0;
   deliverdate2 : string = "";
   deliverdate : Date;
-  deliverdate_hijri : Date;
+  deliverdate_hijri : string;
   type : string="";
   proj_number: string = "";
   sig_date : Date; 
@@ -91,16 +91,30 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
   today = this.calendar.getToday();
   today2 = this.calendar2.getToday();
     formattedAmount: string = '';
-    base64 : any ;
-    filename :string ;
-    files : FileList;
+    base64 : any[]=[] ;
+    filename: any[]=[];
+    files: any[]=[];
   createForm: FormGroup;
     
   
     onSelectFiles(evt) {
   
-    this.files = evt.target.files;
+   // this.files = evt.target.files;
     //console.log(this.files);
+    for(var i=0; i<evt.target.files.length; i++){
+      this.files.push(evt.target.files[i]);
+      let me = this;
+      let file = evt.target.files[i];
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+         me.base64.push(reader.result);
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+         this.filename.push(file.name);
+    }
    
    
      }
@@ -206,7 +220,11 @@ caldurationm(value)
    if(this.duration == 2){
     
     this.service.getDliverDate( startDate , value , 'hijri').subscribe(
-      data=>{this.deliverdate = new Date( data['delivery_date']);},
+      data=>{this.deliverdate = new Date( data['delivery_date']), 
+      this.deliverdate_hijri = data['delivery_hijry'];
+    
+    },
+      
       err=>console.log(err)
     )
   
@@ -216,7 +234,9 @@ caldurationm(value)
    if(this.duration == 3){
     
       this.service.getDliverDate( startDate , value , 'months').subscribe(
-      data=>{this.deliverdate = new Date( data['delivery_date']); },
+      data=>{this.deliverdate = new Date( data['delivery_date']);
+      this.deliverdate_hijri = data['delivery_hijry'];
+    },
       err=>console.log(err)
     )
    }
@@ -244,22 +264,22 @@ caldurationd(value)
   let startDate = formatDate(this.startdate, format, locale);
 
  this.service.getDliverDate(startDate , value , 'days').subscribe(
-   data=>{this.deliverdate = new Date( data['delivery_date']); ; console.log(this.deliverdate) },
+   data=>{this.deliverdate = new Date( data['delivery_date']); ; console.log(this.deliverdate)
+   this.deliverdate_hijri = data['delivery_hijry'];
+  
+  },
    err=>console.log(err)
  )
 
 }
   nextStep() {
-    this.from_hijri = this.model.day+"/"+this.model.month+"/"+this.model.year;
+    // this.from_hijri = this.model.day+"/"+this.model.month+"/"+this.model.year;
     const format = 'dd/MM/yyyy';
     const locale = 'en-US';
     let startDate = formatDate(this.startdate, format, locale);
-    this.startdate_hijri=this.startdate;
-    let startDateHiri = formatDate(this.startdate_hijri, format, locale);
-    let deliverDate = formatDate(this.deliverdate, format, locale);
-    this.deliverdate_hijri=this.startdate;
-    let deliverDateHihri = formatDate(this.deliverdate_hijri, format, locale); 
-    let segDate = formatDate(this.sig_date, format, locale); 
+    
+   let deliverDate = formatDate(this.deliverdate, format, locale);
+     let segDate = formatDate(this.sig_date, format, locale); 
     let sdate = formatDate(this.stiuationdate, format, locale); 
     if(this.first_pay == undefined) this.first_pay = 0 ;
     if(this.perface_ratio == undefined) this.perface_ratio =0;
@@ -279,10 +299,10 @@ caldurationd(value)
         lantitude : this.lat ,
         longitude : this.lng ,
         delivery_date : deliverDate.toString() ,
-        delivery_hijri_date : deliverDateHihri.toString(),
+        delivery_hijri_date :this.deliverdate_hijri,
         first_pay_percentage : this.perface_ratio , 
         project_date : startDate.toString() ,
-        project_hijri_date : this.from_hijri,
+        project_hijri_date : this.startdate_hijri,
         project_type : this.type ,
         project_net : this.netcost,
         proj_number: this.proj_number,
@@ -329,18 +349,12 @@ caldurationd(value)
            console.log(data) ; 
            for (let index = 0; index < this.files.length; index++) {
          
-            let me =this;
-            let reader = new FileReader();
-            reader.readAsDataURL(this.files[index]);
-            reader.onload = function () {
-             me.service.UploadFile2(me.files[index].name , reader.result.toString() , data['project_is']).subscribe(
-               data=> console.log(data) ,
-               err=>console.log(err) )
-             }
-               reader.onerror = function (error) {
-              console.log('Error: ', error);
-            };
           
+             this.service.UploadFile2(this.files[index].name , this.base64[index] , data['project_is']).subscribe(
+               data=>console.log(data),
+               err=>console.log(err)
+             )
+                       
             
           } 
          
@@ -353,12 +367,35 @@ caldurationd(value)
      
   }
 
+  removeAttachment(i){
+    this.files.splice(i,1);
+    this.filename.splice(i,1);
+    this.base64.splice(i,1);
+  }
+
   ChooseVat(val)
   {
     console.log(val);
     this.with_vat = val;
   }
 
+  SetHijri()
+  {
+    const format = 'dd/MM/yyyy';
+    const locale = 'en-US';
+    let startDate = formatDate(this.startdate, format, locale);
+    this.service.getStartHijriDate(startDate).subscribe(
+    data=>{
+      // this.today = data['start_hijri'] 
+      // this.model.day= +this.today.day ;
+      // this.model.month= +this.today.month ;
+      // this.model.year= +this.today.year ;
+      this.startdate_hijri = data['start_hijri']  ;
+    },
+   err=> console.log(err)
+    );
+    
+  }
 
   //for hjri calender
   getWeekdayShortName(weekday: number) {

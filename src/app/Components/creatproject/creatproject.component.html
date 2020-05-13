@@ -83,7 +83,7 @@
                            <mat-form-field class="full-wid mrgn-b-lg ">
                               <input matInput  placeholder= "{{'Session From Grogorian'|translate}}"
                               name="startdate" [(ngModel)]="startdate" 
-
+                              (change)="SetHijri()"
                               [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
                                >
                               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -96,10 +96,14 @@
                          
                            <mat-form-field class="full-wid mrgn-b-lg ">
                          
-                           <input matInput placeholder="{{'Session From Hijri'|translate}}" 
-                           class="rtl" [firstDayOfWeek]="7"
+                              <input matInput placeholder="{{'Session From Hijri'|translate}}" 
+                              name="startdate_hijri"  [(ngModel)]="startdate_hijri" 
+                              placeholder="{{'Project Amount'|translate}}" 
+                             disabled>
+                           <!-- <input matInput placeholder="{{'Session From Hijri'|translate}}" 
+                           class="rtl" [firstDayOfWeek]="7" name="dp"
                            placement="bottom" [positionTarget]="buttonEl" [footerTemplate]="footerTemplate"
-                           name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                           [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
                            <mat-datepicker-toggle #buttonEl matSuffix [for]="d"  (click)="d.toggle()"></mat-datepicker-toggle>
                              
                            
@@ -109,9 +113,9 @@
                               <button mat-button color="primary" (click)="model = today; d.close()">{{'Today'|translate}}</button>
                               <button mat-button color="warn" (click)="d.close()">{{'Cancel'|translate}}</button>
                            </div>
-                            </ng-template>
+                            </ng-template>-->
                           
-                        </mat-form-field>
+                        </mat-form-field> 
                          
                     </div>
                    </div>
@@ -262,8 +266,10 @@
                  </div>
                  <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
                   <mat-form-field class="mrgn-b-lg " fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                                          
-                     <input matInput placeholder="{{'Session From Hijri'|translate}}" 
+                       
+                     <input matInput  name="deliverdate_hijri"  [(ngModel)]="deliverdate_hijri"
+                     placeholder="{{'Session From Hijri'|translate}}" type="text" disabled >
+                     <!-- <input matInput placeholder="{{'Session From Hijri'|translate}}" 
                      class="rtl" [firstDayOfWeek]="7"
                      placement="bottom" [positionTarget]="buttonE2" [footerTemplate]="footerTemplate1"
                      name="dp1" [(ngModel)]="model2" ngbDatepicker #d1="ngbDatepicker" disabled>
@@ -276,7 +282,7 @@
                         <button mat-button color="primary" (click)="model2 = today2; d1.close()">{{'Today'|translate}}</button>
                         <button mat-button color="warn" (click)="d1.close()">{{'Cancel'|translate}}</button>
                      </div>
-                      </ng-template>
+                      </ng-template> -->
                                  
                   </mat-form-field>
               </div>
@@ -331,43 +337,57 @@
                      </div>
                    </div>
                 
+                     <!--Attchament-->
                      
-                      <div fxLayout="row wrap" fxLayoutAlign="space-between center"  fxLayout.xs="column"> 
-                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                      <mat-label  class="mrgn-b-md title" style="font-weight: bolder;">{{'Upload queue'|translate}}</mat-label>
-                      <br>
-                      <br>
-                      <input type="file" mat-input
-                      id="file" 
-                      (change)="onSelectFiles($event)" multiple>
-                      </div>
-                   </div>
-                   <br>
-                  
-                   <div fxLayout="row wrap" fxLayoutAlign="space-between center"  fxLayout.xs="column"> 
-                     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
-                         
-            <table class="table table-hover table-middle th-fw-light mb-0 ">
-               <thead>
-                  <tr>
-                  <th>{{'File Name'|translate}}</th>
-                  <th>{{'File Size'|translate}}</th>
-                 </tr>
-               </thead>
-               <tbody>
-                  <tr *ngFor="let file of files">
-                     <td>
-                        {{file.name}}
-                     </td>
-                     <td>
-                       {{file.size / 1024}}
-                     </td>
-                  </tr>
-               </tbody>
-              </table>
-              
-                    </div>
-                   </div>
+                        <mat-label class="title">{{'Attachments'|translate}}</mat-label>
+                        <div class="gene-card-content">
+                          <!--Attachment-->
+                       <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49"
+                       fxLayoutAlign="space-between start" style="margin-bottom: 2%;"
+                       >
+                      
+                        <input type="file" mat-input multiple="true"
+                        id="file" z
+                        (change)="onSelectFiles($event)">
+                       
+                       </div>
+                        </div>
+   
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between center"  fxLayout.xs="column"> 
+                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                               
+                              <table class="table table-hover table-middle th-fw-light mb-0 ">
+                                 <thead>
+                                    <tr>
+                                    <th>{{'File Name'|translate}}</th>
+                                    <th>{{'File Size'|translate}}</th>
+                                    <th>{{'Controls'|translate}}</th>
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr *ngFor="let file of files; index as i">
+                                       <td>
+                                          {{file.name}}
+                                       </td>
+                                       <td>
+                                       {{file.size / 1024}}
+                                       </td>
+                                       <td>
+                                          <button mat-icon-button color="primary" matTooltip="{{'Delete'|translate}}" (click)="removeAttachment(i)">
+                                          <mat-icon>delete</mat-icon>
+                                          </button>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                    
+                          </div>
+                         </div>
+                      
+   
+
+
+
                   <br>
                    <div fxLayout="row" fxLayoutAlign="center">
                       <button mat-button type="button" (click)="previousStep()">  <mat-icon>navigate_next</mat-icon> {{'Previous'|translate }}
@@ -464,5 +484,5 @@
    </mat-menu>
 
 
-   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG-ezRaKAupLlvKAazxRPa9PFnMlRFiGA=initMap"
+   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG-ezRaKAupLlvKAazxRPa9PFnMlRFiGA"
    type="text/javascript"></script>

@@ -260,7 +260,7 @@ this.Qty_tbl.forEach(element => {
    err => console.log(err)
  )
    
- this.service.getProjectitem().subscribe(
+ this.service.getProjectitem(true).subscribe(
    data=> this.projectitems = data , 
    err=> console.log(err)
  )

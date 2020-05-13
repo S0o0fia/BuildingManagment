@@ -76,6 +76,7 @@
       <table class="table table-hover table-middle th-fw-light mb-0">
          <thead>
             <tr style="text-align: center;">
+               <th>{{'ID'|translate}}</th>
                <th>{{'Item Number'|translate}}</th>
                <th>{{'Item Name'|translate}}</th>
                <th>{{'Item Description'|translate}}</th>
@@ -88,7 +89,8 @@
             </tr>
          </thead>
          <tbody>
-            <tr style="text-align: center;" *ngFor="let approve of approveaty">
+            <tr style="text-align: center;" *ngFor="let approve of approveaty ; let i = index">
+               <td>{{i+1}}</td>
                <td>{{approve.number}}</td>
                <td>{{approve.name}}</td>
                <td>{{approve.description}}</td>
