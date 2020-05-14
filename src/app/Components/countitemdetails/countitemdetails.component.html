@@ -112,13 +112,41 @@
                  <tbody>
                     <tr *ngFor="let item of Items" style="text-align: center;">
                         <td style="text-align: center;">{{item.location}}</td>
-                        <td style="text-align: center;">{{item.description}}</td>
-                        <td style="text-align: center;">{{item.qty_unit}}</td>
-                        <td style="text-align: center;">{{item.qty_length}}</td>
-                        <td style="text-align: center;" *ngIf="dimension>1">{{item.qty_width}}</td>
-                        <td style="text-align: center;" *ngIf="dimension>2">{{item.qty_height}}</td>
-                        <td style="text-align: center;">{{item.qty_pers}}</td>
-                        <td style="text-align: center;">{{item.qty}}</td>
+                        <td style="text-align: center;">
+                           <span *ngIf="state!='draft'">{{item.description}}</span>
+                           <input *ngIf="state=='draft'" (change)="updateItem(item)"
+                            matInput name="description" [value]="item.description" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.description"/>
+                        </td>
+                        <td style="text-align: center;">
+                           <span *ngIf="state!='draft'">{{item.qty_unit}}</span>
+                           <input *ngIf="state=='draft'" (change)="updateItem(item)"
+                            matInput name="qty_unit" [value]="item.qty_unit" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.qty_unit"/>
+                        </td>
+                        <td style="text-align: center;">
+                           <span *ngIf="state!='draft'">{{item.qty_length}}</span>
+                           <input *ngIf="state=='draft'" (change)="updateItem(item)"
+                            matInput name="qty_length" [value]="item.qty_length" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.qty_length"/>
+                        </td>
+                        <td style="text-align: center;" *ngIf="dimension>1">
+                           <span *ngIf="state!='draft'">{{item.qty_width}}</span>
+                           <input *ngIf="state=='draft'" (change)="updateItem(item)"
+                            matInput name="qty_width" [value]="item.qty_width" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.qty_width"/>
+                        </td>
+                        <td style="text-align: center;" *ngIf="dimension>2">
+                           <span *ngIf="state!='draft'">{{item.qty_height}}</span>
+                           <input *ngIf="state=='draft'" (change)="updateItem(item)"
+                            matInput name="qty_height" [value]="item.qty_height" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.qty_height"/>
+                        </td>
+                        <td style="text-align: center;">
+                           <span *ngIf="state!='draft'">{{item.qty_pers}}</span>
+                           <input *ngIf="state=='draft'" (change)="updateItem(item)"
+                            matInput name="qty_pers" [value]="item.qty_pers" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.qty_pers"/>
+                        </td>
+                        <td style="text-align: center;">
+                           <span *ngIf="state!='draft'">{{item.qty}}</span>
+                           <input *ngIf="state=='draft'" (change)="updateItem(item)"
+                            matInput name="qty" [value]="item.qty" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.qty"/>
+                        </td>
                         <!--Number-->
                         <td class="sm-wid"  style="text-align: center;">
                            <input (change)="calQty(item)"  [disabled]="boolcontractor == true"

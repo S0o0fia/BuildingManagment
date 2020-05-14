@@ -48,6 +48,7 @@ export class CountitemdetailsComponent implements OnInit {
   approved_pers: number = 0;
   approve : number = 0;
   items : any []=[];
+  updatedItems : any []=[];
   role : number ; 
   boolconsultant : boolean = false ; 
   boolcontractor : boolean = false ;
@@ -57,6 +58,13 @@ export class CountitemdetailsComponent implements OnInit {
   details : string;
   commentsection : any [] =[];
   commentusers : any[] =[];
+  description:any;
+  qty:any;
+  qty_length:any;
+  qty_width:any;
+  qty_height:any;
+  qty_unit:any;
+  qty_pers:any;
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
    ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
    this.user = localStorage.getItem('loginUser');
@@ -85,7 +93,7 @@ export class CountitemdetailsComponent implements OnInit {
 
 
  ngOnInit() {
-
+  this.state=null;
   //get Type of comments
   this.service.getType_forRFI().subscribe(
     data=> this.type = data , 
@@ -128,6 +136,7 @@ export class CountitemdetailsComponent implements OnInit {
           {
             this.count.push(element);
             this.state = element.state;
+            console.log('state: '+element.state);
             this.consultant_approve = element.state;
             this.uom=element.uom;
             this.dimension=element.dimension;
@@ -182,9 +191,8 @@ export class CountitemdetailsComponent implements OnInit {
      this.boolcontractor = false;
      this.boolconsultant = false;
    }
-
-   
  }
+ 
 
  ApproveConsultant()
  {
@@ -215,15 +223,46 @@ export class CountitemdetailsComponent implements OnInit {
 
  ApproveDraft()
  {
+  // this.service.setCountState("waiting" , this.id).subscribe(
+  //   data=> {
+  //     this.openSnackBar("تم اعتماد المسودة","إغلاق");
+  //    // location.reload();
+  //     console.log(data) },
+  //   err=> console.log(err)
+  // );
+
+  debugger;
+
+  this.Items.forEach(element => {
+    let count_item={
+      "id":element.id,
+      "description":element.description,
+      "qty":element.qty,
+      "qty_length":element.qty_length,
+      "qty_width":element.qty_width,
+      "qty_height":element.qty_height,
+      "qty_unit":element.qty_unit,
+      "qty_pers":element.qty_pers
+    }
+    this.service.updatecountItem(count_item).subscribe(
+      data=>{
+        
+     
+      }, 
+      err=> console.log(err)
+
+    )
+    
+  });
+  this.openSnackBar("تم اعتماد المسودة","إغلاق");
   this.service.setCountState("waiting" , this.id).subscribe(
     data=> {
-      this.openSnackBar("تم اعتماد المسودة","إغلاق");
-     // location.reload();
-      console.log(data) },
+    
+      console.log(data)
+      this.router.navigate(['home/table/countdetails']);
+    } ,
     err=> console.log(err)
   )
-
-  
   
  }
    
@@ -260,6 +299,11 @@ export class CountitemdetailsComponent implements OnInit {
     this.user_id = val;
   }
 
+  updateItem(i){
+    let index=this.Items.findIndex(x => x.count_id === i.count_id);
+    this.Items.splice(index,1);
+    this.Items.push(i);
+  }
 
   calQty(i)
   {

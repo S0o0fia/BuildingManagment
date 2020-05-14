@@ -71,7 +71,7 @@ export class CollectTableComponent implements OnInit {
     this.service.getQty_tbl().subscribe(
       data=> {
         this.items = data;
-        console.log("data: "+ JSON.stringify(this.items));
+        //console.log("data: "+ JSON.stringify(this.items));
         this.filteredNumbers = this.myControl.valueChanges
         .pipe(
           startWith(''),
@@ -83,6 +83,8 @@ export class CollectTableComponent implements OnInit {
           startWith(''),
           map(value => this._filter1(value))
         );
+
+        console.log('filteredNames: '+JSON.stringify(this.filteredNames));
       },
       err=>console.log(err)
     )
@@ -97,7 +99,7 @@ export class CollectTableComponent implements OnInit {
     const filterValue = value.toLowerCase();
     this.items.forEach(element=>
       {
-       this.itemNumber.push({"id":element.id,"item_number":element.item_number,"item_name":element.item_name});
+       this.itemNumber.push({"id":element.id,"item_number":element.item_number,"item_name":element.item_name,"product_uom_name":element.product_uom_name,"dimension":element.dimension});
       });
     return this.itemNumber.filter(option => option.item_number.toLowerCase().includes(filterValue));
   }
@@ -107,7 +109,7 @@ export class CollectTableComponent implements OnInit {
     const filterValue = value.toLowerCase();
     this.items.forEach(element=>
       {
-       this.itemName.push({"id":element.id,"item_name":element.item_name,"item_number":element.item_number});
+       this.itemName.push({"id":element.id,"item_name":element.item_name,"item_number":element.item_number,"product_uom_name":element.product_uom_name,"dimension":element.dimension});
       });
     return this.itemName.filter(option => option.item_name.toLowerCase().includes(filterValue));
   }

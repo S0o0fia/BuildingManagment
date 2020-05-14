@@ -726,6 +726,23 @@ export class CoreService {
 		return this.http.post(this.apiURL+itemUrl , null);
 	}
 
+	updatecountItem(countitem : any)
+	{
+		debugger;
+		let itemUrl = '/count/items/update?db=nqproject&token='+localStorage.getItem('token')+
+		'&values={"id":'+countitem.id+	
+		',"description":"'+countitem.description+
+		'","qty":'+countitem.qty+
+		',"qty_height":'+countitem.qty_height+
+		',"qty_length":'+countitem.qty_length+
+		',"qty_width":'+countitem.qty_width+
+		',"qty_unit":'+countitem.qty_unit+
+		',"qty_pers":'+countitem.qty_pers+
+		'}';
+        console.log(itemUrl);
+		return this.http.post(this.apiURL+itemUrl , null);
+	}
+
 	getCount()
 	{
 		let counturl = '/count/get?db=nqproject&token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid');

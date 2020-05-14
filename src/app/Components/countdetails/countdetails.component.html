@@ -36,6 +36,7 @@
                       <th></th>
                       <th style="text-align: center;" >{{'Request Number'|translate}}</th>
                                  <th style="text-align: center;">{{'Item Name'|translate}}</th>
+                                 <th style="text-align: center;">{{'Section'|translate}}</th>
                                  <th style="text-align: center;">{{'Controls'|translate}}</th>
                       
                    </tr>
@@ -62,6 +63,7 @@
                            </td>
                            <td style="text-align: center;">{{data.name}}</td>      
                            <td style="text-align: center;" ng-show="45 > data.quantity_name">{{data.quantity_name}}</td>
+                           <td style="text-align: center;" ng-show="45 > data.quantity_name">{{data.section_name}}</td>
                            <td style="text-align: center;">
                               <div class="dropdown row">
                                     <button mat-icon-button  (click)="countdetails(data.id)" matTooltip="{{'Detials'|translate}}" >
@@ -92,7 +94,7 @@
              </ng-container>
                 </tbody>
              </table>
-             <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
+             <pagination-controls  id="listing_pagination" maxSize="10" directionLinks="true"
               previousLabel="{{'Previous'|translate}}"
                nextLabel="{{'Next'|translate}}"
               (pageChange)="page = $event"></pagination-controls>
