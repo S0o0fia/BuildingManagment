@@ -220,6 +220,7 @@
    "Audience" : "جمهور",
    "Quantity Sold" : "الكمية المباعة",
    "Contracted Quantities" : "الكمية التعاقدية",
+   "Total Contracted" : "إجمالي قيمة التعاقدي",
    "Total Excuted":" إجمالي قيمة المنفذ",
    "Quantity" : "الكمية" ,
    "Grow Sales" : "تنمو المبيعات",
@@ -877,7 +878,16 @@
            "Type" : "نوع العنصر"  , 
            "Zip Code" : "ص ب" ,
            "Post Code":"رمز بريدي" , 
-           "owner":"مالك"
+           "owner":"مالك" , 
+           "On":"في",
+           "created by ":"تم الإنشاء بواسطة",
+           "state chenged to  waiting by  ": "تم اعتماد المسودة بواسطة" ,
+           "state chenged to  accepted by  ":"تم قبول الطلب بواسطة",
+           "state chenged to  accepted-with-comment by  ":"تم قبول الطلب بملاحظات بواسطة",
+           "state chenged to  reject-resend by  ":"تم رفض الطلب ويجب إعادة تقديمه بواسطة" ,
+           "state chenged to  rejected by  ":"تم رفض الطلب بواسطة"
+              
+
           
               
 

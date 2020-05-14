@@ -34,7 +34,7 @@
                  <table class="table table-hover table-middle th-fw-light mb-0">
                     <thead>
                        <tr>
-                        <td>{{i+1}}</td>
+                         <td>{{'ID'|translate}}</td>
                           <th>{{'Specify Works'|translate}}</th>
                           <th>{{'Request Number'|translate}}</th>
                            <th>{{'Project Items'|translate}}</th>
@@ -48,7 +48,7 @@
                         itemsPerPage: 10,
                         currentPage: page,
                         totalItems: totalRec }">
-                             <td>{{i+1}}</td>
+                              <td>{{i+1}}</td>
                               <td>{{data.request_name}}</td>
                               <td>{{data.request_num}}</td>
                               <td>{{data.work_location}}</td>

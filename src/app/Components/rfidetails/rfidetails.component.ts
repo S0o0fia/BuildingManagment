@@ -94,10 +94,11 @@ export class RfidetailsComponent implements OnInit {
   {
     this.state = "waiting"
     this.service.updateSate(this.state , this.id).subscribe(
-      data=> console.log(data) , 
+      data=> {console.log(data) , this.openSnackBar("تم اعتماد المسودة","إغلاق"); location.reload() }, 
       err=> console.log(err)
     )
-   this.openSnackBar("تم اعتماد المسودة","إغلاق");
+   
+
   }
 
   ngOnInit() {
@@ -130,7 +131,7 @@ export class RfidetailsComponent implements OnInit {
   
     //get Comments
     this.service.getComment(this.id    
-      ).subscribe( data=> this.Comments = data , 
+      ).subscribe( data=> this.Comments = data ,  
       err=> console.log(err));
         
 
@@ -159,6 +160,7 @@ export class RfidetailsComponent implements OnInit {
              this.activity_log=element.activity_log;
 
              this.activity_log.forEach(e=>{
+           console.log(e)
                e.action=e.action.replace(':','');
                e.date=this.datePipe.transform(e.date, 'dd-MM-yyyy');   
              });

@@ -391,6 +391,7 @@ caldurationd(value)
       // this.model.month= +this.today.month ;
       // this.model.year= +this.today.year ;
       this.startdate_hijri = data['start_hijri']  ;
+      console.log(this.startdate_hijri);
     },
    err=> console.log(err)
     );

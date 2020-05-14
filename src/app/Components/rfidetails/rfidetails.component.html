@@ -92,7 +92,8 @@
          <mat-divider></mat-divider>
          <tr *ngFor="let a of activity_log">
             <td>{{a.action  | translate}}</td>
-            <td>On {{a.date | translate}}</td>
+            <td> {{a.user}}</td>
+            <td>{{'On'|translate}} {{a.date}}</td>
          </tr>
     </mat-card>
 
