@@ -84,7 +84,7 @@ export class AddExtractComponent implements OnInit {
     const filterValue = value.toLowerCase();
     this.approve.forEach(element=>
       {
-       this.itemIds.push({"number":element.number,"name":element.name});
+       this.itemIds.push({"number":element.number,"name":element.name,"quantity_id":element.quantity_id});
       });
     return this.itemIds.filter(option => option.number.toLowerCase().includes(filterValue));
   }
@@ -179,7 +179,11 @@ export class AddExtractComponent implements OnInit {
  Add(id)
 
  {
+<<<<<<< HEAD
   console.log(id)
+=======
+   //alert(id);
+>>>>>>> d2166a827994b86d495a53d7268338c168f689bd
   this.approved=[];
   this.ApprovedCountItem=[];
     this.approve.forEach(element=>
