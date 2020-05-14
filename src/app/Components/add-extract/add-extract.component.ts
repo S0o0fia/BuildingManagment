@@ -177,7 +177,9 @@ export class AddExtractComponent implements OnInit {
 
 
  Add(id)
+
  {
+  console.log(id)
   this.approved=[];
   this.ApprovedCountItem=[];
     this.approve.forEach(element=>

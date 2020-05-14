@@ -159,7 +159,7 @@
                                        [(ngModel)]="item_id"
                                     />
                                     <mat-autocomplete #auto="matAutocomplete">
-                                       <mat-option *ngFor="let option of (filteredIds | async)" [value]="option.number" (click)="Add(option.quantity_id)">
+                                       <mat-option *ngFor="let option of (filteredIds | async)" value={{option.number}},{{option.name}} (click)="Add(option.quantity_id)">
                                           {{ option.number }}, {{ option.name }}
                                        </mat-option>
                                     </mat-autocomplete>

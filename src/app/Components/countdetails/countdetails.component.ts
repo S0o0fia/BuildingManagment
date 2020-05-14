@@ -55,13 +55,16 @@ ngOnInit() {
 this.pageTitleService.setTitle('قائمة طلبات الحصر ' +' / '+this.projectname);
 
  this.service.getCount().subscribe(
-   data=> {this.counttable = data as any;
-   debugger;
+   data=> {
+    this.counttable = data as any[];    
+    let draft=data.filter(x=>x.state=='draft');
+    this.totalRec = draft.length;
   },
    err=> console.log(err)
  );
 
-this.totalRec = this.counttable.length;
+
+
 }
 
 openCloseRow(id): void {
@@ -85,8 +88,18 @@ openDialog(): void {
 state(key:string)
 {
  this.statename = key;
-
-  
+  // if(key=='draft'){
+  //   let draft=this.counttable.filter(x=>x.state=='draft');
+  //   this.totalRec = draft.length;
+  // }
+  // if(key=='waiting'){
+  //   let waiting=this.counttable.filter(x=>x.state=='waiting');
+  //   this.totalRec = waiting.length;
+  // }
+  // if(key=='accepted'){
+  //   let accepted=this.counttable.filter(x=>x.state=='accepted');
+  //   this.totalRec = accepted.length;
+  // }
 }
 
 }
