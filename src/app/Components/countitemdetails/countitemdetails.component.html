@@ -147,7 +147,7 @@
                         <td style="text-align: center;">
                            <span *ngIf="state!='draft'">{{item.qty}}</span>
                            <input *ngIf="state=='draft'" (change)="updateItem(item)"
-                            matInput name="qty" [value]="item.qty" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.qty"/>
+                            matInput name="qty" [value]="item.qty" placeholder="{{'Enter'|translate}}" [(ngModel)]="item.qty" disabled/>
                         </td>
                         <!--Number-->
                         <td class="sm-wid"  style="text-align: center;">

@@ -191,6 +191,8 @@ export class CoreService {
 		'","date_situation":"'+value.date_situation+
 		'","description":"'+value.description+
 		'","with_vat":'+value.with_vat+
+		',"lantitude":'+value.lantitude+
+		',"longitude":'+value.longitude+
 		'}';
         console.log(projecturl);
 		const headers = new HttpHeaders();

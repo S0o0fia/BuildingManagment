@@ -54,7 +54,7 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
   contact_number  :number; 
   project_amount  :number; 
   project_duration  :number ; 
-  first_pay : number;
+  first_pay : number = 0;
   within_project :string="";
   budget_year  :string = ""; 
   status  :string = ""; 
@@ -69,6 +69,7 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
   users : any;
   netcost :number=0;
   perface_ratio : number=0;
+  total_amount : number=0;
   calender : number =0;
   duration : number=0;
   project_duration_days : number = 0;
@@ -169,8 +170,13 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
 
   conationfpay(event)
   { 
+    
+    
     if(event.checked == true)
-    this.containfirst = true;
+  {  this.containfirst = true;
+  
+  
+  }
     else 
     this.containfirst = false;
 
@@ -188,6 +194,7 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
   }
   raito()
   {
+    
      if(this.first_pay == null)
       this.perface_ratio = 0;
      else if (this.project_amount == null)
@@ -199,6 +206,7 @@ export class CreatprojectComponent  extends NgbDatepickerI18n  implements OnInit
   }
 
   transformAmount(element){
+    this.total_amount = this.project_amount;
     this.formattedAmount = this.currencyPipe.transform(this.project_amount , "   ر.س");
     // Remove or comment this line if you dont want to show the formatted amount in the textbox.
     element.target.value = this.formattedAmount;
@@ -295,7 +303,7 @@ caldurationd(value)
         first_pay : this.first_pay , 
         proj_duration_days :this.project_duration_days ,
         proj_duration_monthes : this.project_duration_months, 
-        project_val:this.project_amount , 
+        project_val:this.total_amount , 
         lantitude : this.lat ,
         longitude : this.lng ,
         delivery_date : deliverDate.toString() ,
