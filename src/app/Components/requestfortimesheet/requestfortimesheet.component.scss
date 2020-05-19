@@ -16,3 +16,8 @@ th , button , thead , .title{
 h3 , h4{
     font-family: 'Tajawal', sans-serif;
 }
+
+button:focus, button:active:focus, button.active:focus {
+    opacity: 0.7;
+transform: translateY(4px);
+    }
