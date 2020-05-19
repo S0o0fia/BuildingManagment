@@ -179,11 +179,7 @@ export class AddExtractComponent implements OnInit {
  Add(id)
 
  {
-<<<<<<< HEAD
-  console.log(id)
-=======
    //alert(id);
->>>>>>> d2166a827994b86d495a53d7268338c168f689bd
   this.approved=[];
   this.ApprovedCountItem=[];
     this.approve.forEach(element=>
