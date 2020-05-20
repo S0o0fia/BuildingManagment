@@ -17,11 +17,11 @@
                          <mat-form-field class="full-wid mrgn-b-lg">
                                <mat-label>{{'Specify Works'|translate}}</mat-label>
                                <mat-select  matNativeControl required name="mainid" [(ngModel)]="mainid">
-                                <div *ngFor="let section of Mainsection">
-                                 <mat-option value={{section.id}}>
+                                <!-- <div *ngFor="let section of Mainsection"> -->
+                                 <mat-option *ngFor="let section of Mainsection" [value]="section.id">
                                    {{section.name}}
                                  </mat-option>
-                            </div> 
+                            <!-- </div>  -->
                         </mat-select>
                          </mat-form-field>
                       </div>
@@ -29,7 +29,7 @@
                      <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                          <mat-form-field class="full-wid mrgn-b-lg">
                                <mat-label>{{'Items Type'|translate}}</mat-label>
-                               <mat-select  name="workid"  [(ngModel)]="workid">
+                               <mat-select  name="workid"  [(ngModel)]="item_type">
                                    <mat-option value="contracted">{{'Contracted'|translate}}</mat-option>
                                    <mat-option value="calibrate">{{'Calibration'|translate}}</mat-option>
                                </mat-select>
@@ -70,11 +70,11 @@
                                <mat-form-field class="full-wid mrgn-b-lg ">
                                      <mat-label>{{'Unit'|translate}}</mat-label>
                                <mat-select name="unitid" [(ngModel)]="unitid">
-                            <div *ngFor="let unit of Unit" >
-                                 <mat-option value={{unit.id}} >
+                            <!-- <div *ngFor="let unit of Unit" > -->
+                                 <mat-option *ngFor="let unit of Unit" [value]="unit.id">
                                     {{unit.name}}
                                  </mat-option>
-                            </div>
+                            <!-- </div> -->
                                </mat-select>                    
                                </mat-form-field>
                         </div>
@@ -91,18 +91,18 @@
                       <mat-form-field class="full-wid mrgn-b-lg ">
                            
                             <input matInput name="unit_price" [(ngModel)]="unit_price"
-                            [disabled]="item_qty==null" (change)="calTotal()"
+                            (change)="calTotal()"
                             placeholder="{{'Unit Price'|translate}}" type="number" required>       
                       </mat-form-field>
                </div>
-               <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+               <!-- <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                    <mat-form-field class="full-wid mrgn-b-lg ">
                         
                          <input matInput name="total_price"  [(ngModel)]="total_price"
                         disabled
                          placeholder="{{'Total Price'|translate}}" type="number"  required>       
                    </mat-form-field>
-            </div>
+            </div> -->
 
 
                    <div fxLayout="row" fxLayoutAlign="space-between">

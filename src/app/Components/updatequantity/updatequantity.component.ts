@@ -32,16 +32,16 @@ export class UpdatequantityComponent implements OnInit {subscription : Subscript
  item_qty : number ;
  unit_price: number;
  total_price : number;
- newQty : Quantity;
+ newQty : any;
  items : any = [];
  projectname : string;
  Qty_tbls:any[]=[];
  Qty_tbl:any[]=[];
  editItem : any;
  formattedAmount: string = '';
-  editItem1: any;
+  item_type: any;
 
- constructor(public service : CoreService,  private router : Router, private formatPipe: NumberFormatPipe , 
+ constructor(public dialogRef: MatDialogRef<QuantitytableComponent>, public service : CoreService,  private router : Router, private formatPipe: NumberFormatPipe , 
   private pageTitleService: PageTitleService , private dialog: MatDialog , private discount : MatDialog,private currencyPipe:CurrencyPipe,
   @Inject(MAT_DIALOG_DATA) public data: any, private _snackBar: MatSnackBar) { 
     const dialogConfig = new MatDialogConfig();
@@ -49,6 +49,7 @@ export class UpdatequantityComponent implements OnInit {subscription : Subscript
     dialogConfig.autoFocus = true;
     this.projectname = localStorage.getItem('projectname');
     //this.role = +localStorage.getItem('Role');
+    dialogRef.disableClose = true;
   }
    
   transformAmount(value){
@@ -63,6 +64,23 @@ export class UpdatequantityComponent implements OnInit {subscription : Subscript
 
  
  ngOnInit() {
+  this.service.getMainSectionList().subscribe(
+    data=>{this.Mainsection = data ; 
+      console.log(this.Mainsection);
+    }, 
+    err=> console.log(err)
+  );
+
+  this.service.getUnit().subscribe(
+    data=>this.Unit = data, 
+    err=> console.log(err)
+  );
+  
+  this.service.getProjectitem().subscribe(
+    data=> this.items = data , 
+    err=> console.log(err)
+  );
+
   this.service.getQty_tbl().subscribe(
     (res)=> {
       console.log(res);
@@ -79,17 +97,18 @@ export class UpdatequantityComponent implements OnInit {subscription : Subscript
       
       });
       this.editItem=this.Qty_tbl.filter(q=>q.id==this.data);
-      this.editItem1=this.editItem;
       this.description=this.editItem[0].description;
-      this.bindData();
+      this.unitid=this.editItem[0].product_uom;
+      this.item_type=this.editItem[0].item_type;
+      this.item_number=this.editItem[0].item_number;
+      this.item_name=this.editItem[0].item_name;
+      this.unit_price=Number(this.editItem[0].price_unit);
+      this.mainid=this.editItem[0].main_section_id;
+      this.item_qty=Number(this.editItem[0].item_qty);
     },
       (err)=> console.log(err)
   );  
   
- }
-
- bindData(){
-  alert(JSON.stringify(this.editItem1[0].description));
  }
 
  calTotal()
@@ -99,32 +118,30 @@ export class UpdatequantityComponent implements OnInit {subscription : Subscript
 
  Save()
  {
-     this.newQty = {
-           description : this.description , 
-           first_subsection_id : +this.subid , 
-           main_section_id : +this.mainid , 
-           second_subsection_id : this.workid , 
-           item_name : this.item_name ,
-           item_number : this.item_number , 
-           item_qty : this.item_qty , 
-           price_total : this.total_price , 
-           price_unit : this.unit_price , 
-           product_uom : +this.unitid , 
-           projectid : +localStorage.getItem('projectid')
-     }
-    //  this.coreService.createQty(this.newQty).subscribe(
-    //    (data)=>{ 
-    //      console.log(data) ;
+  this.newQty = {
+    id : this.editItem[0].id,
+    description : this.description,
+    main_section_id : +this.mainid, 
+    item_name : this.item_name ,
+    item_number : this.item_number , 
+    item_qty : this.item_qty , 
+    price_unit : this.unit_price , 
+    product_uom : +this.unitid , 
+    item_type : this.item_type
+  }
+     this.service.updateQty(this.newQty).subscribe(
+       (data)=>{ 
+         console.log(data) ;
        
-    //      let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
-    //                    if(msg)
-    //                    {
-    //                      location.reload();
-    //                    }
+         let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
+                       if(msg)
+                       {
+                         location.reload();
+                       }
      
-    //    } ,
-    //    err=> {console.log(err);}
-    // );
+       } ,
+       err=> {console.log(err);}
+    );
  }
 
 //the Stack bar Method 
