@@ -2,7 +2,7 @@
     <div class="gene-card-title">
        <div fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="column" fxLayoutAlign="start center">
-             <h3>{{'Add Request'|translate}}</h3>
+             <h3>{{'Result of Approve Request with Number'|translate}} {{data.number}}</h3>
           </div>
           <span fxFlex></span>
        </div>
@@ -19,10 +19,10 @@
                                <mat-select name="approve" [(ngModel)]="approve">
                                 
                                     
-                                       <mat-option  (click)="disbleCommet()" value="accepted" >{{'Accepted'|translate}}</mat-option>
-                                       <mat-option (click)="enableCommet()" value="accepted-with-comment" >{{'Accepted With Comments'|translate}}</mat-option>
-                                       <mat-option  (click)="disbleCommet()" value="reject-resend" >{{'Rejected and must Resend'|translate}}</mat-option>
-                                       <mat-option  (click)="disbleCommet()" value="rejected" >{{'Rejected'|translate}}</mat-option>
+                                       <mat-option  (click)="disbleCommet()" value="accepted" >{{'Accepted'|translate}} Code A</mat-option>
+                                       <mat-option (click)="enableCommet()" value="accepted-with-comment" >{{'Accepted With Comments'|translate}} Code B</mat-option>
+                                       <mat-option  (click)="disbleCommet()" value="reject-resend" >{{'Rejected and must Resend'|translate}} Code C</mat-option>
+                                       <mat-option  (click)="disbleCommet()" value="rejected" >{{'Rejected'|translate}} Code D</mat-option>
                                </mat-select>
                          </mat-form-field>
                       </div>
@@ -31,7 +31,7 @@
                         <mat-form-field class="full-wid mrgn-b-lg">
                            
                               <input matInput name="comment"  [(ngModel)]="comment"
-                              placeholder="{{'Comment'|translate}}" type="text"
+                              placeholder="{{'Note'|translate}}" type="text"
                               [disabled]="!com"
                               >    
                               

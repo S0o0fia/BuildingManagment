@@ -134,6 +134,7 @@ export class QuantitytableComponent implements OnInit {
       this.service.gettotals(this.proj_item , this.item_type).subscribe(
         data=> {
                 console.log(data);
+                
                  this.total_budget = data[0].total as number;
                  this.dis = data[0].discount as number;
                  this.totaldis = this.total_budget - this.dis;
@@ -260,7 +261,7 @@ this.Qty_tbl.forEach(element => {
    err => console.log(err)
  )
    
- this.service.getProjectitem().subscribe(
+ this.service.getProjectitem(true).subscribe(
    data=> this.projectitems = data , 
    err=> console.log(err)
  )

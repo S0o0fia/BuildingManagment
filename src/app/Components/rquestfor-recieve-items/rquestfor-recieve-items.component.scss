@@ -22,6 +22,6 @@ button:active {
     transform: translateY(4px);
   }
   button:focus, button:active:focus, button.active:focus {
-    outline: gray !important;
-    outline-style: groove !important;
+    opacity: 0.7;
+    transform: translateY(4px);
     }

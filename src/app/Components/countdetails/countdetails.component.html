@@ -34,6 +34,7 @@
                 <thead>
                    <tr>
                       <th></th>
+                      <th>{{'ID'|translate}}</th>
                       <th style="text-align: center;" >{{'Request Number'|translate}}</th>
                                  <th style="text-align: center;">{{'Item Name'|translate}}</th>
                                  <th style="text-align: center;">{{'Section'|translate}}</th>
@@ -45,7 +46,7 @@
                      <ng-container *ngFor="let data of counttable | paginate: { id: 'listing_pagination',
                      itemsPerPage: 10,
                      currentPage: page,
-                     totalItems: totalRec };">
+                     totalItems: totalRec }; let i = index">
                    <tr *ngIf="data.state == statename">
                         <td>
                               <span (click)="openCloseRow(data.id)">
@@ -61,6 +62,7 @@
                                       </ng-template>
                                     </span>
                            </td>
+                           <td>{{i+1}}</td>
                            <td style="text-align: center;">{{data.name}}</td>      
                            <td style="text-align: center;" ng-show="45 > data.quantity_name">{{data.quantity_name}}</td>
                            <td style="text-align: center;" ng-show="45 > data.quantity_name">{{data.section_name}}</td>

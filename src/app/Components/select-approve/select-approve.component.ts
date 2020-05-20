@@ -36,7 +36,7 @@ export class SelectApproveComponent implements OnInit {
     //when User Click Approve
     onNoClick(): void {
      
-       this.service.createConsultantApprove(this.data , this.approve ,this.approve , this.comment).subscribe(
+       this.service.createConsultantApprove(this.data.id , this.approve ,this.approve , this.comment).subscribe(
          data=>{
         
            location.reload();
@@ -55,7 +55,7 @@ export class SelectApproveComponent implements OnInit {
     }
   
   ngOnInit() {
-   
+   console.log(this.data)
 
   }
 

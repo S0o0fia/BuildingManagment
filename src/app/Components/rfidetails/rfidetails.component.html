@@ -92,7 +92,8 @@
          <mat-divider></mat-divider>
          <tr *ngFor="let a of activity_log">
             <td>{{a.action  | translate}}</td>
-            <td>On {{a.date | translate}}</td>
+            <td> {{a.user}}</td>
+            <td>{{'On'|translate}} {{a.date}}</td>
          </tr>
     </mat-card>
 
@@ -121,11 +122,20 @@
             <div class="table-responsive" id="dvPdf">
               <mat-card style="background-color: lightsteelblue;">
                 <h5>{{'Request Status' |translate}} : {{state | translate}}</h5>
+                <h5>{{'Note'|translate}} : {{comment}}</h5>
                 <h5>{{'Progress Date' |translate}} :</h5>
                 <h5>{{'Progress Owner' |translate}} :</h5>
               </mat-card>
 
               <mat-card>
+               <div class="gene-card-title">
+                   
+                  <div fxLayout="row" fxLayoutAlign="start">
+                     <h4>{{'Comment'|translate}}</h4>
+      
+                  </div>
+               <mat-divider></mat-divider>
+             </div>
                <form>
                   <div fxLayout="column" style="height:100%;">
                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">

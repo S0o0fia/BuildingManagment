@@ -302,7 +302,21 @@ export class CountitemdetailsComponent implements OnInit {
   updateItem(i){
     let index=this.Items.findIndex(x => x.count_id === i.count_id);
     this.Items.splice(index,1);
-    this.Items.push(i);
+    i.qty=0;
+    if(this.dimension ==1 ){
+      i.qty = (i.qty_length*i.qty_unit)*i.qty_pers/100;
+     
+    }
+    else if(this.dimension== 2){
+      i.qty = (i.qty_length*i.qty_width*i.qty_unit)*i.qty_pers/100;
+    
+
+    }
+    else{
+      i.qty = (i.qty_height*i.qty_length*i.qty_width*i.qty_unit)*i.qty_pers/100;
+    }
+
+      this.Items.push(i);
   }
 
   calQty(i)

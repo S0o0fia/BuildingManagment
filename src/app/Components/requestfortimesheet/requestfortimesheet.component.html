@@ -45,8 +45,10 @@
                      <th></th>
                      <th></th>
                      <th></th>
+                     <th></th>
                    </tr>
                    <tr>
+                      <th>{{'ID'|translate}}</th>
                       <th>{{'Engineer Name'|translate}}</th>
                         <th>{{'The job that candidate to'|translate}}</th>
                         <th>{{'Specialization'|translate}}</th>
@@ -60,8 +62,9 @@
                 <tbody *ngFor="let data of timesheet | paginate: { id: 'listing_pagination',
                      itemsPerPage: 10,
                      currentPage: page,
-                     totalItems: totalRec };">
+                     totalItems: totalRec }; let i = index">
                    <tr *ngIf="data.state == statename && data.contract_id == contract_id">
+                     <td>{{i+1}}</td>
                        <td>{{data.user_name}}</td>
                        <td>{{data.position_description}}</td>
                        <td>{{data.specialty_name}}</td>

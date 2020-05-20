@@ -118,7 +118,7 @@ import { ProjectitemslistComponent } from './Components/projectitemslist/project
 import { TimesheetdetailsComponent } from './Components/timesheetdetails/timesheetdetails.component';
 
 export const firebaseConfig = {
-	apiKey: "AIzaSyCE0po6Q8jGuBEds-A903KEU4U6Cerojzo",
+	apiKey: "AIzaSyAG-ezRaKAupLlvKAazxRPa9PFnMlRFiGA",
 	authDomain: "gene-eaeef.firebaseapp.com",
 	databaseURL: "https://gene-eaeef.firebaseio.com",
 	projectId: "gene-eaeef",
@@ -142,7 +142,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		NgxPaginationModule,
 		NgbDatepickerModule.forRoot() ,
 		AgmCoreModule.forRoot({
-			apiKey: 'AIzaSyARLJcKPev4Ot6baTkjNKjczRDHYlFhgzo'
+			apiKey: 'AIzaSyAG-ezRaKAupLlvKAazxRPa9PFnMlRFiGA'
 		  }),
 		  
 	    ChartsModule,

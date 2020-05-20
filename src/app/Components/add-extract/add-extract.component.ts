@@ -177,6 +177,7 @@ export class AddExtractComponent implements OnInit {
 
 
  Add(id)
+
  {
    //alert(id);
   this.approved=[];

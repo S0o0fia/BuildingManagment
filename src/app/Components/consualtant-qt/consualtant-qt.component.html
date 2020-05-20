@@ -26,6 +26,7 @@
              <table class="table table-hover table-middle th-fw-light mb-0 ">
                 <thead>
                    <tr>
+                      <th>{{'ID'|translate}}</th>
                    <th>{{'Specialization'|translate}}</th>
                    <th>{{'Qualifications according to the contract'|translate}}</th>
                    <th >{{'Number'|translate}}</th> 
@@ -34,9 +35,10 @@
                    <th>{{'Total Price'|translate}}</th>
                    </tr>
                 </thead>
-                <tbody *ngFor="let data of consultant_qty" >
-                  
+                <tbody *ngFor="let data of consultant_qty ; let i = index" >
+                   
                      <tr *ngIf="data.contract_id == Contract_id" >
+                        <td>{{i+1}}</td>
                        <td>{{data.specialty_name}}</td>
                        <td>{{data.qualification_name}}</td>
                        <td>{{data.qty}}</td>

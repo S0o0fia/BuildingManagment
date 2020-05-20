@@ -278,15 +278,15 @@ export class CollectTableComponent implements OnInit {
   calQty(i)
   {
    
-    i.approved_qty=0;
+    i.qty=0;
     if(this.dimension==1){
-      i.approved_qty = (i.approved_length*i.Number)*i.percentage/100;
+      i.qty = (i.qty_length*i.Number)*i.percentage/100;
     }
     else if(this.dimension==2){
-      i.approved_qty = (i.qty_length*i.qty_width*i.Number)*i.percentage/100;
+      i.qty = (i.qty_length*i.qty_width*i.Number)*i.percentage/100;
     }
     else{
-      i.approved_qty = (i.qty_height*i.qty_length*i.qty_width*i.Number)*i.percentage/100;
+      i.qty = (i.qty_height*i.qty_length*i.qty_width*i.Number)*i.percentage/100;
     }
     
     //this.calpercentage(i);

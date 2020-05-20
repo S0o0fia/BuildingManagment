@@ -505,19 +505,22 @@ multi : boolean = false ;
                     element.approved_qty = 0
                     this.services.createItemRFI(element).subscribe(
                       data=>{
+                        console.log(data)
                          //function for calling Stackbar
-                        let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
-                        if(msg)
-                        {
-                          for (var i = 0; i < this.filename.length; i++){
+                 
+                        let i = 0 ;
+                          for ( i = 0; i < this.filename.length; i++){
                             this.services.UploadFile(this.filename[i], this.base64[i], this.inspectionIDs.inspection_id).subscribe(
                               data=>console.log(data) , 
                               err=> console.log(err)
                             );
                           }
-                        
+                        if(i == this.filename.length)
+                        {
+                          let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
                          location.reload();
                         }
+                       
                       },
                       err=>console.log(err)
                     )
