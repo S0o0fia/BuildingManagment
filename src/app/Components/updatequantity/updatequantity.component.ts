@@ -39,7 +39,8 @@ export class UpdatequantityComponent implements OnInit {subscription : Subscript
  Qty_tbl:any[]=[];
  editItem : any;
  formattedAmount: string = '';
-  item_type: any;
+ item_type: any;
+ item_types:any[]=[{id:1,value:"Contracted"},{id:2,value:"Calibration"}];
 
  constructor(public dialogRef: MatDialogRef<QuantitytableComponent>, public service : CoreService,  private router : Router, private formatPipe: NumberFormatPipe , 
   private pageTitleService: PageTitleService , private dialog: MatDialog , private discount : MatDialog,private currencyPipe:CurrencyPipe,

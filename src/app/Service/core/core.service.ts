@@ -260,11 +260,12 @@ export class CoreService {
 	}
 	createQty(value : Quantity)
 	{
+		debugger
 		let createQtyturl = "/table-qty/create?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"main_section_id":'
 		+value.main_section_id+
 		',"project_items_id":'+value.first_subsection_id+
-		',"item_type":"'+value.second_subsection_id+
-		'","product_uom":'+value.product_uom+
+		',"item_type":'+value.second_subsection_id+
+		',"product_uom":'+value.product_uom+
 		',"project_id":'+value.projectid+
 		',"item_qty":'+value.item_qty+
 		',"price_unit":'+value.price_unit+
@@ -283,7 +284,7 @@ export class CoreService {
 		+value.id+
 		',"main_section_id":'
 		+value.main_section_id+
-		',"item_type":"'+value.second_subsection_id+
+		',"item_type":"'+value.item_type+
 		'","product_uom":'+value.product_uom+
 		',"item_qty":'+value.item_qty+
 		',"price_unit":'+value.price_unit+
