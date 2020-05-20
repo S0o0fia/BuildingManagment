@@ -1,1 +1,105 @@
-<p>timesheetdetails works!</p>
+<div class="container" fxLayout="wrap row" fxLayout.xs="column" fxLayoutGap="5%" fxLayoutAlign="center">
+    <mat-card id="card1">
+            <div class="gene-card-title">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                       <div fxLayout="column">
+                          <h4>{{'Timesheet Details'|translate}}</h4>
+           
+                       </div> <span fxFlex></span><span fxFlex></span>
+                       
+                       <div fxLayout="column">
+                          <div class="row">
+                          <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtolist()">
+                            
+                            <mat-icon>exit_to_app</mat-icon> 
+                            {{'Back'|translate}}</button>
+                          <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
+                           [ngStyle]="{ 'display': (boolconsultant ? 'none' :  'block' ) }">
+                           
+                          
+                           {{'Draft Approve'|translate}}</button>
+                           <button mat-raised-button color="warn" >{{'Collector Specialist'|translate}}</button>
+                
+                        </div>
+                       </div> 
+                    </div>
+                   
+                    <mat-divider></mat-divider>
+         </div>
+         <div class="gene-card-content pad-t-none" style="overflow-x:auto;">
+                <div class="table-responsive "  id="dvPdf" >
+                  
+                   <table class=" table-responsive table flexbox"  fxLayout="row">
+                      <thead  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" >
+                         <tr  fxLayout="column"   fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" >
+                            <td class="col">{{'Project Name'|translate}}</td>
+                            <td class="col">{{'From Duration'|translate}}</td>
+                            <td class="col">{{'To Duration'|translate}}</td>
+                          
+                            <td class="col">{{'Description'|translate}}</td>
+                            <td class="col">{{'Qualification'|translate}}</td>
+                            <td class="col">{{'Speciality'|translate}}</td>
+                            <td class="col">{{'Position'|translate}}</td>
+                            <td class="col">{{'User Name'|translate}}</td>
+                            <td class="col">{{'State'|translate}}</td>
+                           
+                         </tr>
+                      </thead>
+                      <tbody  fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
+                         <tr  *ngFor="let item of sheet"   fxLayout="column"  fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50">
+                          
+                           <td class="col">{{item.project_name}}</td>
+                           <td class="col">{{item.from_date}}</td>
+                           <td class="col">{{item.to_date}}</td>                      
+                           
+                          
+                          <td class="col">{{item.description}}</td>
+                          <td class="col">{{item.qualification_name}}</td> 
+                          <td class="col">{{item.specialty_name}}</td> 
+                          <td class="col">{{item.position_description}}</td> 
+                          <td class="col">{{item.user_name}}</td> 
+                          <td class="col">{{item.state | translate}}</td>
+                         </tr>
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+        
+    </mat-card>
+   
+ </div>
+ <div fxLayout="wrap row" fxLayout.xs="column" fxLayoutAlign="space-around center">
+    <mat-card>
+       <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+             <div fxLayout="column">
+                <h4>{{'Attachments'|translate}}</h4>
+             </div> <span fxFlex></span>
+          </div>
+          <mat-divider></mat-divider>
+       </div> 
+       <div class="gene-card-content pad-t-none"> 
+             <mat-list *ngFor="let item of sheet">
+                <mat-list *ngFor="let data of item.attachment_ids">
+               <mat-list-item>
+                <table>
+                 <tbody>
+                    <tr>
+                       <td>
+                         {{data.name}}
+                       </td>
+                       <td>
+                         <a href={{download+data.id}} target="_blank"><mat-icon
+                            matTooltip="{{'Download'|translate}}"
+                            color="primary" >cloud_download</mat-icon></a>
+                       </td>
+                    </tr>
+                 </tbody>
+                </table>
+                 </mat-list-item>
+               <mat-divider></mat-divider>
+                </mat-list>
+             </mat-list>
+       </div>
+    </mat-card>
+ </div>

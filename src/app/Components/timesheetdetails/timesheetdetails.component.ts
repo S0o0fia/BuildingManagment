@@ -16,7 +16,10 @@ export class TimesheetdetailsComponent implements OnInit {
   id : number;
   approve_draft : boolean ;
   role : number ;
+  sheet:any[]=[];
   state: any;
+  contract_id:any;
+  download : string = "http://nqraait.ddns.net:8070/api/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id=";
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
     ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
     this.user = localStorage.getItem('loginUser');
@@ -29,10 +32,17 @@ export class TimesheetdetailsComponent implements OnInit {
   {
     this.service.getTimesheetDetails(this.id).subscribe(
       data => {
-     console.log(data);
+        this.sheet=data as any[];
+        this.contract_id=this.sheet[0].contract_id;
+        console.log(data);
       },
        err=>console.log(err)
      );
   }
+
+  backtolist()
+ {
+   this.router.navigate(['home/timesheet',this.contract_id]);
+ }
 
 }
