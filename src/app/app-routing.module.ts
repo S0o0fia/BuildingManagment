@@ -38,6 +38,7 @@ import { ConsultantExtractDetailComponent } from './Components/consultant-extrac
 import { RoleManagementComponent } from './Components/role-management/role-management.component';
 import { ProjectscheduleComponent } from './Components/projectschedule/projectschedule.component';
 import { ProjectitemslistComponent } from './Components/projectitemslist/projectitemslist.component';
+import { TimesheetdetailsComponent } from './Components/timesheetdetails/timesheetdetails.component';
 
 
 
@@ -195,6 +196,9 @@ const appRoutes: Routes = [
          , {
             path:'addextract',
             component:AddExtractComponent
+         },{
+            path:'tsdetails/:id',
+            component:TimesheetdetailsComponent
          },
 
         

@@ -22,11 +22,16 @@ export class RequestfortimesheetComponent implements OnInit {
 
   ngOnInit() {
     this.services.getTimesheet().subscribe(
-      data=>{this.timesheet = data as any[] ; console.log(this.timesheet)}, 
+      data=>{
+        this.timesheet = data as any[] ; 
+        console.log(this.timesheet);
+        this.totalRec = this.timesheet.filter(t=>t.state=='draft').length;
+        //alert(this.totalRec);
+      }, 
       err=> console.log(err)
     );
 
-    this.totalRec = this.timesheet.length;
+    
   
   }
 
@@ -73,5 +78,9 @@ export class RequestfortimesheetComponent implements OnInit {
       },
       err=>console.log(err)
     )
+  }
+
+  tsdetails(id){
+    this.router.navigate(['home/tsdetails',id]);
   }
 }

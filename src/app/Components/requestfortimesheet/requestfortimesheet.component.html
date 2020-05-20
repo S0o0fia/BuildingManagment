@@ -70,11 +70,16 @@
                        <td>{{data.to_date}}</td>
                        <td>{{data.state |translate }}</td>
                        <td>
-                        <div class="row">
+                        <!-- <div class="row">
                            <button mat-button color='primary' >
                             <mat-icon >arrow_left </mat-icon>                           
-                         </button>
-                        </div>
+                         </button> -->
+                         <div class="dropdown row">
+                           <button mat-icon-button  (click)="tsdetails(data.id)" matTooltip="{{'Detials'|translate}}" >
+                                        <mat-icon  color="primary">arrow_back</mat-icon>
+                                  </button>
+                         </div>
+                        <!-- </div> -->
                       </td>
                    </tr>
                 </tbody>

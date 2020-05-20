@@ -855,6 +855,14 @@ export class CoreService {
 
   }
 
+  getTimesheetDetails(id)
+  {
+	  let url = '/consultant/timesheet/get?db=nqproject&token='+localStorage.getItem('token')+'&timesheet_id='+id;
+	
+	 return this.http.get<any[]>(this.apiURL+url);
+
+  }
+
   createTimesheet(value:Timesheet)
   {
 	let url = '/consultant/timesheet/create?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
