@@ -116,6 +116,7 @@ import { ModifyprojectscheduleComponent } from './Components/modifyprojectschedu
 import { EasyPieChartModule } from 'ng2modules-easypiechart';
 import { ProjectitemslistComponent } from './Components/projectitemslist/projectitemslist.component';
 import { TimesheetdetailsComponent } from './Components/timesheetdetails/timesheetdetails.component';
+import { UpdatequantityComponent } from './Components/updatequantity/updatequantity.component';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyAG-ezRaKAupLlvKAazxRPa9PFnMlRFiGA",
@@ -357,7 +358,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		ProjectscheduleComponent,
 		ModifyprojectscheduleComponent,
 		ProjectitemslistComponent,
-		TimesheetdetailsComponent
+		TimesheetdetailsComponent,
+		UpdatequantityComponent
 
 	
 		
@@ -374,6 +376,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		EditContractedQunatityComponent,
 		SelectApproveComponent,
 		CreatequantityComponent,
+		UpdatequantityComponent,
 		AddRequestComponent,
 		PieChartComponent,
 		AddAttendeceComponent,

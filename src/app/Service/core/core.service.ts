@@ -276,6 +276,24 @@ export class CoreService {
 		console.log(createQtyturl);
 		return this.http.post(this.apiURL+createQtyturl , null);
 	}
+
+	updateQty(value : any)
+	{
+		let updateQtyturl = "/table-qty/update?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"id":'
+		+value.id+
+		',"main_section_id":'
+		+value.main_section_id+
+		',"item_type":"'+value.second_subsection_id+
+		'","product_uom":'+value.product_uom+
+		',"item_qty":'+value.item_qty+
+		',"price_unit":'+value.price_unit+
+		',"item_number":"'+value.item_number+
+		'","item_name":"'+value.item_name+
+        '","description":"'+value.description+'"}';
+       
+		console.log(updateQtyturl);
+		return this.http.post(this.apiURL+updateQtyturl , null);
+	}
 	
 	getMainSectionList(filter = false){
 		let mainSectionUrl='/section/get?token='+localStorage.getItem('token')+

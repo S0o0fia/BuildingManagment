@@ -15,6 +15,7 @@ import * as JSpfd from 'jspdf'
 import { DiscountComponent } from '../discount/discount.component';
 import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
 import { CurrencyPipe } from '@angular/common';
+import { UpdatequantityComponent } from '../updatequantity/updatequantity.component';
 
 
 @Component({
@@ -276,19 +277,25 @@ console.log(this.Qty_tbl);
       height: '80%'
      
     });
-
-
- 
-   
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.router.navigate['/table/quantity'];
     
     });
+  }
 
-     
-
-
+  openEditDialog(data: any)
+  {
+    const dialogRef = this.dialog.open(UpdatequantityComponent, {
+      width: '80%',
+      height: '85%',
+      data: data.id
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
   }
 
   opendiscount()

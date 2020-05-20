@@ -144,7 +144,14 @@
                         <td [ngStyle]="{ 'color': (data.flag   ? 'red' : 'black') }">
                            <span>{{data.excuted}}</span>
                         </td>
-                      
+                        <td>
+                           <!-- <button mat-icon-button color="primary" matTooltip="{{'Delete'|translate}}">
+                           <mat-icon>delete</mat-icon>
+                           </button> -->
+                           <button mat-icon-button color="primary" matTooltip="{{'Edit'|translate}}" (click)="openEditDialog(data)">
+                           <mat-icon>edit</mat-icon>
+                           </button>
+                        </td>
                       
                      </tr>
 
@@ -180,7 +187,7 @@
                                    </tbody>
                                </table>
                            </td>
-                           <td></td>
+                           <td></td>                           
                        </tr>
                   </ng-container>
                 </tbody>
