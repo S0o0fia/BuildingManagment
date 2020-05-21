@@ -17,7 +17,8 @@ import { ChooserequestComponent } from '../chooserequest/chooserequest.component
 
 
 export class CrmComponent implements OnInit, OnDestroy {
-    
+   company_id : number=Number(localStorage.getItem("company_id"));
+
    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
       coinList               : any;
       tickerSliderContent    : any;
@@ -252,8 +253,12 @@ export class CrmComponent implements OnInit, OnDestroy {
    
          this.service.getProjectList().
             subscribe( res =>
-                     { console.log(res);
-                      this.ProjectList = res as any[];
+                     { 
+                        debugger
+                        
+                        console.log(res);
+                        let list=res as any[];
+                      this.ProjectList = list.filter(p=>p.contractor_id==this.company_id || p.consultant_id==this.company_id);
                       this.totalRec = this.ProjectList.length;
                       },                     
                        err => console.log(err),
