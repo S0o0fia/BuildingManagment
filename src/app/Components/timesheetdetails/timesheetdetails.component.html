@@ -6,19 +6,16 @@
                           <h4>{{'Timesheet Details'|translate}}</h4>
            
                        </div> <span fxFlex></span><span fxFlex></span>
-                       
-                       <div fxLayout="column">
+                       <br/>
+                       <div fxLayout="column" style="margin-right:0.5%;"> 
                           <div class="row">
                           <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtolist()">
                             
                             <mat-icon>exit_to_app</mat-icon> 
                             {{'Back'|translate}}</button>
-                          <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
-                           [ngStyle]="{ 'display': (boolconsultant ? 'none' :  'block' ) }">
-                           
-                          
-                           {{'Draft Approve'|translate}}</button>
-                           <button mat-raised-button color="warn" >{{'Collector Specialist'|translate}}</button>
+                       
+                           <button mat-raised-button color="warn" (click)="setstate()" 
+                           [disabled]="state != 'draft'">{{'Collector Specialist'|translate}}</button>
                 
                         </div>
                        </div> 
@@ -34,14 +31,13 @@
                          <tr  fxLayout="column"   fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="50" fxFlex.gt-md="50" class="mrgn-b-xs" >
                             <td class="col">{{'Project Name'|translate}}</td>
                             <td class="col">{{'From Duration'|translate}}</td>
-                            <td class="col">{{'To Duration'|translate}}</td>
-                          
+                            <td class="col">{{'To Duration'|translate}}</td>                          
                             <td class="col">{{'Description'|translate}}</td>
-                            <td class="col">{{'Qualification'|translate}}</td>
-                            <td class="col">{{'Speciality'|translate}}</td>
-                            <td class="col">{{'Position'|translate}}</td>
-                            <td class="col">{{'User Name'|translate}}</td>
-                            <td class="col">{{'State'|translate}}</td>
+                            <td class="col">{{'Qualifications'|translate}}</td>
+                            <td class="col">{{'Specialization'|translate}}</td>
+                            <td class="col">{{'Job Title'|translate}}</td>
+                            <td class="col">{{'username'|translate}}</td>
+                            <td class="col">{{'Status'|translate}}</td>
                            
                          </tr>
                       </thead>
@@ -50,9 +46,7 @@
                           
                            <td class="col">{{item.project_name}}</td>
                            <td class="col">{{item.from_date}}</td>
-                           <td class="col">{{item.to_date}}</td>                      
-                           
-                          
+                           <td class="col">{{item.to_date}}</td>
                           <td class="col">{{item.description}}</td>
                           <td class="col">{{item.qualification_name}}</td> 
                           <td class="col">{{item.specialty_name}}</td> 

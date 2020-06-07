@@ -67,11 +67,27 @@
                               </button>
                            </div>
                           </div>
+                            <!--Total Excute to date-->
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                     <input matInput name="total_extract" [(ngModel)]="total_extract"
+                                     placeholder="{{'Total Excute to date'|translate}}" type="number" 
+                                     required disabled>       
+                              </mat-form-field>
+                           </div>
+                            <!--Previously total excuted-->
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                     <input matInput name="total_extract" [(ngModel)]="total_extract"
+                                     placeholder="{{'Previously total excuted'|translate}}" type="number" 
+                                     required disabled>       
+                              </mat-form-field>
+                           </div>
                            <!--Total work performed in the abstract-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-form-field class="full-wid mrgn-b-lg">
                                        <input matInput name="total_work" [(ngModel)]="total_work"
-                                       placeholder="{{'Total work performed in the abstract'|translate}}" type="number" 
+                                       placeholder="{{'Perform with the current extract'|translate}}" type="number" 
                                        required disabled>       
                                 </mat-form-field>
                              </div>
@@ -87,11 +103,20 @@
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-form-field class="full-wid mrgn-b-lg">
                                        <input matInput name="Net_amout" [(ngModel)]="Net_amout"
-                                       placeholder="{{'Net amount due'|translate}}" type="number" 
+                                       placeholder="{{'Net receivable'|translate}}" type="number" 
                                        required disabled>       
                                 </mat-form-field>
-                             </div>    
-                                      <!--Total after tax-->
+                             </div>  
+                             
+                            <!--The value of the tax-->
+                           <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
+                              <mat-form-field class="full-wid mrgn-b-lg">
+                                     <input matInput name="tax" [(ngModel)]="tax"
+                                     placeholder="{{'The value of the tax'|translate}}" type="number" 
+                                     required disabled>       
+                              </mat-form-field>
+                           </div> 
+                          <!--Total after tax-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-form-field class="full-wid mrgn-b-lg">
                                        <input matInput name="total_Vat" [(ngModel)]="total_Vat"
@@ -99,11 +124,11 @@
                                        required disabled>       
                                 </mat-form-field>
                              </div>   
-                                          <!--The amount paid-->
+                             <!--Net payable, including tax-->
                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100">
                                 <mat-form-field class="full-wid mrgn-b-lg">
                                        <input matInput name="paid" [(ngModel)]="paid" 
-                                       placeholder="{{'The amount paid'|translate}}" type="number" 
+                                       placeholder="{{'Net payable, including tax'|translate}}" type="number" 
                                        required >       
                                 </mat-form-field>
                              </div>                

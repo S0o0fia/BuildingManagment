@@ -20,6 +20,7 @@ import { Observable } from 'rxjs';
 export class AddExtractComponent implements OnInit {
   minDate : Date;
   maxDate : Date;
+  total_extract : number;
   extract_number : string;
   extract_date : Date = new Date();
   total_work : number = 0;
@@ -46,6 +47,7 @@ export class AddExtractComponent implements OnInit {
   invoice_type : string = 'current';
   itemIds: any[]=[];
   myControl = new FormControl();
+  tax : number;
   filteredIds: Observable<string[]>;
  
   openCloseRow(id): void
@@ -72,6 +74,7 @@ export class AddExtractComponent implements OnInit {
       data=> {
         this.extract_number = data[0].sequence;
         this.from_extract_date = data[0].date_from ; 
+        this.total_extract = data[0].total_invoices
       },
       err=>console.log(err)
     );
@@ -189,6 +192,7 @@ export class AddExtractComponent implements OnInit {
         this.approved.push(element);
         this.total_work += (element.price * element.approved_qty);
         this.Net_amout = this.total_work-this.total_discount;
+        this.tax =this.Net_amout*0.05;
         this.total_Vat = (this.Net_amout)+(this.Net_amout*0.05);
       }
 
@@ -222,6 +226,7 @@ export class AddExtractComponent implements OnInit {
   
     this.total_work -= (this.approved[index].price *this.approved[index].approved_qty); 
     this.Net_amout = this.total_work-this.total_discount;
+    this.tax =this.Net_amout*0.05;
     this.total_Vat = (this.Net_amout)+(this.Net_amout*0.05);
     this.approved.splice(index , 1);
  }
@@ -279,12 +284,14 @@ export class AddExtractComponent implements OnInit {
 
      this.total_discount += this.dis_amount;
      this.Net_amout -= this.dis_amount;
+     this.tax =this.Net_amout*0.05;
      this.total_Vat = (this.Net_amout)+(this.Net_amout*0.05);
   }
   removediscount(index)
 {
   this.total_discount -= this.discount[index].amount;
   this.Net_amout += this.discount[index].amount;
+  this.tax =this.Net_amout*0.05;
   this.total_Vat = (this.Net_amout)+(this.Net_amout*0.05);
   this.discount.splice(index , 1);
   

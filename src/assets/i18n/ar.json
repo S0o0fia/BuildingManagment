@@ -885,7 +885,18 @@
            "state chenged to  accepted by  ":"تم قبول الطلب بواسطة",
            "state chenged to  accepted-with-comment by  ":"تم قبول الطلب بملاحظات بواسطة",
            "state chenged to  reject-resend by  ":"تم رفض الطلب ويجب إعادة تقديمه بواسطة" ,
-           "state chenged to  rejected by  ":"تم رفض الطلب بواسطة"
+           "state chenged to  rejected by  ":"تم رفض الطلب بواسطة" , 
+            "Update":"تعديل",
+            "Total Excute to date":"اجمالي المنفذ حتى تاريخه",
+            "Previously total excuted":"اجمالي المنفذ سابقا",
+            "Perform with the current extract":"المنفذ بالمستخلص الحالي",
+            "Net receivable":"صافي المستحق" , 
+            "The value of the tax":"قيمة الضريبة",
+            "Net payable, including tax":"صافي المستحق شامل الضريبة" , 
+            "Pay done" : "تم السداد",
+            "Timesheet Details":"تعيين المهندس المختص"
+
+
               
 
           

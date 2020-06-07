@@ -34,15 +34,27 @@ export class TimesheetdetailsComponent implements OnInit {
       data => {
         this.sheet=data as any[];
         this.contract_id=this.sheet[0].contract_id;
+        this.state = this.sheet[0].state;
         console.log(data);
       },
        err=>console.log(err)
      );
   }
-
+  
   backtolist()
  {
    this.router.navigate(['home/timesheet',this.contract_id]);
  }
 
+ boolconsultant : boolean = false;
+ setstate()
+  {
+    this.service.setConsultantState(this.id , 'accepted').subscribe(
+      data=>{
+        this.boolconsultant = true; 
+        location.reload();
+      } , 
+      err=>console.log(err)
+    )
+  }
 }

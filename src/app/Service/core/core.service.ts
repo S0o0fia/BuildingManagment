@@ -528,6 +528,15 @@ export class CoreService {
 		return this.http.get(this.apiURL+getinvoiceitem);
 	}
 
+	setStateInvoice(id , state)
+    {
+		let stateurl = '/invoice/set_state?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
+		'"state":"'+state+
+		'", "id":'+id +
+		'}';
+		return this.http.post(this.apiURL+stateurl , null);
+	}
+
 	getInvoicediscount(id)
 	{
 		let getinvoicedisciunt = "/invoice/discount/get?db=nqproject&token="+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid')+
@@ -1061,5 +1070,7 @@ export class CoreService {
 	return this.http.get<any[]>(this.apiURL+url);
 
   }
+   
+
 }
 

@@ -254,11 +254,14 @@ export class CrmComponent implements OnInit, OnDestroy {
          this.service.getProjectList().
             subscribe( res =>
                      { 
-                        debugger
-                        
-                        console.log(res);
-                        let list=res as any[];
-                      this.ProjectList = list.filter(p=>p.contractor_id==this.company_id || p.consultant_id==this.company_id);
+                     //this is part doesn't work properly
+                     //   let list=res as any[];
+                     //   this.ProjectList = list.filter(p=>p.contractor_id==this.company_id || p.consultant_id==this.company_id);
+                    
+                     
+                     this.ProjectList = res as any[];
+                    
+                    
                       this.totalRec = this.ProjectList.length;
                       },                     
                        err => console.log(err),

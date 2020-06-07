@@ -1,12 +1,25 @@
 <div>
     <mat-card dir="rtl"  fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="70" style="margin:auto;">
             <div class="gene-card-title">
+               <div fxLayout="column">
                <div fxLayout="row" fxLayoutAlign="center">
                   <div fxLayout="column" fxLayoutAlign="center">
                      <h3> {{projectname}} /  {{'Extract Details'|translate}}</h3>
                   </div>
-                  <span fxFlex></span>
+               </div> <span fxFlex></span>
+            
+              
+                  <div class="row"  fxLayoutAlign="center">
+                  <button class="mrgn-b-xs" mat-raised-button color="primary"
+                  [disabled]="state == 'paid'"
+                  (click)="paid()">
+                     {{'Pay done'|translate}}
+                 </button>
+                  </div>
                </div>
+               
+
+            
                <mat-divider></mat-divider>
             </div>
             <div class="gene-card-content" >

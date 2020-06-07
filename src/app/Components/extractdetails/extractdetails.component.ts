@@ -17,15 +17,33 @@ export class ExtractdetailsComponent implements OnInit {
   page: number = 1;
   public rowSelected : any = -1;
   id :number;
+  state : string = "";
   constructor(private route:ActivatedRoute  , private router : Router , public service : CoreService) {
     this.projectname = localStorage.getItem('projectname');
     this.id = +( this.route.snapshot.paramMap.get('id') );
    }
 
+   paid()
+   {
+     this.service.setStateInvoice(this.id , 'paid').subscribe(
+       data=>{location.reload()}, 
+       err=>console.log(err)
+     )
+   }
+
   ngOnInit() {
     this.service.getInvoice().subscribe(
-      data=> {this.Invoices = data  as any[] ; 
-        console.log(this.Invoices);
+      data=> {this.Invoices = data  as any[] ;
+        this.Invoices.forEach(element => {
+          if(element.id == this.id)
+          {
+            console.log(element);
+            element.state = this.state;
+          
+          }
+        });
+        
+       
       }, 
       err => console.log(err)
     )
