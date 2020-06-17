@@ -8,11 +8,26 @@ import { PageTitleService } from '../core/page-title/page-title.service';
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 import { ChooserequestComponent } from '../chooserequest/chooserequest.component';
+import { trigger, transition, style, animate, query, state } from '@angular/animations';
 
 @Component({
   selector: 'ms-crm',
   templateUrl: './crm.component.html',
-  styleUrls: ['./crm.component.scss']
+  styleUrls: ['./crm.component.scss'] ,
+  animations: [
+
+   trigger('slideInOut', [
+     transition(':enter', [
+       style({ transform: 'translateX(100%)', opacity: 0 }),
+       animate('700ms ease-in', style({ transform: 'translateX(0%)', 'opacity': 1 }))
+     ]),
+     
+     transition(':leave', [
+       style({ transform: 'translateX(0%)', opacity: 1 }),
+       animate('0ms ease-in', style({ transform: 'translateX(100%)', 'opacity': 0 }))
+     ])
+   ])
+ ]
 })
 
 

@@ -2,7 +2,7 @@
     <ms-ticker-slider [sliderContent]="tickerSliderContent" [sliderConfig]="tickerSliderConfig"></ms-ticker-slider>
  </mat-card>
  <!-- ticker slider -->
- <div fxLayout="row wrap" fxLayoutAlign="start stretch" class="crypto-dash-card" *ngIf="statsCardData">
+ <div fxLayout="row wrap" fxLayoutAlign="start stretch" class="crypto-dash-card" *ngIf="statsCardData"  @slideInOut>
     <div fxFlex.gt-sm="20" fxFlex.gt-xs="100" fxFlex="100" *ngFor="let cardData of statsCardData">
        <ms-stats-card [statsCardData]="cardData"></ms-stats-card>
     </div>
@@ -23,14 +23,14 @@
               </div>
                 <mat-divider></mat-divider>
              </div>
-             <div class="gene-card-content pad-b-none">
+             <div class="gene-card-content pad-b-none" @slideInOut>
                 <div class="buttongroup mrgn-b-md" fxLayout="row"  fxLayoutAlign="center">
                    <button class="mrgn-b-xs" mat-raised-button color="primary" >{{'All'|translate}}</button>
                    <button class="mrgn-b-xs" mat-raised-button color="warn" >{{'New'|translate}}</button>
                    <button class="mrgn-b-xs" mat-raised-button color="accent" >{{'Done'|translate}}</button>
                 </div>
-                <div class="table-responsive">
-                     <table class="table table-hover table-middle th-fw-light mb-0">
+                <div class="table-responsive" >
+                     <table class="table table-hover table-middle th-fw-light mb-0" > 
                            <thead>
                               <tr>
                                  <th>{{'ID'|translate}}</th>

@@ -1,33 +1,56 @@
-<div class="gene-login gene-session pad-y-xl">
-   <div fxLayout="row" fxLayoutAlign="center start">
-      <div fxLayout="column" fxFlex.xl="540px" fxFlex.lg="540px" fxFlex.md="540px" fxFlex.sm="540px" fxFlex.xs="100">
-         <mat-card class="gene-login-wrapper">
+
+<mat-card class="header" style="height: 15% ; background-color: #02b371; margin: 0; border-radius: 0;" dir="rtl">
+ <div fxLayout="row wrap" fxLayoutAlign="start">
+  <h1>{{'Monjez'|translate}}</h1>
+ </div>
+
+</mat-card>
+
+<mat-card class="body"  style="height: 85%; margin: 0;  border-radius: 0;" dir="rtl">
+  
+   <div fxLayout="row wrap" fxLayoutAlign="start space-between">
+      <div fxLayout="column"  fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100" fxFlex.gt-md="40" 
+      fxLayoutAlign="center" style="margin-top:5%; padding:1%">
+      <div style=" border: 4px solid #02b371;">
+         <mat-card class="gene-login-wrapper" style="background-color: #02b371; padding: 7%;" >
             <div>
-               <div fxLayout="column" fxLayoutAlign="center center mrgn-b-md">
-                  <div class="login-logo justify-content">
-                     <img src="assets/img/login_logo.jpg" id="logo">
-                     <br>
-                     <h3>{{'Projects Managment Program'|translate}}</h3>
-                  </div>
-               </div>
-               <form #form="ngForm" (ngSubmit)="login(form.value)">
+              <form #form="ngForm" (ngSubmit)="login(form.value)">
                <div fxLayout="column" fxLayoutAlign="start stretch">
-                  <mat-form-field class="full-wid mrgn-b-md">
-                     <input matInput placeholder="{{'username'|translate}}" type="text" name="username" required [(ngModel)]="username">
-                  </mat-form-field>
-                  <mat-form-field class="full-wid mrgn-b-md ">
-                     <input matInput placeholder="{{'Password'|translate}}" type="password" name="password" required [(ngModel)]="password">
-                  </mat-form-field>
-               
-                  <button class="login" mat-raised-button [disabled]="!form.valid">
-                     <mat-icon>open_in_browser</mat-icon>
-                     {{'SIGN IN'|translate}}                     
+                     <input  placeholder="{{'username'|translate}}" type="text" name="username" required [(ngModel)]="username">
+                     <input  placeholder="{{'Password'|translate}}" type="password" name="password" required [(ngModel)]="password">
+                 
+                  <button class="login" mat-raised-button [disabled]="!form.valid" style="padding:1%; border-radius: 10px;">
+                            {{'SIGN IN'|translate}}                     
                   </button>
                 
+                  <button mat-button style="color: white; width: fit-content; justify-self: center; align-self: center;
+                  margin-top: 2%;">{{'Reset Password'|translate}}</button>
                </div>
                </form>
             </div>
          </mat-card>
       </div>
-   </div>
+      </div>
+    
+      
+         <div fxLayout="column"  fxFlex.gt-sm="60" fxFlex.gt-xs="60" fxFlex="100" fxFlex.gt-md="60" fxLayoutAlign="center" style="margin-top: 5%; padding-left:1%;" >
+         
+            <mat-card fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center" 
+            class="news">
+
+            </mat-card>
+         </div>
+   
+        
 </div>
+
+
+<div fxLayout="row wrap" fxLayoutAlign="end" style="height: 25% ; width: 100%;">
+   <mat-card style="width: fit-content; background-color:#02b371 ; 
+   vertical-align: bottom; align-self: flex-end; justify-self: flex-end; padding:0.5%;"  fxLayoutAlign="end">
+      <h6>طٌور بواسطة نقرة مبدع</h6>
+   </mat-card>
+</div>
+</mat-card>
+
+

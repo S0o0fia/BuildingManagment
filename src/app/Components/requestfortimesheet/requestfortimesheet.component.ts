@@ -3,11 +3,24 @@ import { CoreService } from 'app/Service/core/core.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddtimesheetComponent } from '../addtimesheet/addtimesheet.component';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-requestfortimesheet',
   templateUrl: './requestfortimesheet.component.html',
-  styleUrls: ['./requestfortimesheet.component.scss']
+  styleUrls: ['./requestfortimesheet.component.scss'] , 
+  animations:[
+   
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ] 
 })
 export class RequestfortimesheetComponent implements OnInit {
   totalRec : number; 

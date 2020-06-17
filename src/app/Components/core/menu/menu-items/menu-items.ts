@@ -41,8 +41,8 @@ const MENUITEMSAdmin = [
      
     },
     {
-      state: 'projectreport',
-      name: 'Project Report',
+      state: 'projectslist',
+      name: 'Projects List',
       type: 'link',
       icon: 'note',
   

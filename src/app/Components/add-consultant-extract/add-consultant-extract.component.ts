@@ -5,11 +5,23 @@ import { Extract } from 'app/Models/Extract/extract';
 import { formatDate } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-add-consultant-extract',
   templateUrl: './add-consultant-extract.component.html',
-  styleUrls: ['./add-consultant-extract.component.scss']
+  styleUrls: ['./add-consultant-extract.component.scss'] ,
+  animations: [
+    trigger('fade', [
+       state('in', style({opacity: 1})),
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(600 )
+      ]),
+      transition(':leave',
+        animate(600, style({opacity: 0})))
+    ])
+  ],  
 })
 export class AddConsultantExtractComponent implements OnInit {
   extractname : any[]=[];

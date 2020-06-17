@@ -5,51 +5,34 @@
       </div>
       <mat-divider></mat-divider>
    </div>
+   <!--first Row-->
 <div fxLayout="row wrap" fxLayoutAlign="center stretch">
-   <!--Request For Inspection-->
-   <div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="100" fxFlex.gt-md="33">
-       <mat-card class="card-full-width row">
-         <h5>{{'Request for Inspection'|translate}}</h5>
-           
-         <canvas baseChart
-         height="150" 
-         [data]="pieChartData2"
-           [options]="PieChartOptions1" 
-           [colors]="pieChartColors2"
-           [labels]="pieChartLabels2"
-           [plugins]="pieChartPlugins"
-           [legend]="pieChartLegend" 
-           [chartType]="pieChartType1"></canvas> 
-      
-      
-        </mat-card>
-   </div>
-   <!--Extract-->
+     <!--Request For Inspection-->
+     <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+      <mat-card class="card-full-width row">
+        <h5>{{'Request for Inspection'|translate}}</h5>
+          
+        <canvas baseChart
+        height="175" 
+        [data]="pieChartData2"
+          [options]="PieChartOptions1" 
+          [colors]="pieChartColors2"
+          [labels]="pieChartLabels2"
+          [plugins]="pieChartPlugins"
+          [legend]="pieChartLegend" 
+          [chartType]="pieChartType1"></canvas> 
+     
+     
+       </mat-card>
+  </div>
 
-<div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="100" fxFlex.gt-md="33">
-       <mat-card class="card-full-width row">
-         <h5>{{'Current Extracts'|translate}}</h5>
-           
-      <canvas baseChart
-       height="150" 
-      [datasets]="barChartData"
-      [labels]="mbarChartLabels1"
-      [options]="barChartOptions"
-      [colors]="barChartColors"
-      [legend]="barChartLegend"
-      [chartType]="barChartType"
-      (chartHover)="chartHovered($event)"
-      (chartClick)="chartClicked($event)"></canvas>      
-      
-        </mat-card>
-   </div>
-    <!--Request For Count-->
-   <div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="100" fxFlex.gt-md="33">
+      <!--Request For Count-->
+   <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
       <mat-card class="card-full-width row">
         <h5>{{'Request of Count'|translate}}</h5>
           
         <canvas baseChart
-             height="150" 
+             height="175" 
              [data]="pieChartData1"
                [options]="PieChartOptions1" 
                [colors]="pieChartColors1"
@@ -60,94 +43,50 @@
             
       </mat-card>
   </div>
- 
-  
+
 
 </div>
 </mat-card>
 
-<!--Bars Seconed Part-->
+<!--Seconed Row-->
 <mat-card >
+   <div class="gene-card-title">
+      <div fxLayout="row" fxLayoutAlign="start center">
+      <span fxFlex></span>
+      </div>
+      <mat-divider></mat-divider>
+   </div>
+
 <div fxLayout="row wrap" fxLayoutAlign="center stretch">
-  
-   <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100" fxFlex.gt-md="25">
- <!--Financial completion rate-->
- <mat-card>
-   <div class="gene-card-title">
-      <div fxLayout="row" fxLayoutAlign="start center">
-         <div fxLayout="column" fxLayoutAlign="start center">
-            <h5>{{'Financial completion rate'|translate}}</h5>
-         </div>
-         <span fxFlex></span>
-      </div>
-      <mat-divider></mat-divider>
-   </div>
-   <canvas height="250"
-   baseChart [datasets]="barChartData2" 
-   [labels]="mbarChartLabels2" 
-   [options]="barHorizontalChartOptions" 
-   [colors]="barChartColors"
-   [legend]="barHorizontalChartLegend" 
-   [chartType]="barHorizontalChartType"></canvas>
-   
- </mat-card>
-   </div>
-
-   <!--Technical completion rate-->
-   <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100" fxFlex.gt-md="25">
-      <mat-card>
-         <div class="gene-card-title">
-            <div fxLayout="row" fxLayoutAlign="start center">
-               <div fxLayout="column" fxLayoutAlign="start center">
-                  <h5>{{'Technical completion rate'|translate}}</h5>
-               </div>
-               <span fxFlex></span>
+ <!--Technical completion rate-->
+ <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+   <mat-card>
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column" fxLayoutAlign="start center">
+               <h5>{{'Technical completion rate'|translate}}</h5>
             </div>
-            <mat-divider></mat-divider>
+            <span fxFlex></span>
          </div>
-   <canvas baseChart
-   height="250" 
-  [datasets]="barChartData"
-  [labels]="mbarChartLabels1"
-  [options]="barChartOptions"
-  [colors]="barChartColors"
-  [legend]="barChartLegend"
-  [chartType]="barChartType"
-  (chartHover)="chartHovered($event)"
-  (chartClick)="chartClicked($event)"></canvas>
-      </mat-card>
-</div>
-
-
-<div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100" fxFlex.gt-md="25">
- <!--Earned value ratio-->
- <mat-card>
-   <div class="gene-card-title">
-      <div fxLayout="row" fxLayoutAlign="start center">
-         <div fxLayout="column" fxLayoutAlign="start center">
-            <h5>{{'Earned value ratio'|translate}}</h5>
-         </div>
-         <span fxFlex></span>
+         <mat-divider></mat-divider>
       </div>
-      <mat-divider></mat-divider>
-   </div>
-   <canvas baseChart
-   height="250" 
-   [datasets]="barChartData1"
-   [labels]="mbarChartLabels2"
-   [options]="barChartOptions"
-   [colors]="barChartColors1"
-   [legend]="barChartLegend"
-   [chartType]="barChartType"
-   (chartHover)="chartHovered($event)"
-   (chartClick)="chartClicked($event)"></canvas>
-
- </mat-card>
+<canvas baseChart
+height="250" 
+[datasets]="barChartData3"
+[labels]="mbarChartLabels3"
+[options]="barChartOptions"
+[colors]="barChartColors"
+[legend]="barChartLegend"
+[chartType]="barChartType"
+(chartHover)="chartHovered($event)"
+(chartClick)="chartClicked($event)"></canvas>
+   </mat-card>
 </div>
 
 
-<div fxFlex.gt-sm="25" fxFlex.gt-xs="25" fxFlex="100" fxFlex.gt-md="25">
    <!--Planned completion rate-->
+
+<div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
    <mat-card>
      <div class="gene-card-title">
         <div fxLayout="row" fxLayoutAlign="start center">
@@ -160,10 +99,138 @@
      </div>
      <canvas baseChart
      height="250" 
-     [datasets]="barChartData3"
+    [datasets]="barChartData"
+[labels]="mbarChartLabels1"
+[options]="barChartOptions"
+[colors]="barChartColors"
+[legend]="barChartLegend"
+[chartType]="barChartType"
+(chartHover)="chartHovered($event)"
+(chartClick)="chartClicked($event)"></canvas>
+  
+   </mat-card>
+  </div>
+
+
+
+</div>
+</mat-card>
+
+
+<!--Third Row-->
+
+<mat-card >
+   <div class="gene-card-title">
+      <div fxLayout="row" fxLayoutAlign="start center">
+      <span fxFlex></span>
+      </div>
+      <mat-divider></mat-divider>
+   </div>
+   <div fxLayout="row wrap" fxLayoutAlign="center stretch">
+  
+      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+    <!--Financial completion rate-->
+    <mat-card>
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column" fxLayoutAlign="start center">
+               <h5>{{'Financial completion rate'|translate}}</h5>
+            </div>
+            <span fxFlex></span>
+         </div>
+         <mat-divider></mat-divider>
+      </div>
+      <canvas height="240"
+      baseChart [datasets]="barChartData2" 
+      [labels]="mbarChartLabels2" 
+      [options]="barHorizontalChartOptions" 
+      [colors]="barChartColors1"
+      [legend]="barHorizontalChartLegend" 
+      [chartType]="barHorizontalChartType"></canvas>
+      
+    </mat-card>
+      </div>
+
+      <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+         <!--Actual Achievement Ratio-->
+         <mat-card>
+           <div class="gene-card-title">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                 <div fxLayout="column" fxLayoutAlign="start center">
+                    <h5>{{'Actual Achievement Ratio'|translate}} VI</h5>
+                 </div>
+                 <span fxFlex></span>
+              </div>
+              <mat-divider></mat-divider>
+           </div>
+           <canvas baseChart
+           height="240" 
+           [datasets]="barChartData4"
+           [labels]="mbarChartLabels4"
+           [options]="barChartOptions"
+           [colors]="barChartColors1"
+           [legend]="barChartLegend"
+           [chartType]="barChartType"
+           (chartHover)="chartHovered($event)"
+           (chartClick)="chartClicked($event)"></canvas>
+        
+         </mat-card>
+        </div>
+     
+     
+   </div>
+   
+</mat-card>
+
+
+<!--fourth Row-->
+
+<mat-card >
+   <div class="gene-card-title">
+      <div fxLayout="row" fxLayoutAlign="start center">
+      <span fxFlex></span>
+      </div>
+      <mat-divider></mat-divider>
+   </div>
+   <div fxLayout="row wrap" fxLayoutAlign="center stretch">
+       <!--Extract-->
+
+<div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+   <mat-card class="card-full-width row">
+     <h5>{{'Current Extracts'|translate}}</h5>
+    
+  <canvas baseChart
+   height="250" 
+  [datasets]="barChartData"
+  [labels]="mbarChartLabels1"
+  [options]="barChartOptions"
+  [colors]="barChartColors"
+  [legend]="barChartLegend"
+  [chartType]="barChartType"
+  (chartHover)="chartHovered($event)"
+  (chartClick)="chartClicked($event)"></canvas>      
+  
+    </mat-card>
+</div>
+
+<div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+   <!--Earned value ratio-->
+   <mat-card>
+     <div class="gene-card-title">
+        <div fxLayout="row" fxLayoutAlign="start center">
+           <div fxLayout="column" fxLayoutAlign="start center">
+              <h5>{{'Earned value ratio'|translate}}</h5>
+           </div>
+           <span fxFlex></span>
+        </div>
+        <mat-divider></mat-divider>
+     </div>
+     <canvas baseChart
+     height="250" 
+     [datasets]="barChartData1"
      [labels]="mbarChartLabels2"
      [options]="barChartOptions"
-     [colors]="barChartColors1"
+     [colors]="barChartColors"
      [legend]="barChartLegend"
      [chartType]="barChartType"
      (chartHover)="chartHovered($event)"
@@ -174,17 +241,11 @@
   
 
 
-
-</div>
+   </div>
 </mat-card>
 
-
-<!--Bars Third Part-->
-<mat-card >
-   <div fxLayout="row wrap" fxLayoutAlign="center stretch">
-     
-      <div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="100" fxFlex.gt-md="33">
-    <!--Overall evaluation of the contractor-->
+<!--Fifth Row-->
+  <!--Overall evaluation of the contractor-->
     <mat-card>
       <div class="gene-card-title">
          <div fxLayout="row" fxLayoutAlign="start center">
@@ -203,59 +264,4 @@
        [options]="options3"></easy-pie-chart>
        
     </mat-card>
-      </div>
-   
-      <!--Percentage of completion according to the extracts-->
-      <div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="100" fxFlex.gt-md="33">
-         <mat-card>
-            <div class="gene-card-title">
-               <div fxLayout="row" fxLayoutAlign="start center">
-                  <div fxLayout="column" fxLayoutAlign="start center">
-                     <h5>{{'Percentage of completion according to the extracts'|translate}}</h5>
-                  </div>
-                  <span fxFlex></span>
-               </div>
-               <mat-divider></mat-divider>
-            </div>
-            <canvas height="240"
-            baseChart [datasets]="barChartData2" 
-            [labels]="mbarChartLabels2" 
-            [options]="barHorizontalChartOptions" 
-            [colors]="barChartColors"
-            [legend]="barHorizontalChartLegend" 
-            [chartType]="barHorizontalChartType"></canvas>
-     
-         </mat-card>
-   </div>
-   
-   
-   <div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="100" fxFlex.gt-md="33">
-    <!--Actual Achievement Ratio-->
-    <mat-card>
-      <div class="gene-card-title">
-         <div fxLayout="row" fxLayoutAlign="start center">
-            <div fxLayout="column" fxLayoutAlign="start center">
-               <h5>{{'Actual Achievement Ratio'|translate}} VI</h5>
-            </div>
-            <span fxFlex></span>
-         </div>
-         <mat-divider></mat-divider>
-      </div>
-      <canvas baseChart
-      height="240" 
-      [datasets]="barChartData4"
-      [labels]="mbarChartLabels2"
-      [options]="barChartOptions"
-      [colors]="barChartColors1"
-      [legend]="barChartLegend"
-      [chartType]="barChartType"
-      (chartHover)="chartHovered($event)"
-      (chartClick)="chartClicked($event)"></canvas>
-   
-    </mat-card>
-   </div>
-
-   </div>
-   </mat-card>
-   
-   
+      

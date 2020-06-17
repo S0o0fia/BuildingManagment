@@ -141,7 +141,7 @@
                   </tr>
                </thead>
                <tbody>
-                  <tr *ngFor="let item of RFI ; let i = index;">
+                  <tr *ngFor="let item of RFI ; let i = index;" @fade>
                      <td style="text-align: center;">
                         <mat-checkbox (change)="getRFIid($event , item.id , i)"></mat-checkbox>
                      </td>
@@ -207,7 +207,7 @@
                      </tr>
                   </thead>
                   <tbody *ngFor="let item of Location; let i = index"  >
-                     <tr  style="text-align: center;">
+                     <tr  style="text-align: center;" @fade>
                         <td style="text-align: center;">{{item.rfi_id}}</td>
                         <td style="text-align: center;">
                          {{item.ir_name}}

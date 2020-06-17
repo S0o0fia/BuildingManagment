@@ -9,12 +9,25 @@ import { SelectApproveComponent } from '../select-approve/select-approve.compone
 import { Countitem } from 'app/Models/Count/countitem';
 import { DatePipe } from '@angular/common';
 import { Comment } from 'app/Models/Comment/comment';
+import { trigger, transition, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'ms-countitemdetails',
   templateUrl: './countitemdetails.component.html',
   styleUrls: ['./countitemdetails.component.scss'],
-  providers: [DatePipe]
+  providers: [DatePipe] , 
+  animations:[ trigger('slideInOut', [
+    transition(':enter', [
+      style({ transform: 'translateX(100%)', opacity: 0 }),
+      animate('700ms ease-in', style({ transform: 'translateX(0%)', 'opacity': 1 }))
+    ]),
+    
+    transition(':leave', [
+      style({ transform: 'translateX(0%)', opacity: 1 }),
+      animate('0ms ease-in', style({ transform: 'translateX(100%)', 'opacity': 0 }))
+    ])
+  ])
+],
 })
 export class CountitemdetailsComponent implements OnInit {
 

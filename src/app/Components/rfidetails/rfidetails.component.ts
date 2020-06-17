@@ -10,12 +10,26 @@ import { Approvedqty } from 'app/Models/Quantity/approvedqty';
 import {Comment } from '../../Models/Comment/comment'
 import { timeThursdays, Numeric } from 'd3';
 import { DatePipe } from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-rfidetails',
   templateUrl: './rfidetails.component.html',
   styleUrls: ['./rfidetails.component.scss'],
-  providers: [DatePipe]
+  providers: [DatePipe] , 
+  animations:[ trigger('slideInOut', [
+    transition(':enter', [
+      style({ transform: 'translateX(100%)', opacity: 0 }),
+      animate('700ms ease-in', style({ transform: 'translateX(0%)', 'opacity': 1 }))
+    ]),
+    
+    transition(':leave', [
+      style({ transform: 'translateX(0%)', opacity: 1 }),
+      animate('0ms ease-in', style({ transform: 'translateX(100%)', 'opacity': 0 }))
+    ])
+  ])
+],
+
 })
 
 export class RfidetailsComponent implements OnInit {

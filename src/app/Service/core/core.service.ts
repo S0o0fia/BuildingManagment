@@ -258,14 +258,15 @@ export class CoreService {
 	
 		 return this.http.post(this.apiURL+consultant_approvalUrl , null);
 	}
+	
 	createQty(value : Quantity)
 	{
-		debugger
+
 		let createQtyturl = "/table-qty/create?db="+this.db+'&token='+localStorage.getItem("token")+'&values={"main_section_id":'
 		+value.main_section_id+
 		',"project_items_id":'+value.first_subsection_id+
-		',"item_type":'+value.second_subsection_id+
-		',"product_uom":'+value.product_uom+
+		',"item_type":"'+value.second_subsection_id+
+		'","product_uom":'+value.product_uom+
 		',"project_id":'+value.projectid+
 		',"item_qty":'+value.item_qty+
 		',"price_unit":'+value.price_unit+
@@ -563,6 +564,17 @@ export class CoreService {
 
 	   return this.http.post(this.apiURL+extracturl , null);
 
+
+	}
+
+	CountItemwithInvoice(invoice_id : number  , count_id : number)
+	{
+	  let url = '/invoice/qsr?db=nqproject&token='+localStorage.getItem('token')+'&values={'+
+	  '"invoice_id":'+invoice_id+
+	  ',"count_id":'+count_id
+	  +'}'
+	  console.log(url);
+	  return this.http.post(this.apiURL+url , null);
 
 	}
 
@@ -1030,10 +1042,22 @@ export class CoreService {
 	  return this.http.get(this.apiURL+url);
   }
 
+  getRFIChartProject()
+  {
+	  let url = '/project/dashboard/rfi-count?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	  return this.http.get(this.apiURL+url);
+  }
+
 
   getCountChart()
   {
 	  let url = '/project/dashboard/qr-count?db=nqproject&token='+localStorage.getItem('token');
+	  return this.http.get(this.apiURL+url);
+  }
+
+  getCountChartProject()
+  {
+	  let url = '/project/dashboard/qr-count?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
 	  return this.http.get(this.apiURL+url);
   }
   
@@ -1043,17 +1067,59 @@ export class CoreService {
 	return this.http.get<any[]>(this.apiURL+url)
   }
 
+  getDoneContractProject()
+  {
+	let url = '/project/dashboard/done-pers?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	return this.http.get<any[]>(this.apiURL+url)
+  }
+
+  getTechPercent()
+  {
+	let url = '/project/dashboard/tech-comp-pers?db=nqproject&token='+localStorage.getItem('token');
+	return this.http.get<any[]>(this.apiURL+url)
+  }
+
+  getTechPercentProject()
+  {
+	let url = '/project/dashboard/tech-comp-pers?db=nqproject&token='+localStorage.getItem('token')+localStorage.getItem('projectid');
+	return this.http.get<any[]>(this.apiURL+url)
+  }
+
   getSPI()
   {
 	let url = '/project/dashboard/spi?db=nqproject&token='+localStorage.getItem('token');
 	return this.http.get<any[]>(this.apiURL+url)
   }
   
+  getSPIProject()
+  {
+	let url = '/project/dashboard/spi?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	return this.http.get<any[]>(this.apiURL+url)
+  }
+
   getfianace()
+  {
+	let url = '/project/dashboard/finance-pers?db=nqproject&token='+localStorage.getItem('token');
+	return this.http.get<any[]>(this.apiURL+url)
+  }
+  getfianaceProject()
+  {
+	let url = '/project/dashboard/finance-pers?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	return this.http.get<any[]>(this.apiURL+url)
+  }
+
+  getacualachieve()
   {
 	let url = '/project/dashboard/finance?db=nqproject&token='+localStorage.getItem('token');
 	return this.http.get<any[]>(this.apiURL+url)
   }
+  
+  getacualachieveProject()
+  {
+	let url = '/project/dashboard/finance?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	return this.http.get<any[]>(this.apiURL+url)
+  }
+
 
   getDliverDate(date : string , num : number , type : string)
   {
@@ -1071,6 +1137,14 @@ export class CoreService {
 
   }
    
+
+  getFourGraph()
+  {
+	let url = '/project/dashboard/achieve?db=nqproject&token='+localStorage.getItem('token');
+	return this.http.get<any[]>(this.apiURL+url);
+}
+
+  
 
 }
 

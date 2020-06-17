@@ -6,11 +6,24 @@ import { PageTitleService } from '../core/page-title/page-title.service';
 import { MatDialog } from '@angular/material';
 import { AddConsultantContractComponent } from '../add-consultant-contract/add-consultant-contract.component';
 import { CurrencyPipe } from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-contractstable',
   templateUrl: './contractstable.component.html',
-  styleUrls: ['./contractstable.component.scss']
+  styleUrls: ['./contractstable.component.scss'] , 
+  animations:[
+   
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ] 
 })
 export class ContractstableComponent implements OnInit {
 

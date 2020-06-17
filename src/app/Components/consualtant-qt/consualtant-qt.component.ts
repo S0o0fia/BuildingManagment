@@ -5,12 +5,31 @@ import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddconsualtantQTComponent } from '../addconsualtant-qt/addconsualtant-qt.component';
+import { trigger, transition, style, animate, query, state } from '@angular/animations';
 
 @Component({
+  
   selector: 'ms-consualtant-qt',
   templateUrl: './consualtant-qt.component.html',
-  styleUrls: ['./consualtant-qt.component.scss']
+  styleUrls: ['./consualtant-qt.component.scss'] ,
+  animations:[
+   
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ] 
+ 
 })
+
+
+ 
+
 export class ConsualtantQTComponent implements OnInit {
 
   consultant_qty : any [] = [];

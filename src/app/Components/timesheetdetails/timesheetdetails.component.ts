@@ -3,12 +3,25 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoreService } from 'app/Service/core/core.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { DatePipe } from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-timesheetdetails',
   templateUrl: './timesheetdetails.component.html',
   styleUrls: ['./timesheetdetails.component.scss'],
-  providers: [DatePipe]
+  providers: [DatePipe],
+  animations:[ trigger('slideInOut', [
+    transition(':enter', [
+      style({ transform: 'translateX(100%)', opacity: 0 }),
+      animate('700ms ease-in', style({ transform: 'translateX(0%)', 'opacity': 1 }))
+    ]),
+    
+    transition(':leave', [
+      style({ transform: 'translateX(0%)', opacity: 1 }),
+      animate('0ms ease-in', style({ transform: 'translateX(100%)', 'opacity': 0 }))
+    ])
+  ])
+],
 })
 export class TimesheetdetailsComponent implements OnInit {
 

@@ -96,7 +96,7 @@
                                          </tr>
                                      </thead>
                                      <tbody>
-                                        <tr *ngFor="let item of matrial; let i = index" >
+                                        <tr *ngFor="let item of matrial; let i = index" @fade>
                                            <td>{{item.name}}</td>
                                            <td>{{item.qty}}</td>
                                            <td><mat-icon (click)="removeitem(i)" matTooltip="{{'Delete' | translate}}">delete</mat-icon></td>

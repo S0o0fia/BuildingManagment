@@ -13,6 +13,13 @@ th , button , thead , span{
     font-family: 'Cairo', sans-serif;
 }
 
-h4{
+h4 , #title{
     font-family: 'Tajawal', sans-serif;
+}
+
+h4{
+    color: white; 
+    opacity: 0.5;
+    align-self: center;
+    justify-self: center;
 }

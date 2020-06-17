@@ -2,11 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { CoreService } from 'app/Service/core/core.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ModifyroleComponent } from '../modifyrole/modifyrole.component';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-role-management',
   templateUrl: './role-management.component.html',
-  styleUrls: ['./role-management.component.scss']
+  styleUrls: ['./role-management.component.scss'] , 
+  animations:[
+   
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ] 
 })
 export class RoleManagementComponent implements OnInit {
 

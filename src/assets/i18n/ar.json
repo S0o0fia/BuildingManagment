@@ -95,13 +95,12 @@
    "username" : "اسم المستخدم", 
    "Total_Vat" : "إجمالي الضريبة" ,
    "Forgot Password?": "هل نسيت كلمة المرور؟",
-   "LOGIN": "تسجيل الدخول",
+   "LOGIN": " دخول",
    "Job Title" : "المسمى الوظيفي" , 
    "" : "مقبول" , 
-   "Reset Password": "إعادة ضبط كلمة المرور",
+   "Reset Password": " استعادة كلمة المرور",
    "You’ll receive reset password instruction to you email.": "سوف تتلقى تعليمات إعادة تعيين كلمة المرور لك بالبريد الإلكتروني.",
    "Create Account?": "إنشاء حساب؟",
-   "Reset Password": "إعادة ضبط كلمة المرور",
    "Already have an account? Login": "هل لديك حساب؟ تسجيل الدخول",
    "GET STARTED": "البدء",
    "Or Signup Using": "أو الاشتراك عن طريق",
@@ -198,7 +197,7 @@
    "USERS": "المستخدمين",
    "USER PROFILE": "ملف تعريفي للمستخدم",
    "SESSIONS": "جلسات",
-   "LOGIN": "تسجيل الدخول",
+   "LOGIN": " دخول",
    "REGISTER": "تسجيل",
    "FORGOT": "نسيت",
    "LOCKSCREEN": "اقفل الشاشة",
@@ -332,7 +331,7 @@
    "Search" : "بحث",
    "Please enter your user information" : "يرجى إدخال معلومات المستخدم الخاصة بك",
    "Forgot Password?" : "هل نسيت كلمة المرور؟",
-   "SIGN IN" : "تسجيل الدخول",
+   "SIGN IN" : " دخول",
    "Click here to create one" : "انقر هنا لإنشاء واحد",
    "Back to login" : "العودة إلى تسجيل الدخول",
    "RECOVER PASSWORD" : "إستعادة كلمة المرور",
@@ -894,12 +893,9 @@
             "The value of the tax":"قيمة الضريبة",
             "Net payable, including tax":"صافي المستحق شامل الضريبة" , 
             "Pay done" : "تم السداد",
-            "Timesheet Details":"تعيين المهندس المختص"
+            "Timesheet Details":"تعيين المهندس المختص" , 
+            "Achieve Rate" : "معدلات الإنجاز" , 
+            "Monjez" : "مُنجز"
 
+          }
 
-              
-
-          
-              
-
-}

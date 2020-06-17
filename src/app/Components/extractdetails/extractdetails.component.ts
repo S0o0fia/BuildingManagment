@@ -1,11 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CoreService } from 'app/Service/core/core.service';
+import { MatSnackBar } from '@angular/material';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-extractdetails',
   templateUrl: './extractdetails.component.html',
-  styleUrls: ['./extractdetails.component.scss']
+  styleUrls: ['./extractdetails.component.scss'] , 
+  animations:[ trigger('slideInOut', [
+    transition(':enter', [
+      style({ transform: 'translateX(100%)', opacity: 0 }),
+      animate('700ms ease-in', style({ transform: 'translateX(0%)', 'opacity': 1 }))
+    ]),
+    
+    transition(':leave', [
+      style({ transform: 'translateX(0%)', opacity: 1 }),
+      animate('0ms ease-in', style({ transform: 'translateX(100%)', 'opacity': 0 }))
+    ])
+  ])
+],
 })
 export class ExtractdetailsComponent implements OnInit {
   
@@ -17,8 +31,11 @@ export class ExtractdetailsComponent implements OnInit {
   page: number = 1;
   public rowSelected : any = -1;
   id :number;
-  state : string = "";
-  constructor(private route:ActivatedRoute  , private router : Router , public service : CoreService) {
+  state : string;
+  boolconsultant : boolean = false;
+  invoice : any;
+  constructor(private route:ActivatedRoute  , private router : Router , public service : CoreService , 
+    public openSnackBar : MatSnackBar) {
     this.projectname = localStorage.getItem('projectname');
     this.id = +( this.route.snapshot.paramMap.get('id') );
    }
@@ -26,24 +43,76 @@ export class ExtractdetailsComponent implements OnInit {
    paid()
    {
      this.service.setStateInvoice(this.id , 'paid').subscribe(
-       data=>{location.reload()}, 
+       data=>{
+        let msg = this.openSnackBar.open('تم دفع المستخلص', 'إلغاء');
+        if(msg)
+        {
+        location.reload();
+        }
+       }, 
        err=>console.log(err)
      )
    }
 
+   ApproveDraft()
+   {
+      this.service.setStateInvoice(this.id , 'waiting').subscribe(
+      data=>{
+        this.state='waiting';
+        let msg = this.openSnackBar.open('تم اعتماد المسودة', 'إلغاء');
+        if(msg)
+        {
+        location.reload();
+        }
+   
+      }, 
+      err=>console.log(err)
+    )
+   }
+
+   Approve()
+   {
+      this.service.setStateInvoice(this.id , 'accepted').subscribe(
+      data=>{
+        this.state='accepted';
+        let msg = this.openSnackBar.open('تم اعتماد المستخلص', 'إلغاء');
+        if(msg)
+        {
+        location.reload();
+        }
+   
+      }, 
+      err=>console.log(err)
+    )
+   }
+
+
+   Rejected()
+   {
+      this.service.setStateInvoice(this.id , 'rejected').subscribe(
+      data=>{
+        this.state='rejected';
+        let msg = this.openSnackBar.open('تم رفض المستخلص', 'إلغاء');
+        if(msg)
+        {
+        location.reload();
+        }
+   
+      }, 
+      err=>console.log(err)
+    )
+   }
+   
   ngOnInit() {
+    
     this.service.getInvoice().subscribe(
-      data=> {this.Invoices = data  as any[] ;
-        this.Invoices.forEach(element => {
-          if(element.id == this.id)
+      data=> {this.Invoices = data as any[]
+        this.Invoices.forEach(e=>{
+          if(e.id == this.id)
           {
-            console.log(element);
-            element.state = this.state;
-          
+           this.state = e["state"];
           }
-        });
-        
-       
+        })
       }, 
       err => console.log(err)
     )
@@ -66,6 +135,9 @@ export class ExtractdetailsComponent implements OnInit {
     );
   }
 
-
+  back()
+  {
+    this.router.navigate(['/home/abstracts']);
+  }
 
 }

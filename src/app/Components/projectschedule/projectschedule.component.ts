@@ -2,11 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { CoreService } from 'app/Service/core/core.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ModifyprojectscheduleComponent } from '../modifyprojectschedule/modifyprojectschedule.component';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-projectschedule',
   templateUrl: './projectschedule.component.html',
-  styleUrls: ['./projectschedule.component.scss']
+  styleUrls: ['./projectschedule.component.scss'] , 
+  animations:[
+   
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ] 
 })
 export class ProjectscheduleComponent implements OnInit {
 

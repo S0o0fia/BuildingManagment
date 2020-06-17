@@ -6,11 +6,24 @@ import { CoreService } from 'app/Service/core/core.service';
 import { PageTitleService } from '../core/page-title/page-title.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-countdetails',
   templateUrl: './countdetails.component.html',
-  styleUrls: ['./countdetails.component.scss']
+  styleUrls: ['./countdetails.component.scss'] ,
+  animations:[
+   
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ] 
 })
 export class CountdetailsComponent implements OnInit {
 

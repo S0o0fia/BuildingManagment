@@ -10,12 +10,26 @@ import {map, startWith} from 'rxjs/operators';
 import { MatDialogRef } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { async } from '@angular/core/testing';
+import { coreServices } from 'videogular2/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
 @Component({
   selector: 'ms-add-extract',
   templateUrl: './add-extract.component.html',
-  styleUrls: ['./add-extract.component.scss']
+  styleUrls: ['./add-extract.component.scss'] ,
+  animations: [
+    trigger('fade', [
+       state('in', style({opacity: 1})),
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(600 )
+      ]),
+      transition(':leave',
+        animate(600, style({opacity: 0})))
+    ])
+  ], 
 })
 export class AddExtractComponent implements OnInit {
   minDate : Date;
@@ -25,8 +39,8 @@ export class AddExtractComponent implements OnInit {
   extract_date : Date = new Date();
   total_work : number = 0;
   discounts : string = "";
-  total_discount : number = 0;
-  Net_amout : number = 0;
+  total_discount : number = 0;  
+  Net_amout: number = 0;
   total_Vat : number = 0;
   paid : number = 0;
   ext: Extract ;
@@ -117,7 +131,6 @@ export class AddExtractComponent implements OnInit {
     let to_exDate = formatDate(this.to_extract_date, format, locale);
     
     this.ext= {
-
       Total_vat : this.total_Vat ,
       date_from : from_exDate ,
       date_to : to_exDate ,
@@ -129,52 +142,61 @@ export class AddExtractComponent implements OnInit {
       total_price: this.Net_amout ,
       invoice_type : this.invoice_type
     };
-    console.log(this.ext)
+   
     this.service.createInvoice(this.ext).subscribe(
       data=>{
         this.extract_id = data['invoice_id'];
-        console.log(this.extract_id);
-        this.discount.forEach(e => {
-          this.service.createInvoiceDiscount({
-            name : e['discount'] , 
-            total : e['amount'] , 
-            project_invoice_id : this.extract_id
-          }).subscribe(
-            data=>{
-              this.ApprovedCountItem.forEach(e2 => {
-                this.service.createInvoiceitem({
-                  approved_qty : e2.approved_qty , 
-                  extract_id : this.extract_id , 
-                  item_name : e2.name , 
-                  item_number : e2.number , 
-                  p_approved_qty : e2.p_approved_qty , 
-                  price : e2.price , 
-                  qty : e2.qty
+        console.log(data);
+         //Create Invoice Item 
+         this.ApprovedCountItem.forEach(e2 => {
+         
+           this.service.createInvoiceitem({
+            approved_qty : e2.approved_qty ,
+            extract_id : this.extract_id , 
+            item_name : e2.name , 
+            item_number : e2.number , 
+            p_approved_qty : e2.p_approved_qty , 
+            price : e2.price , 
+            qty : e2.qty
+          })
+        .subscribe(
+          data=>{
+            console.log(data);
+            console.log(this.ApprovedCountItem)
+            e2['details'].forEach(element => {
+              this.service.CountItemwithInvoice(this.extract_id , element.id).subscribe(
+                data=>{console.log(data),
+                  this.discount.forEach(e => {
+                    this.service.createInvoiceDiscount({
+                      name : e['discount'] , 
+                      total : e['amount'] , 
+                      project_invoice_id : this.extract_id
                 }).subscribe(
-                  data=> {
+                  data=>{console.log(data)
                     let msg = this.openSnackBar("تم الإضافة بنجاح" , "إالغاء" );
                     if(msg)
                     {
-                     this.router.navigate(['/home/abstracts']);
+                      location.reload();
                     }
-                  } , 
+                  },
                   err=>console.log(err)
-                )
-              });
-              
-
-
-            } , 
-            err=>console.log(err)
-
-          );
-          
-        });
-       
-      } ,
+                )})              
+                
+                },
+                err=>console.log(err)
+              )
+            });       
+          } ,
+          err=>console.log(err)
+        );
+         })
+        
+      },
       err => console.log(err)
     );
-    
+
+
+   
 
   } 
 
@@ -198,8 +220,7 @@ export class AddExtractComponent implements OnInit {
 
     });   
     console.log(this.approved);
-
- }
+  }
 
  Adddiscount()
  {

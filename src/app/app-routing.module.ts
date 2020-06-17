@@ -56,7 +56,7 @@ const appRoutes: Routes = [
        
          {
             path: "crm",
-            component : CrmComponent
+            component : ProjectReportComponent
          },
          {
             path:"createproject",
@@ -111,8 +111,8 @@ const appRoutes: Routes = [
             component : ConsultantExtractDetailComponent
          },
          {
-            path: "projectreport" , 
-            component : ProjectReportComponent
+            path: "projectslist" , 
+            component : CrmComponent
          },
             {
             path: "AddExtractConsultant" , 

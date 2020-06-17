@@ -9,11 +9,23 @@ import { formatDate } from '@angular/common';
 import { Matetrial } from 'app/Models/Material/matetrial';
 import { Mirdata } from 'app/Models/MIR Request/mirdata';
 import { Mat } from 'app/Models/Material/mat';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-addrecieveditem',
   templateUrl: './addrecieveditem.component.html',
-  styleUrls: ['./addrecieveditem.component.scss']
+  styleUrls: ['./addrecieveditem.component.scss'],
+  animations: [
+    trigger('fade', [
+       state('in', style({opacity: 1})),
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(600 )
+      ]),
+      transition(':leave',
+        animate(600, style({opacity: 0})))
+    ])
+  ],  
 })
 export class AddrecieveditemComponent implements OnInit {
 

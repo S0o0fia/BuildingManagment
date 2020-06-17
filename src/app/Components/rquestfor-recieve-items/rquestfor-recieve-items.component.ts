@@ -4,11 +4,24 @@ import { PageTitleService } from '../core/page-title/page-title.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CoreService } from 'app/Service/core/core.service';
 import { Router } from '@angular/router';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-rquestfor-recieve-items',
   templateUrl: './rquestfor-recieve-items.component.html',
-  styleUrls: ['./rquestfor-recieve-items.component.scss']
+  styleUrls: ['./rquestfor-recieve-items.component.scss'] , 
+  animations:[
+   
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ] 
 })
 export class RquestforRecieveItemsComponent implements OnInit {
   getMIR : any = [];

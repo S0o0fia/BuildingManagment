@@ -5,11 +5,24 @@ import { Rfi } from 'app/Models/RFI/rfi';
 import { TranslateService } from '@ngx-translate/core';
 import { CoreService } from 'app/Service/core/core.service';
 import { ProjectitemsComponent } from '../projectitems/projectitems.component';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-projectitemslist',
   templateUrl: './projectitemslist.component.html',
-  styleUrls: ['./projectitemslist.component.scss']
+  styleUrls: ['./projectitemslist.component.scss'] , 
+  animations:[
+   
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ] 
 })
 export class ProjectitemslistComponent implements OnInit {
   itemslist: any[]=[];

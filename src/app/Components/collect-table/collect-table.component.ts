@@ -9,11 +9,23 @@ import {map, startWith} from 'rxjs/operators';
 import { MatDialogRef } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-collect-table',
   templateUrl: './collect-table.component.html',
-  styleUrls: ['./collect-table.component.scss']
+  styleUrls: ['./collect-table.component.scss'] ,
+  animations: [
+    trigger('fade', [
+       state('in', style({opacity: 1})),
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(600 )
+      ]),
+      transition(':leave',
+        animate(600, style({opacity: 0})))
+    ])
+  ],  
 })
 export class CollectTableComponent implements OnInit {
 

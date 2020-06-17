@@ -1,11 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreService } from 'app/Service/core/core.service';
 import { formatDate } from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-approve-quantities',
   templateUrl: './approve-quantities.component.html',
-  styleUrls: ['./approve-quantities.component.scss']
+  styleUrls: ['./approve-quantities.component.scss'] , 
+  animations:[
+   
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ] 
 })
 export class ApproveQuantitiesComponent implements OnInit {
 

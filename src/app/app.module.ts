@@ -117,6 +117,12 @@ import { EasyPieChartModule } from 'ng2modules-easypiechart';
 import { ProjectitemslistComponent } from './Components/projectitemslist/projectitemslist.component';
 import { TimesheetdetailsComponent } from './Components/timesheetdetails/timesheetdetails.component';
 import { UpdatequantityComponent } from './Components/updatequantity/updatequantity.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+
+import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { NgxEchartsModule } from 'ngx-echarts';
+
+
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyAG-ezRaKAupLlvKAazxRPa9PFnMlRFiGA",
@@ -145,7 +151,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		AgmCoreModule.forRoot({
 			apiKey: 'AIzaSyAG-ezRaKAupLlvKAazxRPa9PFnMlRFiGA'
 		  }),
-		  
+		  NgxUiLoaderModule,
 	    ChartsModule,
 		BrowserAnimationsModule, 
 		FileUploadModule ,
@@ -168,6 +174,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		VgCoreModule,
 		VgControlsModule,
 		VgOverlayPlayModule,
+		BrowserAnimationsModule,
 		VgBufferingModule,
 		VgStreamingModule,
         HttpClientModule,
@@ -208,14 +215,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		MatDialogModule,
 		MatGridListModule,
 		ToastrModule.forRoot(),
-		
+		NgxUiLoaderModule,
 		LoadingBarRouterModule,
 		LoadingBarRouterModule,
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
 		FormsModule,
-	    
+	    NgxEchartsModule  ,
 		RoutingModule,
 		FlexLayoutModule,
 		NgbModalModule.forRoot(),
@@ -259,12 +266,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		MatRadioModule,
 		MatDialogModule,
 		MatGridListModule,
-		ToastrModule.forRoot(),
-		
+		ToastrModule.forRoot(),		
 		LoadingBarRouterModule,
 		LoadingBarRouterModule,
 		RouterModule,
-	
+		NgxSpinnerModule,
 		CommonModule,
 		MatCardModule,
 		FlexLayoutModule,

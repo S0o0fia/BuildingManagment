@@ -1,5 +1,5 @@
 <div>
-    <mat-card dir="rtl"  fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="70" style="margin:auto;">
+    <mat-card  @slideInOut dir="rtl"  fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="70" style="margin:auto;">
             <div class="gene-card-title">
                <div fxLayout="column">
                <div fxLayout="row" fxLayoutAlign="center">
@@ -10,12 +10,41 @@
             
               
                   <div class="row"  fxLayoutAlign="center">
-                  <button class="mrgn-b-xs" mat-raised-button color="primary"
-                  [disabled]="state == 'paid'"
-                  (click)="paid()">
-                     {{'Pay done'|translate}}
-                 </button>
+                   
+                <button (click)="back()" class="mrgn-b-xs" mat-raised-button color="primary">
+                  <mat-icon>exit_to_app</mat-icon> 
+                  {{'Back'|translate}}</button>
+                 
+                 
+                <!--Approve Draft-->
+                 <button class="mrgn-b-xs" mat-raised-button color="primary"
+                 (click)="ApproveDraft()" [disabled]="state != 'draft'">
+                 {{'Draft Approve'|translate}}</button>
+
+                 <!--Approve-->
+                 <button  class="mrgn-b-xs" mat-raised-button color="accent"
+                 [disabled]="state != 'waiting'"
+                 (click)="Approve()"
+                 >{{'accepted'|translate}}</button>
+                 <!--Rejected-->
+                 <button class="mrgn-b-xs" mat-raised-button color="warn" 
+                 [disabled]="state != 'waiting'"
+                 (click)="Rejected()" >
+                    {{'rejected'|translate}}</button>
+
+                
                   </div>
+                  
+                 
+                  <div class="row"  fxLayoutAlign="center">
+                         <!--Paid-->
+                    <button class="mrgn-b-xs" mat-raised-button color="accent"
+                    [disabled]="state == 'paid'"
+                    (click)="paid()">
+                       {{'Pay done'|translate}}
+                   </button>
+                  </div>
+
                </div>
                
 
@@ -124,7 +153,7 @@
        </div>
     
       <div>
-         <mat-card>
+         <mat-card @slideInOut>
             <div class="gene-card-title">
                <div fxLayout="row" fxLayoutAlign="center">
                   <div fxLayout="column" fxLayoutAlign="center">
@@ -242,7 +271,7 @@
       </div>
 
       <div>
-      <mat-card>
+      <mat-card @slideInOut>
          <div class="gene-card-title">
             <div fxLayout="row" fxLayoutAlign="center">
                <div fxLayout="column" fxLayoutAlign="center">

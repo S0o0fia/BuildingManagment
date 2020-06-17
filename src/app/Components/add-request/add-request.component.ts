@@ -11,7 +11,7 @@ import { InspctionId } from 'app/Models/inspction_id/inspction-id';
 import {map, startWith} from 'rxjs/operators';
 import { FileUploader , FileSelectDirective } from 'ng2-file-upload';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'app/Service/custompipe/format-datepicker';
-import { AnimationQueryOptions } from '@angular/animations';
+import { AnimationQueryOptions, trigger, transition, style, animate, state } from '@angular/animations';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 //import { threadId } from 'worker_threads';
@@ -20,6 +20,18 @@ const URL = 'http://nqraait.ddns.net:8070/api/test?db=nqproject&token='+localSto
   selector: 'ms-add-request',
   templateUrl: './add-request.component.html',
   styleUrls: ['./add-request.component.scss'],
+  animations: [
+    trigger('fade', [
+       state('in', style({opacity: 1})),
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(600 )
+      ]),
+      transition(':leave',
+        animate(600, style({opacity: 0})))
+    ])
+  ],  
+
   providers: [
     {provide: DateAdapter, useClass: AppDateAdapter},
     // {provide: APP_DATE_FORMATS, useValue: APP_DATE_FORMATS}
@@ -75,7 +87,7 @@ base64string:any;
   image: any;
   imageSrc: any;
   filename: any[]=[];
-
+  project_item : number;
   myControl = new FormControl();
   myControl1 = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -242,9 +254,13 @@ multi : boolean = false ;
     //this to get the request number from the from 
     request(value , type)
     {
-      //alert("value: "+value+", type: "+type);
+      this.services.getQty_tbl().subscribe(
+        data=> this.quantitys = data as any[],
+        err=>console.log(err)
+    )
+     
+     
       this.req_number = value;
-
       this.Project_list.forEach(element => {
         if(element.project_type == "multi")
         {
@@ -261,15 +277,16 @@ multi : boolean = false ;
            //to get the item fro Qty-tble based on id of work type 
            this.services.getQty_tbl().subscribe(
             data=> {
-
+              
               this.quantitys = [];
               data.forEach(element => {
 
-                if(element.main_section_name  == type)
+                if(element.main_section_name == type && element.first_subsection_id == this.project_item)
                 {
                   this.quantitys.push(element)
                 }
               });
+            
               this.filteredNumbers = this.myControl.valueChanges
             .pipe(
               startWith(''),
@@ -292,7 +309,16 @@ multi : boolean = false ;
         this.services.getQty_tbl().subscribe(
           data=> {
             this.quantitys = [];
-              this.quantitys = data ;
+           
+             data.forEach(element=>
+              {
+                
+                if(element.main_section_name == type)
+                {
+                  this.quantitys.push(element)
+                }
+              });
+     
               console.log("qty_tbl "+JSON.stringify(this.quantitys));
             this.filteredNumbers = this.myControl.valueChanges
           .pipe(
@@ -309,8 +335,7 @@ multi : boolean = false ;
           err => console.log(err)
         );
               }
-
-
+        
     }
     //Method Action To remove item when click on delete icon on items Tables 
     
@@ -319,73 +344,8 @@ multi : boolean = false ;
     {
       //alert("value: "+value+", type: "+type);
       this.req_number = value;
-
-      this.Project_list.forEach(element => {
-        if(element.project_type == "multi")
-        {
-           this.multi = true;
-        }
-        else 
-        {
-          this.multi = false;
-        }
-      });
-      
-      if(this.multi == true)
-      {
-           //to get the item fro Qty-tble based on id of work type 
-           this.services.getQty_tbl().subscribe(
-            data=> {
-
-              this.quantitys = [];
-              data.forEach(element => {
-
-                if(element.main_section_name  == type)
-                {
-                  this.quantitys.push(element)
-                }
-              });
-              this.filteredNumbers = this.myControl.valueChanges
-            .pipe(
-              startWith(''),
-              map(value => this._filter(value))
-            );
-      
-            this.filteredNames = this.myControl1.valueChanges
-            .pipe(
-              startWith(''),
-              map(value => this._filter1(value))
-            );
-            }, 
-            err => console.log(err)
-          );
-      }
-
-      else 
-      
-      {
-        this.services.getQty_tbl().subscribe(
-          data=> {
-            this.quantitys = [];
-              this.quantitys = data ;
-              console.log("qty_tbl "+JSON.stringify(this.quantitys));
-            this.filteredNumbers = this.myControl.valueChanges
-          .pipe(
-            startWith(''),
-            map(value => this._filter(value))
-          );
-    
-          this.filteredNames = this.myControl1.valueChanges
-          .pipe(
-            startWith(''),
-            map(value => this._filter1(value))
-          );
-          }, 
-          err => console.log(err)
-        );
-              }
-
-
+      this.project_item = value;
+     
     }
 
     //Action Method when click Cancel button

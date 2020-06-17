@@ -7,11 +7,24 @@ import { Rfi } from 'app/Models/RFI/rfi';
 import { GetRFI } from 'app/Models/RFI/get-rfi';
 import { NewItemRFI } from 'app/Models/Items/new-item-rfi';
 import { Router } from '@angular/router';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ms-request-for-inspection',
   templateUrl: './request-for-inspection.component.html',
-  styleUrls: ['./request-for-inspection.component.scss']
+  styleUrls: ['./request-for-inspection.component.scss'] , 
+  animations:[
+   
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ] 
 })
 export class RequestForInspectionComponent implements OnInit {
 

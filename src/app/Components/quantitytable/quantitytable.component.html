@@ -1,4 +1,4 @@
-<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100"  @tabletoggle>
    <mat-card>
       <div class="gene-card-title">
          <div fxLayout="row" fxLayoutAlign="space-around center">
@@ -112,7 +112,9 @@
                                     <mat-icon>arrow_drop_down</mat-icon>
                                  </button>
                                  <ng-template #close>
-                                       <button color="primary"  mat-icon-button matTooltip="{{'Hide'|translate}}" >
+                                       <button color="primary"  mat-icon-button matTooltip="{{'Hide'|translate}}" 
+                                     
+                                       >
                                              <!-- [matMenuTriggerFor]="menu" -->
                                           <mat-icon>arrow_drop_up</mat-icon>
                                        </button>
@@ -155,11 +157,11 @@
                       
                      </tr>
 
-                     <tr *ngIf="rowSelected==data.id" style="background-color: #C1C7C9;">
+                     <tr *ngIf="rowSelected==data.id" style="background-color: #C1C7C9;" >
                            <td></td>
                            <td></td>
-                           <td colspan="5">
-                               <table class="table table-striped">
+                           <td colspan="7">
+                               <table class="table table-striped"  @fade>
                                  <th>{{'Items Type'|translate}}</th>
                                  <th>{{'Unit'|translate}}</th>
                                 <th>{{'Unit Price'|translate}}</th>

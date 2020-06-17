@@ -16,12 +16,33 @@ import { DiscountComponent } from '../discount/discount.component';
 import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
 import { CurrencyPipe } from '@angular/common';
 import { UpdatequantityComponent } from '../updatequantity/updatequantity.component';
+import { trigger, state, transition, animate  , style, query, stagger} from '@angular/animations';
 
 
 @Component({
   selector: 'ms-quantitytable',
   templateUrl: './quantitytable.component.html',
   styleUrls: ['./quantitytable.component.scss'],
+  animations:[
+    trigger('fade' ,[
+      
+      transition(":enter" , [
+        style({opacity : 0}),
+        animate(1000 , style({background:'white' , opacity:1})
+        )
+      ])
+    ]) ,
+
+    trigger('tabletoggle' , [
+      transition(':enter', [
+        style({ opacity: 0 }), animate('1000ms', style({ opacity: 1 }))]
+      ),
+      transition(':leave',
+        [style({ opacity: 1 }), animate('1000ms', style({ opacity: 0 }))]
+      )
+    ]) 
+    
+  ]
 
 })
 

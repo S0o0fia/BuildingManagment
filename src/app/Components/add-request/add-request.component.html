@@ -93,12 +93,12 @@
                               </tr>
                               </thead>
                               <tbody>
-                                 <tr *ngFor="let file of files; index as i">
+                                 <tr *ngFor="let file of files; index as i" @fade>
                                     <td>
                                        {{file.name}}
                                     </td>
                                     <td>
-                                    {{file.size / 1024}}
+                                      {{file.size / 1024}}
                                     </td>
                                     <td>
                                        <button mat-icon-button color="primary" matTooltip="{{'Delete'|translate}}" (click)="removeAttachment(i)">
@@ -307,7 +307,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       <tr *ngFor="let item of itemDate; let i = index" >
+                                       <tr *ngFor="let item of itemDate; let i = index"  @fade>
                                           <td>{{item.inspect_location}}</td>
                                           <td>{{item.qty}}</td>
                                           <!-- <td>{{item.total}}</td> -->

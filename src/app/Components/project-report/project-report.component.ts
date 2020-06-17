@@ -53,12 +53,14 @@ public barChartOptions:any = {
    //lables
    public mbarChartLabels1 :string[] =[];
    public mbarChartLabels2 :string[] =[];
+   public mbarChartLabels3 :string[] =[];
+   public mbarChartLabels4 :string[] =[];
    //Data
    
    public barChartData:any[] = [];
    public barChartData1:any[]=[];
    public barChartData2:any[]=[];
-   public barChartData3:any[]=[{data:[120] , label:"Planned completion"}];
+   public barChartData3:any[]=[{data:[120] , label:"نسبة الإنجاز الفعلية"}];
    public barChartData4:any[]=[{data:[50 ,120] , label:"Actual Achievement"}];
 //options  for type
    public barChartType:string = 'bar';
@@ -78,56 +80,54 @@ public barChartOptions:any = {
    public total_excuted : number []=[]; 
    public SPI : any[]=[]; 
    public financePrecentage : any[] =[];
+   public techPrecentage: any[]=[];
+   public acualpercentage : any[]=[];
+   public acualplanned_pers : any[]=[];
     
   public percent3: number;
  
   public options3: any;
 
+  
  
    //Color
    public barChartColors:Array<any> = [
       {
-        backgroundColor: 'rgb(66, 104, 113)',
-        borderColor: 'rgb(66, 104, 113)',
+        backgroundColor: '#0070D1',
+        borderColor: '#0070D1',
         pointBackgroundColor: 'rgba(105,159,177,1)',
         pointBorderColor: '#fafafa',
         pointHoverBackgroundColor: '#fafafa',
-        pointHoverBorderColor: 'rgb(66, 104, 113)'
+        pointHoverBorderColor: '#0070D1'
       },
       { 
-         backgroundColor: 'rgb(208, 174, 74)',
-         borderColor: 'rgb(208, 174, 74)',
+         backgroundColor: '#ff3db4',
+         borderColor: '#ff3db4',
          pointBackgroundColor: 'rgba(77,20,96,1)',
          pointBorderColor: '#fff',
          pointHoverBackgroundColor: '#fff',
-         pointHoverBorderColor: 'rgb(208, 174, 74)'
-       }
+         pointHoverBorderColor: '#ff3db4'
+       } ,
+       { 
+         backgroundColor: '#02bc77',
+         borderColor: '#02bc77',
+         pointBackgroundColor: 'rgba(77,20,96,1)',
+         pointBorderColor: '#fff',
+         pointHoverBackgroundColor: '#fff',
+         pointHoverBorderColor: '#02bc77'
+       } ,
+
+       { 
+         backgroundColor: '#f59c1a',
+         borderColor: '#f59c1a',
+         pointBackgroundColor: 'rgba(77,20,96,1)',
+         pointBorderColor: '#fff',
+         pointHoverBackgroundColor: '#fff',
+         pointHoverBorderColor: '#f59c1a'
+       } ,
     ];
    
-      public barChartColors1:Array<any> = [
-          { 
-            backgroundColor: 'rgb(66, 104, 113)',
-            borderColor: 'rgb(66, 104, 113)',
-            pointBackgroundColor: 'rgba(77,20,96,1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgb(208, 174, 74)'
-          }
-       ];
-   
-       public barChartColors2:Array<any> = [
-         { 
-           backgroundColor: 'rgb(162, 98, 60)',
-           borderColor: 'rgb(162, 98, 60)',
-           pointBackgroundColor: 'rgba(77,20,96,1)',
-           pointBorderColor: '#fff',
-           pointHoverBackgroundColor: '#fff',
-           pointHoverBorderColor: 'rgb(162, 98, 60)'
-         }
-      ];
-    
- 
-  
+      
    // events
    public chartClicked(e:any):void {
      console.log(e);
@@ -157,7 +157,7 @@ public barChartOptions:any = {
 
    this.percent3 = 75;
    this.options3 = {
-        barColor: '#426871',
+        barColor: '#02bc77',
         trackColor: '#f9f9f9',
         scaleColor: '#dfe0e0',
         scaleLength: 5,
@@ -174,9 +174,13 @@ public barChartOptions:any = {
   }
 
    // Pie
+  newpieChartOptions : any;
+  newpieChartOptions2 : any;
+  option : any;
   
     ngOnInit() {
-
+   
+      
    this.service.getRFIChart().subscribe(
       data=> {
          this.data = data[0] as any[]
@@ -185,24 +189,54 @@ public barChartOptions:any = {
           this.rejected = this.data['rejected'];
           this.waiting = this.data['waiting'];
           this.draft = this.data['draft'];
-          this.pieChartData2 = 
-           [   
-              this.accepted , this.aceeptedwithcomment , this.draft , this.waiting , this.rejected
-           ];
-           this.pieChartType2 = 'pie';
-          this.pieChartColors2 = [{
-          backgroundColor: ['#426871', '#478a99' ,'#197bd1', '#d0ae4a', '#a2623c']
-
-     
-  
-        }];
-   this.PieChartOptions1 = {
-      elements: {
-         arc: {
-            borderWidth: 0
-         }
-      }
-   }
+          this.newpieChartOptions = {
+            tooltip : {
+               trigger: 'item',
+               formatter: "{b} : {c} ({d}%)"
+            },
+            legend: {
+               bottom: 10,
+                 left: 'center',
+                 x : 'center',
+                 y : 'bottom'
+             },
+            series : [
+               {
+                  type: 'pie',
+                  radius : '75%',
+                  center: ['50%', '50%'],
+                  selectedMode: 'single',
+                  itemStyle : {
+                     normal : {
+                        label : {
+                           show : false
+                        },
+                        labelLine : {
+                           show : false
+                        }
+                     }
+                  },
+                  data:[
+                     {
+                        label: {
+                           normal: {
+                              backgroundColor: '#eee',
+                              borderColor: '',
+                              borderWidth: 1,
+                              borderRadius: 4
+                           }
+                        }
+                     },
+                     {value:this.accepted, name: 'مقبول', itemStyle: {color: '#00acac'}},
+                     {value:this.aceeptedwithcomment, name: 'مقبول بملاحظات', itemStyle: {color: '#9ACD32'}},
+                     {value:this.waiting, name: 'بانتظار الاعتماد', itemStyle: {color: '#f59c1a'}},
+                     {value:this.rejected, name: 'مرفوض', itemStyle: {color: '#C00000'}},
+                     {value:this.draft , name: 'مسودة', itemStyle: {color: '#3498db'}}
+                  ]
+               }
+            ]
+         };
+      
 
           
       
@@ -218,77 +252,134 @@ public barChartOptions:any = {
           this.rejectedc = this.dataCount['rejected'];
           this.waitingc = this.dataCount['waiting'];
           this.draftc = this.dataCount['draft'];
-          this.pieChartData1 = 
-           [   
-              this.acceptedc , this.draftc , this.waitingc , this.rejectedc
-           ];
-           this.pieChartType1 = 'pie';
-          this.pieChartColors1 = [{    
-                  backgroundColor: ['#426871','#197bd1', '#d0ae4a', '#a2623c'] }];
-   this.PieChartOptions1 = {
-      elements: {
-         arc: {
-            borderWidth: 0
-         }
-      }
-   }
-
+          this.newpieChartOptions2 = {
+            tooltip : {
+               trigger: 'item',
+               formatter: "{b} : {c} ({d}%)"
+            },
+            legend: {
+               bottom: 10,
+                 left: 'center',
+                 x : 'center',
+                 y : 'bottom'
+             },
+            series : [
+               {
+                  type: 'pie',
+                  radius : '75%',
+                  center: ['50%', '50%'],
+                  selectedMode: 'single',
+                  itemStyle : {
+                     normal : {
+                        label : {
+                           show : false
+                        },
+                        labelLine : {
+                           show : false
+                        }
+                     }
+                  },
+                  data:[
+                     {
+                        label: {
+                           normal: {
+                              backgroundColor: '#eee',
+                              borderColor: '',
+                              borderWidth: 1,
+                              borderRadius: 4
+                           }
+                        }
+                     },
+                     {value:this.acceptedc, name: 'مقبول', itemStyle: {color: '#00acac'}},
+                     {value:this.aceeptedwithcommentc, name: 'مقبول بملاحظات', itemStyle: {color: '#9ACD32'}},
+                     {value:this.waitingc, name: 'بانتظار الاعتماد', itemStyle: {color: '#f59c1a'}},
+                     {value:this.rejectedc, name: 'مرفوض', itemStyle: {color: '#C00000'}},
+                     {value:this.draftc , name: 'مسودة', itemStyle: {color: '#3498db'}}
+                  ]
+               }
+            ]
+         };
    
       } , 
       err=> console.log (err)
    )
     
 
-   //Done Contarct 
-   this.service.getDoneContract().subscribe(
-      data=> {
-        data.forEach(element => {
-           this.mbarChartLabels1.push(element.contract_no);
-           this.percentage.push(element.percentage);
-           this.planned_pers.push(element.planned_pers);
-           this.total_excuted.push(element.total_excuted); 
-            
-        });
-
-        this.barChartData = [ {data : this.percentage , label : "Precentage" } ,
-        {data : this.planned_pers , label : "Planned Precentage"} ];
-      
-      },
-
-      err=>console.log(err)
-   )
-   //SPI
-    this.service.getSPI().subscribe(
+  
+    //Actual Achienvement 
+    this.service.getFourGraph().subscribe(
        data=>{
           data.forEach(element => {
-             this.mbarChartLabels2.push(element.contract_no);
-             this.SPI.push(element.SPI);
-          },
-           this.barChartData1 = [{data: this.SPI , label:"SPI"}]
-
-          );
-       },
-       err=>console.log(err)         
-    );
-
-    //Finance
-    this.service.getfianace().subscribe(
-       data=>{   
-         data.forEach(element => {
-           this.mbarChartLabels2.push(element.contract_no);
-            this.financePrecentage.push(element.percentage);
-         })
-         this.barChartData2 = [{data:this.financePrecentage , label:"Precentage"}]
+             this.planned_pers.push(element.planned_pers);
+             this.percentage.push(element.percentage)
+             this.financePrecentage.push(element.paid_pers)
+             this.acualplanned_pers.push(element.spended_pers);
+             this.mbarChartLabels4.push(element.contract_no);
+             
+          });
+          this.barChartData4 = [
+          {data:this.financePrecentage , label:"نسبة الانجاز المالية"},
+          {data:this.percentage , label:"نسبة الإنجاز الفعلية"}  , 
+          {data:this.planned_pers , label:"نسبةالإنجاز المخططة"} ,
+          {data:this.acualplanned_pers , label:"المدة المنقضية"}]
        },
        err=>console.log(err)
     )
-     this.pageTitleService.setTitle("المنصة التفاعلية");
-     
-
 
 }
 
+//for S curve 
+public lineChartOptions :any = {
+   responsive: true,
+   maintainAspectRatio: false,
+   scales: {
+      yAxes: [{
+         gridLines: {
+           display: true,
+           drawBorder: false
+         },
+         scaleLabel: {
+            display: true,
+            labelString: 'Cost'
+         },
+         ticks: {
+           stepSize: 50
+         }
+       }],
+      xAxes: [{
+         gridLines: {
+           display: false,
+           drawBorder: false
+         },
+         scaleLabel: {
+            display: true,
+            labelString: 'Time'
+         },
+      }]
+   },
+   tooltip: {
+      enabled: true
+   },
+   legend: {
+      display: false
+   },
+}
 
+   //line chart color
+public color: Array <any> = [
+   {
+      lineTension: 0.4,
+      borderColor: '#1565c0',
+      pointBorderColor: '#1565c0',
+      pointBorderWidth: 2,
+      pointRadius: 7,
+      fill: false,
+      pointBackgroundColor: '#FFFFFF',
+      borderWidth: 3
+   }
+];
+
+  
 
 }
 
