@@ -117,12 +117,12 @@ import { EasyPieChartModule } from 'ng2modules-easypiechart';
 import { ProjectitemslistComponent } from './Components/projectitemslist/projectitemslist.component';
 import { TimesheetdetailsComponent } from './Components/timesheetdetails/timesheetdetails.component';
 import { UpdatequantityComponent } from './Components/updatequantity/updatequantity.component';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 
-import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { NgxUiLoaderModule, NgxUiLoaderService } from  'ngx-ui-loader';
 import { NgxEchartsModule } from 'ngx-echarts';
-
-
+ import * as echarts from 'ngx-echarts';
+import { ReloadComponent } from './Components/reload/reload.component';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyAG-ezRaKAupLlvKAazxRPa9PFnMlRFiGA",
@@ -222,7 +222,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		BrowserAnimationsModule,
 		FormsModule,
 		FormsModule,
-	    NgxEchartsModule  ,
+		NgxEchartsModule,
+	  
 		RoutingModule,
 		FlexLayoutModule,
 		NgbModalModule.forRoot(),
@@ -365,7 +366,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		ModifyprojectscheduleComponent,
 		ProjectitemslistComponent,
 		TimesheetdetailsComponent,
-		UpdatequantityComponent
+		UpdatequantityComponent,
+		ReloadComponent
 
 	
 		
@@ -412,8 +414,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		ExcelService,
 		NumberFormatPipe,
 		D3ChartService,
-
-	
+		NgxSpinnerService , 
+		NgxUiLoaderService,
 		{
 			provide: PERFECT_SCROLLBAR_CONFIG,
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

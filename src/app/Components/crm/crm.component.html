@@ -54,7 +54,7 @@
                                  <td>{{data.Status}}</td>
                                  <td>
                                     <button mat-icon-button color="primary" matTooltip="{{'Delete'|translate}}"
-                                    (click)="deleteProject(data.id)">
+                                    (click)="deleteProject(data.id)" *ngIf="candelete">
                                  <mat-icon>delete</mat-icon>
                                  </button>
                                    <button mat-icon-button color="primary" matTooltip="{{'Active Stage'|translate}}"

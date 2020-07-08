@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { CoreService } from 'app/Service/core/core.service';
+import { service } from 'powerbi-client';
+import { HttpClient } from '@angular/common/http';
 
 export interface ChildrenItems {
   state: string;
@@ -25,6 +28,14 @@ const MENUITEMSAdmin = [
    
   },
   {
+    state: 'projectslist',
+    name: 'Projects List',
+    type: 'link',
+    icon: 'note',
+
+   
+  },
+  {
       state: 'createproject',
       name: 'New Project',
       type: 'link',
@@ -40,14 +51,7 @@ const MENUITEMSAdmin = [
      
      
     },
-    {
-      state: 'projectslist',
-      name: 'Projects List',
-      type: 'link',
-      icon: 'note',
-  
-     
-    },
+   
     {
       state : 'approvedqty',
       name : 'Approved Quantities' ,
@@ -100,6 +104,14 @@ const MENUITEMSConsultant = [
 
   
  },
+ {
+  state: 'projectslist',
+  name: 'Projects List',
+  type: 'link',
+  icon: 'note',
+
+ 
+},
 
    {
      state : 'ConsultantContracts',
@@ -125,15 +137,7 @@ const MENUITEMSConsultant = [
     
    },
    
-   {
-     state: 'projectreport',
-     name: 'Project Report',
-     type: 'link',
-     icon: 'note',
- 
-    
-   },
- 
+  
   
    {
      state : 'approvedqty',
@@ -164,6 +168,14 @@ const MENUITEMSContractor = [
 
   
  },
+ {
+  state: 'projectslist',
+  name: 'Projects List',
+  type: 'link',
+  icon: 'note',
+
+ 
+},
   
    {
      state: 'attendance',
@@ -182,15 +194,6 @@ const MENUITEMSContractor = [
     
    },
    
-   {
-     state: 'projectreport',
-     name: 'Project Report',
-     type: 'link',
-     icon: 'note',
- 
-    
-   },
- 
   
    {
      state : 'approvedqty',
@@ -201,25 +204,25 @@ const MENUITEMSContractor = [
 
    },
   
-     {
-       state: 'logout',
-       name: 'Logout',
-       type: 'link',
-       icon: 'exit_to_app' ,
+   {
+    state: 'logout',
+    name: 'Logout',
+    type: 'link',
+    icon: 'exit_to_app' ,
+
    
-      
-     } 
+  } 
 ]
+
+
+const RoleMenu = [] = [];
 @Injectable()
 export class MenuItems {
   getAll(): Menu[] {
-     let role = +localStorage.getItem('Role');
-     if(role == 2 )
-     return MENUITEMSConsultant 
-     else if (role == 3) 
-     return MENUITEMSContractor 
-      else 
-      return MENUITEMSAdmin
+    
+
+
+     return RoleMenu;
 
   }
  

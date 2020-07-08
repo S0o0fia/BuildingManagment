@@ -1,7 +1,7 @@
-<div class="sidebar-panel gene-sidenav" fxLayout="column">
+<div class="sidebar-panel gene-sidenav" fxLayout="column" *ngIf="showChart">
    <mat-toolbar class="sidebar-logo">
       <div class="gene-logo">
-         <a href="javascript:void(0)" (click)="onClick()" style="color:white ; font-size:35px; margin-top: 2%;" id="title">
+         <a href="javascript:void(0)" (click)="onClick()" style="color:#21ace3 ; text-shadow: 1px 1px black; font-size:35px; margin-top: 2%;" id="title">
             
             {{'Monjez'|translate}}
            
@@ -15,9 +15,9 @@
             <div class="gene-user-name">{{user}}</div>
          </div>
          <div class="sidenav-scrollbar-container" fxLayout="column">
-            <ng-container *ngIf="verticalMenuStatus; else horizontalMenuStatus">
+            <ng-container>
                <mat-nav-list fxLayout="column" menuToggleDirective class="navigation">
-                  <mat-list-item menuToggleLink *ngFor="let menuitem of menuList.getAll()" >
+                  <mat-list-item menuToggleLink *ngFor="let menuitem of menuList" >
                      <a menuToggle class="gene-relative" mat-ripple *ngIf="menuitem.type === 'button'" routerLinkActive="active-link"      [routerLink]="['home/',menuitem.state]"
                      [ngStyle]="{ 'display': ( menuitem.code != 1 ? 'none' :  'block' ) }">
                      <mat-icon>{{ menuitem.icon }}</mat-icon>
@@ -61,7 +61,7 @@
             </ng-container>
             <ng-template #horizontalMenuStatus>
                <mat-nav-list fxLayout="column" menuToggleDirective class="navigation">
-                  <mat-list-item  *ngFor="let menuitem of menuList.getAll()" menuToggleLink>
+                  <mat-list-item  *ngFor="let menuitem of menuList" menuToggleLink>
                      <a menuToggle class="gene-relative" mat-ripple *ngIf="menuitem.type === 'button'" routerLinkActive="active-link" [routerLink]="['/home/crm']">
                      <mat-icon>{{ menuitem.icon }}</mat-icon>
                      <span>{{ menuitem.name | translate }}</span>

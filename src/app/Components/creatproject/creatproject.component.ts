@@ -14,6 +14,7 @@ import { NumberFormatPipe } from 'app/Models/Pipe/number.pip';
 import {
   NgbDateStruct, NgbCalendar, NgbCalendarIslamicUmalqura, NgbDatepickerI18n 
 } from '@ng-bootstrap/ng-bootstrap';
+import { trigger, transition, style, animate } from '@angular/animations';
 const WEEKDAYS = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
 const MONTHS = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال',
   'ذو القعدة', 'ذو الحجة'];
@@ -28,7 +29,19 @@ const MONTHS = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخ�
     //for Hijri Calender 
     {provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura},
     {provide: NgbDatepickerI18n, useClass: CreatprojectComponent}
-  ]
+  ] , 
+  animations:[ trigger('slideInOut', [
+    transition(':enter', [
+      style({ transform: 'translateX(100%)', opacity: 0 }),
+      animate('700ms ease-in', style({ transform: 'translateX(0%)', 'opacity': 1 }))
+    ]),
+    
+    transition(':leave', [
+      style({ transform: 'translateX(0%)', opacity: 1 }),
+      animate('0ms ease-in', style({ transform: 'translateX(100%)', 'opacity': 0 }))
+    ])
+  ])
+]
 })
 
 

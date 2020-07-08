@@ -9,14 +9,15 @@
       </div>
       <mat-divider></mat-divider>
    </div>
+  <div style="display: block" *ngIf="showChart">
    <canvas baseChart
-   height="125" 
-   [datasets]="barChartData4"
-   [labels]="mbarChartLabels4"
-   [options]="lineChartOptions"
-   [colors]="color"
-   chartType="line">   
- </canvas>
+      [datasets]="barChartData4"
+      [labels]="mbarChartLabels4"
+      [options]="lineChartOptions"
+      [colors]="barChartColors"
+      chartType="line">   
+    </canvas>
+</div>
 
  </mat-card>
 <!--Four Graph-->
@@ -31,6 +32,7 @@
       </div>
       <mat-divider></mat-divider>
    </div>
+   <div style="display: block" *ngIf="showChart">
    <canvas baseChart
    height="125" 
    [datasets]="barChartData4"
@@ -41,7 +43,32 @@
    [chartType]="barChartType"
    (chartHover)="chartHovered($event)"
    (chartClick)="chartClicked($event)"></canvas>
+   </div>
+   
+ </mat-card>
 
+ <mat-card>
+   <div class="gene-card-title">
+      <div fxLayout="row" fxLayoutAlign="start center">
+         <div fxLayout="column" fxLayoutAlign="start center">
+            <h3>{{'Exchange plan'|translate}}</h3>
+         </div>
+         <span fxFlex></span>
+      </div>
+      <mat-divider></mat-divider>
+   </div>
+   <div style="display: block" *ngIf="showChart">
+   <canvas baseChart
+   height="125" 
+   [datasets]="barChartData4"
+   [labels]="mbarChartLabels4"
+   [options]="barChartOptions"
+   [colors]="barChartColors"
+   [legend]="barChartLegend"
+   [chartType]="barChartType"
+   (chartHover)="chartHovered($event)"
+   (chartClick)="chartClicked($event)"></canvas>
+</div>
    
  </mat-card>
 

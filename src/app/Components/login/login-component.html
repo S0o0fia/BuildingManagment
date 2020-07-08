@@ -1,18 +1,37 @@
 
-<mat-card class="header" style="height: 15% ; background-color: #02b371; margin: 0; border-radius: 0;" dir="rtl">
- <div fxLayout="row wrap" fxLayoutAlign="start">
-  <h1>{{'Monjez'|translate}}</h1>
- </div>
+<mat-card class="header" fxLayout="row" style="margin: 0; border-radius: 0;"  fxLayout.xs="column" dir="rtl">
+  
+   <div fxLayout="column"  fxFlex.gt-sm="60" fxFlex.gt-xs="60" fxFlex="100" fxFlex.gt-md="60" fxLayoutAlign="center" style="margin-top:0.5%; padding-right:1%;" @slideRight >
+     <div fxLayout="row" fxLayout.xs="column">
+      
+      <div fxLayout="row"  fxLayoutAlign="start" >
+          <span fxLayoutAlign="start" id="title1">{{'Monjez'|translate}}</span>
+          &nbsp; &nbsp; &nbsp; 
+         <span id="title2" fxLayoutAlign="start" style="color:white">|</span>
+         &nbsp; &nbsp; &nbsp; 
+         <span id="title3" fxLayoutAlign="start" fxLayoutAlign="start"style="color:white">{{'Municipal facilities implementation follow-up project'|translate}}
+            - {{'Riyadh Municipality'|translate}}</span>
+            
+      </div>
+
+     
+   </div>
+   </div>
+   <div fxLayout="column" class="foot" fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100" fxFlex.gt-md="40"  style="padding-left:1%;" @slideLeft >
+     <img fxLayoutAlign="end"  class="footimg" src="assets/img/logo.png" />
+   </div>
+ 
+  
 
 </mat-card>
 
-<mat-card class="body"  style="height: 85%; margin: 0;  border-radius: 0;" dir="rtl">
+<mat-card class="body"  style="margin: 0;  border-radius: 0;" dir="rtl">
   
-   <div fxLayout="row wrap" fxLayoutAlign="start space-between">
-      <div fxLayout="column"  fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100" fxFlex.gt-md="40" 
+   <div fxLayout="row wrap" fxLayoutAlign="start space-between" >
+      <div fxLayout="column"  fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="100" fxFlex.gt-md="40" @slideRight 
       fxLayoutAlign="center" style="margin-top:5%; padding:1%">
-      <div style=" border: 4px solid #02b371;">
-         <mat-card class="gene-login-wrapper" style="background-color: #02b371; padding: 7%;" >
+      <div style=" border: 4px solid #216c46;   border-radius : 10px;">
+         <mat-card class="gene-login-wrapper" style="background-color: #216c46; padding: 4%;"  >
             <div>
               <form #form="ngForm" (ngSubmit)="login(form.value)">
                <div fxLayout="column" fxLayoutAlign="start stretch">
@@ -26,6 +45,7 @@
                   <button mat-button style="color: white; width: fit-content; justify-self: center; align-self: center;
                   margin-top: 2%;">{{'Reset Password'|translate}}</button>
                </div>
+               <h5>{{'Developed by'|translate}} Nqraa {{'CopyRight for 2020'|translate}} 2020 &copy;</h5>
                </form>
             </div>
          </mat-card>
@@ -35,9 +55,9 @@
       
          <div fxLayout="column"  fxFlex.gt-sm="60" fxFlex.gt-xs="60" fxFlex="100" fxFlex.gt-md="60" fxLayoutAlign="center" style="margin-top: 5%; padding-left:1%;" >
          
-            <mat-card fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center" 
+            <mat-card fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="start" @slideLeft
             class="news">
-
+                   <h1 fxLayoutAlign="start" >{{'Our News'|translate}}</h1>
             </mat-card>
          </div>
    
@@ -45,11 +65,10 @@
 </div>
 
 
-<div fxLayout="row wrap" fxLayoutAlign="end" style="height: 25% ; width: 100%;">
-   <mat-card style="width: fit-content; background-color:#02b371 ; 
-   vertical-align: bottom; align-self: flex-end; justify-self: flex-end; padding:0.5%;"  fxLayoutAlign="end">
-      <h6>طٌور بواسطة نقرة مبدع</h6>
-   </mat-card>
+<div fxLayout="row wrap" fxLayoutAlign="start" style="width: 100%;">
+  
+   <img fxLayoutAlign="start" id="comeback"  src="assets/img/comeback.png" />
+
 </div>
 </mat-card>
 

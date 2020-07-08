@@ -34,7 +34,7 @@ export class TimesheetdetailsComponent implements OnInit {
   contract_id:any;
   download : string = "http://nqraait.ddns.net:8070/api/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id=";
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
-    ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
+    ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe , public _snack:MatSnackBar) { 
     this.user = localStorage.getItem('loginUser');
      this.id = +( this.route.snapshot.paramMap.get('id') );
      this.approve_draft = false;
@@ -65,8 +65,11 @@ export class TimesheetdetailsComponent implements OnInit {
     this.service.setConsultantState(this.id , 'accepted').subscribe(
       data=>{
         this.boolconsultant = true; 
-        location.reload();
-      } , 
+        let msg = this._snack.open('تم تعيين المهندس بنجاح' ,'إلغاء')
+        if(msg)
+        { 
+          location.reload();}
+        } , 
       err=>console.log(err)
     )
   }

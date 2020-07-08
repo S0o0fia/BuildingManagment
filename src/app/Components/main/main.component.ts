@@ -358,7 +358,7 @@ export class MainComponent implements OnInit, OnDestroy{
 		// this.authService.logOut();
 		debugger;
 		localStorage.clear();
-		this.routes.navigate(['/login']);
+		this.routes.navigate(['']);
 	}
 
 	/**

@@ -33,7 +33,9 @@ import { trigger, transition, style, animate, query, state } from '@angular/anim
 
 export class CrmComponent implements OnInit, OnDestroy {
    company_id : number=Number(localStorage.getItem("company_id"));
-
+   candelete : boolean;
+   role : any ;
+   activity : any[]=[];
    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
       coinList               : any;
       tickerSliderContent    : any;
@@ -240,7 +242,7 @@ export class CrmComponent implements OnInit, OnDestroy {
                   public _snackBar : MatSnackBar,
                   private dialog: MatDialog) { 
 
-                     
+                     this.role = localStorage.getItem('Role');
                      const dialogConfig = new MatDialogConfig();
 
                      dialogConfig.disableClose = true;
@@ -251,6 +253,20 @@ export class CrmComponent implements OnInit, OnDestroy {
             
       ngOnInit() {
         
+      //Role 
+      this.service.getRole(this.role).subscribe(
+			data=>{
+            this.activity = data[0].activity_ids ;
+            console.log(this.activity)
+            this.activity.forEach(element => {
+               if(element.name == "Delete project")
+               {
+                 this.candelete = true;
+               }
+            });
+         } ,
+         err=>console.log(err)
+      ),
    
          this.pageTitleService.setTitle("الرئيسية");
       

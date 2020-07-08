@@ -1,4 +1,16 @@
- 
+
+       .body{
+        height: 85%;
+    }
+
+    .header{
+        height: 15%;
+        background-image: url('assets/img/header.png');
+        background-size: cover;
+        background-attachment: fixed;
+
+      
+    }
  .gene-login-wrapper {
    
    margin-top:10%;
@@ -19,7 +31,7 @@
 {
     margin-top:30%;
     padding:5%;
-    opacity: 0.5;
+    opacity: 0.78;
     width: 100%; 
   height: 100%; 
 }
@@ -34,7 +46,7 @@
     margin: auto;
 }
 
-.login-logo{
+.login-logo {
     margin-top: 2%;
     text-align: center;
     align-content: center;
@@ -85,12 +97,42 @@ th , button , thead{
     font-family: 'Cairo', sans-serif;
 }
 
-h1{
+#title1{
     font-family: 'Tajawal', sans-serif;
     font-size: 50px;
-  margin: 0.75%;
-    color: whitesmoke;
+    text-shadow: 1px 1px black;
+  color:#21ace3;;
+
 }
+h1{
+    color: #216c46;
+    font-family: 'Tajawal', sans-serif;
+    padding: 2%;;
+}
+#title2
+{
+   font-family: 'Tajawal', sans-serif;
+  font-size: 50px;
+  opacity: 0.2;
+  color:white;;
+
+
+}
+#title3
+{
+    font-family: 'Tajawal', sans-serif;
+    font-size: 15px;
+    margin-top: 5%;
+    text-shadow: 1px 1px black;
+    color:white;;
+}
+   
+#comeback
+       {
+           width:10%;
+           padding-top: 2%;
+       }
+
 h6{
     font-family: 'Tajawal', sans-serif;
     color: whitesmoke;
@@ -117,4 +159,72 @@ input {
     border-radius: 10px;
     box-sizing: border-box;
   }
+
+  h5{
+      align-self: center;
+      justify-self:center;
+      color: black;
+      text-align: center;      
+    font-family: 'Tajawal', sans-serif;
+  }
+  #logo {
+    visibility: hidden;
+    clear: both;
+    display: none;
+  }
+  .footimg
+  {
+    width:35%; align-self: flex-end; justify-content:end ;
+  }
+  @media screen and (max-width: 600px) {
+    #title2  {
+      visibility: hidden;
+      clear: both;
+      float: left;
+       width: 28%;
+      display: none;
+    }
+    .footimg{
+        justify-self: center;
+        align-self: center;
+        width: 60%;
+       padding-bottom: 2%;
+    }
+    #title1 {
+       font-size: xx-large;
+       align-self: center;
+       justify-self: center;
+       margin: 0;
+       padding: 0;
+      }
+      #title3{
+      
+       text-align: center;
+       margin: 0;
+       padding: 0;
+       }
+       .header
+       {
+         height: 30%;
+         margin: 0;
+        padding: 0;
+        background-image: url('assets/img/header.png');
+        background-size: cover;
+        background-attachment: fixed;
+        
+       }
+      
+
+       .body{
+           height: 70%;
+       }
+
+       #comeback
+       {
+           width:20%;
+           padding-top: 0;
+       }
+  }
+
+
   

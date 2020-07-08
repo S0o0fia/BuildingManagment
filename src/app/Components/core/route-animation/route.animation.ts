@@ -1,7 +1,7 @@
 import { transition, style, trigger, animate, state, group } from "@angular/animations";
 
 export let routeAnimation = trigger('routeAnimation', [
-  transition('void => *', [
+  transition(':enter', [
     style({
       opacity: 0,
       transform: 'translate3d(0, 10%, 0)',
@@ -19,7 +19,7 @@ export let routeAnimation = trigger('routeAnimation', [
 ]);
 
 export let fadeInAnimation = trigger('fadeInAnimation', [
-  transition('void => *', [
+  transition(':enter', [
     style({
       opacity: 0,
     }),

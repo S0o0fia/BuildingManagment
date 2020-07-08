@@ -47,7 +47,8 @@ import { trigger, state, transition, animate  , style, query, stagger} from '@an
 })
 
 export class QuantitytableComponent implements OnInit {
- 
+  camcreate : boolean;
+  activity : any[]=[];
   collapseSidebarStatus: any;
   mySubscription : any;
   browserRefresh = false;
@@ -236,7 +237,20 @@ if(this.role == 2)
   
 }
 
+
 this.pageTitleService.setTitle(this.projectname +' / '+"جدول الكميات");
+ 
+ this.service.getRole(this.role).subscribe(
+   data=>{
+     this.activity = data[0].activity_ids;
+     this.activity.forEach(element => {
+       if(element.name == "Create Quantity")
+       {
+         this.camcreate = true;
+       }
+     });
+   }
+ )
 
 this.service.gettotal().subscribe(
   data=>{

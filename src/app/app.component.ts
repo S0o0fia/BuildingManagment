@@ -16,13 +16,13 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   	selector: 'gene-app',
     templateUrl: 'app.component.html',
-   encapsulation: ViewEncapsulation.None
+   encapsulation: ViewEncapsulation.None,
+  providers : [NgxSpinnerService]
 })
 
 export class GeneAppComponent {
    loading = true
-   constructor(translate: TranslateService , @Inject(NgxSpinnerService) private spinner: NgxSpinnerService , 
-   @Inject(NgxUiLoaderService) public loader : NgxUiLoaderService ,private http: HttpClient,
+   constructor(translate: TranslateService , @Inject(NgxSpinnerService) private spinner: NgxSpinnerService ,private http: HttpClient,
    private router: Router) {
       translate.addLangs(['en', 'fr', 'he', 'ru' , 'ar' , 'zh' ,'de' , 'es', 'ja', 'ko' , 'it' ,'hu']);
       translate.setDefaultLang('ar');

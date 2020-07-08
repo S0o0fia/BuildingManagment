@@ -5,12 +5,38 @@ import { User } from 'app/Models/User/user';
 
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
    selector: 'ms-login-session',
    templateUrl:'./login-component.html',
    styleUrls: ['./login-component.scss'],
    encapsulation: ViewEncapsulation.None,
+   animations:[
+      trigger('slideRight', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('900ms ease-in', style({ transform: 'translateX(0%)', 'opacity': 1 }))
+      ]),
+      
+      transition(':leave', [
+        style({ transform: 'translateX(0%)', opacity: 1 }),
+        animate('0ms ease-in', style({ transform: 'translateX(100%)', 'opacity': 0 }))
+      ])
+    ]) ,
+
+    trigger('slideLeft', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('900ms ease-in', style({ transform: 'translateX(0%)', 'opacity': 1 }))
+      ]),
+      
+      transition(':leave', [
+        style({ transform: 'translateX(0%)', opacity: 1 }),
+        animate('0ms ease-in', style({ transform: 'translateX(-100%)', 'opacity': 0 }))
+      ])
+    ])
+  ]
 })
 export class LoginComponent {
 	
@@ -34,7 +60,6 @@ export class LoginComponent {
              localStorage.setItem("token" , data["token"]);
              localStorage.setItem("loginUser" , data["name"]);
              localStorage.setItem("Role" , data["role_detail"].code )
-             localStorage.setItem("roledetails", data["role_detail"]);
              localStorage.setItem("company_id",data["company_id"]);
              console.log(data);
              console.log('CID: '+localStorage.getItem["company_id"]);

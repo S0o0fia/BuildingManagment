@@ -47,6 +47,7 @@ export class CoreService {
 					private http : HttpClient){
 	}
 
+	
 	loginUser(value) {
    
 		const headers = new HttpHeaders();
@@ -55,11 +56,17 @@ export class CoreService {
 		 .set('db', this.db)
 		 .set('login', value.username)
 		 .set('password',value.password);
+		 
 		 return this.http.post(this.apiURL+"/authenticate" , null,{headers ,params});
   
   
 	 }
 
+	 returnBase()
+	 {
+		
+         return this.apiURL;
+	 }
 	//Services for HomePage
 	getTickerData(){
 		return this.http.get('assets/data/ticker.json').pipe(map(response => response));
@@ -84,13 +91,13 @@ export class CoreService {
 
 	getRoles ()
 	{
-		let userUrl='/usersrole/get?db='+this.db+'&token='+localStorage.getItem("token");
-		return this.http.get(this.apiURL+userUrl);
+		let userUrl='/usersrole/get?db='+this.db+'&token='+localStorage.getItem("token")+'';
+		return this.http.get<any[]>(this.apiURL+userUrl);
 	}
 
 	getRole (id: number)
 	{
-		debugger
+	
 		let userUrl='/usersrole/get?db='+this.db+'&token='+localStorage.getItem("token")+'&role_id='+id;
 		return this.http.get(this.apiURL+userUrl);
 	}
@@ -1044,7 +1051,7 @@ export class CoreService {
 
   getRFIChartProject()
   {
-	  let url = '/project/dashboard/rfi-count?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	  let url = '/project/dashboard/rfi-count?db=nqproject&token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid');
 	  return this.http.get(this.apiURL+url);
   }
 
@@ -1057,7 +1064,7 @@ export class CoreService {
 
   getCountChartProject()
   {
-	  let url = '/project/dashboard/qr-count?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	  let url = '/project/dashboard/qr-count?db=nqproject&token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid');
 	  return this.http.get(this.apiURL+url);
   }
   
@@ -1069,7 +1076,7 @@ export class CoreService {
 
   getDoneContractProject()
   {
-	let url = '/project/dashboard/done-pers?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	let url = '/project/dashboard/done-pers?db=nqproject&token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid');
 	return this.http.get<any[]>(this.apiURL+url)
   }
 
@@ -1093,7 +1100,7 @@ export class CoreService {
   
   getSPIProject()
   {
-	let url = '/project/dashboard/spi?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	let url = '/project/dashboard/spi?db=nqproject&token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid');
 	return this.http.get<any[]>(this.apiURL+url)
   }
 
@@ -1104,7 +1111,7 @@ export class CoreService {
   }
   getfianaceProject()
   {
-	let url = '/project/dashboard/finance-pers?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	let url = '/project/dashboard/finance-pers?db=nqproject&token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid');
 	return this.http.get<any[]>(this.apiURL+url)
   }
 
@@ -1116,7 +1123,7 @@ export class CoreService {
   
   getacualachieveProject()
   {
-	let url = '/project/dashboard/finance?db=nqproject&token='+localStorage.getItem('token')+'&project_id'+localStorage.getItem('projectid');
+	let url = '/project/dashboard/finance?db=nqproject&token='+localStorage.getItem('token')+'&project_id='+localStorage.getItem('projectid');
 	return this.http.get<any[]>(this.apiURL+url)
   }
 

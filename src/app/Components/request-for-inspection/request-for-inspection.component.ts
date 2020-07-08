@@ -37,7 +37,8 @@ export class RequestForInspectionComponent implements OnInit {
   statename : string;
   projectname : string;
   role : number;
-  boolrole : boolean = false ;
+  activity : any[]=[];
+  boolrole : boolean ;
   
  
   constructor(public service : CoreService,
@@ -75,15 +76,25 @@ this.pageTitleService.setTitle(this.projectname +' / '+"طلبات فحص الأ
 
 
 this.totalRec = this.RFI_tbl.length;
-//this.statename=null;
 
- if(this.role == 2)
- {
-   this.boolrole = true;
- }
- console.log(this.boolrole);
+
+
+this.service.getRole(this.role).subscribe(
+  data=>{
+        this.activity = data[0].activity_ids ;
+        console.log(this.activity)
+        this.activity.forEach(element => {
+           if(element.name == "Create RFI")
+           {
+             this.boolrole = true;
+           }
+        });
+     } ,
+     err=>console.log(err)
+  )
+
+
 }
-
 openDialog(): void {
   const dialogRef = this.dialog.open(AddRequestComponent, {
     width: '80%',

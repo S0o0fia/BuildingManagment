@@ -50,8 +50,8 @@ export class RfidetailsComponent implements OnInit {
    details : string;
    typeid : number;
    Comment : Comment;
-   download : string = "http://nqraait.ddns.net:8070/api/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id=";
    Comments : any = [];
+   download : string;
    role : number ;
    boolconsultant : boolean = false ; 
    boolcontractor : boolean = false;
@@ -70,7 +70,7 @@ export class RfidetailsComponent implements OnInit {
      this.id = +( this.route.snapshot.paramMap.get('id') );
      this.approve_draft = false;
      this.role = +localStorage.getItem('Role');
-
+    this.download = this.service.returnBase()+ "/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id=";
 
   
   }

@@ -10,8 +10,7 @@
                  
                  <div fxLayout="column" >
                     <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()"
-                      [ngStyle]="{ 'display': (boolrole ? 'none' :  'block' ) }"
-                    >
+                  *ngIf="boolrole">
                        <mat-icon>queue</mat-icon> {{'Add Request'|translate}}</button>
                  </div> 
               </div>

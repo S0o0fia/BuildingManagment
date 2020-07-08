@@ -1,5 +1,5 @@
                         <div fxLayout="row wrap" fxLayoutAlign=" start" class="gene-form-wizard">
-                        <mat-card fxFlex="100%">
+                        <mat-card fxFlex="100%" @slideInOut>
                         <div class="gene-card-title">
                            <div fxLayout="row" fxLayoutAlign="start center">
                               <div fxLayout="column">
@@ -413,7 +413,7 @@
                         <!--The Map Part-->
                         <div fxLayout="row wrap" fxLayoutAlign="start" >
                         <div fxFlex.gt-md="300" fxFlex.gt-sm="300" fxFlex="300" style="height: 500px;">
-                           <mat-card id="mapcard">
+                           <mat-card id="mapcard" @slideInOut>
                               <div class="gene-card-title">
                                  <div fxLayout="row" fxLayoutAlign="start center">
                                     <div fxLayout="column" fxFlex="500">

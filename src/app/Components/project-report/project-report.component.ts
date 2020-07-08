@@ -10,88 +10,103 @@ import { CoreService } from 'app/Service/core/core.service';
   styleUrls: ['./project-report.component.scss']
 })
 export class ProjectReportComponent implements OnInit {
-
-  data : any [] = [];
-  //rfi 
-  accepted : number = 0; 
-  aceeptedwithcomment : number = 0; 
-  waiting : number = 0; 
-  draft : number = 0;
-  rejected : number = 0;
-  //Count
-  dataCount : any[]=[] ;
-  acceptedc : number = 0;
-  aceeptedwithcommentc : number =0 ;
-  waitingc : number = 0;
-  draftc : number =0;
-  rejectedc : number = 0;
-  //for pie ؤCOUNT
-  public pieChartData1  :SingleDataSet;
-  public pieChartType1:string
-  pieChartColors1: any[] ;
-  PieChartOptions1: any;
-  public pieChartOptions: ChartOptions = {
-   responsive: true,
- };
- public pieChartLabels1: Label[] = [['Accepted', 'مقبول'], ['Draft', 'مسودة'], ['Waiting', 'بانتظار الاعتماد'] , ['Rejected', 'مرفوض'] ];
- public pieChartType: ChartType = 'pie';
- public pieChartLegend = true;
- public pieChartPlugins = [];
- //FOR PIE RFI
- public pieChartData2  :SingleDataSet;
- public pieChartType2:string
- pieChartColors2: any[] ;
-
-public pieChartLabels2: Label[] = [['Accepted', 'مقبول'], ['Accepted with', 'comments', 'مقبول بملاحظات'], ['Draft', 'مسودة'], ['Waiting', 'بانتظار الاعتماد'] , ['Rejected', 'مرفوض'] ];
+ //RFI CHART
+   data : any[]=[];
+   accepted  :number;
+   aceeptedwithcomment :number;
+   rejected:number;
+   waiting:number;
+   draft : number;
+   newpieChartOptions :any;
+   showChart : boolean;
+   //Count Chart
+   dataCount : any[]=[];
+   acceptedc : number;
+   rejectedc: number;
+   waitingc : number;
+   draftc:number;
+   aceeptedwithcommentc:number;
+   newpieChartOptions2 :any;
 
 
-//Bar Chart 
-public barChartOptions:any = {
-   scaleShowVerticalLines: false,
-   responsive: true
- };
-   //lables
-   public mbarChartLabels1 :string[] =[];
-   public mbarChartLabels2 :string[] =[];
-   public mbarChartLabels3 :string[] =[];
-   public mbarChartLabels4 :string[] =[];
-   //Data
+   //Four Values Chart
+   planned_pers :any[]=[];
+   percentage : any[]=[];
+   financePrecentage : any[]=[];
+   acualplanned_pers : any[]=[];
+   mbarChartLabels4 :string[]=[];
+   barChartData4 : any[]=[];
+
+   //line Chart 
+   public lineChartOptions :any = {
+      responsive: true,
+      maintainAspectRatio: false,
+		scales: {
+         yAxes: [{
+            gridLines: {
+              display: true,
+              drawBorder: false
+            }
+          }],
+         xAxes: [{
+            gridLines: {
+              display: false,
+              drawBorder: false
+            }
+         }]
+      },
+		tooltip: {
+			enabled: true
+		},
+		legend: {
+			display: false
+		},
+   }
    
-   public barChartData:any[] = [];
-   public barChartData1:any[]=[];
-   public barChartData2:any[]=[];
-   public barChartData3:any[]=[{data:[120] , label:"نسبة الإنجاز الفعلية"}];
-   public barChartData4:any[]=[{data:[50 ,120] , label:"Actual Achievement"}];
-//options  for type
-   public barChartType:string = 'bar';
-   public barHorizontalChartType:string = 'horizontalBar';
-   public barHorizontalChartLegend:boolean = true;
 
-   public barHorizontalChartOptions:any = {
+   public color: Array <any> = [
+      {
+         lineTension: 0.4,
+         borderColor: '#1565c0',
+         pointBorderColor: '#1565c0',
+         pointBorderWidth: 2,
+         pointRadius: 2,
+         fill: false,
+         pointBackgroundColor: '#FFFFFF',
+         borderWidth: 3,
+      },
+      {
+         lineTension: 0.4,
+         borderColor: '#0097a7',
+         pointBorderColor: '#0097a7',
+         pointBorderWidth: 2,
+         pointRadius: 2,
+         fill: false,
+         pointBackgroundColor: '#FFFFFF',
+         borderWidth: 3,
+      },
+      {
+         lineTension: 0.4,
+         borderColor: '',
+         pointBorderColor: '',
+         pointBorderWidth: 2,
+         pointRadius: 2,
+         fill: false,
+         pointBackgroundColor: '#FFFFFF',
+         borderWidth: 3,
+      
+      }
+   ];
+
+   //options for Charts
+   public barChartLegend:boolean = true;
+   public barChartType:string = 'bar';
+   public barChartOptions:any = {
       scaleShowVerticalLines: false,
       responsive: true
-   };
-   
-   public barChartLegend:boolean = true;
+    };
 
-   //For More Data
-   public percentage : number[]=[];
-   public planned_pers : number []=[];
-   public total_excuted : number []=[]; 
-   public SPI : any[]=[]; 
-   public financePrecentage : any[] =[];
-   public techPrecentage: any[]=[];
-   public acualpercentage : any[]=[];
-   public acualplanned_pers : any[]=[];
-    
-  public percent3: number;
- 
-  public options3: any;
-
-  
- 
-   //Color
-   public barChartColors:Array<any> = [
+    public barChartColors:Array<any> = [
       {
         backgroundColor: '#0070D1',
         borderColor: '#0070D1',
@@ -107,80 +122,27 @@ public barChartOptions:any = {
          pointBorderColor: '#fff',
          pointHoverBackgroundColor: '#fff',
          pointHoverBorderColor: '#ff3db4'
-       } ,
-       { 
-         backgroundColor: '#02bc77',
-         borderColor: '#02bc77',
-         pointBackgroundColor: 'rgba(77,20,96,1)',
-         pointBorderColor: '#fff',
-         pointHoverBackgroundColor: '#fff',
-         pointHoverBorderColor: '#02bc77'
-       } ,
-
-       { 
-         backgroundColor: '#f59c1a',
-         borderColor: '#f59c1a',
-         pointBackgroundColor: 'rgba(77,20,96,1)',
-         pointBorderColor: '#fff',
-         pointHoverBackgroundColor: '#fff',
-         pointHoverBorderColor: '#f59c1a'
-       } ,
+       }
     ];
-   
-      
-   // events
-   public chartClicked(e:any):void {
-     console.log(e);
-   }
- 
-   public chartHovered(e:any):void {
-     console.log(e);
-   }
- 
-   public randomize():void {
-     let data = [
-       Math.round(Math.random() * 100),
-       Math.round(Math.random() * 100),
-       Math.round(Math.random() * 100),
-       (Math.random() * 100),
-       Math.round(Math.random() * 100),
-       (Math.random() * 100),
-       Math.round(Math.random() * 100)];
-     let clone = JSON.parse(JSON.stringify(this.barChartData));
-     clone[0].data = data;
-     this.barChartData = clone;
-   }
 
-  constructor(private pageTitleService: PageTitleService , public service : CoreService) { 
-   monkeyPatchChartJsTooltip();
-   monkeyPatchChartJsLegend();
-
-   this.percent3 = 75;
-   this.options3 = {
-        barColor: '#02bc77',
-        trackColor: '#f9f9f9',
-        scaleColor: '#dfe0e0',
-        scaleLength: 5,
-        lineCap: 'round',
-        lineWidth: 10,
-        size: 300,
-        rotate: 0,
-        animate: {
-            duration: 3000,
-            enabled: true
-        }
-   };
-
-  }
-
-   // Pie
-  newpieChartOptions : any;
-  newpieChartOptions2 : any;
-  option : any;
+     // events
+     public chartClicked(e:any):void {
+      console.log(e);
+    }
   
-    ngOnInit() {
-   
-      
+    public chartHovered(e:any):void {
+      console.log(e);
+    }
+ constructor(public service:CoreService)
+ {
+
+ }
+ ngOnInit() {
+   setTimeout(()=>{
+      this.showChart = true;
+   },0)
+
+       
    this.service.getRFIChart().subscribe(
       data=> {
          this.data = data[0] as any[]
@@ -244,6 +206,7 @@ public barChartOptions:any = {
       err=> console.log (err)
    )
 
+   
    //Count
    this.service.getCountChart().subscribe(
       data=> {
@@ -328,59 +291,15 @@ public barChartOptions:any = {
 
 }
 
-//for S curve 
-public lineChartOptions :any = {
-   responsive: true,
-   maintainAspectRatio: false,
-   scales: {
-      yAxes: [{
-         gridLines: {
-           display: true,
-           drawBorder: false
-         },
-         scaleLabel: {
-            display: true,
-            labelString: 'Cost'
-         },
-         ticks: {
-           stepSize: 50
-         }
-       }],
-      xAxes: [{
-         gridLines: {
-           display: false,
-           drawBorder: false
-         },
-         scaleLabel: {
-            display: true,
-            labelString: 'Time'
-         },
-      }]
-   },
-   tooltip: {
-      enabled: true
-   },
-   legend: {
-      display: false
-   },
+
+ngAfterViewInit()
+{
+   this.barChartData4 = [
+      {data:this.financePrecentage , label:"نسبة الانجاز المالية"},
+      {data:this.percentage , label:"نسبة الإنجاز الفعلية"}  , 
+      {data:this.planned_pers , label:"نسبةالإنجاز المخططة"} ,
+      {data:this.acualplanned_pers , label:"المدة المنقضية"}]
 }
-
-   //line chart color
-public color: Array <any> = [
-   {
-      lineTension: 0.4,
-      borderColor: '#1565c0',
-      pointBorderColor: '#1565c0',
-      pointBorderWidth: 2,
-      pointRadius: 7,
-      fill: false,
-      pointBackgroundColor: '#FFFFFF',
-      borderWidth: 3
-   }
-];
-
-  
-
 }
 
 

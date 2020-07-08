@@ -895,7 +895,21 @@
             "Pay done" : "تم السداد",
             "Timesheet Details":"تعيين المهندس المختص" , 
             "Achieve Rate" : "معدلات الإنجاز" , 
-            "Monjez" : "مُنجز"
-
+            "Monjez" : "مُنجِز" , 
+            "Municipal facilities implementation follow-up project":"نظام متابعة مشاريع إدارة التنفيذ المرافق البلدية ",
+            "Riyadh Municipality":"أمانة الرياض" ,
+            "Exchange plan" : "معدلات الصرف" ,
+            "Developed by" : "طور بواسطة",
+            "CopyRight for 2020":"جميع الحقوق محفوطة" ,
+            "Our News" : "أخبارنا" , 
+            "Read all projects" : "رؤية جميع المشاريع" ,
+            "Read company projects" : "رؤية مشاريع الشركة" ,
+            "Read assigned projects" : "رؤية المشاريع المسندة إليه" , 
+            "create project" : "إنشاء مشروع" , 
+            "Dashboard" : "الداش بورد"  , 
+            "Consultant Contracts" : "عقود الاستشاريين", 
+            "Setting" : "الإعدادات" ,
+            "Log Out" : "تسجيل الدخول"
+          
           }
 

@@ -39,6 +39,7 @@ import { RoleManagementComponent } from './Components/role-management/role-manag
 import { ProjectscheduleComponent } from './Components/projectschedule/projectschedule.component';
 import { ProjectitemslistComponent } from './Components/projectitemslist/projectitemslist.component';
 import { TimesheetdetailsComponent } from './Components/timesheetdetails/timesheetdetails.component';
+import { ReloadComponent } from './Components/reload/reload.component';
 
 
 
@@ -47,13 +48,17 @@ const appRoutes: Routes = [
       path: '',
       component:LoginComponent
    },
+
    {
       path: 'home',
       component:MainComponent,
       canActivate: [AuthGuard],
       
       children: [
-       
+         {
+            path:'logout',
+           redirectTo : '/'
+          },
          {
             path: "crm",
             component : ProjectReportComponent
@@ -170,7 +175,10 @@ const appRoutes: Routes = [
             component:VideosComponent
          } ,
          
-        
+         {
+            path:'reload',
+            component:ReloadComponent
+         } ,
 
          {
             path:'edit',
@@ -200,7 +208,7 @@ const appRoutes: Routes = [
             path:'tsdetails/:id',
             component:TimesheetdetailsComponent
          },
-
+         
         
         
       ]
@@ -209,7 +217,7 @@ const appRoutes: Routes = [
      
    {
       path: '**',
-      redirectTo: '/'
+      redirectTo: 'home/crm'
    }
 ]
 

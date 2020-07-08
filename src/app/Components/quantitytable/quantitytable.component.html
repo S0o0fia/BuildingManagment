@@ -10,13 +10,13 @@
             <div fxLayout="column">
                <div class="row"  fxLayoutAlign="space-between">
                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()"
-               [ngStyle]="{ 'display': (boolrole ? 'none' :  'block' ) }">
+              *ngIf="camcreate">
                   {{'Add'|translate}}
                   <mat-icon>queue</mat-icon>
                </button>
                <button  matTooltip="{{'Discount'|translate}}" class="mrgn-b-xs" mat-raised-button color="primary" 
                (click)="opendiscount()"
-               [ngStyle]="{ 'display': (boolrole ? 'none' :  'block' ) }"
+               *ngIf="camcreate"
                ><mat-icon>money_off</mat-icon></button>
             </div>
             </div> 

@@ -20,7 +20,7 @@ export class CreateuserComponent implements OnInit {
   userjob : string;
   company : number;
   Role :number;
-  section_id : number;
+  section_id : number = 0;
   companies : any []=[];
   userRole : any []=[];
   specialest : any[]=[];
