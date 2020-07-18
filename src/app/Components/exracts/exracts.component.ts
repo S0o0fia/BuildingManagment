@@ -22,6 +22,9 @@ export class ExractsComponent implements OnInit {
   page: number = 1;
   statename : string = "draft" ;
   public rowSelected : any = -1;
+  activity : any[]=[];
+  camcreate : boolean = false; 
+
   constructor(private router : Router , public service : CoreService) {
     this.projectname = localStorage.getItem('projectname');
     this.role = +localStorage.getItem('Role');
@@ -34,12 +37,21 @@ export class ExractsComponent implements OnInit {
       err=> console.log(err));  
     
      this.totalRec = this.Invoices.length;
+    
+     this.service.getRole(this.role).subscribe(
+      data=>{
+        this.activity = data[0].activity_ids;
+        this.activity.forEach(element => {
+          if(element.name == "create inv")
+          {
+            this.camcreate = true;
+          } 
+        });
+      }
+    )
+   
 
-
-  if(this.role == 2)
-  {
-    this.boolrole = true;
-  }
+    
 
 }
  

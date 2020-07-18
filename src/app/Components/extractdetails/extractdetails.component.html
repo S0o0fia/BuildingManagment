@@ -13,42 +13,42 @@
                    
                 <button (click)="back()" class="mrgn-b-xs" mat-raised-button color="primary">
                   <mat-icon>exit_to_app</mat-icon> 
-                  {{'Back'|translate}}</button>
-                 
+                  {{'Back'|translate}}</button> 
                  
                 <!--Approve Draft-->
                  <button class="mrgn-b-xs" mat-raised-button color="primary"
-                 (click)="ApproveDraft()" [disabled]="state != 'draft'">
+                 (click)="ApproveDraft()" [disabled]="state != 'draft'"
+                 [ngStyle]="{ 'display': ( submitinv ? 'block' :  'none' ) }"
+                 >
                  {{'Draft Approve'|translate}}</button>
 
                  <!--Approve-->
                  <button  class="mrgn-b-xs" mat-raised-button color="accent"
                  [disabled]="state != 'waiting'"
-                 (click)="Approve()"
+                 (click)="Approve()" [ngStyle]="{ 'display': ( approveinv ? 'block' :  'none' ) }"
                  >{{'accepted'|translate}}</button>
+
                  <!--Rejected-->
                  <button class="mrgn-b-xs" mat-raised-button color="warn" 
                  [disabled]="state != 'waiting'"
-                 (click)="Rejected()" >
+                 (click)="Rejected()" 
+                 [ngStyle]="{ 'display': ( rejectinv ? 'block' :  'none' ) }">
                     {{'rejected'|translate}}</button>
+                </div>
 
-                
-                  </div>
-                  
-                 
                   <div class="row"  fxLayoutAlign="center">
                          <!--Paid-->
                     <button class="mrgn-b-xs" mat-raised-button color="accent"
+                    [ngStyle]="{ 'display': ( payinv ? 'block' :  'none' ) }"
                     [disabled]="state == 'paid'"
-                    (click)="paid()">
-                       {{'Pay done'|translate}}
+                    (click)="paid()"> 
+                    {{'Pay done'|translate}}
                    </button>
                   </div>
 
-               </div>
-               
 
-            
+               </div>
+                
                <mat-divider></mat-divider>
             </div>
             <div class="gene-card-content" >

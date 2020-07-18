@@ -64,6 +64,8 @@ export class RfidetailsComponent implements OnInit {
   userid : number;
   request_number : string;
   comment : string = "";
+  activity: any[]=[];
+  boolcomment : boolean = false;
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
     ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
     this.user = localStorage.getItem('loginUser');
@@ -117,19 +119,23 @@ export class RfidetailsComponent implements OnInit {
 
   ngOnInit() {
 
-    if(this.role == 2)
-    {
-      this.boolconsultant = true;
-    }
-    else if (this.role == 3)
-    {
-       this.boolcontractor = true;
-    }
-    else 
-    {
-      this.boolconsultant = false ;
-      this.boolcontractor = false;
-    }
+    this.service.getRole(this.role).subscribe(
+      data=>{
+            this.activity = data[0].activity_ids ;
+            console.log(data)
+            this.activity.forEach(element => {
+               if(element.name == "approve rfi")
+               {
+                 this.boolconsultant = true;
+               }
+               if(element.name == "referral-rfi")
+               {
+                 this.boolcomment = true;
+               }
+            });
+         } ,
+         err=>console.log(err)
+      )
 
     //get comment section
     this.service.getCommentSection().subscribe(

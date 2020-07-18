@@ -56,7 +56,10 @@ export class MirapproveComponent implements OnInit {
   commentusers : any[] =[];
   Commentt : Comment;
   Comments : any []=[]; 
-
+  activity : any[]=[];
+  submitmir : boolean = false;
+  approvemir :boolean = false;
+  boolcomment : boolean = false;
  constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
    ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
    this.user = localStorage.getItem('loginUser');
@@ -142,20 +145,31 @@ export class MirapproveComponent implements OnInit {
   this.openSnackBar("تم اعتماد المسودة","إغلاق");
  }
  ngOnInit() {
-  if(this.role == 2)
-  {
-    this.boolconsultant = true;
-  }
-  else if (this.role == 3)
-  {
-     this.boolcontractor = true;
-  }
-  else 
-  {
-    this.boolconsultant = false ;
-    this.boolcontractor = false;
-  }
+  
+  
+  this.service.getRole(this.role).subscribe(
+    data=>{
+      this.activity = data[0].activity_ids;
+      this.activity.forEach(element => {
+     
+        if(element.name == "submit-mir")
+        {
+          this.submitmir = true;
+        }
+        if(element.name == "approve-mir")
+        {
+          this.approvemir = true;
+        }
+        if(element.name == "referral-mir")
+        {
+          this.boolcomment = true;
+        }
+            
+               
+      });
+    });
 
+  
     //comment Mir 
     //get comment section
     this.service.getCommentSection().subscribe(

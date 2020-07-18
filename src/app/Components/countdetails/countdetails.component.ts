@@ -38,7 +38,8 @@ export class CountdetailsComponent implements OnInit {
   statename : string;
   projectname : string;
   public rowSelected : any = -1;
- 
+  activity : any[]=[];
+  camcreate : boolean= false;
   constructor(public service : CoreService,
     private pageTitleService: PageTitleService ,private router:Router, private dialog: MatDialog) { 
 
@@ -60,10 +61,18 @@ export class CountdetailsComponent implements OnInit {
     }
 ngOnInit() {
   
-  if(this.role == 2)
-  {
-    this.boolrole = true;
-  }
+  this.service.getRole(this.role).subscribe(
+    data=>{
+      this.activity = data[0].activity_ids;
+      this.activity.forEach(element => {
+        if(element.name == "create qsr")
+        {
+          this.camcreate = true;
+        }
+       
+      });
+    }
+  )
 
 this.pageTitleService.setTitle('قائمة طلبات الحصر ' +' / '+this.projectname);
 

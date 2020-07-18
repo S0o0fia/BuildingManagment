@@ -72,9 +72,8 @@ export class QuantitytableComponent implements OnInit {
   projectname : string;
   formattedAmount: string = '';
   public rowSelected : any = -1;
-  boolrole : boolean = false;
   role : number;
-  
+  modifyqty : boolean = false;
 
   HideDiscount()
   {
@@ -231,12 +230,7 @@ export class QuantitytableComponent implements OnInit {
  Qty_tbls:any[]=[];
 ngOnInit() {
 
-if(this.role == 2)
-{
-  this.boolrole = true;
-  
-}
-
+ 
 
 this.pageTitleService.setTitle(this.projectname +' / '+"جدول الكميات");
  
@@ -247,6 +241,10 @@ this.pageTitleService.setTitle(this.projectname +' / '+"جدول الكميات"
        if(element.name == "Create Quantity")
        {
          this.camcreate = true;
+       }
+       if(element.name == "modify qty")
+       {
+         this.modifyqty = true;
        }
      });
    }

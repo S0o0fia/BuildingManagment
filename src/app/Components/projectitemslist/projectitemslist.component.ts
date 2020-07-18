@@ -29,12 +29,16 @@ export class ProjectitemslistComponent implements OnInit {
    public projectname : string;
    public page : number = 0 ;
    public totalRec : number;
+   addbool : boolean = false;
+   role :number ;
+   activity : any[]=[];
   constructor(private dialog: MatDialog,
     private _snackBar: MatSnackBar
 
     ,private translate : TranslateService , private  services :CoreService) {
 
        this.projectname = localStorage.getItem('projectname');
+       this.role = +localStorage.getItem('Role');
      }
 
   ngOnInit() {
@@ -44,6 +48,22 @@ export class ProjectitemslistComponent implements OnInit {
     );
 
     this.totalRec = this.itemslist.length;
+
+
+
+    this.services.getRole(this.role).subscribe(
+      data=>{
+            this.activity = data[0].activity_ids ;
+          
+            this.activity.forEach(element => {
+               if(element.name == "create-project-item")
+               {
+                 this.addbool = true;
+               }
+            });
+         } ,
+         err=>console.log(err)
+      )
   }
 
 

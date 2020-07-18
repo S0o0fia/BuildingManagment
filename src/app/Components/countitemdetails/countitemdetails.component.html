@@ -15,12 +15,11 @@
                            {{'Back'|translate}}</button>
                          <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
                           (click)="ApproveDraft()"
-                          [ngStyle]="{ 'display': (boolconsultant ? 'none' :  'block' ) }">
-                          
+                          [ngStyle]="{ 'display': (boolconsultant ? 'block' :  'none' ) }">
+                         {{'Draft Approve'|translate}}</button>
                          
-                          {{'Draft Approve'|translate}}</button>
                           <button *ngIf="consultant_approve!='draft'" class="mrgn-b-xs" [disabled]="consultant_approve == 'accepted'" mat-raised-button color="warn" (click)="ApproveConsultant()"
-                          [ngStyle]="{ 'display': (boolcontractor ? 'none' :  'block' ) }"
+                          [ngStyle]="{ 'display': (boolcontractor ? 'block' :  'none' ) }"
                           >{{'Collector Specialist'|translate}}</button>
                
                        </div>
@@ -183,7 +182,7 @@
       </tr>
    </mat-card>
   
-   <mat-card @slideInOut>
+   <mat-card @slideInOut [ngStyle]="{ 'display': (commentbool ? 'block' :  'none' ) }">
       <div class="gene-card-title">
          <div fxLayout="row" fxLayoutAlign="space-between center">
             <div fxLayout="column">

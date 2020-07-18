@@ -64,7 +64,7 @@ export class FileManagementComponent implements OnInit {
           }
         ];
         this.dataSource.data = TREE_DATA;
-        this.downloadUrl = "http://nqraait.ddns.net:8070/api/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id=";
+        this.downloadUrl = this.service.returnBase+"/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id=";
       }, 
       err => console.log(err)          
      );

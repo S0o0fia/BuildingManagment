@@ -40,7 +40,7 @@ export class RequestForInspectionComponent implements OnInit {
   activity : any[]=[];
   boolrole : boolean ;
   
- 
+
   constructor(public service : CoreService,
     private pageTitleService: PageTitleService ,private router:Router, private dialog: MatDialog) { 
 
@@ -82,7 +82,7 @@ this.totalRec = this.RFI_tbl.length;
 this.service.getRole(this.role).subscribe(
   data=>{
         this.activity = data[0].activity_ids ;
-        console.log(this.activity)
+        console.log(data)
         this.activity.forEach(element => {
            if(element.name == "Create RFI")
            {

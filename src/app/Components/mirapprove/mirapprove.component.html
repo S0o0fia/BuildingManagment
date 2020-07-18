@@ -13,7 +13,7 @@
                           <mat-icon>exit_to_app</mat-icon>                             
                            {{'Back'|translate}}</button>
                           <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
-                           (click)="ApproveDraft()"  [ngStyle]="{ 'display': (boolconsultant ? 'none' :  'inline' ) }">{{'Draft Approve'|translate}}</button>
+                           (click)="ApproveDraft()"  [ngStyle]="{ 'display': (submitmir ? 'inline' :  'none' ) }">{{'Draft Approve'|translate}}</button>
                         </div>
                        </div> 
                     </div>
@@ -100,7 +100,7 @@
                <div fxLayout="row"  fxLayout.xs="column"  >
                  
                   <button class="mrgn-b-xs" 
-                  [ngStyle]="{ 'display': (boolcontractor ? 'none' :  'block' ) }"
+                  [ngStyle]="{ 'display': (approvemir ? 'block' :  'none' ) }"
                   [disabled]="consultant_approve != 'waiting'" mat-raised-button color="accent" (click)="openDialogApprove()">{{consultant_btn|translate}}</button>
                   <button class="mrgn-b-xs"   [ngStyle]="{ 'display': (boolcontractor ? 'none' :  'block' ) }"                  
                   mat-raised-button color="warn">{{'Result Approve'|translate}}</button>
@@ -121,7 +121,7 @@
                 <h5>{{'Progress Owner' |translate}} :</h5>
               </mat-card>
 
-              <mat-card>
+              <mat-card [ngStyle]="{ 'display': (boolcomment ? 'block' :  'none' ) }" >
                <form>
                   <div fxLayout="column" style="height:100%;">
                   <div fxLayout="row wrap" fxLayoutAlign="space-between center">

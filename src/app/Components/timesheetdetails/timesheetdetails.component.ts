@@ -32,13 +32,14 @@ export class TimesheetdetailsComponent implements OnInit {
   sheet:any[]=[];
   state: any;
   contract_id:any;
-  download : string = "http://nqraait.ddns.net:8070/api/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id=";
+  download : string ;
   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
     ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe , public _snack:MatSnackBar) { 
     this.user = localStorage.getItem('loginUser');
      this.id = +( this.route.snapshot.paramMap.get('id') );
      this.approve_draft = false;
      this.role = +localStorage.getItem('Role');
+     this.download = this.service.returnBase+"/attachment/get?db=nqproject&token="+localStorage.getItem('token')+"&attach_id=";
     }
 
   ngOnInit() 

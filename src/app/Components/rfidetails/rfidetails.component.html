@@ -12,8 +12,7 @@
                           <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="backtorfi()"><mat-icon>exit_to_app</mat-icon>
                              {{'Back'|translate}} </button>
                           <button *ngIf ="state == 'draft' " class="mrgn-b-xs" mat-raised-button color="accent"
-                           (click)="ApproveDraft()"
-                           [ngStyle]="{ 'display': (boolconsultant ? 'none' :  'block' ) }">{{'Draft Approve'|translate}} </button>
+                           (click)="ApproveDraft()">{{'Draft Approve'|translate}} </button>
                         </div>
                        </div> 
                    
@@ -108,9 +107,9 @@
                <div fxLayout="wrap row" fxLayout.xs="column">
                  
                   <button class="mrgn-b-xs" [disabled]="consultant_approve != 'waiting'" mat-raised-button color="accent" (click)="openDialogApprove()"
-                  [ngStyle]="{ 'display': (boolcontractor ? 'none' :  'block' ) }">{{consultant_btn|translate}}</button>
+                  [ngStyle]="{ 'display': (boolconsultant ? 'block' :  'none' ) }">{{consultant_btn|translate}}</button>
                   <button class="mrgn-b-xs" mat-raised-button color="warn"
-                  [ngStyle]="{ 'display': (boolcontractor ? 'none' :  'block' ) }">{{'Result Approve'|translate}}</button>
+                   >{{'Result Approve'|translate}}</button>
                   <button class="mrgn-b-xs" mat-raised-button color="primary"><mat-icon>print</mat-icon> {{'Print'|translate}}</button>
             
                </div> 
@@ -127,7 +126,7 @@
                 <h5>{{'Progress Owner' |translate}} :</h5>
               </mat-card>
 
-              <mat-card @slideInOut>
+              <mat-card @slideInOut [ngStyle]="{ 'display': (boolcomment ? 'block' :  'none' ) }" >
                <div class="gene-card-title">
                    
                   <div fxLayout="row" fxLayoutAlign="start">
@@ -186,7 +185,7 @@
                   </div>
                 </form>
 
-                 <div style="overflow-y:scroll; height:45%;">
+        <div style="overflow-y:scroll; height:45%;">
          <div *ngFor="let comment of Comments ; let  i = index"  >
           <mat-card @slideInOut style="text-align: center;border-style: solid;" [ngStyle]="{ 'border-color': ( i%2 == 0 ?  '#1565c0' :  '#00acac' ) }"> 
               <h5>{{comment.user_name}}</h5>

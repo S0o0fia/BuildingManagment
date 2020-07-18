@@ -34,10 +34,17 @@ export class ExtractdetailsComponent implements OnInit {
   state : string;
   boolconsultant : boolean = false;
   invoice : any;
+  role : number;
+  activity : any[]=[];
+  submitinv : boolean= false;
+  approveinv : boolean=false;
+  rejectinv :boolean=false;
+  payinv : boolean = false;
   constructor(private route:ActivatedRoute  , private router : Router , public service : CoreService , 
     public openSnackBar : MatSnackBar) {
     this.projectname = localStorage.getItem('projectname');
     this.id = +( this.route.snapshot.paramMap.get('id') );
+    this.role = +localStorage.getItem('Role');
    }
 
    paid()
@@ -133,11 +140,37 @@ export class ExtractdetailsComponent implements OnInit {
       },
       err=>console.log(err)
     );
+
+    this.service.getRole(this.role).subscribe(
+      data=>{
+        this.activity = data[0].activity_ids;
+        this.activity.forEach(element => {
+          if(element.name == "submit inv")
+          {
+            this.submitinv = true;
+          }
+          if(element.name == "approve inv")
+          {
+            this.approveinv = true;
+          }
+          if(element.name == "reject inv")
+          {
+            this.rejectinv = true;
+          }
+          if(element.name == "pay inv")
+          {
+            this.payinv = true;
+          }
+        });
+      }
+    )
   }
 
   back()
   {
     this.router.navigate(['/home/abstracts']);
   }
+
+  
 
 }

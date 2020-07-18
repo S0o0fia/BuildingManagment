@@ -78,7 +78,9 @@ export class CountitemdetailsComponent implements OnInit {
   qty_height:any;
   qty_unit:any;
   qty_pers:any;
- constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
+  activity : any[]=[];
+  commentbool : boolean = false;
+   constructor(private route:ActivatedRoute ,private router:Router , private service : CoreService 
    ,private _snackBar: MatSnackBar ,public dialog: MatDialog, private datePipe: DatePipe) { 
    this.user = localStorage.getItem('loginUser');
     this.id = +( this.route.snapshot.paramMap.get('id') );
@@ -191,19 +193,25 @@ export class CountitemdetailsComponent implements OnInit {
      }
    );
 
-   if(this.role == 2)
-   {
-     this.boolconsultant = true ;
-   }
-   else if(this.role == 3)
-   {
-      this.boolcontractor = true;
-   }
-   else 
-   {
-     this.boolcontractor = false;
-     this.boolconsultant = false;
-   }
+   this.service.getRole(this.role).subscribe(
+    data=>{
+      this.activity = data[0].activity_ids;
+      this.activity.forEach(element => {
+        if(element.name == "submit qsr")
+        {
+          this.boolconsultant = true;
+        }
+        if(element.name == "approve qsr")
+        {
+          this.boolcontractor = true;
+        }
+        if(element.name == "referral-qsr")
+        {
+          this.commentbool = true;
+        }
+      });
+    }
+  )
  }
  
 

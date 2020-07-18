@@ -8,7 +8,7 @@
                  <span fxFlex></span>
                  <div fxLayout="column">
                   <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()"
-                  [ngStyle]="{ 'display': (boolrole ? 'none' :  'block' ) }">{{'Add'|translate}}
+                  [ngStyle]="{ 'display': (camcreate ? 'block' :  'none' ) }">{{'Add'|translate}}
 
                      <mat-icon>queue</mat-icon>
                   </button>
@@ -17,13 +17,6 @@
               
               <br/>
               <div fxLayout="row" fxLayoutAlign="center center"  fxLayout.xs="column" >
-               <!-- <button class="mrgn-b-xs" mat-raised-button color="primary" >{{'draft'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button color="primary" >{{'waiting'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button color="accent" >{{'accepted'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button color="accent" >{{'accepted-with-comment'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button color="warn" >{{'rejected'|translate}}</button>
-               <button class="mrgn-b-xs" mat-raised-button color="warn">{{'reject-resend'|translate}}</button> -->
-
                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('draft')"> {{'draft'|translate}} <br> <span>No Code</span> </button>
                <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="state('waiting')"> {{'waiting'|translate}}  <br> <span >No Code</span></button>
                <button class="mrgn-b-xs" mat-raised-button color="accent" (click)="state('accepted')">{{'accepted'|translate}} <br> Code A </button>
@@ -47,8 +40,7 @@
                 <tr>
                    <th>{{'ID'|translate}}</th>
                    <th>{{'Request Number'|translate}}</th>
-                   <!-- <th>{{'Factory Name'|translate}}</th> -->
-                   <th>{{'The date of application'|translate}}</th>
+                 <th>{{'The date of application'|translate}}</th>
                    <th>{{'Status'|translate}}</th>
                    <th>{{'Controls'|translate}}</th>
                 </tr>
@@ -60,7 +52,6 @@
                totalItems: totalRec } ">
                   <td>{{i+1}}</td>
                   <td>{{mir.name}}</td>
-                  <!-- <td>{{mir.items_ids[0].factory_name}}</td> -->
                   <td>{{mir.request_date}}</td>
                   <td>{{mir.state|translate}}</td>
                   <td>
@@ -78,7 +69,6 @@
                totalItems: totalRec }">
                <td>{{i+1}}</td>
                   <td>{{mir.name}}</td>
-                  <!-- <td>{{mir.items_ids[0].factory_name}}</td> -->
                   <td>{{mir.request_date}}</td>
                   <td>{{mir.state|translate}}</td>
                   <td>

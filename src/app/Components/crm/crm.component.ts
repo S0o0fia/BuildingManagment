@@ -99,19 +99,7 @@ export class CrmComponent implements OnInit, OnDestroy {
       //safe trade
      
       cryptoCompareColumns = ["id","name","consultant_name","contractor_name" , "Status" , "Controls"];
-      dropList = [
-         "Edit Project",
-         "Project Items" ,
-         "Quantity Table",
-         "Request for Inspection",         
-         "Request for Recieves Items",
-         "List of Count" ,       
-         "Files Managment",
-         "Project Obstacles",
-         "Abstracts" ,
-         "ٌRequests",
-         "Project Schedule"
-               ];
+      dropList : any[] = [];
       
       /*
          ----------Choose from drop down list  ----------
@@ -259,10 +247,58 @@ export class CrmComponent implements OnInit, OnDestroy {
             this.activity = data[0].activity_ids ;
             console.log(this.activity)
             this.activity.forEach(element => {
-               if(element.name == "Delete project")
-               {
-                 this.candelete = true;
-               }
+             switch(element.name)
+             {
+                case "Delete project" : 
+                this.candelete = true;
+                break;
+
+                case "project-details" :
+                   this.dropList.push("Edit Project");
+                  break;
+
+               case "project-items" :
+                  this.dropList.push("Project Items");
+                  break;
+
+               case "qty-table" :
+                  this.dropList.push("Quantity Table");
+                  break;
+
+               case "rfi" :
+                  this.dropList.push("Request for Inspection");
+                  break;
+
+               case "qsr" :
+                  this.dropList.push("List of Count");
+                  break;
+                  
+                case "mir" :
+                    this.dropList.push("Request for Recieves Items");
+                   break;
+                   
+                 case "file-management": 
+                    this.dropList.push("Files Managment");
+                 break; 
+
+                 case "project-obstacles":
+                  this.dropList.push("Project Obstacles");
+                    break;
+
+                case "inv" :
+                  this.dropList.push("Abstracts" );
+                   break;  
+                   
+                case "requests-menu" :
+                  this.dropList.push( "ٌRequests");
+                   break;  
+                   
+                case "timetable" :
+                  this.dropList.push(  "Project Schedule" );
+                   break;   
+                default : break;
+                  
+             }
             });
          } ,
          err=>console.log(err)

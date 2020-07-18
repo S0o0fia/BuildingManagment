@@ -28,7 +28,9 @@ export class RquestforRecieveItemsComponent implements OnInit {
    projectname : string;
   statename: string;
   role : number;
-  boolrole : boolean = false;
+  activity : any[]=[];
+  Qty_tbl : any ;
+  camcreate : boolean = false;
   constructor(public service : CoreService, public router : Router,
     private pageTitleService: PageTitleService , private dialog: MatDialog) { 
 
@@ -41,13 +43,7 @@ export class RquestforRecieveItemsComponent implements OnInit {
    
 
     }
-
-  mirdetails(id)
-    {      
-     this.router.navigate(['home/table/mirdetails',id]);
-    }
-
-    Qty_tbl : any ;
+       
 ngOnInit() {
   debugger;
 this.pageTitleService.setTitle(this.projectname +' / '+"طلبات تسليم المواد");
@@ -58,11 +54,30 @@ this.service.getMIR().subscribe(
   },
   err=>console.log(err) 
 );
-   if(this.role == 2)
-   {
-     this.boolrole  = true;
-   }
+
+this.service.getRole(this.role).subscribe(
+  data=>{
+    this.activity = data[0].activity_ids;
+    this.activity.forEach(element => {
+      if(element.name == "create-mir")
+      {
+        this.camcreate = true;
+      }
+      
+    });
+  }
+)
+
+
+
 }
+
+
+  mirdetails(id)
+    {      
+     this.router.navigate(['home/table/mirdetails',id]);
+    }
+
 
 openDialog(): void {
   const dialogRef = this.dialog.open(AddrecieveditemComponent, {
